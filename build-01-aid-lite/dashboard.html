@@ -20,7 +20,7 @@ table{width:100%;border-collapse:collapse;font-size:14px}th{text-align:left;colo
 @media(max-width:560px){.row{grid-template-columns:100px 1fr 54px}}
 </style></head><body><main>
 <h1>Algorithmic Influence Detector, stage 1</h1>
-<p class="sub">Coordinated messaging in 84,270 English tweets from accounts Twitter attributed to the Internet Research Agency (FiveThirtyEight / Clemson release, file 1 of 13). Results computed locally, stored in Azure SQL, queried with T-SQL.</p>
+<p class="sub">Coordinated messaging in 84,270 English tweets from accounts Twitter attributed to the Internet Research Agency (FiveThirtyEight / Clemson release, file 1 of 13). Stage 1 computed locally; stage 2 re-runs the template detection every Monday on an Azure Function with no person involved, and tags the top messages with key phrases from Azure AI Language.</p>
 
 <div class="kpis">
 <div class="kpi"><b>1,642</b><span>distinct messages posted by 2+ accounts</span></div>
@@ -61,25 +61,26 @@ table{width:100%;border-collapse:collapse;font-size:14px}th{text-align:left;colo
 <div class="row" title="Cluster 8 (LeftTroll): 45%"><div class="lab">Cluster 8 (LeftTroll)</div><div class="track"><div class="bar" style="width:45.4%"></div></div><div class="val">45%</div></div>
 <div class="row" title="Cluster 0 (RightTroll): 42%"><div class="lab">Cluster 0 (RightTroll)</div><div class="track"><div class="bar" style="width:42.0%"></div></div><div class="val">42%</div></div>
 
-<h2>Most-amplified messages</h2>
-<p class="note">Identical body text after stripping links and leading/trailing hashtags. Every one of these was posted by 44 different accounts, once each.</p>
-<table><thead><tr><th>Message</th><th class=num>Accounts</th><th class=num>Posts</th><th>Category</th></tr></thead><tbody>
-<tr><td>6 top choices to replace disgraced mcconnell</td><td class=num>44</td><td class=num>44</td><td>RightTroll</td></tr>
-<tr><td>alabama voters reject gop establishment and go with trump!</td><td class=num>44</td><td class=num>44</td><td>RightTroll</td></tr>
-<tr><td>allen west can no longer remain silent and unloads on colin kaepernick!</td><td class=num>44</td><td class=num>44</td><td>RightTroll</td></tr>
-<tr><td>angela merkel scolds trump on north korea as if she is above him</td><td class=num>44</td><td class=num>44</td><td>RightTroll</td></tr>
-<tr><td>another massive ny times blunder is going viral!</td><td class=num>44</td><td class=num>44</td><td>RightTroll</td></tr>
-<tr><td>anti-trump republican susan collins just got some very bad news!</td><td class=num>44</td><td class=num>44</td><td>RightTroll</td></tr>
-<tr><td>barf! libtard chelsea handler apologizes for trump wherever she goes</td><td class=num>44</td><td class=num>44</td><td>RightTroll</td></tr>
-<tr><td>breaking : ex-mueller deputy threatens deep state assassination of trump!</td><td class=num>44</td><td class=num>44</td><td>RightTroll</td></tr>
-<tr><td>breaking : guam prepares for “imminent missile” strike</td><td class=num>44</td><td class=num>44</td><td>RightTroll</td></tr>
-<tr><td>breaking : judge orders new search of hillary’s benghazi emails</td><td class=num>44</td><td class=num>44</td><td>RightTroll</td></tr>
-<tr><td>california caves! pays woman who had hijab removed by police $85,000</td><td class=num>44</td><td class=num>44</td><td>RightTroll</td></tr>
-<tr><td>canada forced to take drastic action to stop illegals from flooding in</td><td class=num>44</td><td class=num>44</td><td>RightTroll</td></tr>
-<tr><td>chelsea handler calls on generals for a military coup against trump</td><td class=num>44</td><td class=num>44</td><td>RightTroll</td></tr>
-<tr><td>congressman demands mueller testify before congress</td><td class=num>44</td><td class=num>44</td><td>RightTroll</td></tr>
-<tr><td>dem “leader” just claimed trump is worse than kim jong-un</td><td class=num>44</td><td class=num>44</td><td>RightTroll</td></tr>
+<h2>Most-amplified messages, with key phrases</h2>
+<p class="note">Identical body text after stripping links and leading/trailing hashtags. Every one of these was posted by 44 different accounts, once each. Key phrases come from Azure AI Language (free tier), extracted by the scheduled function.</p>
+<table><thead><tr><th>Message</th><th class=num>Accounts</th><th class=num>Posts</th><th>Key phrases</th></tr></thead><tbody>
+<tr><td>6 top choices to replace disgraced mcconnell</td><td class=num>44</td><td class=num>44</td><td>6 top choices; disgraced mcconnell</td></tr>
+<tr><td>alabama voters reject gop establishment and go with trump!</td><td class=num>44</td><td class=num>44</td><td>alabama voters; gop establishment; trump</td></tr>
+<tr><td>allen west can no longer remain silent and unloads on colin kaepernick!</td><td class=num>44</td><td class=num>44</td><td>colin kaepernick; west</td></tr>
+<tr><td>angela merkel scolds trump on north korea as if she is above him</td><td class=num>44</td><td class=num>44</td><td>angela merkel; north korea</td></tr>
+<tr><td>another massive ny times blunder is going viral!</td><td class=num>44</td><td class=num>44</td><td>massive ny times blunder</td></tr>
+<tr><td>anti-trump republican susan collins just got some very bad news!</td><td class=num>44</td><td class=num>44</td><td>anti-trump republican susan collins; bad news</td></tr>
+<tr><td>barf! libtard chelsea handler apologizes for trump wherever she goes</td><td class=num>44</td><td class=num>44</td><td>libtard chelsea handler; trump</td></tr>
+<tr><td>breaking : ex-mueller deputy threatens deep state assassination of trump!</td><td class=num>44</td><td class=num>44</td><td>deep state assassination; ex-mueller deputy; breaking; trump</td></tr>
+<tr><td>breaking : guam prepares for “imminent missile” strike</td><td class=num>44</td><td class=num>44</td><td>imminent missile” strike; breaking; guam</td></tr>
+<tr><td>breaking : judge orders new search of hillary’s benghazi emails</td><td class=num>44</td><td class=num>44</td><td>new search; benghazi emails; breaking; judge; hillary</td></tr>
+<tr><td>california caves! pays woman who had hijab removed by police $85,000</td><td class=num>44</td><td class=num>44</td><td>california caves; woman; hijab; police</td></tr>
+<tr><td>canada forced to take drastic action to stop illegals from flooding in</td><td class=num>44</td><td class=num>44</td><td>drastic action; canada; illegals; flooding</td></tr>
+<tr><td>chelsea handler calls on generals for a military coup against trump</td><td class=num>44</td><td class=num>44</td><td>chelsea handler; military coup; generals; trump</td></tr>
+<tr><td>congressman demands mueller testify before congress</td><td class=num>44</td><td class=num>44</td><td>congressman; mueller</td></tr>
+<tr><td>dem “leader” just claimed trump is worse than kim jong-un</td><td class=num>44</td><td class=num>44</td><td>kim jong-un; leader; trump</td></tr>
 </tbody></table>
+<p class="note" style="margin-top:10px">Last automated run: 2026-10-14 21:22 UTC &middot; runs recorded: 1 &middot; schedule: Mondays 06:00 UTC &middot; function identity: managed, no keys.</p>
 
-<p class="foot">Data: FiveThirtyEight, "Why we're sharing 3 million Russian troll tweets" (2018), collected by Darren Linvill and Patrick Warren, Clemson University. Accounts are state-operator accounts publicly identified by Twitter. Findings are for file 1 of 13 and are not generalized to the full release. Build #1 of Patrick Neil Bradley's Azure learning portfolio. Azure services: Blob Storage, Azure SQL Database (free offer). Cost: $0.</p>
+<p class="foot">Data: FiveThirtyEight, "Why we're sharing 3 million Russian troll tweets" (2018), collected by Darren Linvill and Patrick Warren, Clemson University. Accounts are state-operator accounts publicly identified by Twitter. Findings are for file 1 of 13 and are not generalized to the full release. Build #1 of Patrick Neil Bradley's Azure learning portfolio. Azure services: Blob Storage, Azure SQL Database (free offer), Azure Functions (Flex Consumption), Azure AI Language (F0). Cost: $0.</p>
 </main></body></html>

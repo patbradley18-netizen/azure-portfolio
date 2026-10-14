@@ -1,0 +1,10 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "FUNCTIONS_WORKER_RUNTIME": "python",
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "RawStorage__serviceUri": "https://<storage-account>.blob.core.windows.net",
+    "SqlConnectionString": "Server=<server>.database.windows.net;Database=<db>;Authentication=Active Directory Default;Encrypt=yes;",
+    "LANGUAGE_ENDPOINT": "https://<language-resource>.cognitiveservices.azure.com/"
+  }
+}

@@ -1,4 +1,4 @@
-# Build #1: Algorithmic Influence Detector (AID Lite), stage 1
+# Build #1: Algorithmic Influence Detector (AID Lite), stages 1–2
 
 Detecting coordinated messaging in social-media text with Azure Storage, Azure SQL, and Python. Part of my [Azure learning portfolio](../README.md): small, free-tier builds that each teach one real skill and end as a public showcase.
 
@@ -108,6 +108,42 @@ Data: FiveThirtyEight, ["Why we're sharing 3 million Russian troll tweets"](http
 
 Findings describe file 1 of 13 only. The category skew may reflect which accounts happen to be in this file. Short, generic tweets form noisy clusters; that is a known limit of this method.
 
+## Stage 2: the detection runs itself
+
+Stage 2 moves signal B (template detection) onto a schedule with no person and no laptop in the loop, and adds key phrases from Azure AI Language.
+
+```
+Timer (Mondays 06:00 UTC)
+   |
+   v
+Azure Function  func-azportfolio-b1  (Python 3.12, Flex Consumption, Germany West Central)
+   |  managed identity: Storage Blob Data Reader, Cognitive Services User, SQL db_datareader/db_datawriter
+   |-- blob input binding  -> raw/IRAhandle_tweets_1.csv       (identity-based connection, no key)
+   |-- detect.py           -> 1,642 templates in ~10 s
+   |-- AI Language (F0)    -> key phrases for the top 50 messages
+   '-- SQL output binding  -> dbo.template_runs (one run_id per run; history kept)
+```
+
+| Service | Role | Cost |
+|---|---|---|
+| Azure Functions, Flex Consumption | Runs the job weekly, scales to zero between runs | $0 (one ~25 s run a week, inside the free grant) |
+| Azure AI Language, F0 | Key phrases for the top 50 templates per run | $0 (5,000 text records/month free; ~50 used) |
+| Application Insights | Function logs, sampling on | pennies at most |
+| Managed identity | The function signs in to Blob, Language and SQL as itself | $0 |
+
+First automated run: 2026-10-14 21:22 UTC, 1,642 rows, 50 with key phrases (for example "6 top choices; disgraced mcconnell", "deep state assassination; ex-mueller deputy; breaking; trump").
+
+**What stays local on purpose:** signal A (embeddings). PyTorch is about 3 GB and does not belong in a serverless function. The template signal is the headline finding, so the function automates that.
+
+**Secrets in stage 2:** none. The function's "connection string" setting contains server and database names plus `Authentication=Active Directory Managed Identity`. The blob connection is a URL. The Language endpoint is a URL. Access comes from three role grants, each scoped to one resource.
+
+### Stage 2 lessons
+
+12. **A function inside Azure is still outside your SQL firewall.** The first run failed with "Client with IP address … is not allowed." Fix: the server-level "Allow Azure services" rule. Trade-off: any Azure-hosted service can now *reach* the server, but nothing can sign in without a granted Entra identity. Private networking would be tighter and is out of scope for a free build.
+13. **Bindings beat drivers.** Using the blob input and SQL output bindings meant no database driver to install in the function, no connection code, and no credentials. The host handles it from the setting names.
+14. **The SQL output binding needs a primary key** on the target table, and it upserts. Giving every row a `run_id` turns weekly runs into a history instead of an overwrite.
+15. **Remote build is slow but worth it.** Deploying a zip and letting Azure install `pandas` took a few minutes; it avoids shipping Windows- or WSL-built packages to a Linux host.
+
 ## Next
 
-Stage 2: a timer-triggered Azure Function that re-runs the template detection, and Azure AI Language (free tier) for key phrases. Stage 3: amplification networks and narrative bursts over time.
+Stage 3: amplification networks (which accounts co-post which templates) and narrative bursts over time. Possible stage 4: narrative persistence across later public corpora, measured as similarity only, no attribution of people or organizations.
