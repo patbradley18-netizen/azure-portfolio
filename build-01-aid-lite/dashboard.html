@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AID Lite: Stage 1</title>
+<style>
+:root{color-scheme:light;--surface:#fcfcfb;--surface-2:#f1f0ec;--ink:#0b0b0b;--ink-2:#52514e;--ink-3:#8a8880;--line:#e3e1da;--series:#2a78d6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--surface:#1a1a19;--surface-2:#242422;--ink:#f0efec;--ink-2:#c3c2b7;--ink-3:#8f8e86;--line:#33332f;--series:#3987e5}}
+:root[data-theme="dark"]{color-scheme:dark;--surface:#1a1a19;--surface-2:#242422;--ink:#f0efec;--ink-2:#c3c2b7;--ink-3:#8f8e86;--line:#33332f;--series:#3987e5}
+*{box-sizing:border-box}body{margin:0;background:var(--surface);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:980px;margin:0 auto;padding:32px 16px 64px}
+h1{font-size:26px;margin:0 0 4px}.sub{color:var(--ink-2);margin:0 0 28px}
+h2{font-size:17px;margin:36px 0 4px}.note{color:var(--ink-2);font-size:14px;margin:0 0 14px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.kpi{background:var(--surface-2);border-radius:10px;padding:14px 16px}.kpi b{display:block;font-size:30px;line-height:1.1;font-weight:600}.kpi span{color:var(--ink-2);font-size:13px}
+.row{display:grid;grid-template-columns:minmax(120px,220px) 1fr 64px;align-items:center;gap:10px;padding:3px 0}.row:hover .bar{filter:brightness(1.12)}
+.lab{font-size:13px;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.track{height:14px;background:transparent;border-left:1px solid var(--line)}.bar{height:14px;background:var(--series);border-radius:0 4px 4px 0;min-width:2px}
+.val{font-size:13px;color:var(--ink);text-align:right;font-variant-numeric:tabular-nums}
+table{width:100%;border-collapse:collapse;font-size:14px}th{text-align:left;color:var(--ink-2);font-weight:500;border-bottom:1px solid var(--line);padding:6px 8px}td{padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}td.num{text-align:right;font-variant-numeric:tabular-nums}
+.foot{margin-top:40px;color:var(--ink-3);font-size:13px;border-top:1px solid var(--line);padding-top:14px}
+@media(max-width:560px){.row{grid-template-columns:100px 1fr 54px}}
+</style></head><body><main>
+<h1>Algorithmic Influence Detector, stage 1</h1>
+<p class="sub">Coordinated messaging in 84,270 English tweets from accounts Twitter attributed to the Internet Research Agency (FiveThirtyEight / Clemson release, file 1 of 13). Results computed locally, stored in Azure SQL, queried with T-SQL.</p>
+
+<div class="kpis">
+<div class="kpi"><b>1,642</b><span>distinct messages posted by 2+ accounts</span></div>
+<div class="kpi"><b>26%</b><span>of tweets in this file are copies of a shared message</span></div>
+<div class="kpi"><b>563</b><span>messages pushed by 10 or more accounts</span></div>
+<div class="kpi"><b>44</b><span>accounts on a single identical headline (the ring)</span></div>
+</div>
+
+<h2>Where the coordination is</h2>
+<p class="note">Tweets that are copies of a shared message, by the account category researchers assigned by hand. One category does nearly all of it in this file.</p>
+<div class="row" title="RightTroll: 21,576"><div class="lab">RightTroll</div><div class="track"><div class="bar" style="width:100.0%"></div></div><div class="val">21,576</div></div>
+<div class="row" title="LeftTroll: 170"><div class="lab">LeftTroll</div><div class="track"><div class="bar" style="width:0.8%"></div></div><div class="val">170</div></div>
+<div class="row" title="HashtagGamer: 66"><div class="lab">HashtagGamer</div><div class="track"><div class="bar" style="width:0.3%"></div></div><div class="val">66</div></div>
+<div class="row" title="NonEnglish: 8"><div class="lab">NonEnglish</div><div class="track"><div class="bar" style="width:0.0%"></div></div><div class="val">8</div></div>
+<div class="row" title="Fearmonger: 7"><div class="lab">Fearmonger</div><div class="track"><div class="bar" style="width:0.0%"></div></div><div class="val">7</div></div>
+<div class="row" title="Unknown: 3"><div class="lab">Unknown</div><div class="track"><div class="bar" style="width:0.0%"></div></div><div class="val">3</div></div>
+
+<h2>Did the model find the same groups the researchers drew?</h2>
+<p class="note">Each of 20 embedding clusters, scored by how much of it belongs to one hand-assigned category. The model never saw the labels. Low bars are the short, generic tweets that don't cluster well.</p>
+<div class="row" title="Cluster 14 (RightTroll): 100%"><div class="lab">Cluster 14 (RightTroll)</div><div class="track"><div class="bar" style="width:99.7%"></div></div><div class="val">100%</div></div>
+<div class="row" title="Cluster 4 (RightTroll): 99%"><div class="lab">Cluster 4 (RightTroll)</div><div class="track"><div class="bar" style="width:99.3%"></div></div><div class="val">99%</div></div>
+<div class="row" title="Cluster 7 (RightTroll): 98%"><div class="lab">Cluster 7 (RightTroll)</div><div class="track"><div class="bar" style="width:98.1%"></div></div><div class="val">98%</div></div>
+<div class="row" title="Cluster 5 (RightTroll): 97%"><div class="lab">Cluster 5 (RightTroll)</div><div class="track"><div class="bar" style="width:96.9%"></div></div><div class="val">97%</div></div>
+<div class="row" title="Cluster 18 (RightTroll): 97%"><div class="lab">Cluster 18 (RightTroll)</div><div class="track"><div class="bar" style="width:96.6%"></div></div><div class="val">97%</div></div>
+<div class="row" title="Cluster 2 (RightTroll): 96%"><div class="lab">Cluster 2 (RightTroll)</div><div class="track"><div class="bar" style="width:95.7%"></div></div><div class="val">96%</div></div>
+<div class="row" title="Cluster 1 (RightTroll): 95%"><div class="lab">Cluster 1 (RightTroll)</div><div class="track"><div class="bar" style="width:95.1%"></div></div><div class="val">95%</div></div>
+<div class="row" title="Cluster 6 (RightTroll): 94%"><div class="lab">Cluster 6 (RightTroll)</div><div class="track"><div class="bar" style="width:93.7%"></div></div><div class="val">94%</div></div>
+<div class="row" title="Cluster 13 (NewsFeed): 92%"><div class="lab">Cluster 13 (NewsFeed)</div><div class="track"><div class="bar" style="width:92.2%"></div></div><div class="val">92%</div></div>
+<div class="row" title="Cluster 3 (RightTroll): 88%"><div class="lab">Cluster 3 (RightTroll)</div><div class="track"><div class="bar" style="width:88.3%"></div></div><div class="val">88%</div></div>
+<div class="row" title="Cluster 19 (RightTroll): 84%"><div class="lab">Cluster 19 (RightTroll)</div><div class="track"><div class="bar" style="width:84.2%"></div></div><div class="val">84%</div></div>
+<div class="row" title="Cluster 10 (HashtagGamer): 83%"><div class="lab">Cluster 10 (HashtagGamer)</div><div class="track"><div class="bar" style="width:83.2%"></div></div><div class="val">83%</div></div>
+<div class="row" title="Cluster 11 (RightTroll): 77%"><div class="lab">Cluster 11 (RightTroll)</div><div class="track"><div class="bar" style="width:77.1%"></div></div><div class="val">77%</div></div>
+<div class="row" title="Cluster 12 (RightTroll): 66%"><div class="lab">Cluster 12 (RightTroll)</div><div class="track"><div class="bar" style="width:66.2%"></div></div><div class="val">66%</div></div>
+<div class="row" title="Cluster 15 (NewsFeed): 61%"><div class="lab">Cluster 15 (NewsFeed)</div><div class="track"><div class="bar" style="width:61.1%"></div></div><div class="val">61%</div></div>
+<div class="row" title="Cluster 9 (RightTroll): 61%"><div class="lab">Cluster 9 (RightTroll)</div><div class="track"><div class="bar" style="width:60.6%"></div></div><div class="val">61%</div></div>
+<div class="row" title="Cluster 16 (RightTroll): 58%"><div class="lab">Cluster 16 (RightTroll)</div><div class="track"><div class="bar" style="width:58.5%"></div></div><div class="val">58%</div></div>
+<div class="row" title="Cluster 17 (NewsFeed): 53%"><div class="lab">Cluster 17 (NewsFeed)</div><div class="track"><div class="bar" style="width:52.8%"></div></div><div class="val">53%</div></div>
+<div class="row" title="Cluster 8 (LeftTroll): 45%"><div class="lab">Cluster 8 (LeftTroll)</div><div class="track"><div class="bar" style="width:45.4%"></div></div><div class="val">45%</div></div>
+<div class="row" title="Cluster 0 (RightTroll): 42%"><div class="lab">Cluster 0 (RightTroll)</div><div class="track"><div class="bar" style="width:42.0%"></div></div><div class="val">42%</div></div>
+
+<h2>Most-amplified messages</h2>
+<p class="note">Identical body text after stripping links and leading/trailing hashtags. Every one of these was posted by 44 different accounts, once each.</p>
+<table><thead><tr><th>Message</th><th class=num>Accounts</th><th class=num>Posts</th><th>Category</th></tr></thead><tbody>
+<tr><td>6 top choices to replace disgraced mcconnell</td><td class=num>44</td><td class=num>44</td><td>RightTroll</td></tr>
+<tr><td>alabama voters reject gop establishment and go with trump!</td><td class=num>44</td><td class=num>44</td><td>RightTroll</td></tr>
+<tr><td>allen west can no longer remain silent and unloads on colin kaepernick!</td><td class=num>44</td><td class=num>44</td><td>RightTroll</td></tr>
+<tr><td>angela merkel scolds trump on north korea as if she is above him</td><td class=num>44</td><td class=num>44</td><td>RightTroll</td></tr>
+<tr><td>another massive ny times blunder is going viral!</td><td class=num>44</td><td class=num>44</td><td>RightTroll</td></tr>
+<tr><td>anti-trump republican susan collins just got some very bad news!</td><td class=num>44</td><td class=num>44</td><td>RightTroll</td></tr>
+<tr><td>barf! libtard chelsea handler apologizes for trump wherever she goes</td><td class=num>44</td><td class=num>44</td><td>RightTroll</td></tr>
+<tr><td>breaking : ex-mueller deputy threatens deep state assassination of trump!</td><td class=num>44</td><td class=num>44</td><td>RightTroll</td></tr>
+<tr><td>breaking : guam prepares for “imminent missile” strike</td><td class=num>44</td><td class=num>44</td><td>RightTroll</td></tr>
+<tr><td>breaking : judge orders new search of hillary’s benghazi emails</td><td class=num>44</td><td class=num>44</td><td>RightTroll</td></tr>
+<tr><td>california caves! pays woman who had hijab removed by police $85,000</td><td class=num>44</td><td class=num>44</td><td>RightTroll</td></tr>
+<tr><td>canada forced to take drastic action to stop illegals from flooding in</td><td class=num>44</td><td class=num>44</td><td>RightTroll</td></tr>
+<tr><td>chelsea handler calls on generals for a military coup against trump</td><td class=num>44</td><td class=num>44</td><td>RightTroll</td></tr>
+<tr><td>congressman demands mueller testify before congress</td><td class=num>44</td><td class=num>44</td><td>RightTroll</td></tr>
+<tr><td>dem “leader” just claimed trump is worse than kim jong-un</td><td class=num>44</td><td class=num>44</td><td>RightTroll</td></tr>
+</tbody></table>
+
+<p class="foot">Data: FiveThirtyEight, "Why we're sharing 3 million Russian troll tweets" (2018), collected by Darren Linvill and Patrick Warren, Clemson University. Accounts are state-operator accounts publicly identified by Twitter. Findings are for file 1 of 13 and are not generalized to the full release. Build #1 of Patrick Neil Bradley's Azure learning portfolio. Azure services: Blob Storage, Azure SQL Database (free offer). Cost: $0.</p>
+</main></body></html>
