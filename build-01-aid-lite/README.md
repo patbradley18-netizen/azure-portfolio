@@ -1,4 +1,4 @@
-# Build #1: Algorithmic Influence Detector (AID Lite), stages 1–2
+# Build #1: Algorithmic Influence Detector (AID Lite), stages 1–3
 
 Detecting coordinated messaging in social-media text with Azure Storage, Azure SQL, and Python. Part of my [Azure learning portfolio](../README.md): small, free-tier builds that each teach one real skill and end as a public showcase.
 
@@ -58,6 +58,10 @@ T-SQL queries (run_queries.py) -> dashboard_data.json -> dashboard.html
 | `load_to_sql.py` | Creates the two tables and loads results; Entra token by environment variable |
 | `run_queries.py` | The analyst's four questions in T-SQL; writes the dashboard JSON |
 | `dashboard.html` | Static page built from the JSON (no external scripts) |
+| `analyze_network.py` | Stage 3, signal C: retweet edges, hubs, brokers, ring check |
+| `analyze_bursts.py` | Stage 3, signal D: posts per template per day, one-day blast share, daily timeline |
+| `load_stage3.py` | Creates and loads `edges`, `bursts`, `daily_volume`; Entra token by environment variable, retries while the serverless DB wakes |
+| `build_dashboard_stage3.py` | Inserts the stage 3 sections into the dashboard from the JSON summaries |
 | `setup_wsl.sh`, `install_sql_driver.sh` | Environment setup |
 
 Not in the repo: the dataset, result CSVs, logs, and any settings file (`.gitignore`).
@@ -144,6 +148,35 @@ First automated run: 2026-10-14 21:22 UTC, 1,642 rows, 50 with key phrases (for 
 14. **The SQL output binding needs a primary key** on the target table, and it upserts. Giving every row a `run_id` turns weekly runs into a history instead of an overwrite.
 15. **Remote build is slow but worth it.** Deploying a zip and letting Azure install `pandas` took a few minutes; it avoids shipping Windows- or WSL-built packages to a Linux host.
 
+## Stage 3: who amplified whom, and when
+
+Stage 2 found *what* was repeated. Stage 3 asks *who spread it* (signal C) and *when it spiked* (signal D). Both computed locally in WSL, results loaded to Azure SQL, dashboard extended. No new Azure resources, no new cost.
+
+```
+IRAhandle_tweets_1.csv (local copy of the blob)
+   |
+   |-- analyze_network.py  -> edges.csv, hubs.csv, brokers.csv, network_summary.json
+   |      external edge: body starts "RT handle:"  (18,094 retweets of outside handles)
+   |      internal edge: retweet body == earlier original by another dataset account (1,952)
+   |-- analyze_bursts.py   -> bursts.csv, daily_volume.csv, bursts_summary.json
+   |-- load_stage3.py      -> dbo.edges (9,782), dbo.bursts (1,642), dbo.daily_volume (1,020)   [Entra token by env var]
+   '-- build_dashboard_stage3.py -> dashboard.html sections
+```
+
+### What stage 3 found
+
+- **Hubs and brokers.** The ten biggest brokers (accounts that retweet the most distinct handles) are all RightTroll accounts with the same naming pattern; the top one retweeted 1,090 distinct handles. The ring of 44 accounts from stages 1–2 received 524 internal retweets, and 507 of them (97%) came from inside the ring. Coordination confirmed from a second, independent signal.
+- **Cross-faction amplification.** RightTroll accounts retweeted LeftTroll originals 660 times, more than they retweeted their own side (488). Same operation, both sides of the argument.
+- **One-day blast.** 74% of the 1,642 templates were posted on exactly one day; the longest-lived lasted 9 days. 2017-08-12 alone carried 2,936 template posts, 51% of every original tweet that day. The planned burst score (peak over median) was useless, since median equals peak when a template lives one day; the shape of the timeline is the finding.
+- **Outside handles.** The most-retweeted outside handles are public accounts. The dashboard names them only as *targets* of amplification. Being retweeted by this operation says nothing about the account retweeted, and this project makes no claims about people or organizations.
+
+### Stage 3 lessons
+
+16. **Check what the data actually contains before designing the metric.** I planned to parse `RT @handle:`; this dataset usually strips the `@`, and only a minority of flagged retweets carry a handle at all. The first run found 743 edges, the corrected regex found 18,094. Ten minutes of looking at raw rows would have saved an hour.
+17. **A metric that returns 1.0 for everything is telling you something.** The burst score was flat because the behaviour it was built to measure (slow build, then spike) is not how this operation worked. Replacing the metric with a description of the real shape (one-day blasts) was the honest move, and the better finding.
+18. **Two independent signals that agree are worth more than one strong one.** Template detection (text) and retweet structure (network) both point at the same 44 accounts. That is how an analyst earns the word "coordinated."
+19. **Python output buffering hides progress in background jobs.** A loader that ran for two minutes showed an empty log until it exited. Use `python -u` or flush when you poll logs.
+20. **Serverless SQL still pauses.** Two connection retries, 20 s apart, woke the free database before the load ran (same as lesson 8). Build the retry into every loader rather than remembering to run it twice.
 ## Next
 
-Stage 3: amplification networks (which accounts co-post which templates) and narrative bursts over time. Possible stage 4: narrative persistence across later public corpora, measured as similarity only, no attribution of people or organizations.
+Build #1 closes here (AAR and Dataset Card to follow). Possible stage 4 later: narrative persistence across a second licensed public corpus, measured as similarity scores only, no attribution of people or organizations.
