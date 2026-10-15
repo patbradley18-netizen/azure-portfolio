@@ -1,0 +1,9 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "<local only: UseDevelopmentStorage=true>",
+    "FUNCTIONS_WORKER_RUNTIME": "python",
+    "BLS_API_KEY": "<in Azure this is a Key Vault reference: @Microsoft.KeyVault(VaultName=kv-azportfolio-b2;SecretName=bls-api-key)>",
+    "SqlConnectionString": "Server=tcp:<server>.database.windows.net,1433;Database=aid;Authentication=Active Directory Default;Encrypt=True;"
+  }
+}
