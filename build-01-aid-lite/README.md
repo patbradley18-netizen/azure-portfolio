@@ -1,4 +1,4 @@
-# Build #1: Algorithmic Influence Detector (AID Lite), stages 1–3
+# Build #1: Algorithmic Influence Detector (AID Lite), stages 1–4
 
 Detecting coordinated messaging in social-media text with Azure Storage, Azure SQL, and Python. Part of my [Azure learning portfolio](../README.md): small, free-tier builds that each teach one real skill and end as a public showcase.
 
@@ -62,6 +62,10 @@ T-SQL queries (run_queries.py) -> dashboard_data.json -> dashboard.html
 | `analyze_bursts.py` | Stage 3, signal D: posts per template per day, one-day blast share, daily timeline |
 | `load_stage3.py` | Creates and loads `edges`, `bursts`, `daily_volume`; Entra token by environment variable, retries while the serverless DB wakes |
 | `build_dashboard_stage3.py` | Inserts the stage 3 sections into the dashboard from the JSON summaries |
+| `fetch_crec.py` | Stage 4: pulls Congressional Record daily editions from govinfo.gov (public domain), one JSONL per sitting day, resume-safe |
+| `index_templates.py` | Stage 4: embeds the 1,642 templates locally and indexes them as vectors in Azure AI Search (Entra token by env var) |
+| `analyze_persistence.py` | Stage 4: chunks and embeds the speeches, scores them against templates and a random-tweet control, aggregates by month and party |
+| `build_dashboard_stage4.py` | Inserts the stage 4 section into the dashboard |
 | `setup_wsl.sh`, `install_sql_driver.sh` | Environment setup |
 
 Not in the repo: the dataset, result CSVs, logs, and any settings file (`.gitignore`).
@@ -111,6 +115,8 @@ python run_queries.py
 Data: FiveThirtyEight, ["Why we're sharing 3 million Russian troll tweets"](https://fivethirtyeight.com/features/why-were-sharing-3-million-russian-troll-tweets) (2018); collected by Darren Linvill and Patrick Warren, Clemson University. The repository carries no license file; this is non-commercial educational use with attribution. The accounts are state-operator accounts publicly identified by Twitter, not private individuals.
 
 Findings describe file 1 of 13 only. The category skew may reflect which accounts happen to be in this file. Short, generic tweets form noisy clusters; that is a known limit of this method.
+
+Stage 4 corpus: Congressional Record daily editions, U.S. Government Publishing Office via govinfo.gov, August 2017 to December 2018. U.S. government works, public domain. Fetched at a polite rate with a descriptive user agent; the raw text is not redistributed here (`data/` is gitignored) and the fetch script rebuilds it.
 
 ## Stage 2: the detection runs itself
 
@@ -177,6 +183,47 @@ IRAhandle_tweets_1.csv (local copy of the blob)
 18. **Two independent signals that agree are worth more than one strong one.** Template detection (text) and retweet structure (network) both point at the same 44 accounts. That is how an analyst earns the word "coordinated."
 19. **Python output buffering hides progress in background jobs.** A loader that ran for two minutes showed an empty log until it exited. Use `python -u` or flush when you poll logs.
 20. **Serverless SQL still pauses.** Two connection retries, 20 s apart, woke the free database before the load ran (same as lesson 8). Build the retry into every loader rather than remembering to run it twice.
+## Stage 4: did the themes reach the floor of Congress? (a null result)
+
+Stage 4 asked whether the ideas in the 1,642 templates show up later in public discourse. Corpus: the Congressional Record, August 2017 to December 2018, from govinfo.gov (public domain, no API key needed). Method: similarity scores only, with a control. No claims about people; the dashboard shows party and month, never names.
+
+```
+govinfo.gov (CREC daily editions)         Azure AI Search, free tier  srch-azportfolio-b1
+   |  fetch_crec.py (open URLs, 0.25 s pause)       ^  index_templates.py: 1,642 template vectors (local embed)
+   v                                                |  serves the showcase lookup: any sentence vs the templates
+data/crec/*.jsonl  292 sitting days, 39,079 granules, 284 MB
+   |  analyze_persistence.py (local, RTX 5050 ~8 min)
+   |    187,829 chunks of ~200 words  ->  best similarity to templates  AND  to 1,642 random non-template troll tweets (control)
+   '-> persistence_scores.csv, persistence_summary.json -> dashboard section
+```
+
+| Service | Role | Cost |
+|---|---|---|
+| Azure AI Search, free SKU | Vector index of the 1,642 templates (HNSW, 384 dims); Entra RBAC, no admin key used | $0 (free tier: 3 indexes, 50 MB) |
+| Everything else | Local: fetch, chunk, embed, score | $0 |
+
+**Why the sweep ran locally and not in Azure:** the free search tier holds roughly 30k vectors; the corpus is 188k chunks. Azure serves the lookup, the laptop does the sweep. That split is stated here so the architecture diagram is honest.
+
+### What stage 4 found
+
+| | Templates | Random troll tweets (control) |
+|---|---|---|
+| Mean best similarity, all chunks | 0.386 | **0.397** |
+| Chunks scoring ≥ 0.60 | 0.96% | 0.61% |
+| Lift over control | +0.35 points (D +0.66, R +0.32; no month above +1.3) | |
+
+- **No measurable trace.** Speeches resemble random troll tweets slightly *more* than they resemble the coordinated templates. The two monthly lines never separate.
+- **The "matches" are shared news topics**: North Korea sanctions, Obamacare premiums, the 2017 tax cuts, the opioid emergency. Congress debated them because they were the news; so did the trolls.
+- **Similarity sees topic, not stance.** The highest-scoring chunk in the whole corpus is a member arguing that the Mueller investigation is *not* a witch hunt, matched to the template "the truth about mueller's crooked witch hunt." A stance classifier would be a different project.
+- **The control is the finding.** Without it, "0.96% of speeches resemble troll templates" would have read as a result. With it, the number is noise. Anchor phrase: politics resembles politics.
+
+### Stage 4 lessons
+
+21. **A 200 status is not proof of success.** govinfo answers non-sitting days with an HTML "cannot be found" page and status 200; the XML parser crashed on a Saturday. Check the body is what you expected before parsing.
+22. **Build the control before you look at the signal.** It took one extra line of code and it turned a false finding into an honest one.
+23. **Cosine similarity measures topic, not stance.** Rebuttals score as high as endorsements. Say what the metric can and cannot see in the write-up.
+24. **Size the free tier before you design around it.** 50 MB is about 30k vectors at 384 dimensions. Index the small side (templates), sweep the big side locally.
+25. **Estimate from a representative sample.** My fetch estimate came from a recess week (~100 granules/day); session days run 200–300. 2.5 hours became 13.
 ## Next
 
-Build #1 closes here (AAR and Dataset Card to follow). Possible stage 4 later: narrative persistence across a second licensed public corpus, measured as similarity scores only, no attribution of people or organizations.
+Build #1 closes here: AAR and Dataset Card to follow. A stance classifier (does a speech endorse or rebut a frame?) would be the honest follow-on to stage 4, and it is a separate build.

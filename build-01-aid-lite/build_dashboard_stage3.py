@@ -23,7 +23,7 @@ rl, rr, ll, lr = mix.get(("RightTroll","LeftTroll"),0), mix.get(("RightTroll","R
 vol = bur["daily_volume"]; n = len(vol); W, H, pad = 900, 160, 28
 ymax = max(v["template_posts"] for v in vol)
 pts = " ".join(f"{pad + i*(W-2*pad)/(n-1):.1f},{H-pad - v['template_posts']/ymax*(H-2*pad):.1f}" for i, v in enumerate(vol))
-years = [(i, v["day"][:4]) for i, v in enumerate(vol) if v["day"][:4] != vol[i-1]["day"][:4]]  # first year label skipped: too close to 2015
+years = [(i, v["day"][:4]) for i, v in enumerate(vol) if i > 0 and v["day"][:4] != vol[i-1]["day"][:4]]  # first year label skipped: too close to 2015
 ticks = "".join(f'<text x="{pad + i*(W-2*pad)/(n-1):.1f}" y="{H-8}" font-size="11" fill="var(--ink-3)">{y}</text>' for i, y in years)
 peak_i = max(range(n), key=lambda i: vol[i]["template_posts"]); px = pad + peak_i*(W-2*pad)/(n-1)
 svg = (f'<svg viewBox="0 0 {W} {H}" width="100%" role="img" aria-label="Template posts per day, {vol[0]["day"]} to {vol[-1]["day"]}">'
