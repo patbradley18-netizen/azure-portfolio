@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Azure Learning Portfolio</title>
+<meta name="description" content="Small, free-tier Azure builds on public data by Patrick Neil Bradley. Each one teaches a Business Analyst skill and ends as a live page.">
+<style>
+:root{color-scheme:light;--surface:#fcfcfb;--surface-2:#f1f0ec;--ink:#0b0b0b;--ink-2:#52514e;--ink-3:#8a8880;--line:#e3e1da;--series:#2a78d6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--surface:#1a1a19;--surface-2:#242422;--ink:#f0efec;--ink-2:#c3c2b7;--ink-3:#8f8e86;--line:#33332f;--series:#3987e5}}
+:root[data-theme="dark"]{color-scheme:dark;--surface:#1a1a19;--surface-2:#242422;--ink:#f0efec;--ink-2:#c3c2b7;--ink-3:#8f8e86;--line:#33332f;--series:#3987e5}
+*{box-sizing:border-box}body{margin:0;background:var(--surface);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:860px;margin:0 auto;padding:40px 16px 64px}h1{font-size:28px;margin:0 0 6px}.sub{color:var(--ink-2);margin:0 0 32px}
+.card{display:block;background:var(--surface-2);border-radius:12px;padding:18px 20px;margin:0 0 14px;color:inherit;text-decoration:none;border:1px solid transparent}
+.card:hover{border-color:var(--series)}.card h2{font-size:18px;margin:0 0 4px}.card p{margin:0;color:var(--ink-2);font-size:15px}.card .meta{display:block;margin-top:8px;color:var(--ink-3);font-size:13px}
+.foot{margin-top:40px;color:var(--ink-3);font-size:13px;border-top:1px solid var(--line);padding-top:14px}a{color:var(--series)}
+</style></head><body><main>
+<h1>Azure Learning Portfolio</h1>
+<p class="sub">Small, free-tier Azure builds on public data. Each one teaches a Business Analyst skill, ships with its code and an honest README, and ends as a live page here. By <a href="https://patrickneilbradley.com">Patrick Neil Bradley</a>. Total cost so far: $0.</p>
+<a class="card" href="build-01-aid-lite/"><h2>Build #1: Algorithmic Influence Detector (AID Lite)</h2><p>Coordinated messaging in a public dataset of state-operator tweets: identical-message templates, a 44-account ring, who amplified whom, one-day blasts, and a control-tested null result against the Congressional Record.</p><span class="meta">Blob Storage · Azure SQL (free) · Functions · AI Language · AI Search · four stages</span></a>
+<a class="card" href="build-02-bls-veterans/"><h2>Build #2: Veteran employment, pulled weekly from BLS</h2><p>Five Current Population Survey series for veterans and nonveterans, refreshed every Saturday by a Function whose API key lives in Key Vault and nowhere else.</p><span class="meta">Functions · Key Vault · Azure SQL (free) · SQL output binding</span></a>
+<div class="card"><h2>Build #3: This site</h2><p>Azure Blob Storage static website, deployed by GitHub Actions on every push to <code>main</code>. GitHub signs in to Azure with OIDC through a managed identity: no deployment token, no secret anywhere. A secret-scan gate runs before every deploy.</p><span class="meta">Blob static website · GitHub Actions · OIDC federated identity</span></div>
+<p class="foot">Code, READMEs and lessons: <a href="https://github.com/patbradley18-netizen/azure-portfolio">github.com/patbradley18-netizen/azure-portfolio</a>. Built on an Azure for Students subscription; non-commercial.</p>
+</main></body></html>

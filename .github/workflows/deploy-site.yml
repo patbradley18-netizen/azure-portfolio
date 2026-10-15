@@ -1,0 +1,56 @@
+# Build #3: deploy the portfolio site to the Azure Blob static website on every push to main.
+# Auth is OIDC: GitHub proves its identity to Entra, which issues a short-lived token for the
+# user-assigned managed identity below. No deployment token, no secret in this repo or in GitHub.
+name: Deploy site to Azure (Blob static website)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  id-token: write   # needed to request the OIDC token
+  contents: read
+
+env:
+  STORAGE_ACCOUNT: stazportfoliob1
+  SITE_URL: https://stazportfoliob1.z14.web.core.windows.net/
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Gate - fail if a secret-shaped string is in the repo
+        run: |
+          if git grep -nE 'AccountKey=|SharedAccessSignature=|eyJ0eXAi[A-Za-z0-9_-]{10,}|DefaultEndpointsProtocol=' -- . ':!.github/workflows/*' ':!**/*.example.json'; then
+            echo "::error::secret-shaped string found; refusing to deploy"; exit 1; fi
+          echo "gate passed"
+
+      - name: Assemble site
+        run: |
+          mkdir -p dist/build-01-aid-lite dist/build-02-bls-veterans
+          cp site/index.html dist/index.html
+          cp build-01-aid-lite/dashboard.html dist/build-01-aid-lite/index.html
+          cp build-01-aid-lite/dashboard.png  dist/build-01-aid-lite/dashboard.png
+          cp build-02-bls-veterans/dashboard.html dist/build-02-bls-veterans/index.html
+          cp build-02-bls-veterans/dashboard.png  dist/build-02-bls-veterans/dashboard.png
+          find dist -type f | sort
+
+      - name: Azure login (OIDC, user-assigned managed identity)
+        uses: azure/login@v2
+        with:
+          client-id: 7721b9b0-874d-4b8c-9ce5-b3ca0489bcdd
+          tenant-id: fbc63603-de50-4d40-b10a-1708ddcea0b7
+          subscription-id: 9cb921f7-8a0b-445c-bb35-eca47da1daae
+
+      - name: Upload to $web
+        run: az storage blob upload-batch --account-name "$STORAGE_ACCOUNT" --auth-mode login -d '$web' -s dist --overwrite true --only-show-errors
+
+      - name: Verify live
+        run: |
+          sleep 5
+          curl -fsS "$SITE_URL" | grep -q "Azure Learning Portfolio" && echo "live: $SITE_URL"
+          curl -fsS "${SITE_URL}build-01-aid-lite/" | grep -q "Algorithmic Influence Detector"
+          curl -fsS "${SITE_URL}build-02-bls-veterans/" | grep -q "Veteran employment"
