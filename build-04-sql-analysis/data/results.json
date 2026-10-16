@@ -1,0 +1,512 @@
+{
+ "Q1": {
+  "question": "Veteran vs nonveteran unemployment gap by year: when has it favored veterans, and by how much?",
+  "sql": "WITH yr AS (\n  SELECT YEAR(period) AS yr, series_id, AVG(value) AS avg_rate\n  FROM bls.observations\n  WHERE series_id IN ('LNU04049526','LNU04049601')\n  GROUP BY YEAR(period), series_id)\nSELECT v.yr,\n       ROUND(v.avg_rate,1) AS veterans,\n       ROUND(n.avg_rate,1) AS nonveterans,\n       ROUND(v.avg_rate - n.avg_rate,1) AS gap_pts,\n       CASE WHEN v.avg_rate < n.avg_rate THEN 'veterans lower' ELSE 'veterans higher' END AS who_is_lower\nFROM yr v JOIN yr n ON n.yr = v.yr AND n.series_id = 'LNU04049601'\nWHERE v.series_id = 'LNU04049526'\nORDER BY v.yr;",
+  "columns": [
+   "yr",
+   "veterans",
+   "nonveterans",
+   "gap_pts",
+   "who_is_lower"
+  ],
+  "rows": [
+   {
+    "yr": 2000,
+    "veterans": 2.9,
+    "nonveterans": 3.8,
+    "gap_pts": -0.9,
+    "who_is_lower": "veterans lower"
+   },
+   {
+    "yr": 2001,
+    "veterans": 3.6,
+    "nonveterans": 4.6,
+    "gap_pts": -1.0,
+    "who_is_lower": "veterans lower"
+   },
+   {
+    "yr": 2002,
+    "veterans": 4.7,
+    "nonveterans": 5.6,
+    "gap_pts": -0.9,
+    "who_is_lower": "veterans lower"
+   },
+   {
+    "yr": 2003,
+    "veterans": 5.0,
+    "nonveterans": 5.8,
+    "gap_pts": -0.8,
+    "who_is_lower": "veterans lower"
+   },
+   {
+    "yr": 2004,
+    "veterans": 4.6,
+    "nonveterans": 5.3,
+    "gap_pts": -0.7,
+    "who_is_lower": "veterans lower"
+   },
+   {
+    "yr": 2005,
+    "veterans": 4.0,
+    "nonveterans": 4.9,
+    "gap_pts": -0.9,
+    "who_is_lower": "veterans lower"
+   },
+   {
+    "yr": 2006,
+    "veterans": 3.8,
+    "nonveterans": 4.4,
+    "gap_pts": -0.7,
+    "who_is_lower": "veterans lower"
+   },
+   {
+    "yr": 2007,
+    "veterans": 3.8,
+    "nonveterans": 4.5,
+    "gap_pts": -0.7,
+    "who_is_lower": "veterans lower"
+   },
+   {
+    "yr": 2008,
+    "veterans": 4.6,
+    "nonveterans": 5.6,
+    "gap_pts": -1.0,
+    "who_is_lower": "veterans lower"
+   },
+   {
+    "yr": 2009,
+    "veterans": 8.1,
+    "nonveterans": 9.1,
+    "gap_pts": -1.0,
+    "who_is_lower": "veterans lower"
+   },
+   {
+    "yr": 2010,
+    "veterans": 8.7,
+    "nonveterans": 9.4,
+    "gap_pts": -0.8,
+    "who_is_lower": "veterans lower"
+   },
+   {
+    "yr": 2011,
+    "veterans": 8.3,
+    "nonveterans": 8.8,
+    "gap_pts": -0.4,
+    "who_is_lower": "veterans lower"
+   },
+   {
+    "yr": 2012,
+    "veterans": 7.0,
+    "nonveterans": 7.9,
+    "gap_pts": -0.9,
+    "who_is_lower": "veterans lower"
+   },
+   {
+    "yr": 2013,
+    "veterans": 6.6,
+    "nonveterans": 7.2,
+    "gap_pts": -0.6,
+    "who_is_lower": "veterans lower"
+   },
+   {
+    "yr": 2014,
+    "veterans": 5.3,
+    "nonveterans": 6.0,
+    "gap_pts": -0.7,
+    "who_is_lower": "veterans lower"
+   },
+   {
+    "yr": 2015,
+    "veterans": 4.6,
+    "nonveterans": 5.2,
+    "gap_pts": -0.6,
+    "who_is_lower": "veterans lower"
+   },
+   {
+    "yr": 2016,
+    "veterans": 4.3,
+    "nonveterans": 4.7,
+    "gap_pts": -0.5,
+    "who_is_lower": "veterans lower"
+   },
+   {
+    "yr": 2017,
+    "veterans": 3.7,
+    "nonveterans": 4.2,
+    "gap_pts": -0.6,
+    "who_is_lower": "veterans lower"
+   },
+   {
+    "yr": 2018,
+    "veterans": 3.5,
+    "nonveterans": 3.8,
+    "gap_pts": -0.3,
+    "who_is_lower": "veterans lower"
+   },
+   {
+    "yr": 2019,
+    "veterans": 3.1,
+    "nonveterans": 3.6,
+    "gap_pts": -0.5,
+    "who_is_lower": "veterans lower"
+   },
+   {
+    "yr": 2020,
+    "veterans": 6.5,
+    "nonveterans": 8.1,
+    "gap_pts": -1.5,
+    "who_is_lower": "veterans lower"
+   },
+   {
+    "yr": 2021,
+    "veterans": 4.4,
+    "nonveterans": 5.3,
+    "gap_pts": -1.0,
+    "who_is_lower": "veterans lower"
+   },
+   {
+    "yr": 2022,
+    "veterans": 2.8,
+    "nonveterans": 3.6,
+    "gap_pts": -0.8,
+    "who_is_lower": "veterans lower"
+   },
+   {
+    "yr": 2023,
+    "veterans": 2.8,
+    "nonveterans": 3.6,
+    "gap_pts": -0.8,
+    "who_is_lower": "veterans lower"
+   },
+   {
+    "yr": 2024,
+    "veterans": 3.0,
+    "nonveterans": 3.9,
+    "gap_pts": -1.0,
+    "who_is_lower": "veterans lower"
+   },
+   {
+    "yr": 2025,
+    "veterans": 3.5,
+    "nonveterans": 4.2,
+    "gap_pts": -0.6,
+    "who_is_lower": "veterans lower"
+   },
+   {
+    "yr": 2026,
+    "veterans": 3.8,
+    "nonveterans": 4.2,
+    "gap_pts": -0.3,
+    "who_is_lower": "veterans lower"
+   }
+  ]
+ },
+ "Q2": {
+  "question": "Gulf War-era II vs all veterans: how big was the post-2008 spike, and how long did it take to close?",
+  "sql": "WITH g AS (\n  SELECT period, value AS gw2 FROM bls.observations WHERE series_id = 'LNU04066408'),\n     a AS (\n  SELECT period, value AS all_vets FROM bls.observations WHERE series_id = 'LNU04049526'),\n     j AS (\n  SELECT g.period, g.gw2, a.all_vets, g.gw2 - a.all_vets AS excess FROM g JOIN a ON a.period = g.period),\n     pk AS (\n  SELECT TOP 1 period AS peak_period, gw2 AS peak_gw2, all_vets AS peak_all, excess AS peak_excess\n  FROM j WHERE period >= '2008-01-01' ORDER BY gw2 DESC)\nSELECT pk.peak_period, pk.peak_gw2, pk.peak_all, ROUND(pk.peak_excess,1) AS peak_excess_pts,\n       (SELECT MIN(period) FROM j WHERE period > pk.peak_period AND excess <= 1.0) AS first_month_within_1pt,\n       DATEDIFF(month, pk.peak_period, (SELECT MIN(period) FROM j WHERE period > pk.peak_period AND excess <= 1.0)) AS months_to_close_to_1pt,\n       (SELECT ROUND(AVG(excess),1) FROM j WHERE period >= DATEADD(month,-12,(SELECT MAX(period) FROM j))) AS excess_last_12m\nFROM pk;",
+  "columns": [
+   "peak_period",
+   "peak_gw2",
+   "peak_all",
+   "peak_excess_pts",
+   "first_month_within_1pt",
+   "months_to_close_to_1pt",
+   "excess_last_12m"
+  ],
+  "rows": [
+   {
+    "peak_period": "2011-01-01",
+    "peak_gw2": 15.2,
+    "peak_all": 9.9,
+    "peak_excess_pts": 5.3,
+    "first_month_within_1pt": "2012-02-01",
+    "months_to_close_to_1pt": 13,
+    "excess_last_12m": 0.7
+   }
+  ]
+ },
+ "Q3": {
+  "question": "Same-month year-over-year change (the honest way to read NSA data): latest reading vs the same month last year, every series.",
+  "sql": "WITH latest AS (SELECT MAX(period) AS p FROM bls.observations)\nSELECT s.series_id, s.measure, s.population,\n       o.period AS latest_period, o.value AS latest_value,\n       y.value AS same_month_last_year,\n       ROUND(o.value - y.value,1) AS yoy_change_pts\nFROM bls.series s\nJOIN latest l ON 1=1\nJOIN bls.observations o ON o.series_id = s.series_id AND o.period = l.p\nLEFT JOIN bls.observations y ON y.series_id = s.series_id AND y.period = DATEADD(year,-1,l.p)\nORDER BY s.measure, s.population;",
+  "columns": [
+   "series_id",
+   "measure",
+   "population",
+   "latest_period",
+   "latest_value",
+   "same_month_last_year",
+   "yoy_change_pts"
+  ],
+  "rows": [
+   {
+    "series_id": "LNU01349601",
+    "measure": "Labor force participation rate",
+    "population": "Nonveterans, 18+",
+    "latest_period": "2026-09-01",
+    "latest_value": 64.1,
+    "same_month_last_year": 64.8,
+    "yoy_change_pts": -0.7
+   },
+   {
+    "series_id": "LNU01349526",
+    "measure": "Labor force participation rate",
+    "population": "Veterans, 18+",
+    "latest_period": "2026-09-01",
+    "latest_value": 48.3,
+    "same_month_last_year": 49.0,
+    "yoy_change_pts": -0.7
+   },
+   {
+    "series_id": "LNU04066408",
+    "measure": "Unemployment rate",
+    "population": "Gulf War-era II veterans, 18+",
+    "latest_period": "2026-09-01",
+    "latest_value": 4.1,
+    "same_month_last_year": 2.4,
+    "yoy_change_pts": 1.7
+   },
+   {
+    "series_id": "LNU04049601",
+    "measure": "Unemployment rate",
+    "population": "Nonveterans, 18+",
+    "latest_period": "2026-09-01",
+    "latest_value": 3.9,
+    "same_month_last_year": 4.2,
+    "yoy_change_pts": -0.3
+   },
+   {
+    "series_id": "LNU04049526",
+    "measure": "Unemployment rate",
+    "population": "Veterans, 18+",
+    "latest_period": "2026-09-01",
+    "latest_value": 3.5,
+    "same_month_last_year": 2.6,
+    "yoy_change_pts": 0.9
+   }
+  ]
+ },
+ "Q4": {
+  "question": "Recessions in the data: for 2008-10 and 2020, the peak month and months back to the pre-recession level, per group.",
+  "sql": "WITH ep AS (\n  SELECT 'Great Recession' AS episode, CAST('2007-12-01' AS date) AS pre_month, CAST('2008-01-01' AS date) AS win_start, CAST('2012-12-01' AS date) AS win_end\n  UNION ALL\n  SELECT 'COVID-19', '2020-02-01', '2020-03-01', '2023-12-01'),\n     base AS (\n  SELECT e.episode, o.series_id, o.value AS pre_value\n  FROM ep e JOIN bls.observations o ON o.period = e.pre_month\n  WHERE o.series_id IN ('LNU04049526','LNU04049601','LNU04066408')),\n     peak AS (\n  SELECT e.episode, o.series_id, MAX(o.value) AS peak_value\n  FROM ep e JOIN bls.observations o ON o.period BETWEEN e.win_start AND e.win_end\n  WHERE o.series_id IN ('LNU04049526','LNU04049601','LNU04066408')\n  GROUP BY e.episode, o.series_id),\n     peak_month AS (\n  SELECT p.episode, p.series_id, p.peak_value, MIN(o.period) AS peak_period\n  FROM peak p JOIN ep e ON e.episode = p.episode\n  JOIN bls.observations o ON o.series_id = p.series_id AND o.value = p.peak_value AND o.period BETWEEN e.win_start AND e.win_end\n  GROUP BY p.episode, p.series_id, p.peak_value),\n     recov AS (\n  SELECT pm.episode, pm.series_id, MIN(o.period) AS recovered_period\n  FROM peak_month pm JOIN base b ON b.episode = pm.episode AND b.series_id = pm.series_id\n  JOIN bls.observations o ON o.series_id = pm.series_id AND o.period > pm.peak_period AND o.value <= b.pre_value\n  GROUP BY pm.episode, pm.series_id)\nSELECT pm.episode, s.population, b.pre_value, pm.peak_period, pm.peak_value,\n       ROUND(pm.peak_value - b.pre_value,1) AS rise_pts,\n       r.recovered_period, DATEDIFF(month, pm.peak_period, r.recovered_period) AS months_peak_to_recovery\nFROM peak_month pm\nJOIN base b ON b.episode = pm.episode AND b.series_id = pm.series_id\nJOIN bls.series s ON s.series_id = pm.series_id\nLEFT JOIN recov r ON r.episode = pm.episode AND r.series_id = pm.series_id\nORDER BY pm.episode, s.population;",
+  "columns": [
+   "episode",
+   "population",
+   "pre_value",
+   "peak_period",
+   "peak_value",
+   "rise_pts",
+   "recovered_period",
+   "months_peak_to_recovery"
+  ],
+  "rows": [
+   {
+    "episode": "COVID-19",
+    "population": "Gulf War-era II veterans, 18+",
+    "pre_value": 4.5,
+    "peak_period": "2020-04-01",
+    "peak_value": 13.0,
+    "rise_pts": 8.5,
+    "recovered_period": "2021-05-01",
+    "months_peak_to_recovery": 13
+   },
+   {
+    "episode": "COVID-19",
+    "population": "Nonveterans, 18+",
+    "pre_value": 3.7,
+    "peak_period": "2020-04-01",
+    "peak_value": 14.4,
+    "rise_pts": 10.7,
+    "recovered_period": "2021-12-01",
+    "months_peak_to_recovery": 20
+   },
+   {
+    "episode": "COVID-19",
+    "population": "Veterans, 18+",
+    "pre_value": 3.6,
+    "peak_period": "2020-04-01",
+    "peak_value": 11.7,
+    "rise_pts": 8.1,
+    "recovered_period": "2021-08-01",
+    "months_peak_to_recovery": 16
+   },
+   {
+    "episode": "Great Recession",
+    "population": "Gulf War-era II veterans, 18+",
+    "pre_value": 10.2,
+    "peak_period": "2011-01-01",
+    "peak_value": 15.2,
+    "rise_pts": 5.0,
+    "recovered_period": "2011-08-01",
+    "months_peak_to_recovery": 7
+   },
+   {
+    "episode": "Great Recession",
+    "population": "Nonveterans, 18+",
+    "pre_value": 4.6,
+    "peak_period": "2010-01-01",
+    "peak_value": 10.4,
+    "rise_pts": 5.8,
+    "recovered_period": "2016-04-01",
+    "months_peak_to_recovery": 75
+   },
+   {
+    "episode": "Great Recession",
+    "population": "Veterans, 18+",
+    "pre_value": 4.8,
+    "peak_period": "2011-01-01",
+    "peak_value": 9.9,
+    "rise_pts": 5.1,
+    "recovered_period": "2014-09-01",
+    "months_peak_to_recovery": 44
+   }
+  ]
+ },
+ "Q5": {
+  "question": "Producers vs amplifiers: which account categories write the templates, and which do the retweeting?",
+  "sql": "WITH prod AS (\n  SELECT top_category AS category, COUNT(*) AS templates_written\n  FROM dbo.templates GROUP BY top_category),\n     amp AS (\n  SELECT source_category AS category, SUM(weight) AS retweets_sent, COUNT(DISTINCT source) AS retweeting_accounts\n  FROM dbo.edges GROUP BY source_category)\nSELECT COALESCE(p.category, a.category) AS category,\n       COALESCE(p.templates_written,0) AS templates_written,\n       COALESCE(a.retweets_sent,0) AS retweets_sent,\n       COALESCE(a.retweeting_accounts,0) AS retweeting_accounts,\n       CASE WHEN COALESCE(a.retweets_sent,0) = 0 THEN NULL\n            ELSE ROUND(1.0 * COALESCE(p.templates_written,0) / a.retweets_sent, 3) END AS templates_per_retweet\nFROM prod p FULL OUTER JOIN amp a ON a.category = p.category\nORDER BY retweets_sent DESC;",
+  "columns": [
+   "category",
+   "templates_written",
+   "retweets_sent",
+   "retweeting_accounts",
+   "templates_per_retweet"
+  ],
+  "rows": [
+   {
+    "category": "RightTroll",
+    "templates_written": 1571,
+    "retweets_sent": 18847,
+    "retweeting_accounts": 76,
+    "templates_per_retweet": 0.083
+   },
+   {
+    "category": "LeftTroll",
+    "templates_written": 47,
+    "retweets_sent": 806,
+    "retweeting_accounts": 12,
+    "templates_per_retweet": 0.058
+   },
+   {
+    "category": "HashtagGamer",
+    "templates_written": 20,
+    "retweets_sent": 297,
+    "retweeting_accounts": 15,
+    "templates_per_retweet": 0.067
+   },
+   {
+    "category": "NonEnglish",
+    "templates_written": 1,
+    "retweets_sent": 57,
+    "retweeting_accounts": 4,
+    "templates_per_retweet": 0.018
+   },
+   {
+    "category": "Commercial",
+    "templates_written": 0,
+    "retweets_sent": 23,
+    "retweeting_accounts": 1,
+    "templates_per_retweet": 0.0
+   },
+   {
+    "category": "Fearmonger",
+    "templates_written": 2,
+    "retweets_sent": 10,
+    "retweeting_accounts": 4,
+    "templates_per_retweet": 0.2
+   },
+   {
+    "category": "Unknown",
+    "templates_written": 1,
+    "retweets_sent": 6,
+    "retweeting_accounts": 4,
+    "templates_per_retweet": 0.167
+   }
+  ]
+ },
+ "Q6": {
+  "question": "Template lifetime: what share of each category's templates were one-day blasts, and how long did the rest live?",
+  "sql": "SELECT t.top_category AS category,\n       COUNT(*) AS templates,\n       SUM(CASE WHEN b.days_active = 1 THEN 1 ELSE 0 END) AS one_day_blasts,\n       ROUND(100.0 * SUM(CASE WHEN b.days_active = 1 THEN 1 ELSE 0 END) / COUNT(*),1) AS blast_share_pct,\n       MAX(b.days_active) AS longest_days,\n       ROUND(AVG(CASE WHEN b.days_active > 1 THEN 1.0 * b.days_active END),1) AS avg_days_when_multi_day\nFROM dbo.templates t JOIN dbo.bursts b ON b.body = t.body\nGROUP BY t.top_category\nORDER BY templates DESC;",
+  "columns": [
+   "category",
+   "templates",
+   "one_day_blasts",
+   "blast_share_pct",
+   "longest_days",
+   "avg_days_when_multi_day"
+  ],
+  "rows": [
+   {
+    "category": "RightTroll",
+    "templates": 1571,
+    "one_day_blasts": 1218,
+    "blast_share_pct": 77.5,
+    "longest_days": 7,
+    "avg_days_when_multi_day": 2.4
+   },
+   {
+    "category": "LeftTroll",
+    "templates": 47,
+    "one_day_blasts": 0,
+    "blast_share_pct": 0.0,
+    "longest_days": 9,
+    "avg_days_when_multi_day": 3.3
+   },
+   {
+    "category": "HashtagGamer",
+    "templates": 20,
+    "one_day_blasts": 0,
+    "blast_share_pct": 0.0,
+    "longest_days": 5,
+    "avg_days_when_multi_day": 3.2
+   },
+   {
+    "category": "Fearmonger",
+    "templates": 2,
+    "one_day_blasts": 0,
+    "blast_share_pct": 0.0,
+    "longest_days": 3,
+    "avg_days_when_multi_day": 2.5
+   },
+   {
+    "category": "Unknown",
+    "templates": 1,
+    "one_day_blasts": 0,
+    "blast_share_pct": 0.0,
+    "longest_days": 3,
+    "avg_days_when_multi_day": 3.0
+   },
+   {
+    "category": "NonEnglish",
+    "templates": 1,
+    "one_day_blasts": 0,
+    "blast_share_pct": 0.0,
+    "longest_days": 3,
+    "avg_days_when_multi_day": 3.0
+   }
+  ]
+ },
+ "Q7": {
+  "question": "Data quality: does each weekly function run reproduce the same template set? (Fills in as runs accumulate.)",
+  "sql": "SELECT run_id, MIN(run_time) AS run_time, COUNT(*) AS rows_written,\n       MAX(n_authors) AS max_authors, SUM(n_tweets) AS template_posts,\n       MAX(english_originals) AS english_originals,\n       SUM(CASE WHEN key_phrases IS NOT NULL THEN 1 ELSE 0 END) AS rows_with_key_phrases\nFROM dbo.template_runs\nGROUP BY run_id\nORDER BY run_time;",
+  "columns": [
+   "run_id",
+   "run_time",
+   "rows_written",
+   "max_authors",
+   "template_posts",
+   "english_originals",
+   "rows_with_key_phrases"
+  ],
+  "rows": [
+   {
+    "run_id": "d17b70d5-73b7-4896-99ff-86e102ac8b48",
+    "run_time": "2026-10-14",
+    "rows_written": 1642,
+    "max_authors": 44,
+    "template_posts": 21830,
+    "english_originals": 84270,
+    "rows_with_key_phrases": 50
+   }
+  ]
+ }
+}
