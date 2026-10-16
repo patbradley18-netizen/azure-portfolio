@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SQL Findings</title>
+<style>
+:root{color-scheme:light;--surface:#fcfcfb;--surface-2:#f1f0ec;--ink:#0b0b0b;--ink-2:#52514e;--ink-3:#8a8880;--line:#e3e1da;--series:#2a78d6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--surface:#1a1a19;--surface-2:#242422;--ink:#f0efec;--ink-2:#c3c2b7;--ink-3:#8f8e86;--line:#33332f;--series:#3987e5}}
+:root[data-theme="dark"]{color-scheme:dark;--surface:#1a1a19;--surface-2:#242422;--ink:#f0efec;--ink-2:#c3c2b7;--ink-3:#8f8e86;--line:#33332f;--series:#3987e5}
+*{box-sizing:border-box}body{margin:0;background:var(--surface);color:var(--ink);font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:980px;margin:0 auto;padding:32px 16px 64px}h1{font-size:26px;margin:0 0 4px}.sub{color:var(--ink-2);margin:0 0 28px}
+h2{font-size:17px;margin:40px 0 8px}.finding{font-size:16px;margin:0 0 6px}.note{color:var(--ink-2);font-size:14px;margin:0 0 14px}
+table{width:100%;border-collapse:collapse;font-size:13px;display:block;overflow-x:auto}th{text-align:left;color:var(--ink-2);font-weight:500;border-bottom:1px solid var(--line);padding:6px 8px;white-space:nowrap}td{padding:5px 8px;border-bottom:1px solid var(--line);vertical-align:top}td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+details{margin-top:10px}summary{cursor:pointer;color:var(--series);font-size:14px}pre{background:var(--surface-2);padding:12px;border-radius:8px;overflow-x:auto;font-size:12px;line-height:1.45}
+.foot{margin-top:40px;color:var(--ink-3);font-size:13px;border-top:1px solid var(--line);padding-top:14px}a{color:var(--series)}
+</style></head><body><main>
+<h1>Seven questions, seven queries, seven sentences</h1>
+<p class="sub">The queries a Business Analyst writes against the tables from builds #1 and #2, run on the free Azure SQL database, each answered in one sentence with its number and its caveat. Anchor phrase: question, query, sentence. Expand any query to read the T-SQL.</p>
+<section class="q">
+<h2>Q1. Veteran vs nonveteran unemployment gap by year: when has it favored veterans, and by how much?</h2>
+<p class="finding">Veterans have had the lower unemployment rate in <b>27 of 27 years</b> since 2000. The gap was widest in 2020 (1.5 points in veterans' favor) and narrowest in 2018 (0.3 points).</p>
+<p class="note">Annual averages of monthly not-seasonally-adjusted rates. Veterans skew older, which lowers unemployment on its own; this gap is not age-adjusted.</p>
+<table><thead><tr><th class=num>yr</th><th class=num>veterans</th><th class=num>nonveterans</th><th class=num>gap_pts</th><th>who_is_lower</th></tr></thead><tbody><tr><td class="num">2000</td><td class="num">2.9</td><td class="num">3.8</td><td class="num">-0.9</td><td>veterans lower</td></tr><tr><td class="num">2001</td><td class="num">3.6</td><td class="num">4.6</td><td class="num">-1.0</td><td>veterans lower</td></tr><tr><td class="num">2002</td><td class="num">4.7</td><td class="num">5.6</td><td class="num">-0.9</td><td>veterans lower</td></tr><tr><td class="num">2003</td><td class="num">5.0</td><td class="num">5.8</td><td class="num">-0.8</td><td>veterans lower</td></tr><tr><td class="num">2004</td><td class="num">4.6</td><td class="num">5.3</td><td class="num">-0.7</td><td>veterans lower</td></tr><tr><td class="num">2005</td><td class="num">4.0</td><td class="num">4.9</td><td class="num">-0.9</td><td>veterans lower</td></tr><tr><td class="num">2006</td><td class="num">3.8</td><td class="num">4.4</td><td class="num">-0.7</td><td>veterans lower</td></tr><tr><td class="num">2007</td><td class="num">3.8</td><td class="num">4.5</td><td class="num">-0.7</td><td>veterans lower</td></tr><tr><td class="num">2008</td><td class="num">4.6</td><td class="num">5.6</td><td class="num">-1.0</td><td>veterans lower</td></tr><tr><td class="num">2009</td><td class="num">8.1</td><td class="num">9.1</td><td class="num">-1.0</td><td>veterans lower</td></tr><tr><td class="num">2010</td><td class="num">8.7</td><td class="num">9.4</td><td class="num">-0.8</td><td>veterans lower</td></tr><tr><td class="num">2011</td><td class="num">8.3</td><td class="num">8.8</td><td class="num">-0.4</td><td>veterans lower</td></tr><tr><td class="num">2012</td><td class="num">7.0</td><td class="num">7.9</td><td class="num">-0.9</td><td>veterans lower</td></tr><tr><td class="num">2013</td><td class="num">6.6</td><td class="num">7.2</td><td class="num">-0.6</td><td>veterans lower</td></tr><tr><td class="num">2014</td><td class="num">5.3</td><td class="num">6.0</td><td class="num">-0.7</td><td>veterans lower</td></tr><tr><td class="num">2015</td><td class="num">4.6</td><td class="num">5.2</td><td class="num">-0.6</td><td>veterans lower</td></tr><tr><td class="num">2016</td><td class="num">4.3</td><td class="num">4.7</td><td class="num">-0.5</td><td>veterans lower</td></tr><tr><td class="num">2017</td><td class="num">3.7</td><td class="num">4.2</td><td class="num">-0.6</td><td>veterans lower</td></tr><tr><td class="num">2018</td><td class="num">3.5</td><td class="num">3.8</td><td class="num">-0.3</td><td>veterans lower</td></tr><tr><td class="num">2019</td><td class="num">3.1</td><td class="num">3.6</td><td class="num">-0.5</td><td>veterans lower</td></tr><tr><td class="num">2020</td><td class="num">6.5</td><td class="num">8.1</td><td class="num">-1.5</td><td>veterans lower</td></tr><tr><td class="num">2021</td><td class="num">4.4</td><td class="num">5.3</td><td class="num">-1.0</td><td>veterans lower</td></tr><tr><td class="num">2022</td><td class="num">2.8</td><td class="num">3.6</td><td class="num">-0.8</td><td>veterans lower</td></tr><tr><td class="num">2023</td><td class="num">2.8</td><td class="num">3.6</td><td class="num">-0.8</td><td>veterans lower</td></tr><tr><td class="num">2024</td><td class="num">3.0</td><td class="num">3.9</td><td class="num">-1.0</td><td>veterans lower</td></tr><tr><td class="num">2025</td><td class="num">3.5</td><td class="num">4.2</td><td class="num">-0.6</td><td>veterans lower</td></tr><tr><td class="num">2026</td><td class="num">3.8</td><td class="num">4.2</td><td class="num">-0.3</td><td>veterans lower</td></tr></tbody></table>
+<details><summary>Query (CTE + self-join on year)</summary><pre>WITH yr AS (
+  SELECT YEAR(period) AS yr, series_id, AVG(value) AS avg_rate
+  FROM bls.observations
+  WHERE series_id IN (&#x27;LNU04049526&#x27;,&#x27;LNU04049601&#x27;)
+  GROUP BY YEAR(period), series_id)
+SELECT v.yr,
+       ROUND(v.avg_rate,1) AS veterans,
+       ROUND(n.avg_rate,1) AS nonveterans,
+       ROUND(v.avg_rate - n.avg_rate,1) AS gap_pts,
+       CASE WHEN v.avg_rate &lt; n.avg_rate THEN &#x27;veterans lower&#x27; ELSE &#x27;veterans higher&#x27; END AS who_is_lower
+FROM yr v JOIN yr n ON n.yr = v.yr AND n.series_id = &#x27;LNU04049601&#x27;
+WHERE v.series_id = &#x27;LNU04049526&#x27;
+ORDER BY v.yr;</pre></details>
+</section>
+<section class="q">
+<h2>Q2. Gulf War-era II vs all veterans: how big was the post-2008 spike, and how long did it take to close?</h2>
+<p class="finding">Gulf War-era II unemployment peaked at <b>15.2%</b> in 2011-01, 5.3 points above all veterans (9.9%). It took <b>13 months</b> for the excess to fall within 1 point; over the last 12 months it has averaged 0.7 points.</p>
+<p class="note">Gulf War-era II = service since September 2001. The series starts in 2006, so the 2008 window begins at the first available month. Monthly NSA data; the peak is a single month.</p>
+<table><thead><tr><th>peak_period</th><th class=num>peak_gw2</th><th class=num>peak_all</th><th class=num>peak_excess_pts</th><th>first_month_within_1pt</th><th class=num>months_to_close_to_1pt</th><th class=num>excess_last_12m</th></tr></thead><tbody><tr><td>2011-01-01</td><td class="num">15.2</td><td class="num">9.9</td><td class="num">5.3</td><td>2012-02-01</td><td class="num">13</td><td class="num">0.7</td></tr></tbody></table>
+<details><summary>Query (CTEs, TOP 1 peak, correlated subqueries, DATEDIFF)</summary><pre>WITH g AS (
+  SELECT period, value AS gw2 FROM bls.observations WHERE series_id = &#x27;LNU04066408&#x27;),
+     a AS (
+  SELECT period, value AS all_vets FROM bls.observations WHERE series_id = &#x27;LNU04049526&#x27;),
+     j AS (
+  SELECT g.period, g.gw2, a.all_vets, g.gw2 - a.all_vets AS excess FROM g JOIN a ON a.period = g.period),
+     pk AS (
+  SELECT TOP 1 period AS peak_period, gw2 AS peak_gw2, all_vets AS peak_all, excess AS peak_excess
+  FROM j WHERE period &gt;= &#x27;2008-01-01&#x27; ORDER BY gw2 DESC)
+SELECT pk.peak_period, pk.peak_gw2, pk.peak_all, ROUND(pk.peak_excess,1) AS peak_excess_pts,
+       (SELECT MIN(period) FROM j WHERE period &gt; pk.peak_period AND excess &lt;= 1.0) AS first_month_within_1pt,
+       DATEDIFF(month, pk.peak_period, (SELECT MIN(period) FROM j WHERE period &gt; pk.peak_period AND excess &lt;= 1.0)) AS months_to_close_to_1pt,
+       (SELECT ROUND(AVG(excess),1) FROM j WHERE period &gt;= DATEADD(month,-12,(SELECT MAX(period) FROM j))) AS excess_last_12m
+FROM pk;</pre></details>
+</section>
+<section class="q">
+<h2>Q3. Same-month year-over-year change (the honest way to read NSA data): latest reading vs the same month last year, every series.</h2>
+<p class="finding">In 2026-09, Gulf War-era II unemployment was <b>4.1%</b>, +1.7 points against the same month a year earlier, while nonveteran unemployment moved -0.3. Participation fell 0.7 points for both veterans and nonveterans.</p>
+<p class="note">Same month, one year apart, is the only honest comparison for NSA data. A single month of Gulf War-era II data is a small sample and moves a lot; read the trend, not the point.</p>
+<table><thead><tr><th>series_id</th><th>measure</th><th>population</th><th>latest_period</th><th class=num>latest_value</th><th class=num>same_month_last_year</th><th class=num>yoy_change_pts</th></tr></thead><tbody><tr><td>LNU01349601</td><td>Labor force participation rate</td><td>Nonveterans, 18+</td><td>2026-09-01</td><td class="num">64.1</td><td class="num">64.8</td><td class="num">-0.7</td></tr><tr><td>LNU01349526</td><td>Labor force participation rate</td><td>Veterans, 18+</td><td>2026-09-01</td><td class="num">48.3</td><td class="num">49.0</td><td class="num">-0.7</td></tr><tr><td>LNU04066408</td><td>Unemployment rate</td><td>Gulf War-era II veterans, 18+</td><td>2026-09-01</td><td class="num">4.1</td><td class="num">2.4</td><td class="num">1.7</td></tr><tr><td>LNU04049601</td><td>Unemployment rate</td><td>Nonveterans, 18+</td><td>2026-09-01</td><td class="num">3.9</td><td class="num">4.2</td><td class="num">-0.3</td></tr><tr><td>LNU04049526</td><td>Unemployment rate</td><td>Veterans, 18+</td><td>2026-09-01</td><td class="num">3.5</td><td class="num">2.6</td><td class="num">0.9</td></tr></tbody></table>
+<details><summary>Query (LEFT JOIN on DATEADD(year,-1))</summary><pre>WITH latest AS (SELECT MAX(period) AS p FROM bls.observations)
+SELECT s.series_id, s.measure, s.population,
+       o.period AS latest_period, o.value AS latest_value,
+       y.value AS same_month_last_year,
+       ROUND(o.value - y.value,1) AS yoy_change_pts
+FROM bls.series s
+JOIN latest l ON 1=1
+JOIN bls.observations o ON o.series_id = s.series_id AND o.period = l.p
+LEFT JOIN bls.observations y ON y.series_id = s.series_id AND y.period = DATEADD(year,-1,l.p)
+ORDER BY s.measure, s.population;</pre></details>
+</section>
+<section class="q">
+<h2>Q4. Recessions in the data: for 2008-10 and 2020, the peak month and months back to the pre-recession level, per group.</h2>
+<p class="finding">In the COVID-19 shock, veteran unemployment rose 8.1 points to 11.7% and was back at its pre-recession level in <b>16 months</b>; nonveterans rose 10.7 points to 14.4% and took <b>20 months</b>. In the Great Recession the veteran peak came in 2011-01 and recovery to the December 2007 level took 44 months.</p>
+<p class="note">Pre-recession level = December 2007 and February 2020. Recovery = first month at or below that level after the peak. Windows: 2008–2012 and 2020–2023.</p>
+<table><thead><tr><th>episode</th><th>population</th><th class=num>pre_value</th><th>peak_period</th><th class=num>peak_value</th><th class=num>rise_pts</th><th>recovered_period</th><th class=num>months_peak_to_recovery</th></tr></thead><tbody><tr><td>COVID-19</td><td>Gulf War-era II veterans, 18+</td><td class="num">4.5</td><td>2020-04-01</td><td class="num">13.0</td><td class="num">8.5</td><td>2021-05-01</td><td class="num">13</td></tr><tr><td>COVID-19</td><td>Nonveterans, 18+</td><td class="num">3.7</td><td>2020-04-01</td><td class="num">14.4</td><td class="num">10.7</td><td>2021-12-01</td><td class="num">20</td></tr><tr><td>COVID-19</td><td>Veterans, 18+</td><td class="num">3.6</td><td>2020-04-01</td><td class="num">11.7</td><td class="num">8.1</td><td>2021-08-01</td><td class="num">16</td></tr><tr><td>Great Recession</td><td>Gulf War-era II veterans, 18+</td><td class="num">10.2</td><td>2011-01-01</td><td class="num">15.2</td><td class="num">5.0</td><td>2011-08-01</td><td class="num">7</td></tr><tr><td>Great Recession</td><td>Nonveterans, 18+</td><td class="num">4.6</td><td>2010-01-01</td><td class="num">10.4</td><td class="num">5.8</td><td>2016-04-01</td><td class="num">75</td></tr><tr><td>Great Recession</td><td>Veterans, 18+</td><td class="num">4.8</td><td>2011-01-01</td><td class="num">9.9</td><td class="num">5.1</td><td>2014-09-01</td><td class="num">44</td></tr></tbody></table>
+<details><summary>Query (episode table via UNION ALL, three CTEs, LEFT JOIN for not-yet-recovered)</summary><pre>WITH ep AS (
+  SELECT &#x27;Great Recession&#x27; AS episode, CAST(&#x27;2007-12-01&#x27; AS date) AS pre_month, CAST(&#x27;2008-01-01&#x27; AS date) AS win_start, CAST(&#x27;2012-12-01&#x27; AS date) AS win_end
+  UNION ALL
+  SELECT &#x27;COVID-19&#x27;, &#x27;2020-02-01&#x27;, &#x27;2020-03-01&#x27;, &#x27;2023-12-01&#x27;),
+     base AS (
+  SELECT e.episode, o.series_id, o.value AS pre_value
+  FROM ep e JOIN bls.observations o ON o.period = e.pre_month
+  WHERE o.series_id IN (&#x27;LNU04049526&#x27;,&#x27;LNU04049601&#x27;,&#x27;LNU04066408&#x27;)),
+     peak AS (
+  SELECT e.episode, o.series_id, MAX(o.value) AS peak_value
+  FROM ep e JOIN bls.observations o ON o.period BETWEEN e.win_start AND e.win_end
+  WHERE o.series_id IN (&#x27;LNU04049526&#x27;,&#x27;LNU04049601&#x27;,&#x27;LNU04066408&#x27;)
+  GROUP BY e.episode, o.series_id),
+     peak_month AS (
+  SELECT p.episode, p.series_id, p.peak_value, MIN(o.period) AS peak_period
+  FROM peak p JOIN ep e ON e.episode = p.episode
+  JOIN bls.observations o ON o.series_id = p.series_id AND o.value = p.peak_value AND o.period BETWEEN e.win_start AND e.win_end
+  GROUP BY p.episode, p.series_id, p.peak_value),
+     recov AS (
+  SELECT pm.episode, pm.series_id, MIN(o.period) AS recovered_period
+  FROM peak_month pm JOIN base b ON b.episode = pm.episode AND b.series_id = pm.series_id
+  JOIN bls.observations o ON o.series_id = pm.series_id AND o.period &gt; pm.peak_period AND o.value &lt;= b.pre_value
+  GROUP BY pm.episode, pm.series_id)
+SELECT pm.episode, s.population, b.pre_value, pm.peak_period, pm.peak_value,
+       ROUND(pm.peak_value - b.pre_value,1) AS rise_pts,
+       r.recovered_period, DATEDIFF(month, pm.peak_period, r.recovered_period) AS months_peak_to_recovery
+FROM peak_month pm
+JOIN base b ON b.episode = pm.episode AND b.series_id = pm.series_id
+JOIN bls.series s ON s.series_id = pm.series_id
+LEFT JOIN recov r ON r.episode = pm.episode AND r.series_id = pm.series_id
+ORDER BY pm.episode, s.population;</pre></details>
+</section>
+<section class="q">
+<h2>Q5. Producers vs amplifiers: which account categories write the templates, and which do the retweeting?</h2>
+<p class="finding">RightTroll accounts wrote <b>1,571 of 1,642 templates</b> (96%) and sent 18,847 of 20,046 retweets (94%) from just 76 accounts. Producing and amplifying were the same operation, not two.</p>
+<p class="note">Build #1 data, file 1 of 13. Retweet edges count only retweets with an identifiable target (RT handle: or matched in-file original). Categories are the researchers' hand labels.</p>
+<table><thead><tr><th>category</th><th class=num>templates_written</th><th class=num>retweets_sent</th><th class=num>retweeting_accounts</th><th class=num>templates_per_retweet</th></tr></thead><tbody><tr><td>RightTroll</td><td class="num">1,571</td><td class="num">18,847</td><td class="num">76</td><td class="num">0.083</td></tr><tr><td>LeftTroll</td><td class="num">47</td><td class="num">806</td><td class="num">12</td><td class="num">0.058</td></tr><tr><td>HashtagGamer</td><td class="num">20</td><td class="num">297</td><td class="num">15</td><td class="num">0.067</td></tr><tr><td>NonEnglish</td><td class="num">1</td><td class="num">57</td><td class="num">4</td><td class="num">0.018</td></tr><tr><td>Commercial</td><td class="num">0</td><td class="num">23</td><td class="num">1</td><td class="num">0.0</td></tr><tr><td>Fearmonger</td><td class="num">2</td><td class="num">10</td><td class="num">4</td><td class="num">0.200</td></tr><tr><td>Unknown</td><td class="num">1</td><td class="num">6</td><td class="num">4</td><td class="num">0.167</td></tr></tbody></table>
+<details><summary>Query (FULL OUTER JOIN across two signals, COALESCE)</summary><pre>WITH prod AS (
+  SELECT top_category AS category, COUNT(*) AS templates_written
+  FROM dbo.templates GROUP BY top_category),
+     amp AS (
+  SELECT source_category AS category, SUM(weight) AS retweets_sent, COUNT(DISTINCT source) AS retweeting_accounts
+  FROM dbo.edges GROUP BY source_category)
+SELECT COALESCE(p.category, a.category) AS category,
+       COALESCE(p.templates_written,0) AS templates_written,
+       COALESCE(a.retweets_sent,0) AS retweets_sent,
+       COALESCE(a.retweeting_accounts,0) AS retweeting_accounts,
+       CASE WHEN COALESCE(a.retweets_sent,0) = 0 THEN NULL
+            ELSE ROUND(1.0 * COALESCE(p.templates_written,0) / a.retweets_sent, 3) END AS templates_per_retweet
+FROM prod p FULL OUTER JOIN amp a ON a.category = p.category
+ORDER BY retweets_sent DESC;</pre></details>
+</section>
+<section class="q">
+<h2>Q6. Template lifetime: what share of each category&#x27;s templates were one-day blasts, and how long did the rest live?</h2>
+<p class="finding">One-day blasts are a RightTroll signature: <b>77.5%</b> of its 1,571 templates lived one day. Every other category's blast share is 0%; their templates ran 2.5 to 3.3 days on average.</p>
+<p class="note">Days active counts distinct calendar days with at least one post of that template. Small categories (Fearmonger, Unknown) have single-digit template counts.</p>
+<table><thead><tr><th>category</th><th class=num>templates</th><th class=num>one_day_blasts</th><th class=num>blast_share_pct</th><th class=num>longest_days</th><th class=num>avg_days_when_multi_day</th></tr></thead><tbody><tr><td>RightTroll</td><td class="num">1,571</td><td class="num">1,218</td><td class="num">77.5</td><td class="num">7</td><td class="num">2.4</td></tr><tr><td>LeftTroll</td><td class="num">47</td><td class="num">0</td><td class="num">0.0</td><td class="num">9</td><td class="num">3.3</td></tr><tr><td>HashtagGamer</td><td class="num">20</td><td class="num">0</td><td class="num">0.0</td><td class="num">5</td><td class="num">3.2</td></tr><tr><td>Fearmonger</td><td class="num">2</td><td class="num">0</td><td class="num">0.0</td><td class="num">3</td><td class="num">2.5</td></tr><tr><td>Unknown</td><td class="num">1</td><td class="num">0</td><td class="num">0.0</td><td class="num">3</td><td class="num">3.0</td></tr><tr><td>NonEnglish</td><td class="num">1</td><td class="num">0</td><td class="num">0.0</td><td class="num">3</td><td class="num">3.0</td></tr></tbody></table>
+<details><summary>Query (JOIN on body, conditional aggregation, AVG over a CASE)</summary><pre>SELECT t.top_category AS category,
+       COUNT(*) AS templates,
+       SUM(CASE WHEN b.days_active = 1 THEN 1 ELSE 0 END) AS one_day_blasts,
+       ROUND(100.0 * SUM(CASE WHEN b.days_active = 1 THEN 1 ELSE 0 END) / COUNT(*),1) AS blast_share_pct,
+       MAX(b.days_active) AS longest_days,
+       ROUND(AVG(CASE WHEN b.days_active &gt; 1 THEN 1.0 * b.days_active END),1) AS avg_days_when_multi_day
+FROM dbo.templates t JOIN dbo.bursts b ON b.body = t.body
+GROUP BY t.top_category
+ORDER BY templates DESC;</pre></details>
+</section>
+<section class="q">
+<h2>Q7. Data quality: does each weekly function run reproduce the same template set? (Fills in as runs accumulate.)</h2>
+<p class="finding"><b>1 run</b> recorded so far (2026-10-14): 1,642 rows, max authors 44, 21,830 template posts over 84,270 originals. The first scheduled run is Monday 2026-10-19 06:00 UTC; this row should duplicate exactly, because the input file does not change.</p>
+<p class="note">The function reads the same blob every week, so identical counts are the expected result; a changed count would mean a code or data change worth investigating.</p>
+<table><thead><tr><th>run_id</th><th>run_time</th><th class=num>rows_written</th><th class=num>max_authors</th><th class=num>template_posts</th><th class=num>english_originals</th><th class=num>rows_with_key_phrases</th></tr></thead><tbody><tr><td>d17b70d5-73b7-4896-99ff-86e102ac8b48</td><td>2026-10-14</td><td class="num">1,642</td><td class="num">44</td><td class="num">21,830</td><td class="num">84,270</td><td class="num">50</td></tr></tbody></table>
+<details><summary>Query (GROUP BY run_id over the run-stamped history table)</summary><pre>SELECT run_id, MIN(run_time) AS run_time, COUNT(*) AS rows_written,
+       MAX(n_authors) AS max_authors, SUM(n_tweets) AS template_posts,
+       MAX(english_originals) AS english_originals,
+       SUM(CASE WHEN key_phrases IS NOT NULL THEN 1 ELSE 0 END) AS rows_with_key_phrases
+FROM dbo.template_runs
+GROUP BY run_id
+ORDER BY run_time;</pre></details>
+</section>
+<p class="foot">Data: BLS Current Population Survey via api.bls.gov (public domain); FiveThirtyEight / Clemson IRA tweets, file 1 of 13 (attributed, non-commercial). Build #4 of Patrick Neil Bradley's Azure learning portfolio. Azure services: Azure SQL Database (free offer). Cost: $0. Queries and runner: <a href="https://github.com/patbradley18-netizen/azure-portfolio/tree/main/build-04-sql-analysis">GitHub</a>.</p>
+</main></body></html>
