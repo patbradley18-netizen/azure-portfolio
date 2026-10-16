@@ -12,6 +12,8 @@ Small, free-tier builds on an Azure for Students subscription. Each one teaches 
 | 4 | SQL analysis: the queries a Business Analyst writes | T-SQL, business writing | Planned |
 | 5 | Summarize a public report with Azure AI, with cost controls | AI services, cost management | Planned |
 
+Note for anyone copying the OIDC setup: GitHub now presents the subject claim with owner and repository IDs embedded (epo:<owner>@<id>/<repo>@<id>:ref:refs/heads/main); the federated credential subject must match that string exactly.
+
 Rules I hold myself to: cost first; no keys, passwords or connection strings anywhere in code, chat or GitHub; non-commercial only; teach-don't-do; one build at a time; publish the null results too.
 
 Patrick Neil Bradley
