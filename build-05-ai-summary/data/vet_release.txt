@@ -1,0 +1,184 @@
+For release 10:00 a.m. (ET) Tuesday, April 28, 2026                                    USDL-26-0666
+
+Technical information:  (202) 691-6378  *  cpsinfo@bls.gov  *  www.bls.gov/cps  
+Media contact:          (202) 691-5902  *  PressOffice@bls.gov
+
+
+                             EMPLOYMENT SITUATION OF VETERANS -- 2025
+
+
+The unemployment rate for veterans who served on active duty in the U.S. Armed Forces at any
+time since September 2001--a group referred to as Gulf War-era II veterans--was little changed
+at 3.6 percent in 2025, the U.S. Bureau of Labor Statistics reported today. The jobless rate
+for all veterans increased over the year from 3.0 percent to 3.5 percent in 2025. In August
+2025, 50 percent of Gulf War-era II veterans had a service-connected disability, compared with
+34 percent of all veterans. 
+
+This information was obtained from the Current Population Survey (CPS), a monthly sample
+survey of about 60,000 eligible households that provides data on employment, unemployment,
+and people not in the labor force in the United States. Data about veterans are collected
+monthly in the CPS; these monthly data are the source of the 2025 annual averages presented in
+this news release. In August 2025, a supplement to the CPS collected additional information
+about veterans on topics such as service-connected disability and veterans' current or past
+Reserve or National Guard membership. The supplement was co-sponsored by the U.S. Department
+of Veterans Affairs and the U.S. Department of Labor's Veterans' Employment and Training
+Service. For more information, see the Technical Note in this news release. 
+
+ _____________________________________________________________________________________________
+|											      |
+|                     Federal Government Shutdown Impact on Veterans Data		      |
+|											      |
+| The CPS for October 2025 was not collected due to the federal government shutdown. As a     |
+| result, annual estimates for 2025 household survey data were produced using 11-month	      |
+| averages that exclude October. Consequently, 2025 annual estimates are not strictly	      |
+| comparable with annual averages for other years. Veterans supplement data collected in      |
+| August 2025 were not affected. For information about the impact of the federal government   |
+| shutdown on CPS data, see								      |
+| www.bls.gov/cps/methods/2025-federal-government-shutdown-impact-cps.htm.		      |
+|_____________________________________________________________________________________________|
+
+
+Highlights from the 2025 data:
+
+ --The unemployment rate for all veterans increased to 3.5 percent in 2025 and was lower than the
+   rate for nonveterans, at 4.2 percent. (See table A.)
+
+ --The unemployment rate for male veterans (3.3 percent) was lower than the rate for female
+   veterans (4.6 percent) in 2025. Both measures increased over the year. (See table A.)
+
+ --Unemployment rates for Black and Hispanic veterans were lower than for their nonveteran
+   counterparts in 2025, while the rates for White and Asian veterans were not statistically
+   different than their nonveteran counterparts. (See table 1.)
+
+ --Among the 294,000 unemployed veterans in 2025, about 60 percent were ages 25 to 54, 35
+   percent were age 55 and over, and 5 percent were ages 18 to 24. (See table 2A.)
+
+ --Gulf War-era II veterans who reported a service-connected disability rating of less than 30
+   percent in August 2025 were much more likely to be in the labor force than those with a
+   rating of 60 percent or higher (85.1 percent versus 64.7 percent). (See table 7.)
+
+ --In August 2025, 38.7 percent of employed veterans with a service-connected disability
+   worked in the public sector, compared with 20.2 percent of veterans with no disability.
+   Among nonveterans, 13.0 percent worked in the public sector. (See table 8.)
+
+The Veteran Population
+
+In 2025, 17.3 million men and women were veterans, accounting for about 7 percent of the
+civilian noninstitutional population age 18 and over. Of all veterans, 12 percent were women.
+In the survey, veterans are defined as men and women who have previously served on active duty
+in the U.S. Armed Forces and who were civilians at the time these data were collected. 
+
+Veterans are much more likely to be men than are nonveterans, and they also tend to be older.
+In part, this reflects the characteristics of veterans who served during the Vietnam era and
+earlier wartime periods, all of whom are now age 65 and over. Veterans who served during these
+wartime periods accounted for about 28 percent (4.9 million) of the total veteran population
+in 2025. The largest group of veterans in 2025, at 33 percent (5.6 million), served during
+Gulf War-era II (September 2001 to present), while 19 percent of veterans (3.3 million) served
+during Gulf War-era I (August 1990 to August 2001). The remaining 20 percent of veterans (3.5
+million) last served outside these designated wartime periods. (See tables 1 and 2A.)              
+
+The unemployment rate for veteran men (3.3 percent) increased by 0.4 percentage point in 2025
+while the rate for veteran women (4.6 percent) increased by 1.1 percentage points. Compared to
+nonveteran men and women, the unemployment rate for veteran men was lower than their
+nonveteran counterparts (4.3 percent), while the rate for veteran women was little different
+from that of their nonveteran counterparts (4.0 percent). Unemployment rates for White (3.3
+percent) and Black (5.0 percent) veterans increased over the year, while the rates for Asian
+(2.7 percent) and Hispanic or Latino (4.0 percent) veterans were little changed over the year.
+Black veterans had a higher unemployment rate than veterans who are White or Asian in 2025.
+
+Gulf War-era II Veterans
+
+In 2025, there were 5.6 million veterans who had served during Gulf War-era II (September 2001
+to present). Eighteen percent of these veterans were women, compared to about 15 percent of
+Gulf War-era I veterans and about 4 percent of veterans from the Vietnam era and earlier
+wartime periods. (See tables 1 and 2A.) 
+
+The unemployment rate for Gulf War-era II veterans was little changed over the year at 3.6
+percent. Female Gulf War-era II veterans had a higher unemployment rate than their male
+counterparts in 2025 (4.8 percent and 3.4 percent, respectively). (See table A.) 
+
+The unemployment rate for male Gulf War-era II veterans, at 3.4 percent, was lower than the
+rate for male nonveterans, at 4.3 percent, in 2025. By age, unemployment rates for male Gulf
+War-era II veterans and male nonveterans were not statistically different, with one exception:
+45-to-54-year-old male Gulf War-era II veterans had an unemployment rate of 1.5 percent, lower
+than the rate of 3.0 percent for their nonveteran counterparts. (See table 2B.) 
+
+The unemployment rate for female Gulf War-era II veterans, at 4.8 percent, was little
+different than the rate for female nonveterans, at 4.0 percent, in 2025. By age, unemployment
+rates for female Gulf War-era II veterans and nonveterans were not statistically different,
+with one exception: female veterans ages 25 to 34 had an unemployment rate of 8.1 percent,
+higher than the rate for their nonveteran counterparts, at 4.2 percent. (See table 2C.)
+
+Employed Gulf War-era II veteran men were more likely than their nonveteran counterparts to
+work in management, professional, and related occupations (41.8 percent versus 39.5 percent),
+and in service occupations (15.5 percent versus 12.9 percent) in 2025. For women, employed
+Gulf War-era II veterans were more likely than their nonveteran counterparts to work in
+management, professional, and related occupations (59.1 percent versus 48.8 percent) and in
+natural resources, construction, and maintenance occupations (2.3 percent versus 1.1 percent).
+(See table 4.)
+
+Employed Gulf War-era II veteran men were nearly three times as likely to work in the public
+sector in 2025 as their employed nonveteran counterparts--27.3 percent versus 10.0 percent.
+Employed female Gulf War-era II veterans were about twice as likely to work in the public
+sector than nonveteran women--33.4 percent versus 16.2 percent. Overall, 16.2 percent of
+employed Gulf War-era II veterans worked for the federal government, compared with 2.1 percent
+of nonveterans. (See table 5.) 
+
+In August 2025, 39 percent of Gulf War-era II veterans reported serving in Iraq, Afghanistan,
+or both locations. The unemployment rate for these veterans, at 3.4 percent, changed little
+over the year. The rate for Gulf War-era II veterans who served elsewhere (2.3 percent in
+August 2025) also changed little over the year. (See table 10.)
+
+Veterans with a Service-connected Disability
+
+In August 2025, 5.8 million veterans, or 34 percent of all veterans, had a service-connected
+disability. Veterans with a service-connected disability are assigned a disability rating by
+the U.S. Department of Veterans Affairs or the U.S. Department of Defense. Ratings range from
+0 to 100 percent, in increments of 10 percentage points, depending on the severity of the
+condition. (See table 7.) 
+
+Over the year, the unemployment rate for veterans with a service-connected disability
+decreased by 1.7 percentage points to 2.4 percent in August 2025. The rate for veterans with
+no service-connected disability was little changed at 3.7 percent. The unemployment rates for
+both male veterans with a service-connected disability (2.1 percent) and female veterans with
+a service-connected disability (3.8 percent) showed little change over the year.
+
+Among veterans with a service-connected disability in August 2025, 17 percent had a disability
+rating of less than 30 percent, while 59 percent had a rating of 60 percent or higher. The
+unemployment rate for veterans with a disability rating of less than 30 percent was 1.6
+percent, little different than the rate for those with a disability rating of 60 percent or
+higher, at 3.0 percent.
+
+In August 2025, 50 percent (2.8 million) of veterans who served during Gulf War-era II
+reported a service-connected disability. The labor force participation rate of Gulf War-era II
+veterans with a service-connected disability (71.3 percent) was lower than the rate for their
+counterparts with no service-connected disability (84.5 percent). Among Gulf War-era II
+veterans, the unemployment rate for those with a service-connected disability (2.3 percent)
+was not statistically different than the rate for those with no disability (3.2 percent). 
+
+Among Gulf War-era II veterans with a service-connected disability, 70 percent reported a
+disability rating of 60 percent or higher in August 2025. Gulf War-era II veterans who
+reported a disability rating of less than 30 percent were more likely to be in the labor force
+than those with a rating of 60 percent or higher (85.1 percent compared with 64.7 percent). 
+
+Regardless of period of service, many veterans with a service-connected disability work in the
+public sector. In August 2025, 38.7 percent of employed veterans with a service-connected
+disability worked in federal, state, or local government, compared with 20.2 percent of
+veterans with no disability and 13.0 percent of nonveterans. Nearly one-fourth (23.2 percent) 
+of employed veterans with a service-connected disability worked for the federal government,
+compared with 8.6 percent of veterans with no service-connected disability and 2.1 percent of
+nonveterans. (See table 8.)
+
+Reserve and National Guard Membership
+
+In August 2025, over one-third (2.0 million) of Gulf War-era II veterans were current or past
+members of the Reserve or National Guard. The labor force participation rate for veterans of
+this period who were current or past members of the Reserve or National Guard (77.0 percent)
+was not statistically different than the rate for veterans who had never been members (78.5
+percent). Among Gulf War-era II veterans, the unemployment rates for those who were current or
+past members of the Reserve or National Guard (1.8 percent) and for those who had never been
+members (3.1 percent) were not statistically different from each other and were little changed
+from a year earlier. (See table 9.)
+
+
+

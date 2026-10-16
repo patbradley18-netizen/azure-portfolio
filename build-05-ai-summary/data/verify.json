@@ -1,0 +1,178 @@
+{
+  "bullets": [
+    {
+      "text": "The unemployment rate for veterans who served on active duty in the U.S. Armed Forces at a",
+      "verbatim": true,
+      "numbers": [
+        "2001",
+        "3.6",
+        "2025,"
+      ],
+      "missing": [],
+      "ok": true
+    },
+    {
+      "text": "The jobless rate for all veterans increased over the year from 3.0 percent to 3.5 percent ",
+      "verbatim": true,
+      "numbers": [
+        "3.0",
+        "3.5",
+        "2025"
+      ],
+      "missing": [],
+      "ok": true
+    },
+    {
+      "text": "In August 2025, 50 percent of Gulf War-era II veterans had a service-connected disability,",
+      "verbatim": true,
+      "numbers": [
+        "2025,",
+        "50",
+        "34"
+      ],
+      "missing": [],
+      "ok": true
+    },
+    {
+      "text": "Female Gulf War-era II veterans had a higher unemployment rate than their male counterpart",
+      "verbatim": true,
+      "numbers": [
+        "2025",
+        "4.8",
+        "3.4"
+      ],
+      "missing": [],
+      "ok": true
+    },
+    {
+      "text": "For women, employed Gulf War-era II veterans were more likely than their nonveteran counte",
+      "verbatim": true,
+      "numbers": [
+        "59.1",
+        "48.8",
+        "2.3",
+        "1.1"
+      ],
+      "missing": [],
+      "ok": true
+    },
+    {
+      "text": "Employed female Gulf War-era II veterans were about twice as likely to work in the public ",
+      "verbatim": true,
+      "numbers": [
+        "33.4",
+        "16.2"
+      ],
+      "missing": [],
+      "ok": true
+    },
+    {
+      "text": "Among veterans with a service-connected disability in August 2025, 17 percent had a disabi",
+      "verbatim": true,
+      "numbers": [
+        "2025,",
+        "17",
+        "30",
+        "59",
+        "60"
+      ],
+      "missing": [],
+      "ok": true
+    },
+    {
+      "text": "In August 2025, 38.7 percent of employed veterans with a service-connected disability work",
+      "verbatim": true,
+      "numbers": [
+        "2025,",
+        "38.7",
+        "20.2",
+        "13.0"
+      ],
+      "missing": [],
+      "ok": true
+    }
+  ],
+  "headline_numbers": [
+    {
+      "quantity": "4.2 percent",
+      "in_source": true
+    },
+    {
+      "quantity": "77.0 percent",
+      "in_source": true
+    },
+    {
+      "quantity": "5 percent",
+      "in_source": true
+    },
+    {
+      "quantity": "7 percent",
+      "in_source": true
+    },
+    {
+      "quantity": "-27.3 percent",
+      "in_source": true
+    },
+    {
+      "quantity": "1.8 percent",
+      "in_source": true
+    },
+    {
+      "quantity": "15 percent",
+      "in_source": true
+    },
+    {
+      "quantity": "33 percent",
+      "in_source": true
+    },
+    {
+      "quantity": "5.8 million",
+      "in_source": true
+    },
+    {
+      "quantity": "59.1 percent",
+      "in_source": true
+    },
+    {
+      "quantity": "3.7 percent",
+      "in_source": true
+    },
+    {
+      "quantity": "3.0 percent",
+      "in_source": true
+    },
+    {
+      "quantity": "4.0 percent",
+      "in_source": true
+    },
+    {
+      "quantity": "85.1 percent",
+      "in_source": true
+    },
+    {
+      "quantity": "5.6 million",
+      "in_source": true
+    },
+    {
+      "quantity": "84.5 percent",
+      "in_source": true
+    },
+    {
+      "quantity": "39 percent",
+      "in_source": true
+    },
+    {
+      "quantity": "10.0 percent",
+      "in_source": true
+    },
+    {
+      "quantity": "3.2 percent",
+      "in_source": true
+    },
+    {
+      "quantity": "4.8 percent",
+      "in_source": true
+    }
+  ],
+  "pass": true
+}

@@ -1,0 +1,3711 @@
+{
+  "source": "vet_release.txt",
+  "run_ts": "2026-10-16T19:54:13+00:00",
+  "documents": [
+    {
+      "doc_id": 0,
+      "text": "For release 10:00 a.m. (ET) Tuesday, April 28, 2026                                    USDL-26-0666\n\nTechnical information:  (202) 691-6378  *  cpsinfo@bls.gov  *  www.bls.gov/cps  \nMedia contact:          (202) 691-5902  *  PressOffice@bls.gov\n\nEMPLOYMENT SITUATION OF VETERANS -- 2025\n\nThe unemployment rate for veterans who served on active duty in the U.S. Armed Forces at any\ntime since September 2001--a group referred to as Gulf War-era II veterans--was little changed\nat 3.6 percent in 2025, the U.S. Bureau of Labor Statistics reported today. The jobless rate\nfor all veterans increased over the year from 3.0 percent to 3.5 percent in 2025. In August\n2025, 50 percent of Gulf War-era II veterans had a service-connected disability, compared with\n34 percent of all veterans.\n\nThis information was obtained from the Current Population Survey (CPS), a monthly sample\nsurvey of about 60,000 eligible households that provides data on employment, unemployment,\nand people not in the labor force in the United States. Data about veterans are collected\nmonthly in the CPS; these monthly data are the source of the 2025 annual averages presented in\nthis news release. In August 2025, a supplement to the CPS collected additional information\nabout veterans on topics such as service-connected disability and veterans' current or past\nReserve or National Guard membership. The supplement was co-sponsored by the U.S. Department\nof Veterans Affairs and the U.S. Department of Labor's Veterans' Employment and Training\nService. For more information, see the Technical Note in this news release.\n\n_____________________________________________________________________________________________\n|\t\t\t\t\t\t\t\t\t\t\t      |\n|                     Federal Government Shutdown Impact on Veterans Data\t\t      |\n|\t\t\t\t\t\t\t\t\t\t\t      |\n| The CPS for October 2025 was not collected due to the federal government shutdown. As a     |\n| result, annual estimates for 2025 household survey data were produced using 11-month\t      |\n| averages that exclude October. Consequently, 2025 annual estimates are not strictly\t      |\n| comparable with annual averages for other years. Veterans supplement data collected in      |\n| August 2025 were not affected. For information about the impact of the federal government   |\n| shutdown on CPS data, see\t\t\t\t\t\t\t\t      |\n| www.bls.gov/cps/methods/2025-federal-government-shutdown-impact-cps.htm.\t\t      |\n|_____________________________________________________________________________________________|\n\nHighlights from the 2025 data:\n\n--The unemployment rate for all veterans increased to 3.5 percent in 2025 and was lower than the\n   rate for nonveterans, at 4.2 percent. (See table A.)\n\n--The unemployment rate for male veterans (3.3 percent) was lower than the rate for female\n   veterans (4.6 percent) in 2025. Both measures increased over the year. (See table A.)\n\n--Unemployment rates for Black and Hispanic veterans were lower than for their nonveteran\n   counterparts in 2025, while the rates for White and Asian veterans were not statistically\n   different than their nonveteran counterparts. (See table 1.)\n\n--Among the 294,000 unemployed veterans in 2025, about 60 percent were ages 25 to 54, 35\n   percent were age 55 and over, and 5 percent were ages 18 to 24. (See table 2A.)\n\n--Gulf War-era II veterans who reported a service-connected disability rating of less than 30\n   percent in August 2025 were much more likely to be in the labor force than those with a\n   rating of 60 percent or higher (85.1 percent versus 64.7 percent). (See table 7.)\n\n--In August 2025, 38.7 percent of employed veterans with a service-connected disability\n   worked in the public sector, compared with 20.2 percent of veterans with no disability.\n   Among nonveterans, 13.0 percent worked in the public sector. (See table 8.)\n\nThe Veteran Population\n\nIn 2025, 17.3 million men and women were veterans, accounting for about 7 percent of the\ncivilian noninstitutional population age 18 and over. Of all veterans, 12 percent were women.\nIn the survey, veterans are defined as men and women who have previously served on active duty\nin the U.S. Armed Forces and who were civilians at the time these data were collected.\n\nVeterans are much more likely to be men than are nonveterans, and they also tend to be older.\nIn part, this reflects the characteristics of veterans who served during the Vietnam era and\nearlier wartime periods, all of whom are now age 65 and over. Veterans who served during these\nwartime periods accounted for about 28 percent (4.9 million) of the total veteran population\nin 2025. The largest group of veterans in 2025, at 33 percent (5.6 million), served during\nGulf War-era II (September 2001 to present), while 19 percent of veterans (3.3 million) served\nduring Gulf War-era I (August 1990 to August 2001). The remaining 20 percent of veterans (3.5\nmillion) last served outside these designated wartime periods. (See tables 1 and 2A.)",
+      "key_phrases": [
+        "U.S. Armed Forces",
+        "Gulf War-era II veterans",
+        "Federal Government Shutdown Impact",
+        "U.S. Bureau",
+        "U.S. Department",
+        "National Guard membership",
+        "civilian noninstitutional population",
+        "total veteran population",
+        "Current Population Survey",
+        "monthly sample survey",
+        "The Veteran Population",
+        "earlier wartime periods",
+        "2025 household survey data",
+        "service-connected disability rating",
+        "Veterans supplement data",
+        "monthly data",
+        "Media contact",
+        "active duty",
+        "60,000 eligible households",
+        "United States",
+        "Training Service",
+        "Technical Note",
+        "annual estimates",
+        "other years",
+        "nonveteran   counterparts",
+        "nonveteran counterparts",
+        "public sector",
+        "Vietnam era",
+        "Labor Statistics",
+        "labor force",
+        "EMPLOYMENT SITUATION",
+        "jobless rate",
+        "2025 annual averages",
+        "news release",
+        "Veterans Affairs",
+        "male veterans",
+        "female   veterans",
+        "Hispanic veterans",
+        "Asian veterans",
+        "294,000 unemployed veterans",
+        "table A.",
+        "largest group",
+        "unemployment rate",
+        "Technical information",
+        "additional information",
+        "Veterans Data",
+        "17.3 million men",
+        "The CPS",
+        "Veterans' Employment",
+        "bls.gov",
+        "CPS data",
+        "remaining 20 percent",
+        "table 2A",
+        "2025 data",
+        "rates",
+        "3.6 percent",
+        "3.0 percent",
+        "3.5 percent",
+        "50 percent",
+        "34 percent",
+        "4.2 percent",
+        "60 percent",
+        "30   percent",
+        "85.1 percent",
+        "64.7 percent",
+        "38.7 percent",
+        "20.2 percent",
+        "12 percent",
+        "28 percent",
+        "33 percent",
+        "19 percent",
+        "Tuesday",
+        "April",
+        "cpsinfo",
+        "PressOffice",
+        "September",
+        "August",
+        "people",
+        "source",
+        "topics",
+        "Reserve",
+        "October",
+        "result",
+        "11-month",
+        "methods",
+        "federal-government-shutdown",
+        "Highlights",
+        "nonveterans",
+        "measures",
+        "Black",
+        "White",
+        "women",
+        "civilians",
+        "characteristics",
+        "tables"
+      ],
+      "entities": [
+        {
+          "text": "10:00 a.m.",
+          "category": "DateTime",
+          "subcategory": "Time",
+          "offset": 12,
+          "length": 10,
+          "confidence": 0.9
+        },
+        {
+          "text": "Tuesday, April 28, 2026",
+          "category": "DateTime",
+          "subcategory": "Date",
+          "offset": 28,
+          "length": 23,
+          "confidence": 0.86
+        },
+        {
+          "text": "26",
+          "category": "Quantity",
+          "subcategory": "Number",
+          "offset": 92,
+          "length": 2,
+          "confidence": 0.8
+        },
+        {
+          "text": "0666",
+          "category": "Quantity",
+          "subcategory": "Number",
+          "offset": 95,
+          "length": 4,
+          "confidence": 0.8
+        },
+        {
+          "text": "(202) 691-6378",
+          "category": "PhoneNumber",
+          "subcategory": null,
+          "offset": 125,
+          "length": 14,
+          "confidence": 1.0
+        },
+        {
+          "text": "cpsinfo@bls.gov",
+          "category": "Email",
+          "subcategory": null,
+          "offset": 144,
+          "length": 15,
+          "confidence": 0.8
+        },
+        {
+          "text": "www.bls.gov/cps",
+          "category": "URL",
+          "subcategory": null,
+          "offset": 164,
+          "length": 15,
+          "confidence": 0.8
+        },
+        {
+          "text": "Media",
+          "category": "Skill",
+          "subcategory": null,
+          "offset": 182,
+          "length": 5,
+          "confidence": 0.68
+        },
+        {
+          "text": "(202) 691-5902",
+          "category": "PhoneNumber",
+          "subcategory": null,
+          "offset": 206,
+          "length": 14,
+          "confidence": 1.0
+        },
+        {
+          "text": "PressOffice@bls.gov",
+          "category": "Email",
+          "subcategory": null,
+          "offset": 225,
+          "length": 19,
+          "confidence": 0.8
+        },
+        {
+          "text": "VETERANS",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 270,
+          "length": 8,
+          "confidence": 0.66
+        },
+        {
+          "text": "- 2025",
+          "category": "Quantity",
+          "subcategory": "Number",
+          "offset": 280,
+          "length": 6,
+          "confidence": 0.8
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 314,
+          "length": 8,
+          "confidence": 0.94
+        },
+        {
+          "text": "U.S. Armed Forces",
+          "category": "Organization",
+          "subcategory": null,
+          "offset": 356,
+          "length": 17,
+          "confidence": 1.0
+        },
+        {
+          "text": "since September 2001",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 386,
+          "length": 20,
+          "confidence": 0.99
+        },
+        {
+          "text": "Gulf War",
+          "category": "Event",
+          "subcategory": null,
+          "offset": 431,
+          "length": 8,
+          "confidence": 0.78
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 447,
+          "length": 8,
+          "confidence": 0.64
+        },
+        {
+          "text": "3.6 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 479,
+          "length": 11,
+          "confidence": 1.0
+        },
+        {
+          "text": "2025",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 494,
+          "length": 4,
+          "confidence": 0.98
+        },
+        {
+          "text": "U.S. Bureau of Labor Statistics",
+          "category": "Organization",
+          "subcategory": null,
+          "offset": 504,
+          "length": 31,
+          "confidence": 0.96
+        },
+        {
+          "text": "today",
+          "category": "DateTime",
+          "subcategory": "Date",
+          "offset": 545,
+          "length": 5,
+          "confidence": 0.99
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 577,
+          "length": 8,
+          "confidence": 0.89
+        },
+        {
+          "text": "the year",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 601,
+          "length": 8,
+          "confidence": 0.97
+        },
+        {
+          "text": "3.0 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 615,
+          "length": 11,
+          "confidence": 1.0
+        },
+        {
+          "text": "3.5 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 630,
+          "length": 11,
+          "confidence": 1.0
+        },
+        {
+          "text": "2025",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 645,
+          "length": 4,
+          "confidence": 0.99
+        },
+        {
+          "text": "August",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 654,
+          "length": 6,
+          "confidence": 1.0
+        },
+        {
+          "text": "2025",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 661,
+          "length": 4,
+          "confidence": 0.97
+        },
+        {
+          "text": "50 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 667,
+          "length": 10,
+          "confidence": 0.98
+        },
+        {
+          "text": "Gulf War-era",
+          "category": "Event",
+          "subcategory": null,
+          "offset": 681,
+          "length": 12,
+          "confidence": 0.72
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 697,
+          "length": 8,
+          "confidence": 0.95
+        },
+        {
+          "text": "disability",
+          "category": "Skill",
+          "subcategory": null,
+          "offset": 730,
+          "length": 10,
+          "confidence": 0.83
+        },
+        {
+          "text": "34 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 756,
+          "length": 10,
+          "confidence": 1.0
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 774,
+          "length": 8,
+          "confidence": 0.97
+        },
+        {
+          "text": "monthly",
+          "category": "DateTime",
+          "subcategory": "Set",
+          "offset": 859,
+          "length": 7,
+          "confidence": 1.0
+        },
+        {
+          "text": "60,000",
+          "category": "Quantity",
+          "subcategory": "Number",
+          "offset": 890,
+          "length": 6,
+          "confidence": 0.8
+        },
+        {
+          "text": "employment",
+          "category": "Skill",
+          "subcategory": null,
+          "offset": 939,
+          "length": 10,
+          "confidence": 0.94
+        },
+        {
+          "text": "unemployment",
+          "category": "Skill",
+          "subcategory": null,
+          "offset": 951,
+          "length": 12,
+          "confidence": 0.98
+        },
+        {
+          "text": "United States",
+          "category": "Location",
+          "subcategory": "CountryRegion",
+          "offset": 1006,
+          "length": 13,
+          "confidence": 1.0
+        },
+        {
+          "text": "Data",
+          "category": "Skill",
+          "subcategory": null,
+          "offset": 1021,
+          "length": 4,
+          "confidence": 0.8
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 1032,
+          "length": 8,
+          "confidence": 1.0
+        },
+        {
+          "text": "monthly",
+          "category": "DateTime",
+          "subcategory": "Set",
+          "offset": 1055,
+          "length": 7,
+          "confidence": 0.97
+        },
+        {
+          "text": "CPS",
+          "category": "Organization",
+          "subcategory": null,
+          "offset": 1070,
+          "length": 3,
+          "confidence": 0.83
+        },
+        {
+          "text": "monthly",
+          "category": "DateTime",
+          "subcategory": "Set",
+          "offset": 1081,
+          "length": 7,
+          "confidence": 0.99
+        },
+        {
+          "text": "2025",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 1116,
+          "length": 4,
+          "confidence": 0.99
+        },
+        {
+          "text": "annual",
+          "category": "DateTime",
+          "subcategory": "Set",
+          "offset": 1121,
+          "length": 6,
+          "confidence": 0.98
+        },
+        {
+          "text": "August 2025",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 1172,
+          "length": 11,
+          "confidence": 0.99
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 1248,
+          "length": 8,
+          "confidence": 1.0
+        },
+        {
+          "text": "disability",
+          "category": "Skill",
+          "subcategory": null,
+          "offset": 1293,
+          "length": 10,
+          "confidence": 0.71
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 1308,
+          "length": 8,
+          "confidence": 1.0
+        },
+        {
+          "text": "National Guard",
+          "category": "Organization",
+          "subcategory": null,
+          "offset": 1345,
+          "length": 14,
+          "confidence": 1.0
+        },
+        {
+          "text": "U.S. Department",
+          "category": "Organization",
+          "subcategory": null,
+          "offset": 1411,
+          "length": 15,
+          "confidence": 0.74
+        },
+        {
+          "text": "Veterans Affairs",
+          "category": "Organization",
+          "subcategory": null,
+          "offset": 1430,
+          "length": 16,
+          "confidence": 0.77
+        },
+        {
+          "text": "U.S. Department of Labor",
+          "category": "Organization",
+          "subcategory": null,
+          "offset": 1455,
+          "length": 24,
+          "confidence": 0.95
+        },
+        {
+          "text": "Veterans",
+          "category": "Organization",
+          "subcategory": "Sports",
+          "offset": 1482,
+          "length": 8,
+          "confidence": 0.67
+        },
+        {
+          "text": "Employment and Training",
+          "category": "Organization",
+          "subcategory": null,
+          "offset": 1492,
+          "length": 23,
+          "confidence": 0.57
+        },
+        {
+          "text": "Federal Government",
+          "category": "Organization",
+          "subcategory": "Medical",
+          "offset": 1729,
+          "length": 18,
+          "confidence": 0.62
+        },
+        {
+          "text": "Shutdown",
+          "category": "Event",
+          "subcategory": null,
+          "offset": 1748,
+          "length": 8,
+          "confidence": 0.77
+        },
+        {
+          "text": "Veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 1767,
+          "length": 8,
+          "confidence": 0.88
+        },
+        {
+          "text": "October 2025",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 1824,
+          "length": 12,
+          "confidence": 1.0
+        },
+        {
+          "text": "federal government shutdown",
+          "category": "Event",
+          "subcategory": null,
+          "offset": 1866,
+          "length": 27,
+          "confidence": 0.72
+        },
+        {
+          "text": "annual",
+          "category": "DateTime",
+          "subcategory": "Set",
+          "offset": 1916,
+          "length": 6,
+          "confidence": 0.99
+        },
+        {
+          "text": "2025",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 1937,
+          "length": 4,
+          "confidence": 0.92
+        },
+        {
+          "text": "11-month",
+          "category": "DateTime",
+          "subcategory": "Duration",
+          "offset": 1984,
+          "length": 8,
+          "confidence": 0.99
+        },
+        {
+          "text": "October",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 2025,
+          "length": 7,
+          "confidence": 1.0
+        },
+        {
+          "text": "2025",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 2048,
+          "length": 4,
+          "confidence": 0.93
+        },
+        {
+          "text": "annual",
+          "category": "DateTime",
+          "subcategory": "Set",
+          "offset": 2053,
+          "length": 6,
+          "confidence": 0.73
+        },
+        {
+          "text": "annual",
+          "category": "DateTime",
+          "subcategory": "Set",
+          "offset": 2113,
+          "length": 6,
+          "confidence": 0.98
+        },
+        {
+          "text": "Veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 2146,
+          "length": 8,
+          "confidence": 0.97
+        },
+        {
+          "text": "August 2025",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 2193,
+          "length": 11,
+          "confidence": 0.95
+        },
+        {
+          "text": "federal government",
+          "category": "Organization",
+          "subcategory": "Medical",
+          "offset": 2264,
+          "length": 18,
+          "confidence": 0.58
+        },
+        {
+          "text": "shutdown",
+          "category": "Event",
+          "subcategory": null,
+          "offset": 2289,
+          "length": 8,
+          "confidence": 0.68
+        },
+        {
+          "text": "CPS",
+          "category": "Organization",
+          "subcategory": null,
+          "offset": 2301,
+          "length": 3,
+          "confidence": 0.97
+        },
+        {
+          "text": "www.bls.gov/cps/methods/2025-federal-government-shutdown-impact-cps.htm.",
+          "category": "URL",
+          "subcategory": null,
+          "offset": 2332,
+          "length": 72,
+          "confidence": 0.8
+        },
+        {
+          "text": "2025",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 2531,
+          "length": 4,
+          "confidence": 1.0
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 2575,
+          "length": 8,
+          "confidence": 0.99
+        },
+        {
+          "text": "3.5 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 2597,
+          "length": 11,
+          "confidence": 1.0
+        },
+        {
+          "text": "2025",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 2612,
+          "length": 4,
+          "confidence": 0.99
+        },
+        {
+          "text": "nonveterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 2652,
+          "length": 11,
+          "confidence": 0.89
+        },
+        {
+          "text": "4.2 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 2668,
+          "length": 11,
+          "confidence": 1.0
+        },
+        {
+          "text": "male",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 2725,
+          "length": 4,
+          "confidence": 0.78
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 2730,
+          "length": 8,
+          "confidence": 0.63
+        },
+        {
+          "text": "3.3 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 2740,
+          "length": 11,
+          "confidence": 1.0
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 2791,
+          "length": 8,
+          "confidence": 0.85
+        },
+        {
+          "text": "4.6 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 2801,
+          "length": 11,
+          "confidence": 1.0
+        },
+        {
+          "text": "2025",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 2817,
+          "length": 4,
+          "confidence": 0.99
+        },
+        {
+          "text": "the year",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 2852,
+          "length": 8,
+          "confidence": 0.97
+        },
+        {
+          "text": "Black",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 2903,
+          "length": 5,
+          "confidence": 0.95
+        },
+        {
+          "text": "Hispanic",
+          "category": "Location",
+          "subcategory": "CountryRegion",
+          "offset": 2913,
+          "length": 8,
+          "confidence": 0.95
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 2922,
+          "length": 8,
+          "confidence": 0.82
+        },
+        {
+          "text": "nonveteran",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 2957,
+          "length": 10,
+          "confidence": 0.98
+        },
+        {
+          "text": "counterparts",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 2971,
+          "length": 12,
+          "confidence": 0.49
+        },
+        {
+          "text": "2025",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 2987,
+          "length": 4,
+          "confidence": 0.97
+        },
+        {
+          "text": "White",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 3013,
+          "length": 5,
+          "confidence": 0.87
+        },
+        {
+          "text": "Asian",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 3023,
+          "length": 5,
+          "confidence": 0.83
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 3029,
+          "length": 8,
+          "confidence": 0.55
+        },
+        {
+          "text": "nonveteran counterparts",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 3085,
+          "length": 23,
+          "confidence": 0.54
+        },
+        {
+          "text": "1",
+          "category": "Quantity",
+          "subcategory": "Number",
+          "offset": 3121,
+          "length": 1,
+          "confidence": 0.8
+        },
+        {
+          "text": "294,000",
+          "category": "Quantity",
+          "subcategory": "Number",
+          "offset": 3138,
+          "length": 7,
+          "confidence": 0.8
+        },
+        {
+          "text": "unemployed",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 3146,
+          "length": 10,
+          "confidence": 0.78
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 3157,
+          "length": 8,
+          "confidence": 0.56
+        },
+        {
+          "text": "2025",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 3169,
+          "length": 4,
+          "confidence": 0.99
+        },
+        {
+          "text": "60 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 3181,
+          "length": 10,
+          "confidence": 1.0
+        },
+        {
+          "text": "25",
+          "category": "Quantity",
+          "subcategory": "Age",
+          "offset": 3202,
+          "length": 2,
+          "confidence": 0.91
+        },
+        {
+          "text": "54",
+          "category": "Quantity",
+          "subcategory": "Number",
+          "offset": 3208,
+          "length": 2,
+          "confidence": 0.8
+        },
+        {
+          "text": "35",
+          "category": "Quantity",
+          "subcategory": "Age",
+          "offset": 3212,
+          "length": 2,
+          "confidence": 0.93
+        },
+        {
+          "text": "percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 3218,
+          "length": 7,
+          "confidence": 0.62
+        },
+        {
+          "text": "age",
+          "category": "Quantity",
+          "subcategory": "Age",
+          "offset": 3231,
+          "length": 3,
+          "confidence": 0.65
+        },
+        {
+          "text": "55",
+          "category": "Quantity",
+          "subcategory": "Number",
+          "offset": 3235,
+          "length": 2,
+          "confidence": 0.8
+        },
+        {
+          "text": "5 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 3252,
+          "length": 9,
+          "confidence": 0.99
+        },
+        {
+          "text": "18",
+          "category": "Quantity",
+          "subcategory": "Number",
+          "offset": 3272,
+          "length": 2,
+          "confidence": 0.8
+        },
+        {
+          "text": "24.",
+          "category": "Quantity",
+          "subcategory": "Age",
+          "offset": 3278,
+          "length": 3,
+          "confidence": 0.44
+        },
+        {
+          "text": "War-era II",
+          "category": "Event",
+          "subcategory": null,
+          "offset": 3306,
+          "length": 10,
+          "confidence": 0.95
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 3317,
+          "length": 8,
+          "confidence": 0.83
+        },
+        {
+          "text": "30",
+          "category": "Quantity",
+          "subcategory": "Number",
+          "offset": 3390,
+          "length": 2,
+          "confidence": 0.8
+        },
+        {
+          "text": "percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 3396,
+          "length": 7,
+          "confidence": 0.69
+        },
+        {
+          "text": "August 2025",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 3407,
+          "length": 11,
+          "confidence": 1.0
+        },
+        {
+          "text": "60 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 3497,
+          "length": 10,
+          "confidence": 0.99
+        },
+        {
+          "text": "(85.1 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 3518,
+          "length": 13,
+          "confidence": 1.0
+        },
+        {
+          "text": "64.7 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 3539,
+          "length": 12,
+          "confidence": 1.0
+        },
+        {
+          "text": "7",
+          "category": "Quantity",
+          "subcategory": "Number",
+          "offset": 3565,
+          "length": 1,
+          "confidence": 0.8
+        },
+        {
+          "text": "August 2025",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 3575,
+          "length": 11,
+          "confidence": 0.97
+        },
+        {
+          "text": "38.7 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 3588,
+          "length": 12,
+          "confidence": 1.0
+        },
+        {
+          "text": "employed veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 3604,
+          "length": 17,
+          "confidence": 0.69
+        },
+        {
+          "text": "20.2 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 3704,
+          "length": 12,
+          "confidence": 1.0
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 3720,
+          "length": 8,
+          "confidence": 0.87
+        },
+        {
+          "text": "nonveterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 3758,
+          "length": 11,
+          "confidence": 0.89
+        },
+        {
+          "text": "13.0 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 3771,
+          "length": 12,
+          "confidence": 1.0
+        },
+        {
+          "text": "8",
+          "category": "Quantity",
+          "subcategory": "Number",
+          "offset": 3824,
+          "length": 1,
+          "confidence": 0.8
+        },
+        {
+          "text": "Veteran Population",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 3833,
+          "length": 18,
+          "confidence": 0.95
+        },
+        {
+          "text": "2025",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 3856,
+          "length": 4,
+          "confidence": 0.98
+        },
+        {
+          "text": "17.3 million",
+          "category": "Quantity",
+          "subcategory": "Number",
+          "offset": 3862,
+          "length": 12,
+          "confidence": 0.8
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 3894,
+          "length": 8,
+          "confidence": 0.96
+        },
+        {
+          "text": "7 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 3925,
+          "length": 9,
+          "confidence": 1.0
+        },
+        {
+          "text": "civilian noninstitutional population",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 3942,
+          "length": 36,
+          "confidence": 0.66
+        },
+        {
+          "text": "age",
+          "category": "Quantity",
+          "subcategory": "Age",
+          "offset": 3979,
+          "length": 3,
+          "confidence": 0.62
+        },
+        {
+          "text": "18 and over",
+          "category": "Quantity",
+          "subcategory": "Age",
+          "offset": 3983,
+          "length": 11,
+          "confidence": 0.53
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 4003,
+          "length": 8,
+          "confidence": 0.92
+        },
+        {
+          "text": "12 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 4013,
+          "length": 10,
+          "confidence": 1.0
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 4051,
+          "length": 8,
+          "confidence": 0.99
+        },
+        {
+          "text": "previously",
+          "category": "DateTime",
+          "subcategory": null,
+          "offset": 4098,
+          "length": 10,
+          "confidence": 0.81
+        },
+        {
+          "text": "U.S. Armed Forces",
+          "category": "Organization",
+          "subcategory": null,
+          "offset": 4138,
+          "length": 17,
+          "confidence": 0.98
+        },
+        {
+          "text": "civilians",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 4169,
+          "length": 9,
+          "confidence": 0.93
+        },
+        {
+          "text": "Veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 4219,
+          "length": 8,
+          "confidence": 0.99
+        },
+        {
+          "text": "nonveterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 4268,
+          "length": 11,
+          "confidence": 0.97
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 4359,
+          "length": 8,
+          "confidence": 0.92
+        },
+        {
+          "text": "Vietnam",
+          "category": "Location",
+          "subcategory": "CountryRegion",
+          "offset": 4390,
+          "length": 7,
+          "confidence": 0.97
+        },
+        {
+          "text": "now",
+          "category": "DateTime",
+          "subcategory": null,
+          "offset": 4447,
+          "length": 3,
+          "confidence": 1.0
+        },
+        {
+          "text": "age 65",
+          "category": "Quantity",
+          "subcategory": "Age",
+          "offset": 4451,
+          "length": 6,
+          "confidence": 0.61
+        },
+        {
+          "text": "Veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 4468,
+          "length": 8,
+          "confidence": 1.0
+        },
+        {
+          "text": "28 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 4537,
+          "length": 10,
+          "confidence": 1.0
+        },
+        {
+          "text": "4.9 million",
+          "category": "Quantity",
+          "subcategory": "Number",
+          "offset": 4549,
+          "length": 11,
+          "confidence": 0.8
+        },
+        {
+          "text": "veteran",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 4575,
+          "length": 7,
+          "confidence": 0.66
+        },
+        {
+          "text": "2025",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 4597,
+          "length": 4,
+          "confidence": 0.93
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 4624,
+          "length": 8,
+          "confidence": 0.96
+        },
+        {
+          "text": "2025",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 4636,
+          "length": 4,
+          "confidence": 0.99
+        },
+        {
+          "text": "33 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 4645,
+          "length": 10,
+          "confidence": 1.0
+        },
+        {
+          "text": "5.6 million",
+          "category": "Quantity",
+          "subcategory": "Number",
+          "offset": 4657,
+          "length": 11,
+          "confidence": 0.8
+        },
+        {
+          "text": "Gulf War-era II",
+          "category": "Event",
+          "subcategory": null,
+          "offset": 4685,
+          "length": 15,
+          "confidence": 0.75
+        },
+        {
+          "text": "September 2001",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 4702,
+          "length": 14,
+          "confidence": 1.0
+        },
+        {
+          "text": "present",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 4720,
+          "length": 7,
+          "confidence": 0.6
+        },
+        {
+          "text": "19 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 4736,
+          "length": 10,
+          "confidence": 1.0
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 4750,
+          "length": 8,
+          "confidence": 0.93
+        },
+        {
+          "text": "3.3 million",
+          "category": "Quantity",
+          "subcategory": "Number",
+          "offset": 4760,
+          "length": 11,
+          "confidence": 0.8
+        },
+        {
+          "text": "Gulf War-era I",
+          "category": "Event",
+          "subcategory": null,
+          "offset": 4787,
+          "length": 14,
+          "confidence": 0.94
+        },
+        {
+          "text": "August 1990 to August 2001",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 4803,
+          "length": 26,
+          "confidence": 1.0
+        },
+        {
+          "text": "20 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 4846,
+          "length": 10,
+          "confidence": 1.0
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 4860,
+          "length": 8,
+          "confidence": 0.96
+        },
+        {
+          "text": "3.5\nmillion",
+          "category": "Quantity",
+          "subcategory": "Number",
+          "offset": 4870,
+          "length": 11,
+          "confidence": 0.8
+        },
+        {
+          "text": "1",
+          "category": "Quantity",
+          "subcategory": "Number",
+          "offset": 4949,
+          "length": 1,
+          "confidence": 0.8
+        }
+      ],
+      "sentiment": {
+        "label": "negative",
+        "scores": {
+          "positive": 0.0,
+          "neutral": 0.23,
+          "negative": 0.77
+        }
+      }
+    },
+    {
+      "doc_id": 1,
+      "text": "The unemployment rate for veteran men (3.3 percent) increased by 0.4 percentage point in 2025\nwhile the rate for veteran women (4.6 percent) increased by 1.1 percentage points. Compared to\nnonveteran men and women, the unemployment rate for veteran men was lower than their\nnonveteran counterparts (4.3 percent), while the rate for veteran women was little different\nfrom that of their nonveteran counterparts (4.0 percent). Unemployment rates for White (3.3\npercent) and Black (5.0 percent) veterans increased over the year, while the rates for Asian\n(2.7 percent) and Hispanic or Latino (4.0 percent) veterans were little changed over the year.\nBlack veterans had a higher unemployment rate than veterans who are White or Asian in 2025.\n\nGulf War-era II Veterans\n\nIn 2025, there were 5.6 million veterans who had served during Gulf War-era II (September 2001\nto present). Eighteen percent of these veterans were women, compared to about 15 percent of\nGulf War-era I veterans and about 4 percent of veterans from the Vietnam era and earlier\nwartime periods. (See tables 1 and 2A.)\n\nThe unemployment rate for Gulf War-era II veterans was little changed over the year at 3.6\npercent. Female Gulf War-era II veterans had a higher unemployment rate than their male\ncounterparts in 2025 (4.8 percent and 3.4 percent, respectively). (See table A.)\n\nThe unemployment rate for male Gulf War-era II veterans, at 3.4 percent, was lower than the\nrate for male nonveterans, at 4.3 percent, in 2025. By age, unemployment rates for male Gulf\nWar-era II veterans and male nonveterans were not statistically different, with one exception:\n45-to-54-year-old male Gulf War-era II veterans had an unemployment rate of 1.5 percent, lower\nthan the rate of 3.0 percent for their nonveteran counterparts. (See table 2B.)\n\nThe unemployment rate for female Gulf War-era II veterans, at 4.8 percent, was little\ndifferent than the rate for female nonveterans, at 4.0 percent, in 2025. By age, unemployment\nrates for female Gulf War-era II veterans and nonveterans were not statistically different,\nwith one exception: female veterans ages 25 to 34 had an unemployment rate of 8.1 percent,\nhigher than the rate for their nonveteran counterparts, at 4.2 percent. (See table 2C.)\n\nEmployed Gulf War-era II veteran men were more likely than their nonveteran counterparts to\nwork in management, professional, and related occupations (41.8 percent versus 39.5 percent),\nand in service occupations (15.5 percent versus 12.9 percent) in 2025. For women, employed\nGulf War-era II veterans were more likely than their nonveteran counterparts to work in\nmanagement, professional, and related occupations (59.1 percent versus 48.8 percent) and in\nnatural resources, construction, and maintenance occupations (2.3 percent versus 1.1 percent).\n(See table 4.)\n\nEmployed Gulf War-era II veteran men were nearly three times as likely to work in the public\nsector in 2025 as their employed nonveteran counterparts--27.3 percent versus 10.0 percent.\nEmployed female Gulf War-era II veterans were about twice as likely to work in the public\nsector than nonveteran women--33.4 percent versus 16.2 percent. Overall, 16.2 percent of\nemployed Gulf War-era II veterans worked for the federal government, compared with 2.1 percent\nof nonveterans. (See table 5.)\n\nIn August 2025, 39 percent of Gulf War-era II veterans reported serving in Iraq, Afghanistan,\nor both locations. The unemployment rate for these veterans, at 3.4 percent, changed little\nover the year. The rate for Gulf War-era II veterans who served elsewhere (2.3 percent in\nAugust 2025) also changed little over the year. (See table 10.)\n\nVeterans with a Service-connected Disability\n\nIn August 2025, 5.8 million veterans, or 34 percent of all veterans, had a service-connected\ndisability. Veterans with a service-connected disability are assigned a disability rating by\nthe U.S. Department of Veterans Affairs or the U.S. Department of Defense. Ratings range from\n0 to 100 percent, in increments of 10 percentage points, depending on the severity of the\ncondition. (See table 7.)\n\nOver the year, the unemployment rate for veterans with a service-connected disability\ndecreased by 1.7 percentage points to 2.4 percent in August 2025. The rate for veterans with\nno service-connected disability was little changed at 3.7 percent. The unemployment rates for\nboth male veterans with a service-connected disability (2.1 percent) and female veterans with\na service-connected disability (3.8 percent) showed little change over the year.\n\nAmong veterans with a service-connected disability in August 2025, 17 percent had a disability\nrating of less than 30 percent, while 59 percent had a rating of 60 percent or higher. The\nunemployment rate for veterans with a disability rating of less than 30 percent was 1.6\npercent, little different than the rate for those with a disability rating of 60 percent or\nhigher, at 3.0 percent.",
+      "key_phrases": [
+        "54-year-old male Gulf War-era II veterans",
+        "Employed female Gulf War-era II veterans",
+        "Gulf War-era II veteran men",
+        "Gulf War-era I veterans",
+        "female veterans ages",
+        "U.S. Department",
+        "higher unemployment rate",
+        "The unemployment rate",
+        "Black (5.0 percent) veterans",
+        "female nonveterans",
+        "Black veterans",
+        "nonveteran men",
+        "male counterparts",
+        "5.6 million veterans",
+        "5.8 million veterans",
+        "Veterans Affairs",
+        "veteran women",
+        "0.4 percentage point",
+        "1.1 percentage points",
+        "nonveteran counterparts",
+        "Vietnam era",
+        "wartime periods",
+        "one exception",
+        "related occupations",
+        "service occupations",
+        "natural resources",
+        "maintenance occupations",
+        "public sector",
+        "federal government",
+        "10 percentage points",
+        "1.7 percentage points",
+        "little change",
+        "Unemployment rates",
+        "Service-connected Disability",
+        "disability rating",
+        "table A.",
+        "table 2B.",
+        "table 2C",
+        "Eighteen percent",
+        "0 to 100 percent",
+        "4.0 percent",
+        "15 percent",
+        "3.4 percent",
+        "4.3 percent",
+        "1.5 percent",
+        "3.0 percent",
+        "4.8 percent",
+        "8.1 percent",
+        "4.2 percent",
+        "41.8 percent",
+        "39.5 percent",
+        "12.9 percent",
+        "59.1 percent",
+        "48.8 percent",
+        "2.3 percent",
+        "27.3 percent",
+        "10.0 percent",
+        "16.2 percent",
+        "2.1 percent",
+        "39 percent",
+        "34 percent",
+        "2.4 percent",
+        "3.7 percent",
+        "17 percent",
+        "30 percent",
+        "59 percent",
+        "60 percent",
+        "1.6 percent",
+        "White",
+        "Asian",
+        "Hispanic",
+        "Latino",
+        "September",
+        "tables",
+        "2A",
+        "work",
+        "management",
+        "professional",
+        "construction",
+        "August",
+        "Iraq",
+        "Afghanistan",
+        "locations",
+        "Defense",
+        "Ratings",
+        "increments",
+        "severity",
+        "condition",
+        "less",
+        "2025",
+        "45"
+      ],
+      "entities": [
+        {
+          "text": "veteran",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 26,
+          "length": 7,
+          "confidence": 0.66
+        },
+        {
+          "text": "3.3 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 39,
+          "length": 11,
+          "confidence": 1.0
+        },
+        {
+          "text": "0.4 percentage point",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 65,
+          "length": 20,
+          "confidence": 0.98
+        },
+        {
+          "text": "2025",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 89,
+          "length": 4,
+          "confidence": 0.99
+        },
+        {
+          "text": "veteran",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 113,
+          "length": 7,
+          "confidence": 0.62
+        },
+        {
+          "text": "4.6 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 128,
+          "length": 11,
+          "confidence": 1.0
+        },
+        {
+          "text": "1.1 percentage points",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 154,
+          "length": 21,
+          "confidence": 0.87
+        },
+        {
+          "text": "nonveteran men",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 189,
+          "length": 14,
+          "confidence": 0.89
+        },
+        {
+          "text": "unemployment",
+          "category": "Skill",
+          "subcategory": null,
+          "offset": 219,
+          "length": 12,
+          "confidence": 0.61
+        },
+        {
+          "text": "veteran men",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 241,
+          "length": 11,
+          "confidence": 0.93
+        },
+        {
+          "text": "nonveteran counterparts",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 274,
+          "length": 23,
+          "confidence": 0.6
+        },
+        {
+          "text": "4.3 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 299,
+          "length": 11,
+          "confidence": 1.0
+        },
+        {
+          "text": "veteran women",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 332,
+          "length": 13,
+          "confidence": 0.8
+        },
+        {
+          "text": "4.0 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 411,
+          "length": 11,
+          "confidence": 0.99
+        },
+        {
+          "text": "White",
+          "category": "Location",
+          "subcategory": "City",
+          "offset": 448,
+          "length": 5,
+          "confidence": 0.86
+        },
+        {
+          "text": "3.3",
+          "category": "Quantity",
+          "subcategory": "Number",
+          "offset": 455,
+          "length": 3,
+          "confidence": 0.8
+        },
+        {
+          "text": "percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 459,
+          "length": 7,
+          "confidence": 0.51
+        },
+        {
+          "text": "Black",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 472,
+          "length": 5,
+          "confidence": 0.54
+        },
+        {
+          "text": "5.0 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 479,
+          "length": 11,
+          "confidence": 1.0
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 492,
+          "length": 8,
+          "confidence": 0.81
+        },
+        {
+          "text": "the year",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 516,
+          "length": 8,
+          "confidence": 0.94
+        },
+        {
+          "text": "Asian",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 546,
+          "length": 5,
+          "confidence": 0.55
+        },
+        {
+          "text": "(2.7 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 552,
+          "length": 12,
+          "confidence": 1.0
+        },
+        {
+          "text": "4.0 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 590,
+          "length": 11,
+          "confidence": 1.0
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 603,
+          "length": 8,
+          "confidence": 0.73
+        },
+        {
+          "text": "the year",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 637,
+          "length": 8,
+          "confidence": 0.96
+        },
+        {
+          "text": "Black",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 647,
+          "length": 5,
+          "confidence": 0.75
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 653,
+          "length": 8,
+          "confidence": 0.51
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 698,
+          "length": 8,
+          "confidence": 0.92
+        },
+        {
+          "text": "White",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 715,
+          "length": 5,
+          "confidence": 0.7
+        },
+        {
+          "text": "Asian",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 724,
+          "length": 5,
+          "confidence": 0.94
+        },
+        {
+          "text": "2025",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 733,
+          "length": 4,
+          "confidence": 1.0
+        },
+        {
+          "text": "Gulf War-era",
+          "category": "Event",
+          "subcategory": null,
+          "offset": 740,
+          "length": 12,
+          "confidence": 0.66
+        },
+        {
+          "text": "Veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 756,
+          "length": 8,
+          "confidence": 0.72
+        },
+        {
+          "text": "2025",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 769,
+          "length": 4,
+          "confidence": 0.99
+        },
+        {
+          "text": "5.6 million",
+          "category": "Quantity",
+          "subcategory": "Number",
+          "offset": 786,
+          "length": 11,
+          "confidence": 0.8
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 798,
+          "length": 8,
+          "confidence": 0.92
+        },
+        {
+          "text": "Gulf War-era II",
+          "category": "Event",
+          "subcategory": null,
+          "offset": 829,
+          "length": 15,
+          "confidence": 0.73
+        },
+        {
+          "text": "September 2001",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 846,
+          "length": 14,
+          "confidence": 1.0
+        },
+        {
+          "text": "Eighteen percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 874,
+          "length": 16,
+          "confidence": 1.0
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 900,
+          "length": 8,
+          "confidence": 0.95
+        },
+        {
+          "text": "15 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 939,
+          "length": 10,
+          "confidence": 1.0
+        },
+        {
+          "text": "Gulf War",
+          "category": "Event",
+          "subcategory": null,
+          "offset": 953,
+          "length": 8,
+          "confidence": 0.63
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 968,
+          "length": 8,
+          "confidence": 0.73
+        },
+        {
+          "text": "4 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 987,
+          "length": 9,
+          "confidence": 1.0
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 1000,
+          "length": 8,
+          "confidence": 0.9
+        },
+        {
+          "text": "Vietnam",
+          "category": "Location",
+          "subcategory": "CountryRegion",
+          "offset": 1018,
+          "length": 7,
+          "confidence": 1.0
+        },
+        {
+          "text": "1",
+          "category": "Quantity",
+          "subcategory": "Number",
+          "offset": 1071,
+          "length": 1,
+          "confidence": 0.8
+        },
+        {
+          "text": "Gulf War-era II",
+          "category": "Event",
+          "subcategory": null,
+          "offset": 1109,
+          "length": 15,
+          "confidence": 0.79
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 1125,
+          "length": 8,
+          "confidence": 0.8
+        },
+        {
+          "text": "the year",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 1158,
+          "length": 8,
+          "confidence": 0.99
+        },
+        {
+          "text": "3.6",
+          "category": "Quantity",
+          "subcategory": "Number",
+          "offset": 1170,
+          "length": 3,
+          "confidence": 0.8
+        },
+        {
+          "text": "percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 1174,
+          "length": 7,
+          "confidence": 0.52
+        },
+        {
+          "text": "Gulf",
+          "category": "Location",
+          "subcategory": null,
+          "offset": 1190,
+          "length": 4,
+          "confidence": 0.58
+        },
+        {
+          "text": "War-era II",
+          "category": "Event",
+          "subcategory": null,
+          "offset": 1195,
+          "length": 10,
+          "confidence": 0.85
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 1206,
+          "length": 8,
+          "confidence": 0.86
+        },
+        {
+          "text": "2025",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 1278,
+          "length": 4,
+          "confidence": 0.98
+        },
+        {
+          "text": "(4.8 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 1283,
+          "length": 12,
+          "confidence": 1.0
+        },
+        {
+          "text": "3.4 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 1300,
+          "length": 11,
+          "confidence": 1.0
+        },
+        {
+          "text": "Gulf War-era II",
+          "category": "Event",
+          "subcategory": null,
+          "offset": 1375,
+          "length": 15,
+          "confidence": 0.82
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 1391,
+          "length": 8,
+          "confidence": 0.81
+        },
+        {
+          "text": "3.4 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 1404,
+          "length": 11,
+          "confidence": 1.0
+        },
+        {
+          "text": "nonveterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 1450,
+          "length": 11,
+          "confidence": 0.74
+        },
+        {
+          "text": "4.3 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 1466,
+          "length": 11,
+          "confidence": 1.0
+        },
+        {
+          "text": "2025",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 1482,
+          "length": 4,
+          "confidence": 0.98
+        },
+        {
+          "text": "Gulf",
+          "category": "Location",
+          "subcategory": null,
+          "offset": 1524,
+          "length": 4,
+          "confidence": 0.75
+        },
+        {
+          "text": "War-era II",
+          "category": "Event",
+          "subcategory": null,
+          "offset": 1529,
+          "length": 10,
+          "confidence": 0.86
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 1540,
+          "length": 8,
+          "confidence": 0.91
+        },
+        {
+          "text": "nonveterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 1558,
+          "length": 11,
+          "confidence": 0.68
+        },
+        {
+          "text": "one",
+          "category": "Quantity",
+          "subcategory": "Number",
+          "offset": 1609,
+          "length": 3,
+          "confidence": 0.8
+        },
+        {
+          "text": "45-to-",
+          "category": "Quantity",
+          "subcategory": "Age",
+          "offset": 1624,
+          "length": 6,
+          "confidence": 0.81
+        },
+        {
+          "text": "54-year-old",
+          "category": "Quantity",
+          "subcategory": "Age",
+          "offset": 1630,
+          "length": 11,
+          "confidence": 0.9
+        },
+        {
+          "text": "Gulf War-era II",
+          "category": "Event",
+          "subcategory": null,
+          "offset": 1647,
+          "length": 15,
+          "confidence": 0.63
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 1663,
+          "length": 8,
+          "confidence": 0.86
+        },
+        {
+          "text": "1.5 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 1700,
+          "length": 11,
+          "confidence": 1.0
+        },
+        {
+          "text": "3.0 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 1736,
+          "length": 11,
+          "confidence": 1.0
+        },
+        {
+          "text": "2B",
+          "category": "Quantity",
+          "subcategory": "Number",
+          "offset": 1794,
+          "length": 2,
+          "confidence": 0.8
+        },
+        {
+          "text": "War-era",
+          "category": "Event",
+          "subcategory": null,
+          "offset": 1838,
+          "length": 7,
+          "confidence": 0.58
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 1849,
+          "length": 8,
+          "confidence": 0.75
+        },
+        {
+          "text": "4.8 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 1862,
+          "length": 11,
+          "confidence": 1.0
+        },
+        {
+          "text": "nonveterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 1921,
+          "length": 11,
+          "confidence": 0.63
+        },
+        {
+          "text": "4.0 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 1937,
+          "length": 11,
+          "confidence": 1.0
+        },
+        {
+          "text": "2025",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 1953,
+          "length": 4,
+          "confidence": 0.98
+        },
+        {
+          "text": "unemployment",
+          "category": "Skill",
+          "subcategory": null,
+          "offset": 1967,
+          "length": 12,
+          "confidence": 0.93
+        },
+        {
+          "text": "Gulf War-era II",
+          "category": "Event",
+          "subcategory": null,
+          "offset": 1997,
+          "length": 15,
+          "confidence": 0.92
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 2013,
+          "length": 8,
+          "confidence": 0.75
+        },
+        {
+          "text": "nonveterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 2026,
+          "length": 11,
+          "confidence": 0.91
+        },
+        {
+          "text": "one",
+          "category": "Quantity",
+          "subcategory": "Number",
+          "offset": 2077,
+          "length": 3,
+          "confidence": 0.8
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 2099,
+          "length": 8,
+          "confidence": 0.57
+        },
+        {
+          "text": "25",
+          "category": "Quantity",
+          "subcategory": "Age",
+          "offset": 2113,
+          "length": 2,
+          "confidence": 0.92
+        },
+        {
+          "text": "34",
+          "category": "Quantity",
+          "subcategory": "Age",
+          "offset": 2119,
+          "length": 2,
+          "confidence": 0.84
+        },
+        {
+          "text": "8.1 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 2150,
+          "length": 11,
+          "confidence": 1.0
+        },
+        {
+          "text": "4.2 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 2222,
+          "length": 11,
+          "confidence": 1.0
+        },
+        {
+          "text": "Gulf War-era II",
+          "category": "Event",
+          "subcategory": null,
+          "offset": 2261,
+          "length": 15,
+          "confidence": 0.8
+        },
+        {
+          "text": "veteran",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 2277,
+          "length": 7,
+          "confidence": 0.63
+        },
+        {
+          "text": "nonveteran",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 2317,
+          "length": 10,
+          "confidence": 0.5
+        },
+        {
+          "text": "counterparts",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 2328,
+          "length": 12,
+          "confidence": 0.42
+        },
+        {
+          "text": "management",
+          "category": "Skill",
+          "subcategory": null,
+          "offset": 2352,
+          "length": 10,
+          "confidence": 0.95
+        },
+        {
+          "text": "professional",
+          "category": "Skill",
+          "subcategory": null,
+          "offset": 2364,
+          "length": 12,
+          "confidence": 0.96
+        },
+        {
+          "text": "(41.8 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 2402,
+          "length": 13,
+          "confidence": 1.0
+        },
+        {
+          "text": "39.5 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 2423,
+          "length": 12,
+          "confidence": 1.0
+        },
+        {
+          "text": "(15.5 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 2465,
+          "length": 13,
+          "confidence": 1.0
+        },
+        {
+          "text": "12.9 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 2486,
+          "length": 12,
+          "confidence": 0.99
+        },
+        {
+          "text": "2025",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 2503,
+          "length": 4,
+          "confidence": 0.99
+        },
+        {
+          "text": "women",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 2513,
+          "length": 5,
+          "confidence": 0.75
+        },
+        {
+          "text": "Gulf War-era II",
+          "category": "Event",
+          "subcategory": null,
+          "offset": 2529,
+          "length": 15,
+          "confidence": 0.94
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 2545,
+          "length": 8,
+          "confidence": 0.94
+        },
+        {
+          "text": "nonveteran counterparts",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 2582,
+          "length": 23,
+          "confidence": 0.6
+        },
+        {
+          "text": "management",
+          "category": "Skill",
+          "subcategory": null,
+          "offset": 2617,
+          "length": 10,
+          "confidence": 0.96
+        },
+        {
+          "text": "professional",
+          "category": "Skill",
+          "subcategory": null,
+          "offset": 2629,
+          "length": 12,
+          "confidence": 0.9
+        },
+        {
+          "text": "59.1 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 2668,
+          "length": 12,
+          "confidence": 1.0
+        },
+        {
+          "text": "48.8 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 2688,
+          "length": 12,
+          "confidence": 1.0
+        },
+        {
+          "text": "natural resources",
+          "category": "Skill",
+          "subcategory": null,
+          "offset": 2709,
+          "length": 17,
+          "confidence": 0.66
+        },
+        {
+          "text": "maintenance",
+          "category": "Skill",
+          "subcategory": null,
+          "offset": 2746,
+          "length": 11,
+          "confidence": 0.72
+        },
+        {
+          "text": "2.3 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 2771,
+          "length": 11,
+          "confidence": 1.0
+        },
+        {
+          "text": "1.1 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 2790,
+          "length": 11,
+          "confidence": 0.99
+        },
+        {
+          "text": "4",
+          "category": "Quantity",
+          "subcategory": "Number",
+          "offset": 2815,
+          "length": 1,
+          "confidence": 0.8
+        },
+        {
+          "text": "Gulf War-",
+          "category": "Event",
+          "subcategory": null,
+          "offset": 2829,
+          "length": 9,
+          "confidence": 0.73
+        },
+        {
+          "text": "II",
+          "category": "Event",
+          "subcategory": null,
+          "offset": 2842,
+          "length": 2,
+          "confidence": 0.53
+        },
+        {
+          "text": "veteran",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 2845,
+          "length": 7,
+          "confidence": 0.88
+        },
+        {
+          "text": "three",
+          "category": "Quantity",
+          "subcategory": "Number",
+          "offset": 2869,
+          "length": 5,
+          "confidence": 0.8
+        },
+        {
+          "text": "2025",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 2923,
+          "length": 4,
+          "confidence": 0.94
+        },
+        {
+          "text": "nonveteran",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 2946,
+          "length": 10,
+          "confidence": 0.51
+        },
+        {
+          "text": "counterparts",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 2957,
+          "length": 12,
+          "confidence": 0.4
+        },
+        {
+          "text": "-27.3 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 2970,
+          "length": 13,
+          "confidence": 1.0
+        },
+        {
+          "text": "10.0 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 2991,
+          "length": 12,
+          "confidence": 0.99
+        },
+        {
+          "text": "Gulf War-era II",
+          "category": "Event",
+          "subcategory": null,
+          "offset": 3021,
+          "length": 15,
+          "confidence": 0.78
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 3037,
+          "length": 8,
+          "confidence": 0.88
+        },
+        {
+          "text": "nonveteran",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 3107,
+          "length": 10,
+          "confidence": 0.71
+        },
+        {
+          "text": "-33.4 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 3124,
+          "length": 13,
+          "confidence": 1.0
+        },
+        {
+          "text": "16.2 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 3145,
+          "length": 12,
+          "confidence": 1.0
+        },
+        {
+          "text": "16.2 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 3168,
+          "length": 12,
+          "confidence": 1.0
+        },
+        {
+          "text": "Gulf War-era II",
+          "category": "Event",
+          "subcategory": null,
+          "offset": 3193,
+          "length": 15,
+          "confidence": 0.93
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 3209,
+          "length": 8,
+          "confidence": 0.88
+        },
+        {
+          "text": "2.1 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 3267,
+          "length": 11,
+          "confidence": 1.0
+        },
+        {
+          "text": "nonveterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 3282,
+          "length": 11,
+          "confidence": 0.99
+        },
+        {
+          "text": "5",
+          "category": "Quantity",
+          "subcategory": "Number",
+          "offset": 3306,
+          "length": 1,
+          "confidence": 0.8
+        },
+        {
+          "text": "August 2025",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 3314,
+          "length": 11,
+          "confidence": 0.98
+        },
+        {
+          "text": "39 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 3327,
+          "length": 10,
+          "confidence": 1.0
+        },
+        {
+          "text": "Gulf War-era II",
+          "category": "Event",
+          "subcategory": null,
+          "offset": 3341,
+          "length": 15,
+          "confidence": 0.88
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 3357,
+          "length": 8,
+          "confidence": 0.88
+        },
+        {
+          "text": "Iraq",
+          "category": "Location",
+          "subcategory": "CountryRegion",
+          "offset": 3386,
+          "length": 4,
+          "confidence": 0.95
+        },
+        {
+          "text": "Afghanistan",
+          "category": "Location",
+          "subcategory": "CountryRegion",
+          "offset": 3392,
+          "length": 11,
+          "confidence": 0.93
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 3456,
+          "length": 8,
+          "confidence": 0.86
+        },
+        {
+          "text": "3.4 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 3469,
+          "length": 11,
+          "confidence": 1.0
+        },
+        {
+          "text": "the year",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 3502,
+          "length": 8,
+          "confidence": 0.85
+        },
+        {
+          "text": "Gulf War-era II",
+          "category": "Event",
+          "subcategory": null,
+          "offset": 3525,
+          "length": 15,
+          "confidence": 0.75
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 3541,
+          "length": 8,
+          "confidence": 0.82
+        },
+        {
+          "text": "2.3 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 3572,
+          "length": 11,
+          "confidence": 1.0
+        },
+        {
+          "text": "August 2025",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 3587,
+          "length": 11,
+          "confidence": 0.98
+        },
+        {
+          "text": "the year",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 3625,
+          "length": 8,
+          "confidence": 0.94
+        },
+        {
+          "text": "10",
+          "category": "Quantity",
+          "subcategory": "Number",
+          "offset": 3646,
+          "length": 2,
+          "confidence": 0.8
+        },
+        {
+          "text": "Veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 3652,
+          "length": 8,
+          "confidence": 0.96
+        },
+        {
+          "text": "August 2025",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 3701,
+          "length": 11,
+          "confidence": 0.99
+        },
+        {
+          "text": "5.8 million",
+          "category": "Quantity",
+          "subcategory": "Number",
+          "offset": 3714,
+          "length": 11,
+          "confidence": 0.8
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 3726,
+          "length": 8,
+          "confidence": 0.99
+        },
+        {
+          "text": "34 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 3739,
+          "length": 10,
+          "confidence": 1.0
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 3757,
+          "length": 8,
+          "confidence": 0.99
+        },
+        {
+          "text": "Veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 3803,
+          "length": 8,
+          "confidence": 1.0
+        },
+        {
+          "text": "U.S. Department of Veterans Affairs",
+          "category": "Organization",
+          "subcategory": null,
+          "offset": 3888,
+          "length": 35,
+          "confidence": 0.99
+        },
+        {
+          "text": "U.S. Department of Defense",
+          "category": "Organization",
+          "subcategory": null,
+          "offset": 3931,
+          "length": 26,
+          "confidence": 0.98
+        },
+        {
+          "text": "0 to 100 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 3978,
+          "length": 16,
+          "confidence": 0.84
+        },
+        {
+          "text": "10 percentage",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 4013,
+          "length": 13,
+          "confidence": 0.93
+        },
+        {
+          "text": "7",
+          "category": "Quantity",
+          "subcategory": "Number",
+          "offset": 4090,
+          "length": 1,
+          "confidence": 0.8
+        },
+        {
+          "text": "the year",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 4100,
+          "length": 8,
+          "confidence": 0.97
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 4136,
+          "length": 8,
+          "confidence": 0.95
+        },
+        {
+          "text": "1.7 percentage points",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 4194,
+          "length": 21,
+          "confidence": 0.93
+        },
+        {
+          "text": "2.4 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 4219,
+          "length": 11,
+          "confidence": 0.99
+        },
+        {
+          "text": "August 2025",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 4234,
+          "length": 11,
+          "confidence": 0.98
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 4260,
+          "length": 8,
+          "confidence": 1.0
+        },
+        {
+          "text": "3.7 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 4328,
+          "length": 11,
+          "confidence": 1.0
+        },
+        {
+          "text": "male",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 4373,
+          "length": 4,
+          "confidence": 0.76
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 4378,
+          "length": 8,
+          "confidence": 0.67
+        },
+        {
+          "text": "2.1 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 4424,
+          "length": 11,
+          "confidence": 1.0
+        },
+        {
+          "text": "female",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 4441,
+          "length": 6,
+          "confidence": 0.64
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 4448,
+          "length": 8,
+          "confidence": 0.58
+        },
+        {
+          "text": "3.8 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 4494,
+          "length": 11,
+          "confidence": 1.0
+        },
+        {
+          "text": "the year",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 4533,
+          "length": 8,
+          "confidence": 0.98
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 4550,
+          "length": 8,
+          "confidence": 0.96
+        },
+        {
+          "text": "August 2025",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 4598,
+          "length": 11,
+          "confidence": 0.99
+        },
+        {
+          "text": "17 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 4611,
+          "length": 10,
+          "confidence": 1.0
+        },
+        {
+          "text": "30 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 4659,
+          "length": 10,
+          "confidence": 0.97
+        },
+        {
+          "text": "59 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 4677,
+          "length": 10,
+          "confidence": 1.0
+        },
+        {
+          "text": "60 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 4704,
+          "length": 10,
+          "confidence": 1.0
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 4752,
+          "length": 8,
+          "confidence": 0.89
+        },
+        {
+          "text": "30 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 4799,
+          "length": 10,
+          "confidence": 0.99
+        },
+        {
+          "text": "1.6\npercent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 4814,
+          "length": 11,
+          "confidence": 0.71
+        },
+        {
+          "text": "60 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 4896,
+          "length": 10,
+          "confidence": 1.0
+        },
+        {
+          "text": "3.0 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 4921,
+          "length": 11,
+          "confidence": 1.0
+        }
+      ],
+      "sentiment": {
+        "label": "negative",
+        "scores": {
+          "positive": 0.0,
+          "neutral": 0.21,
+          "negative": 0.79
+        }
+      }
+    },
+    {
+      "doc_id": 2,
+      "text": "In August 2025, 50 percent (2.8 million) of veterans who served during Gulf War-era II\nreported a service-connected disability. The labor force participation rate of Gulf War-era II\nveterans with a service-connected disability (71.3 percent) was lower than the rate for their\ncounterparts with no service-connected disability (84.5 percent). Among Gulf War-era II\nveterans, the unemployment rate for those with a service-connected disability (2.3 percent)\nwas not statistically different than the rate for those with no disability (3.2 percent).\n\nAmong Gulf War-era II veterans with a service-connected disability, 70 percent reported a\ndisability rating of 60 percent or higher in August 2025. Gulf War-era II veterans who\nreported a disability rating of less than 30 percent were more likely to be in the labor force\nthan those with a rating of 60 percent or higher (85.1 percent compared with 64.7 percent).\n\nRegardless of period of service, many veterans with a service-connected disability work in the\npublic sector. In August 2025, 38.7 percent of employed veterans with a service-connected\ndisability worked in federal, state, or local government, compared with 20.2 percent of\nveterans with no disability and 13.0 percent of nonveterans. Nearly one-fourth (23.2 percent) \nof employed veterans with a service-connected disability worked for the federal government,\ncompared with 8.6 percent of veterans with no service-connected disability and 2.1 percent of\nnonveterans. (See table 8.)\n\nReserve and National Guard Membership\n\nIn August 2025, over one-third (2.0 million) of Gulf War-era II veterans were current or past\nmembers of the Reserve or National Guard. The labor force participation rate for veterans of\nthis period who were current or past members of the Reserve or National Guard (77.0 percent)\nwas not statistically different than the rate for veterans who had never been members (78.5\npercent). Among Gulf War-era II veterans, the unemployment rates for those who were current or\npast members of the Reserve or National Guard (1.8 percent) and for those who had never been\nmembers (3.1 percent) were not statistically different from each other and were little changed\nfrom a year earlier. (See table 9.)",
+      "key_phrases": [
+        "Gulf War-era II veterans",
+        "labor force participation rate",
+        "National Guard Membership",
+        "service-connected disability work",
+        "unemployment rate",
+        "many veterans",
+        "public sector",
+        "federal, state",
+        "local government",
+        "federal government",
+        "disability rating",
+        "past members",
+        "August",
+        "50 percent",
+        "1.3 percent",
+        "counterparts",
+        "2.3 percent",
+        "3.2 percent",
+        "70 percent",
+        "60 percent",
+        "less",
+        "30 percent",
+        "64.7 percent",
+        "period",
+        "38.7 percent",
+        "20.2 percent",
+        "13.0 percent",
+        "nonveterans",
+        "one",
+        "fourth",
+        "8.6 percent",
+        "2.1 percent",
+        "table",
+        "Reserve",
+        "current",
+        "77.0 percent",
+        "3.1 percent",
+        "85",
+        "2.0"
+      ],
+      "entities": [
+        {
+          "text": "August 2025",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 3,
+          "length": 11,
+          "confidence": 0.99
+        },
+        {
+          "text": "50 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 16,
+          "length": 10,
+          "confidence": 1.0
+        },
+        {
+          "text": "2.8 million",
+          "category": "Quantity",
+          "subcategory": "Number",
+          "offset": 28,
+          "length": 11,
+          "confidence": 0.8
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 44,
+          "length": 8,
+          "confidence": 0.96
+        },
+        {
+          "text": "Gulf War-era II",
+          "category": "Event",
+          "subcategory": null,
+          "offset": 71,
+          "length": 15,
+          "confidence": 0.87
+        },
+        {
+          "text": "disability",
+          "category": "Skill",
+          "subcategory": null,
+          "offset": 116,
+          "length": 10,
+          "confidence": 0.66
+        },
+        {
+          "text": "Gulf War",
+          "category": "Event",
+          "subcategory": null,
+          "offset": 166,
+          "length": 8,
+          "confidence": 0.91
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 182,
+          "length": 8,
+          "confidence": 0.97
+        },
+        {
+          "text": "(71.3 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 227,
+          "length": 13,
+          "confidence": 1.0
+        },
+        {
+          "text": "(84.5 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 326,
+          "length": 13,
+          "confidence": 1.0
+        },
+        {
+          "text": "Gulf War-era II",
+          "category": "Event",
+          "subcategory": null,
+          "offset": 348,
+          "length": 15,
+          "confidence": 0.7
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 364,
+          "length": 8,
+          "confidence": 0.97
+        },
+        {
+          "text": "unemployment",
+          "category": "Skill",
+          "subcategory": null,
+          "offset": 378,
+          "length": 12,
+          "confidence": 0.51
+        },
+        {
+          "text": "2.3 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 443,
+          "length": 11,
+          "confidence": 0.99
+        },
+        {
+          "text": "3.2 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 532,
+          "length": 11,
+          "confidence": 1.0
+        },
+        {
+          "text": "Gulf War-era II",
+          "category": "Event",
+          "subcategory": null,
+          "offset": 553,
+          "length": 15,
+          "confidence": 0.94
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 569,
+          "length": 8,
+          "confidence": 0.91
+        },
+        {
+          "text": "70 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 615,
+          "length": 10,
+          "confidence": 1.0
+        },
+        {
+          "text": "60 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 658,
+          "length": 10,
+          "confidence": 1.0
+        },
+        {
+          "text": "August 2025",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 682,
+          "length": 11,
+          "confidence": 0.94
+        },
+        {
+          "text": "Gulf War-era II",
+          "category": "Event",
+          "subcategory": null,
+          "offset": 695,
+          "length": 15,
+          "confidence": 0.94
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 711,
+          "length": 8,
+          "confidence": 0.91
+        },
+        {
+          "text": "30 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 766,
+          "length": 10,
+          "confidence": 0.99
+        },
+        {
+          "text": "60 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 847,
+          "length": 10,
+          "confidence": 0.99
+        },
+        {
+          "text": "(85.1 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 868,
+          "length": 13,
+          "confidence": 1.0
+        },
+        {
+          "text": "64.7 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 896,
+          "length": 12,
+          "confidence": 1.0
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 950,
+          "length": 8,
+          "confidence": 1.0
+        },
+        {
+          "text": "August 2025",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 1025,
+          "length": 11,
+          "confidence": 1.0
+        },
+        {
+          "text": "38.7 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 1038,
+          "length": 12,
+          "confidence": 1.0
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 1063,
+          "length": 8,
+          "confidence": 0.74
+        },
+        {
+          "text": "20.2 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 1169,
+          "length": 12,
+          "confidence": 1.0
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 1185,
+          "length": 8,
+          "confidence": 0.94
+        },
+        {
+          "text": "13.0 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 1217,
+          "length": 12,
+          "confidence": 1.0
+        },
+        {
+          "text": "nonveterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 1233,
+          "length": 11,
+          "confidence": 0.95
+        },
+        {
+          "text": "one-fourth",
+          "category": "Quantity",
+          "subcategory": "Number",
+          "offset": 1253,
+          "length": 10,
+          "confidence": 0.8
+        },
+        {
+          "text": "(23.2 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 1264,
+          "length": 13,
+          "confidence": 1.0
+        },
+        {
+          "text": "employed veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 1283,
+          "length": 17,
+          "confidence": 0.63
+        },
+        {
+          "text": "federal government",
+          "category": "Organization",
+          "subcategory": "Medical",
+          "offset": 1352,
+          "length": 18,
+          "confidence": 0.86
+        },
+        {
+          "text": "8.6 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 1386,
+          "length": 11,
+          "confidence": 1.0
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 1401,
+          "length": 8,
+          "confidence": 0.95
+        },
+        {
+          "text": "2.1 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 1451,
+          "length": 11,
+          "confidence": 1.0
+        },
+        {
+          "text": "nonveterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 1466,
+          "length": 11,
+          "confidence": 0.96
+        },
+        {
+          "text": "8",
+          "category": "Quantity",
+          "subcategory": "Number",
+          "offset": 1490,
+          "length": 1,
+          "confidence": 0.8
+        },
+        {
+          "text": "Reserve and National Guard Membership",
+          "category": "Organization",
+          "subcategory": null,
+          "offset": 1495,
+          "length": 37,
+          "confidence": 0.9
+        },
+        {
+          "text": "August 2025",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 1537,
+          "length": 11,
+          "confidence": 0.99
+        },
+        {
+          "text": "one-third",
+          "category": "Quantity",
+          "subcategory": "Number",
+          "offset": 1555,
+          "length": 9,
+          "confidence": 0.8
+        },
+        {
+          "text": "2.0 million",
+          "category": "Quantity",
+          "subcategory": "Number",
+          "offset": 1566,
+          "length": 11,
+          "confidence": 0.8
+        },
+        {
+          "text": "Gulf War-era II",
+          "category": "Event",
+          "subcategory": null,
+          "offset": 1582,
+          "length": 15,
+          "confidence": 0.88
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 1598,
+          "length": 8,
+          "confidence": 0.97
+        },
+        {
+          "text": "members",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 1628,
+          "length": 7,
+          "confidence": 0.89
+        },
+        {
+          "text": "Reserve",
+          "category": "Organization",
+          "subcategory": null,
+          "offset": 1643,
+          "length": 7,
+          "confidence": 0.94
+        },
+        {
+          "text": "National Guard",
+          "category": "Organization",
+          "subcategory": null,
+          "offset": 1654,
+          "length": 14,
+          "confidence": 0.98
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 1709,
+          "length": 8,
+          "confidence": 0.99
+        },
+        {
+          "text": "members",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 1758,
+          "length": 7,
+          "confidence": 0.78
+        },
+        {
+          "text": "Reserve",
+          "category": "Organization",
+          "subcategory": null,
+          "offset": 1773,
+          "length": 7,
+          "confidence": 0.85
+        },
+        {
+          "text": "National Guard",
+          "category": "Organization",
+          "subcategory": null,
+          "offset": 1784,
+          "length": 14,
+          "confidence": 0.95
+        },
+        {
+          "text": "(77.0 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 1799,
+          "length": 13,
+          "confidence": 1.0
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 1864,
+          "length": 8,
+          "confidence": 0.98
+        },
+        {
+          "text": "members",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 1892,
+          "length": 7,
+          "confidence": 0.87
+        },
+        {
+          "text": "78.5",
+          "category": "Quantity",
+          "subcategory": "Number",
+          "offset": 1901,
+          "length": 4,
+          "confidence": 0.8
+        },
+        {
+          "text": "Gulf War-era II",
+          "category": "Event",
+          "subcategory": null,
+          "offset": 1922,
+          "length": 15,
+          "confidence": 0.93
+        },
+        {
+          "text": "veterans",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 1938,
+          "length": 8,
+          "confidence": 0.91
+        },
+        {
+          "text": "members",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 2006,
+          "length": 7,
+          "confidence": 0.77
+        },
+        {
+          "text": "Reserve",
+          "category": "Organization",
+          "subcategory": null,
+          "offset": 2021,
+          "length": 7,
+          "confidence": 0.91
+        },
+        {
+          "text": "National Guard",
+          "category": "Organization",
+          "subcategory": null,
+          "offset": 2032,
+          "length": 14,
+          "confidence": 0.92
+        },
+        {
+          "text": "1.8 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 2048,
+          "length": 11,
+          "confidence": 1.0
+        },
+        {
+          "text": "members",
+          "category": "PersonType",
+          "subcategory": null,
+          "offset": 2094,
+          "length": 7,
+          "confidence": 0.78
+        },
+        {
+          "text": "3.1 percent",
+          "category": "Quantity",
+          "subcategory": "Percentage",
+          "offset": 2103,
+          "length": 11,
+          "confidence": 1.0
+        },
+        {
+          "text": "a year earlier",
+          "category": "DateTime",
+          "subcategory": "DateRange",
+          "offset": 2194,
+          "length": 14,
+          "confidence": 0.82
+        },
+        {
+          "text": "9",
+          "category": "Quantity",
+          "subcategory": "Number",
+          "offset": 2221,
+          "length": 1,
+          "confidence": 0.8
+        }
+      ],
+      "sentiment": {
+        "label": "negative",
+        "scores": {
+          "positive": 0.0,
+          "neutral": 0.3,
+          "negative": 0.7
+        }
+      }
+    }
+  ]
+}

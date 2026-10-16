@@ -1,0 +1,32 @@
+{
+  "source": "vet_release.txt",
+  "source_chars": 12187,
+  "documents": 3,
+  "per_doc": [
+    {
+      "doc_id": 0,
+      "chars": 4959,
+      "records": 5
+    },
+    {
+      "doc_id": 1,
+      "chars": 4933,
+      "records": 5
+    },
+    {
+      "doc_id": 2,
+      "chars": 2224,
+      "records": 3
+    }
+  ],
+  "features": [
+    "key_phrases",
+    "entities",
+    "sentiment"
+  ],
+  "records_per_feature": 13,
+  "total_records_per_run": 39,
+  "f0_allowance_per_month": 5000,
+  "f0_share_of_month_pct": 0.78,
+  "s_tier_cost_usd_if_paid": 0.039
+}
