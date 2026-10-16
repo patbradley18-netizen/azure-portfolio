@@ -30,13 +30,14 @@ jobs:
 
       - name: Assemble site
         run: |
-          mkdir -p dist/build-01-aid-lite dist/build-02-bls-veterans dist/build-04-sql-analysis
+          mkdir -p dist/build-01-aid-lite dist/build-02-bls-veterans dist/build-04-sql-analysis dist/build-05-ai-summary
           cp site/index.html dist/index.html
           cp build-01-aid-lite/dashboard.html dist/build-01-aid-lite/index.html
           cp build-01-aid-lite/dashboard.png  dist/build-01-aid-lite/dashboard.png
           cp build-02-bls-veterans/dashboard.html dist/build-02-bls-veterans/index.html
           cp build-02-bls-veterans/dashboard.png  dist/build-02-bls-veterans/dashboard.png
           cp build-04-sql-analysis/findings.html dist/build-04-sql-analysis/index.html
+          cp build-05-ai-summary/findings.html dist/build-05-ai-summary/index.html
           find dist -type f | sort
 
       - name: Azure login (OIDC, user-assigned managed identity)
@@ -56,3 +57,4 @@ jobs:
           curl -fsS "${SITE_URL}build-01-aid-lite/" | grep -q "Algorithmic Influence Detector"
           curl -fsS "${SITE_URL}build-02-bls-veterans/" | grep -q "Veteran employment"
           curl -fsS "${SITE_URL}build-04-sql-analysis/" | grep -q "Seven questions"
+          curl -fsS "${SITE_URL}build-05-ai-summary/" | grep -q "estimate, cap, ledger, verify"

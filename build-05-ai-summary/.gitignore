@@ -1,0 +1,6 @@
+data/*.log
+data/*.b64
+data/*.htm
+data/body.json
+data/resp.txt
+__pycache__/

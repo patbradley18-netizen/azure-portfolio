@@ -10,9 +10,10 @@ Small, free-tier builds on an Azure for Students subscription. Each one teaches 
 | 2 | [Veteran employment pipeline (BLS → Function → SQL)](build-02-bls-veterans/) | Keyed API on a schedule, Key Vault reference, least-privilege SQL grant, upsert on a real key | Published and closed |
 | 3 | [Live site, deployed by GitHub Actions](.github/workflows/deploy-site.yml) | Blob static website, CI/CD, OIDC federated identity (no deployment token), secret-scan gate | Published |
 | 4 | [SQL analysis: seven questions, seven queries, seven sentences](build-04-sql-analysis/) | T-SQL (CTEs, self-joins, FULL OUTER JOIN, conditional aggregation), findings computed from results | Published |
-| 5 | Summarize a public report with Azure AI, with cost controls | AI services, cost management | Planned |
+| 5 | [AI summary with cost controls: estimate, cap, ledger, verify](build-05-ai-summary/) | Azure AI Language (F0), per-record cost estimation, hard caps, billed-vs-estimated ledger, exact-match verification, tier gates | Published |
 
-Note for anyone copying the OIDC setup: GitHub now presents the subject claim with owner and repository IDs embedded (epo:<owner>@<id>/<repo>@<id>:ref:refs/heads/main); the federated credential subject must match that string exactly.
+Note for anyone copying the OIDC setup: GitHub now presents the subject claim with owner and repository IDs embedded (
+epo:<owner>@<id>/<repo>@<id>:ref:refs/heads/main); the federated credential subject must match that string exactly.
 
 Rules I hold myself to: cost first; no keys, passwords or connection strings anywhere in code, chat or GitHub; non-commercial only; teach-don't-do; one build at a time; publish the null results too.
 
