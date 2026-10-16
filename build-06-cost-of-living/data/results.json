@@ -1,0 +1,689 @@
+{
+ "Q1": {
+  "question": "Does the TSCI snapshot carry the raw Census inputs unchanged? (reconciliation, five fields)",
+  "sql": "WITH snap AS (\n  SELECT fips, code, value FROM col.measure WHERE dataset_id = 'tsci_2026-05-12' AND code IN ('r','hv','oc','i','pop')),\nraw AS (\n  SELECT fips, CASE code WHEN 'B25064_001E' THEN 'r' WHEN 'B25077_001E' THEN 'hv' WHEN 'B25088_002E' THEN 'oc'\n                         WHEN 'B19013_001E' THEN 'i' WHEN 'B01003_001E' THEN 'pop' END AS code, value, text\n  FROM col.measure WHERE dataset_id = 'acs5_2023'),\ncmp AS (\n  SELECT COALESCE(s.fips, r.fips) AS fips, COALESCE(s.code, r.code) AS code, s.value AS snap_value, r.value AS raw_value, r.text AS raw_flag,\n         CASE WHEN s.value IS NULL AND r.value IS NULL THEN 'both null'\n              WHEN s.value IS NULL THEN 'snapshot missing'\n              WHEN r.value IS NULL THEN 'raw suppressed, snapshot filled'\n              WHEN ABS(s.value - r.value) < 0.5 THEN 'match'\n              ELSE 'differs' END AS status\n  FROM snap s FULL OUTER JOIN raw r ON r.fips = s.fips AND r.code = s.code)\nSELECT code, status, COUNT(*) AS counties, MIN(fips) AS example_fips\nFROM cmp GROUP BY code, status ORDER BY code, status;",
+  "columns": [
+   "code",
+   "status",
+   "counties",
+   "example_fips"
+  ],
+  "rows": [
+   {
+    "code": "hv",
+    "status": "both null",
+    "counties": 6,
+    "example_fips": "15005"
+   },
+   {
+    "code": "hv",
+    "status": "match",
+    "counties": 3216,
+    "example_fips": "01001"
+   },
+   {
+    "code": "i",
+    "status": "both null",
+    "counties": 2,
+    "example_fips": "32009"
+   },
+   {
+    "code": "i",
+    "status": "match",
+    "counties": 3220,
+    "example_fips": "01001"
+   },
+   {
+    "code": "oc",
+    "status": "both null",
+    "counties": 8,
+    "example_fips": "15005"
+   },
+   {
+    "code": "oc",
+    "status": "match",
+    "counties": 3214,
+    "example_fips": "01001"
+   },
+   {
+    "code": "pop",
+    "status": "match",
+    "counties": 3222,
+    "example_fips": "01001"
+   },
+   {
+    "code": "r",
+    "status": "both null",
+    "counties": 10,
+    "example_fips": "06003"
+   },
+   {
+    "code": "r",
+    "status": "match",
+    "counties": 3212,
+    "example_fips": "01001"
+   }
+  ]
+ },
+ "Q2": {
+  "question": "Where the snapshot and raw source differ, which counties and by how much?",
+  "sql": "WITH snap AS (\n  SELECT fips, code, value FROM col.measure WHERE dataset_id = 'tsci_2026-05-12' AND code IN ('r','hv','oc','i','pop')),\nraw AS (\n  SELECT fips, CASE code WHEN 'B25064_001E' THEN 'r' WHEN 'B25077_001E' THEN 'hv' WHEN 'B25088_002E' THEN 'oc'\n                         WHEN 'B19013_001E' THEN 'i' WHEN 'B01003_001E' THEN 'pop' END AS code, value, text\n  FROM col.measure WHERE dataset_id = 'acs5_2023')\nSELECT TOP 25 c.name, s.code, s.value AS snapshot, r.value AS census, r.text AS census_flag, s.value - r.value AS diff\nFROM snap s JOIN raw r ON r.fips = s.fips AND r.code = s.code JOIN col.county c ON c.fips = s.fips\nWHERE r.value IS NULL OR ABS(s.value - r.value) >= 0.5\nORDER BY ABS(COALESCE(s.value - r.value, s.value)) DESC;",
+  "columns": [
+   "name",
+   "code",
+   "snapshot",
+   "census",
+   "census_flag",
+   "diff"
+  ],
+  "rows": [
+   {
+    "name": "Terrell County, Texas",
+    "code": "r",
+    "snapshot": null,
+    "census": null,
+    "census_flag": "SUPPRESSED",
+    "diff": null
+   },
+   {
+    "name": "Real County, Texas",
+    "code": "hv",
+    "snapshot": null,
+    "census": null,
+    "census_flag": "SUPPRESSED",
+    "diff": null
+   },
+   {
+    "name": "McMullen County, Texas",
+    "code": "r",
+    "snapshot": null,
+    "census": null,
+    "census_flag": "SUPPRESSED",
+    "diff": null
+   },
+   {
+    "name": "Loving County, Texas",
+    "code": "r",
+    "snapshot": null,
+    "census": null,
+    "census_flag": "SUPPRESSED",
+    "diff": null
+   },
+   {
+    "name": "Loving County, Texas",
+    "code": "oc",
+    "snapshot": null,
+    "census": null,
+    "census_flag": "SUPPRESSED",
+    "diff": null
+   },
+   {
+    "name": "Loving County, Texas",
+    "code": "hv",
+    "snapshot": null,
+    "census": null,
+    "census_flag": "SUPPRESSED",
+    "diff": null
+   },
+   {
+    "name": "La Salle County, Texas",
+    "code": "r",
+    "snapshot": null,
+    "census": null,
+    "census_flag": "SUPPRESSED",
+    "diff": null
+   },
+   {
+    "name": "King County, Texas",
+    "code": "r",
+    "snapshot": null,
+    "census": null,
+    "census_flag": "SUPPRESSED",
+    "diff": null
+   },
+   {
+    "name": "King County, Texas",
+    "code": "oc",
+    "snapshot": null,
+    "census": null,
+    "census_flag": "SUPPRESSED",
+    "diff": null
+   },
+   {
+    "name": "King County, Texas",
+    "code": "hv",
+    "snapshot": null,
+    "census": null,
+    "census_flag": "SUPPRESSED",
+    "diff": null
+   },
+   {
+    "name": "Kenedy County, Texas",
+    "code": "r",
+    "snapshot": null,
+    "census": null,
+    "census_flag": "SUPPRESSED",
+    "diff": null
+   },
+   {
+    "name": "Kenedy County, Texas",
+    "code": "oc",
+    "snapshot": null,
+    "census": null,
+    "census_flag": "SUPPRESSED",
+    "diff": null
+   },
+   {
+    "name": "Kenedy County, Texas",
+    "code": "i",
+    "snapshot": null,
+    "census": null,
+    "census_flag": "SUPPRESSED",
+    "diff": null
+   },
+   {
+    "name": "Kenedy County, Texas",
+    "code": "hv",
+    "snapshot": null,
+    "census": null,
+    "census_flag": "SUPPRESSED",
+    "diff": null
+   },
+   {
+    "name": "Glasscock County, Texas",
+    "code": "r",
+    "snapshot": null,
+    "census": null,
+    "census_flag": "SUPPRESSED",
+    "diff": null
+   },
+   {
+    "name": "Glasscock County, Texas",
+    "code": "oc",
+    "snapshot": null,
+    "census": null,
+    "census_flag": "SUPPRESSED",
+    "diff": null
+   },
+   {
+    "name": "Edwards County, Texas",
+    "code": "oc",
+    "snapshot": null,
+    "census": null,
+    "census_flag": "SUPPRESSED",
+    "diff": null
+   },
+   {
+    "name": "Borden County, Texas",
+    "code": "r",
+    "snapshot": null,
+    "census": null,
+    "census_flag": "SUPPRESSED",
+    "diff": null
+   },
+   {
+    "name": "Buffalo County, South Dakota",
+    "code": "oc",
+    "snapshot": null,
+    "census": null,
+    "census_flag": "SUPPRESSED",
+    "diff": null
+   },
+   {
+    "name": "Eureka County, Nevada",
+    "code": "hv",
+    "snapshot": null,
+    "census": null,
+    "census_flag": "SUPPRESSED",
+    "diff": null
+   },
+   {
+    "name": "Esmeralda County, Nevada",
+    "code": "oc",
+    "snapshot": null,
+    "census": null,
+    "census_flag": "SUPPRESSED",
+    "diff": null
+   },
+   {
+    "name": "Esmeralda County, Nevada",
+    "code": "i",
+    "snapshot": null,
+    "census": null,
+    "census_flag": "SUPPRESSED",
+    "diff": null
+   },
+   {
+    "name": "Cameron Parish, Louisiana",
+    "code": "r",
+    "snapshot": null,
+    "census": null,
+    "census_flag": "SUPPRESSED",
+    "diff": null
+   },
+   {
+    "name": "Kalawao County, Hawaii",
+    "code": "oc",
+    "snapshot": null,
+    "census": null,
+    "census_flag": "SUPPRESSED",
+    "diff": null
+   },
+   {
+    "name": "Kalawao County, Hawaii",
+    "code": "hv",
+    "snapshot": null,
+    "census": null,
+    "census_flag": "SUPPRESSED",
+    "diff": null
+   }
+  ]
+ },
+ "Q3": {
+  "question": "Does the snapshot's own arithmetic hold? Recompute nut and burden from inputs and compare to the stored values",
+  "sql": "WITH w AS (\n  SELECT fips,\n         MAX(CASE WHEN code='r' THEN value END) AS r, MAX(CASE WHEN code='oc' THEN value END) AS oc,\n         MAX(CASE WHEN code='cc_m' THEN value END) AS cc_m, MAX(CASE WHEN code='ho' THEN value END) AS ho,\n         MAX(CASE WHEN code='re' THEN value END) AS re, MAX(CASE WHEN code='i' THEN value END) AS i,\n         MAX(CASE WHEN code='hv' THEN value END) AS hv,\n         MAX(CASE WHEN code='on' THEN value END) AS on_stored, MAX(CASE WHEN code='rn' THEN value END) AS rn_stored,\n         MAX(CASE WHEN code='ob' THEN value END) AS ob_stored, MAX(CASE WHEN code='rb' THEN value END) AS rb_stored,\n         MAX(CASE WHEN code='p2i' THEN value END) AS p2i_stored\n  FROM col.measure WHERE dataset_id = 'tsci_2026-05-12' GROUP BY fips),\nchk AS (\n  SELECT fips,\n         CASE WHEN r IS NULL OR oc IS NULL OR i IS NULL OR hv IS NULL THEN 0 ELSE 1 END AS computable,\n         CASE WHEN ABS((oc + cc_m + ho) - on_stored) <= 1 THEN 1 ELSE 0 END AS on_ok,\n         CASE WHEN ABS((r + cc_m + re) - rn_stored) <= 1 THEN 1 ELSE 0 END AS rn_ok,\n         CASE WHEN ABS(ROUND(on_stored*12.0/NULLIF(i,0)*100,1) - ob_stored) <= 0.15 THEN 1 ELSE 0 END AS ob_ok,\n         CASE WHEN ABS(ROUND(rn_stored*12.0/NULLIF(i,0)*100,1) - rb_stored) <= 0.15 THEN 1 ELSE 0 END AS rb_ok,\n         CASE WHEN ABS(ROUND(hv/NULLIF(i,0),2) - p2i_stored) <= 0.015 THEN 1 ELSE 0 END AS p2i_ok\n  FROM w)\nSELECT COUNT(*) AS counties, SUM(computable) AS computable, COUNT(*) - SUM(computable) AS suppressed_inputs,\n       SUM(on_ok) AS owner_nut_ok, SUM(rn_ok) AS renter_nut_ok, SUM(ob_ok) AS owner_burden_ok,\n       SUM(rb_ok) AS renter_burden_ok, SUM(p2i_ok) AS price_to_income_ok,\n       SUM(computable) - SUM(computable*on_ok*rn_ok*ob_ok*rb_ok*p2i_ok) AS computable_with_any_mismatch\nFROM chk;",
+  "columns": [
+   "counties",
+   "computable",
+   "suppressed_inputs",
+   "owner_nut_ok",
+   "renter_nut_ok",
+   "owner_burden_ok",
+   "renter_burden_ok",
+   "price_to_income_ok",
+   "computable_with_any_mismatch"
+  ],
+  "rows": [
+   {
+    "counties": 3222,
+    "computable": 3206,
+    "suppressed_inputs": 16,
+    "owner_nut_ok": 3208,
+    "renter_nut_ok": 3212,
+    "owner_burden_ok": 3208,
+    "renter_burden_ok": 3211,
+    "price_to_income_ok": 3215,
+    "computable_with_any_mismatch": 0
+   }
+  ]
+ },
+ "Q4": {
+  "question": "Which states carry proxy-filled, suppressed, or missing inputs? (provenance, not values)",
+  "sql": "-- TCBI D1 pump is proxy-by-design for every county (state baseline x rent ratio), so it is not a flag here.\nWITH flags AS (\n  SELECT c.state_abbr, c.fips,\n         MAX(CASE WHEN m.dataset_id='tsci_2026-05-12' AND m.code='cc_p' AND m.text <> 'LIVE' THEN 1 ELSE 0 END) AS childcare_proxy,\n         MAX(CASE WHEN m.dataset_id='acs5_2023' AND m.text IS NOT NULL THEN 1 ELSE 0 END) AS census_suppressed,\n         1 - MAX(CASE WHEN m.dataset_id='tcbi_d5_2026-M04' THEN 1 ELSE 0 END) AS missing_from_tcbi\n  FROM col.county c LEFT JOIN col.measure m ON m.fips = c.fips\n  WHERE c.state_abbr IS NOT NULL\n  GROUP BY c.state_abbr, c.fips)\nSELECT TOP 15 state_abbr, COUNT(*) AS counties, SUM(childcare_proxy) AS childcare_proxy, SUM(census_suppressed) AS census_suppressed, SUM(missing_from_tcbi) AS missing_from_tcbi,\n       ROUND(100.0 * SUM(CASE WHEN childcare_proxy + census_suppressed + missing_from_tcbi > 0 THEN 1 ELSE 0 END) / COUNT(*), 1) AS pct_any_flag\nFROM flags GROUP BY state_abbr HAVING SUM(childcare_proxy + census_suppressed + missing_from_tcbi) > 0 ORDER BY pct_any_flag DESC, counties DESC;",
+  "columns": [
+   "state_abbr",
+   "counties",
+   "childcare_proxy",
+   "census_suppressed",
+   "missing_from_tcbi",
+   "pct_any_flag"
+  ],
+  "rows": [
+   {
+    "state_abbr": "IN",
+    "counties": 92,
+    "childcare_proxy": 92,
+    "census_suppressed": 0,
+    "missing_from_tcbi": 0,
+    "pct_any_flag": 100.0
+   },
+   {
+    "state_abbr": "NM",
+    "counties": 33,
+    "childcare_proxy": 33,
+    "census_suppressed": 0,
+    "missing_from_tcbi": 0,
+    "pct_any_flag": 100.0
+   },
+   {
+    "state_abbr": "CT",
+    "counties": 9,
+    "childcare_proxy": 9,
+    "census_suppressed": 0,
+    "missing_from_tcbi": 0,
+    "pct_any_flag": 100.0
+   },
+   {
+    "state_abbr": "MO",
+    "counties": 115,
+    "childcare_proxy": 108,
+    "census_suppressed": 0,
+    "missing_from_tcbi": 0,
+    "pct_any_flag": 93.9
+   },
+   {
+    "state_abbr": "AK",
+    "counties": 30,
+    "childcare_proxy": 19,
+    "census_suppressed": 0,
+    "missing_from_tcbi": 0,
+    "pct_any_flag": 63.3
+   },
+   {
+    "state_abbr": "HI",
+    "counties": 5,
+    "childcare_proxy": 1,
+    "census_suppressed": 1,
+    "missing_from_tcbi": 0,
+    "pct_any_flag": 40.0
+   },
+   {
+    "state_abbr": "FL",
+    "counties": 67,
+    "childcare_proxy": 14,
+    "census_suppressed": 0,
+    "missing_from_tcbi": 0,
+    "pct_any_flag": 20.9
+   },
+   {
+    "state_abbr": "NV",
+    "counties": 17,
+    "childcare_proxy": 0,
+    "census_suppressed": 2,
+    "missing_from_tcbi": 1,
+    "pct_any_flag": 11.8
+   },
+   {
+    "state_abbr": "AR",
+    "counties": 75,
+    "childcare_proxy": 7,
+    "census_suppressed": 0,
+    "missing_from_tcbi": 0,
+    "pct_any_flag": 9.3
+   },
+   {
+    "state_abbr": "TX",
+    "counties": 254,
+    "childcare_proxy": 0,
+    "census_suppressed": 10,
+    "missing_from_tcbi": 8,
+    "pct_any_flag": 3.9
+   },
+   {
+    "state_abbr": "CO",
+    "counties": 64,
+    "childcare_proxy": 2,
+    "census_suppressed": 0,
+    "missing_from_tcbi": 0,
+    "pct_any_flag": 3.1
+   },
+   {
+    "state_abbr": "CA",
+    "counties": 58,
+    "childcare_proxy": 0,
+    "census_suppressed": 1,
+    "missing_from_tcbi": 1,
+    "pct_any_flag": 1.7
+   },
+   {
+    "state_abbr": "LA",
+    "counties": 64,
+    "childcare_proxy": 0,
+    "census_suppressed": 1,
+    "missing_from_tcbi": 1,
+    "pct_any_flag": 1.6
+   },
+   {
+    "state_abbr": "SD",
+    "counties": 66,
+    "childcare_proxy": 0,
+    "census_suppressed": 1,
+    "missing_from_tcbi": 0,
+    "pct_any_flag": 1.5
+   },
+   {
+    "state_abbr": "NC",
+    "counties": 100,
+    "childcare_proxy": 1,
+    "census_suppressed": 0,
+    "missing_from_tcbi": 0,
+    "pct_any_flag": 1.0
+   }
+  ]
+ },
+ "Q5": {
+  "question": "Renter burden: where does rent + childcare + insurance exceed 30% of median income, and how many people live there?",
+  "sql": "WITH w AS (\n  SELECT m.fips, c.name, c.state_abbr,\n         MAX(CASE WHEN code='rb' THEN value END) AS renter_burden_pct,\n         MAX(CASE WHEN code='ob' THEN value END) AS owner_burden_pct,\n         MAX(CASE WHEN code='pop' THEN value END) AS pop,\n         MAX(CASE WHEN code='i' THEN value END) AS income\n  FROM col.measure m JOIN col.county c ON c.fips = m.fips\n  WHERE dataset_id = 'tsci_2026-05-12' GROUP BY m.fips, c.name, c.state_abbr)\nSELECT band, COUNT(*) AS counties, SUM(pop) AS population, ROUND(100.0 * SUM(pop) / SUM(SUM(pop)) OVER (), 1) AS pct_of_population,\n       ROUND(AVG(income), 0) AS avg_median_income\nFROM (SELECT *, CASE WHEN renter_burden_pct >= 50 THEN '4. 50%+ (severe)' WHEN renter_burden_pct >= 40 THEN '3. 40-49%'\n                      WHEN renter_burden_pct >= 30 THEN '2. 30-39% (burdened)' ELSE '1. under 30%' END AS band FROM w WHERE renter_burden_pct IS NOT NULL) b\nGROUP BY band ORDER BY band;",
+  "columns": [
+   "band",
+   "counties",
+   "population",
+   "pct_of_population",
+   "avg_median_income"
+  ],
+  "rows": [
+   {
+    "band": "1. under 30%",
+    "counties": 1266,
+    "population": 56325594.0,
+    "pct_of_population": 16.8,
+    "avg_median_income": 70147.0
+   },
+   {
+    "band": "2. 30-39% (burdened)",
+    "counties": 1560,
+    "population": 178453410.0,
+    "pct_of_population": 53.2,
+    "avg_median_income": 63072.0
+   },
+   {
+    "band": "3. 40-49%",
+    "counties": 344,
+    "population": 95761072.0,
+    "pct_of_population": 28.5,
+    "avg_median_income": 58668.0
+   },
+   {
+    "band": "4. 50%+ (severe)",
+    "counties": 41,
+    "population": 5083962.0,
+    "pct_of_population": 1.5,
+    "avg_median_income": 35277.0
+   }
+  ]
+ },
+ "Q6": {
+  "question": "Which states carry the heaviest shelter burden, weighted by the raw Census population rather than the snapshot's?",
+  "sql": "-- (Cross-dataset join: TSCI burdens x acs5_2023 population. The veteran cut needs a state-level veteran population table;\n--  that is the next load, not something this query can pretend to have.)\nSELECT TOP 15 c.state_abbr, COUNT(*) AS counties,\n       ROUND(SUM(rb.value * pop.value) / NULLIF(SUM(pop.value),0), 1) AS pop_weighted_renter_burden_pct,\n       ROUND(SUM(ob.value * pop.value) / NULLIF(SUM(pop.value),0), 1) AS pop_weighted_owner_burden_pct,\n       ROUND(SUM(ti.value * pop.value) / NULLIF(SUM(pop.value),0), 1) AS pop_weighted_tsci\nFROM col.county c\nJOIN col.measure rb  ON rb.fips = c.fips AND rb.dataset_id = 'tsci_2026-05-12' AND rb.code = 'rb'\nJOIN col.measure ob  ON ob.fips = c.fips AND ob.dataset_id = 'tsci_2026-05-12' AND ob.code = 'ob'\nJOIN col.measure ti  ON ti.fips = c.fips AND ti.dataset_id = 'tsci_2026-05-12' AND ti.code = 'ti'\nJOIN col.measure pop ON pop.fips = c.fips AND pop.dataset_id = 'acs5_2023' AND pop.code = 'B01003_001E'\nWHERE c.state_abbr IS NOT NULL\nGROUP BY c.state_abbr ORDER BY pop_weighted_renter_burden_pct DESC;",
+  "columns": [
+   "state_abbr",
+   "counties",
+   "pop_weighted_renter_burden_pct",
+   "pop_weighted_owner_burden_pct",
+   "pop_weighted_tsci"
+  ],
+  "rows": [
+   {
+    "state_abbr": "DC",
+    "counties": 1,
+    "pop_weighted_renter_burden_pct": 45.6,
+    "pop_weighted_owner_burden_pct": 59.8,
+    "pop_weighted_tsci": 152.9
+   },
+   {
+    "state_abbr": "CA",
+    "counties": 58,
+    "pop_weighted_renter_burden_pct": 43.8,
+    "pop_weighted_owner_burden_pct": 57.0,
+    "pop_weighted_tsci": 139.0
+   },
+   {
+    "state_abbr": "MA",
+    "counties": 14,
+    "pop_weighted_renter_burden_pct": 42.5,
+    "pop_weighted_owner_burden_pct": 55.8,
+    "pop_weighted_tsci": 141.5
+   },
+   {
+    "state_abbr": "FL",
+    "counties": 67,
+    "pop_weighted_renter_burden_pct": 42.0,
+    "pop_weighted_owner_burden_pct": 51.7,
+    "pop_weighted_tsci": 105.9
+   },
+   {
+    "state_abbr": "NV",
+    "counties": 17,
+    "pop_weighted_renter_burden_pct": 41.7,
+    "pop_weighted_owner_burden_pct": 49.0,
+    "pop_weighted_tsci": 95.2
+   },
+   {
+    "state_abbr": "CO",
+    "counties": 64,
+    "pop_weighted_renter_burden_pct": 41.4,
+    "pop_weighted_owner_burden_pct": 50.8,
+    "pop_weighted_tsci": 124.7
+   },
+   {
+    "state_abbr": "OR",
+    "counties": 36,
+    "pop_weighted_renter_burden_pct": 41.3,
+    "pop_weighted_owner_burden_pct": 51.9,
+    "pop_weighted_tsci": 104.4
+   },
+   {
+    "state_abbr": "HI",
+    "counties": 5,
+    "pop_weighted_renter_burden_pct": 40.8,
+    "pop_weighted_owner_burden_pct": 53.6,
+    "pop_weighted_tsci": 132.3
+   },
+   {
+    "state_abbr": "NY",
+    "counties": 62,
+    "pop_weighted_renter_burden_pct": 40.7,
+    "pop_weighted_owner_burden_pct": 59.0,
+    "pop_weighted_tsci": 123.6
+   },
+   {
+    "state_abbr": "WA",
+    "counties": 39,
+    "pop_weighted_renter_burden_pct": 40.1,
+    "pop_weighted_owner_burden_pct": 50.7,
+    "pop_weighted_tsci": 121.8
+   },
+   {
+    "state_abbr": "VT",
+    "counties": 14,
+    "pop_weighted_renter_burden_pct": 39.5,
+    "pop_weighted_owner_burden_pct": 51.2,
+    "pop_weighted_tsci": 98.8
+   },
+   {
+    "state_abbr": "AZ",
+    "counties": 15,
+    "pop_weighted_renter_burden_pct": 39.0,
+    "pop_weighted_owner_burden_pct": 45.3,
+    "pop_weighted_tsci": 91.5
+   },
+   {
+    "state_abbr": "AK",
+    "counties": 30,
+    "pop_weighted_renter_burden_pct": 36.9,
+    "pop_weighted_owner_burden_pct": 48.2,
+    "pop_weighted_tsci": 105.5
+   },
+   {
+    "state_abbr": "OH",
+    "counties": 88,
+    "pop_weighted_renter_burden_pct": 36.8,
+    "pop_weighted_owner_burden_pct": 46.6,
+    "pop_weighted_tsci": 81.0
+   },
+   {
+    "state_abbr": "MD",
+    "counties": 24,
+    "pop_weighted_renter_burden_pct": 36.6,
+    "pop_weighted_owner_burden_pct": 45.1,
+    "pop_weighted_tsci": 117.7
+   }
+  ]
+ },
+ "Q7": {
+  "question": "Warehouse inventory: what is loaded, from where, with what vintage",
+  "sql": "SELECT d.dataset_id, d.tool, d.vintage, d.source_file, d.loaded_at, COUNT(DISTINCT m.code) AS metrics, COUNT(DISTINCT m.fips) AS counties, COUNT(*) AS rows_\nFROM col.dataset d JOIN col.measure m ON m.dataset_id = d.dataset_id\nGROUP BY d.dataset_id, d.tool, d.vintage, d.source_file, d.loaded_at ORDER BY d.tool, d.dataset_id;",
+  "columns": [
+   "dataset_id",
+   "tool",
+   "vintage",
+   "source_file",
+   "loaded_at",
+   "metrics",
+   "counties",
+   "rows_"
+  ],
+  "rows": [
+   {
+    "dataset_id": "acs5_2023",
+    "tool": "census",
+    "vintage": "ACS 5-year 2023",
+    "source_file": "acs5_2023_county.json",
+    "loaded_at": "2026-10-16",
+    "metrics": 5,
+    "counties": 3222,
+    "rows_": 16110
+   },
+   {
+    "dataset_id": "tcbi_d1_2026-06-01",
+    "tool": "tcbi",
+    "vintage": "TCBI_2026-06-01_eia_refresh",
+    "source_file": "d1_data.json",
+    "loaded_at": "2026-10-16",
+    "metrics": 9,
+    "counties": 3134,
+    "rows_": 28206
+   },
+   {
+    "dataset_id": "tcbi_d2_2026-M04",
+    "tool": "tcbi",
+    "vintage": "TCBI_2026-M04_bls_refresh",
+    "source_file": "d2_data.json",
+    "loaded_at": "2026-10-16",
+    "metrics": 6,
+    "counties": 3134,
+    "rows_": 18804
+   },
+   {
+    "dataset_id": "tcbi_d3_2026-M04",
+    "tool": "tcbi",
+    "vintage": "TCBI_2026-M04_bls_refresh",
+    "source_file": "d3_data.json",
+    "loaded_at": "2026-10-16",
+    "metrics": 5,
+    "counties": 3134,
+    "rows_": 15670
+   },
+   {
+    "dataset_id": "tcbi_d4_2026-M04",
+    "tool": "tcbi",
+    "vintage": "TCBI_2026-M04_bls_refresh",
+    "source_file": "d4_data.json",
+    "loaded_at": "2026-10-16",
+    "metrics": 3,
+    "counties": 3134,
+    "rows_": 9402
+   },
+   {
+    "dataset_id": "tcbi_d5_2026-M04",
+    "tool": "tcbi",
+    "vintage": "TCBI_2026-M04_chain_refresh",
+    "source_file": "d5_data.json",
+    "loaded_at": "2026-10-16",
+    "metrics": 10,
+    "counties": 3133,
+    "rows_": 31330
+   },
+   {
+    "dataset_id": "tsci_2026-05-12",
+    "tool": "tsci",
+    "vintage": "2026-05-12 publication snapshot",
+    "source_file": "counties.json",
+    "loaded_at": "2026-10-16",
+    "metrics": 25,
+    "counties": 3222,
+    "rows_": 80550
+   }
+  ]
+ }
+}

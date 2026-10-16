@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cost-of-Living Warehouse</title>
+<style>
+:root{color-scheme:light;--surface:#fcfcfb;--surface-2:#f1f0ec;--ink:#0b0b0b;--ink-2:#52514e;--ink-3:#8a8880;--line:#e3e1da;--series:#2a78d6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--surface:#1a1a19;--surface-2:#242422;--ink:#f0efec;--ink-2:#c3c2b7;--ink-3:#8f8e86;--line:#33332f;--series:#3987e5}}
+:root[data-theme="dark"]{color-scheme:dark;--surface:#1a1a19;--surface-2:#242422;--ink:#f0efec;--ink-2:#c3c2b7;--ink-3:#8f8e86;--line:#33332f;--series:#3987e5}
+*{box-sizing:border-box}body{margin:0;background:var(--surface);color:var(--ink);font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:980px;margin:0 auto;padding:32px 16px 64px}h1{font-size:26px;margin:0 0 4px}.sub{color:var(--ink-2);margin:0 0 28px}
+h2{font-size:17px;margin:40px 0 8px}.finding{font-size:16px;margin:0 0 6px}.note{color:var(--ink-2);font-size:14px;margin:0 0 14px}
+table{width:100%;border-collapse:collapse;font-size:13px;display:block;overflow-x:auto}th{text-align:left;color:var(--ink-2);font-weight:500;border-bottom:1px solid var(--line);padding:6px 8px;white-space:nowrap}td{padding:5px 8px;border-bottom:1px solid var(--line);vertical-align:top}td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+details{margin-top:10px}summary{cursor:pointer;color:var(--series);font-size:14px}pre{background:var(--surface-2);padding:12px;border-radius:8px;overflow-x:auto;font-size:12px;line-height:1.45}
+.foot{margin-top:40px;color:var(--ink-3);font-size:13px;border-top:1px solid var(--line);padding-top:14px}a{color:var(--series)}
+</style></head><body><main>
+<h1>Snapshot to source: a cost-of-living warehouse that checks its own numbers</h1>
+<p class="sub">Two published cost indices (TSCI shelter, TCBI basket; 3,222 counties) loaded into the free Azure SQL database as a long-format warehouse, next to a fresh pull of the Census inputs they cite. Then the question a Business Analyst asks first: does the published number still equal the source? Anchor phrase: snapshot to source. Expand any query to read the T-SQL.</p>
+<section class="q">
+<h2>Q1. Does the TSCI snapshot carry the raw Census inputs unchanged? (reconciliation, five fields)</h2>
+<p class="finding">Of <b>16,110 county-field pairs</b>, 16,084 match the Census value exactly, 26 are null in both (Census small-sample suppression), and <b>0 differ</b>. The snapshot carries its Census inputs unchanged and does not fill suppressed cells.</p>
+<p class="note">ACS 5-year 2023, the vintage the snapshot cites. Match = within 0.5 of the Census value. Suppressed = Census withholds the estimate for small samples (negative sentinel codes in the API, stored here as NULL with a flag).</p>
+<table><thead><tr><th>code</th><th>status</th><th class=num>counties</th><th>example_fips</th></tr></thead><tbody><tr><td>hv</td><td>both null</td><td class="num">6</td><td>15005</td></tr><tr><td>hv</td><td>match</td><td class="num">3,216</td><td>01001</td></tr><tr><td>i</td><td>both null</td><td class="num">2</td><td>32009</td></tr><tr><td>i</td><td>match</td><td class="num">3,220</td><td>01001</td></tr><tr><td>oc</td><td>both null</td><td class="num">8</td><td>15005</td></tr><tr><td>oc</td><td>match</td><td class="num">3,214</td><td>01001</td></tr><tr><td>pop</td><td>match</td><td class="num">3,222</td><td>01001</td></tr><tr><td>r</td><td>both null</td><td class="num">10</td><td>06003</td></tr><tr><td>r</td><td>match</td><td class="num">3,212</td><td>01001</td></tr></tbody></table>
+<details><summary>Query (FULL OUTER JOIN + CASE status, grouped)</summary><pre>WITH snap AS (
+  SELECT fips, code, value FROM col.measure WHERE dataset_id = &#x27;tsci_2026-05-12&#x27; AND code IN (&#x27;r&#x27;,&#x27;hv&#x27;,&#x27;oc&#x27;,&#x27;i&#x27;,&#x27;pop&#x27;)),
+raw AS (
+  SELECT fips, CASE code WHEN &#x27;B25064_001E&#x27; THEN &#x27;r&#x27; WHEN &#x27;B25077_001E&#x27; THEN &#x27;hv&#x27; WHEN &#x27;B25088_002E&#x27; THEN &#x27;oc&#x27;
+                         WHEN &#x27;B19013_001E&#x27; THEN &#x27;i&#x27; WHEN &#x27;B01003_001E&#x27; THEN &#x27;pop&#x27; END AS code, value, text
+  FROM col.measure WHERE dataset_id = &#x27;acs5_2023&#x27;),
+cmp AS (
+  SELECT COALESCE(s.fips, r.fips) AS fips, COALESCE(s.code, r.code) AS code, s.value AS snap_value, r.value AS raw_value, r.text AS raw_flag,
+         CASE WHEN s.value IS NULL AND r.value IS NULL THEN &#x27;both null&#x27;
+              WHEN s.value IS NULL THEN &#x27;snapshot missing&#x27;
+              WHEN r.value IS NULL THEN &#x27;raw suppressed, snapshot filled&#x27;
+              WHEN ABS(s.value - r.value) &lt; 0.5 THEN &#x27;match&#x27;
+              ELSE &#x27;differs&#x27; END AS status
+  FROM snap s FULL OUTER JOIN raw r ON r.fips = s.fips AND r.code = s.code)
+SELECT code, status, COUNT(*) AS counties, MIN(fips) AS example_fips
+FROM cmp GROUP BY code, status ORDER BY code, status;</pre></details>
+</section>
+<section class="q">
+<h2>Q2. Where the snapshot and raw source differ, which counties and by how much?</h2>
+<p class="finding">The 25 rows returned are all suppressed-in-both cases, concentrated in small Texas counties (18 of 25). No county has a value that disagrees with the source.</p>
+<p class="note">Sorted by absolute difference; nulls sort first because there is nothing to compare. If a county ever drifts after a refresh, it appears at the top of this table.</p>
+<table><thead><tr><th>name</th><th>code</th><th>snapshot</th><th>census</th><th>census_flag</th><th>diff</th></tr></thead><tbody><tr><td>Terrell County, Texas</td><td>r</td><td class="num">–</td><td class="num">–</td><td>SUPPRESSED</td><td class="num">–</td></tr><tr><td>Real County, Texas</td><td>hv</td><td class="num">–</td><td class="num">–</td><td>SUPPRESSED</td><td class="num">–</td></tr><tr><td>McMullen County, Texas</td><td>r</td><td class="num">–</td><td class="num">–</td><td>SUPPRESSED</td><td class="num">–</td></tr><tr><td>Loving County, Texas</td><td>r</td><td class="num">–</td><td class="num">–</td><td>SUPPRESSED</td><td class="num">–</td></tr><tr><td>Loving County, Texas</td><td>oc</td><td class="num">–</td><td class="num">–</td><td>SUPPRESSED</td><td class="num">–</td></tr><tr><td>Loving County, Texas</td><td>hv</td><td class="num">–</td><td class="num">–</td><td>SUPPRESSED</td><td class="num">–</td></tr><tr><td>La Salle County, Texas</td><td>r</td><td class="num">–</td><td class="num">–</td><td>SUPPRESSED</td><td class="num">–</td></tr><tr><td>King County, Texas</td><td>r</td><td class="num">–</td><td class="num">–</td><td>SUPPRESSED</td><td class="num">–</td></tr><tr><td>King County, Texas</td><td>oc</td><td class="num">–</td><td class="num">–</td><td>SUPPRESSED</td><td class="num">–</td></tr><tr><td>King County, Texas</td><td>hv</td><td class="num">–</td><td class="num">–</td><td>SUPPRESSED</td><td class="num">–</td></tr><tr><td>Kenedy County, Texas</td><td>r</td><td class="num">–</td><td class="num">–</td><td>SUPPRESSED</td><td class="num">–</td></tr><tr><td>Kenedy County, Texas</td><td>oc</td><td class="num">–</td><td class="num">–</td><td>SUPPRESSED</td><td class="num">–</td></tr><tr><td>Kenedy County, Texas</td><td>i</td><td class="num">–</td><td class="num">–</td><td>SUPPRESSED</td><td class="num">–</td></tr><tr><td>Kenedy County, Texas</td><td>hv</td><td class="num">–</td><td class="num">–</td><td>SUPPRESSED</td><td class="num">–</td></tr><tr><td>Glasscock County, Texas</td><td>r</td><td class="num">–</td><td class="num">–</td><td>SUPPRESSED</td><td class="num">–</td></tr><tr><td>Glasscock County, Texas</td><td>oc</td><td class="num">–</td><td class="num">–</td><td>SUPPRESSED</td><td class="num">–</td></tr><tr><td>Edwards County, Texas</td><td>oc</td><td class="num">–</td><td class="num">–</td><td>SUPPRESSED</td><td class="num">–</td></tr><tr><td>Borden County, Texas</td><td>r</td><td class="num">–</td><td class="num">–</td><td>SUPPRESSED</td><td class="num">–</td></tr><tr><td>Buffalo County, South Dakota</td><td>oc</td><td class="num">–</td><td class="num">–</td><td>SUPPRESSED</td><td class="num">–</td></tr><tr><td>Eureka County, Nevada</td><td>hv</td><td class="num">–</td><td class="num">–</td><td>SUPPRESSED</td><td class="num">–</td></tr><tr><td>Esmeralda County, Nevada</td><td>oc</td><td class="num">–</td><td class="num">–</td><td>SUPPRESSED</td><td class="num">–</td></tr><tr><td>Esmeralda County, Nevada</td><td>i</td><td class="num">–</td><td class="num">–</td><td>SUPPRESSED</td><td class="num">–</td></tr><tr><td>Cameron Parish, Louisiana</td><td>r</td><td class="num">–</td><td class="num">–</td><td>SUPPRESSED</td><td class="num">–</td></tr><tr><td>Kalawao County, Hawaii</td><td>oc</td><td class="num">–</td><td class="num">–</td><td>SUPPRESSED</td><td class="num">–</td></tr><tr><td>Kalawao County, Hawaii</td><td>hv</td><td class="num">–</td><td class="num">–</td><td>SUPPRESSED</td><td class="num">–</td></tr></tbody></table>
+<details><summary>Query (JOIN with inequality filter, TOP 25)</summary><pre>WITH snap AS (
+  SELECT fips, code, value FROM col.measure WHERE dataset_id = &#x27;tsci_2026-05-12&#x27; AND code IN (&#x27;r&#x27;,&#x27;hv&#x27;,&#x27;oc&#x27;,&#x27;i&#x27;,&#x27;pop&#x27;)),
+raw AS (
+  SELECT fips, CASE code WHEN &#x27;B25064_001E&#x27; THEN &#x27;r&#x27; WHEN &#x27;B25077_001E&#x27; THEN &#x27;hv&#x27; WHEN &#x27;B25088_002E&#x27; THEN &#x27;oc&#x27;
+                         WHEN &#x27;B19013_001E&#x27; THEN &#x27;i&#x27; WHEN &#x27;B01003_001E&#x27; THEN &#x27;pop&#x27; END AS code, value, text
+  FROM col.measure WHERE dataset_id = &#x27;acs5_2023&#x27;)
+SELECT TOP 25 c.name, s.code, s.value AS snapshot, r.value AS census, r.text AS census_flag, s.value - r.value AS diff
+FROM snap s JOIN raw r ON r.fips = s.fips AND r.code = s.code JOIN col.county c ON c.fips = s.fips
+WHERE r.value IS NULL OR ABS(s.value - r.value) &gt;= 0.5
+ORDER BY ABS(COALESCE(s.value - r.value, s.value)) DESC;</pre></details>
+</section>
+<section class="q">
+<h2>Q3. Does the snapshot&#x27;s own arithmetic hold? Recompute nut and burden from inputs and compare to the stored values</h2>
+<p class="finding"><b>3,206 of 3,222 counties</b> have every input; across them the recomputed owner nut, renter nut, both burdens and price-to-income match the stored values with <b>0 mismatches</b>. The other 16 cannot be recomputed because an input is suppressed.</p>
+<p class="note">Formulas from the methodology page: owner nut = owner cost + childcare + homeowner insurance; renter nut = rent + childcare + renter insurance; burden = nut × 12 ÷ median income; price-to-income = home value ÷ income. Tolerances: $1 on nuts, 0.15 pt on burdens, 0.015 on the ratio (rounding).</p>
+<table><thead><tr><th class=num>counties</th><th class=num>computable</th><th class=num>suppressed_inputs</th><th class=num>owner_nut_ok</th><th class=num>renter_nut_ok</th><th class=num>owner_burden_ok</th><th class=num>renter_burden_ok</th><th class=num>price_to_income_ok</th><th class=num>computable_with_any_mismatch</th></tr></thead><tbody><tr><td class="num">3,222</td><td class="num">3,206</td><td class="num">16</td><td class="num">3,208</td><td class="num">3,212</td><td class="num">3,208</td><td class="num">3,211</td><td class="num">3,215</td><td class="num">0</td></tr></tbody></table>
+<details><summary>Query (conditional aggregation pivot, computed checks, SUM of flags)</summary><pre>WITH w AS (
+  SELECT fips,
+         MAX(CASE WHEN code=&#x27;r&#x27; THEN value END) AS r, MAX(CASE WHEN code=&#x27;oc&#x27; THEN value END) AS oc,
+         MAX(CASE WHEN code=&#x27;cc_m&#x27; THEN value END) AS cc_m, MAX(CASE WHEN code=&#x27;ho&#x27; THEN value END) AS ho,
+         MAX(CASE WHEN code=&#x27;re&#x27; THEN value END) AS re, MAX(CASE WHEN code=&#x27;i&#x27; THEN value END) AS i,
+         MAX(CASE WHEN code=&#x27;hv&#x27; THEN value END) AS hv,
+         MAX(CASE WHEN code=&#x27;on&#x27; THEN value END) AS on_stored, MAX(CASE WHEN code=&#x27;rn&#x27; THEN value END) AS rn_stored,
+         MAX(CASE WHEN code=&#x27;ob&#x27; THEN value END) AS ob_stored, MAX(CASE WHEN code=&#x27;rb&#x27; THEN value END) AS rb_stored,
+         MAX(CASE WHEN code=&#x27;p2i&#x27; THEN value END) AS p2i_stored
+  FROM col.measure WHERE dataset_id = &#x27;tsci_2026-05-12&#x27; GROUP BY fips),
+chk AS (
+  SELECT fips,
+         CASE WHEN r IS NULL OR oc IS NULL OR i IS NULL OR hv IS NULL THEN 0 ELSE 1 END AS computable,
+         CASE WHEN ABS((oc + cc_m + ho) - on_stored) &lt;= 1 THEN 1 ELSE 0 END AS on_ok,
+         CASE WHEN ABS((r + cc_m + re) - rn_stored) &lt;= 1 THEN 1 ELSE 0 END AS rn_ok,
+         CASE WHEN ABS(ROUND(on_stored*12.0/NULLIF(i,0)*100,1) - ob_stored) &lt;= 0.15 THEN 1 ELSE 0 END AS ob_ok,
+         CASE WHEN ABS(ROUND(rn_stored*12.0/NULLIF(i,0)*100,1) - rb_stored) &lt;= 0.15 THEN 1 ELSE 0 END AS rb_ok,
+         CASE WHEN ABS(ROUND(hv/NULLIF(i,0),2) - p2i_stored) &lt;= 0.015 THEN 1 ELSE 0 END AS p2i_ok
+  FROM w)
+SELECT COUNT(*) AS counties, SUM(computable) AS computable, COUNT(*) - SUM(computable) AS suppressed_inputs,
+       SUM(on_ok) AS owner_nut_ok, SUM(rn_ok) AS renter_nut_ok, SUM(ob_ok) AS owner_burden_ok,
+       SUM(rb_ok) AS renter_burden_ok, SUM(p2i_ok) AS price_to_income_ok,
+       SUM(computable) - SUM(computable*on_ok*rn_ok*ob_ok*rb_ok*p2i_ok) AS computable_with_any_mismatch
+FROM chk;</pre></details>
+</section>
+<section class="q">
+<h2>Q4. Which states carry proxy-filled, suppressed, or missing inputs? (provenance, not values)</h2>
+<p class="finding">Childcare is proxy-filled for every county in <b>IN, NM, CT</b> and 108 of 115 in MO. Census suppresses at least one input in 16 counties (shown states), and 11 counties in these states are absent from TCBI. A value with a flag is not the same as a value.</p>
+<p class="note">Provenance flags carried in the snapshots (childcare cc_p ≠ LIVE) and in the raw pull (suppressed). TCBI D1 pump is proxy-by-design for every county, so it is not counted. Only states with at least one flag are listed.</p>
+<table><thead><tr><th>state_abbr</th><th class=num>counties</th><th class=num>childcare_proxy</th><th class=num>census_suppressed</th><th class=num>missing_from_tcbi</th><th class=num>pct_any_flag</th></tr></thead><tbody><tr><td>IN</td><td class="num">92</td><td class="num">92</td><td class="num">0</td><td class="num">0</td><td class="num">100.0</td></tr><tr><td>NM</td><td class="num">33</td><td class="num">33</td><td class="num">0</td><td class="num">0</td><td class="num">100.0</td></tr><tr><td>CT</td><td class="num">9</td><td class="num">9</td><td class="num">0</td><td class="num">0</td><td class="num">100.0</td></tr><tr><td>MO</td><td class="num">115</td><td class="num">108</td><td class="num">0</td><td class="num">0</td><td class="num">93.9</td></tr><tr><td>AK</td><td class="num">30</td><td class="num">19</td><td class="num">0</td><td class="num">0</td><td class="num">63.3</td></tr><tr><td>HI</td><td class="num">5</td><td class="num">1</td><td class="num">1</td><td class="num">0</td><td class="num">40</td></tr><tr><td>FL</td><td class="num">67</td><td class="num">14</td><td class="num">0</td><td class="num">0</td><td class="num">20.9</td></tr><tr><td>NV</td><td class="num">17</td><td class="num">0</td><td class="num">2</td><td class="num">1</td><td class="num">11.8</td></tr><tr><td>AR</td><td class="num">75</td><td class="num">7</td><td class="num">0</td><td class="num">0</td><td class="num">9.3</td></tr><tr><td>TX</td><td class="num">254</td><td class="num">0</td><td class="num">10</td><td class="num">8</td><td class="num">3.9</td></tr><tr><td>CO</td><td class="num">64</td><td class="num">2</td><td class="num">0</td><td class="num">0</td><td class="num">3.1</td></tr><tr><td>CA</td><td class="num">58</td><td class="num">0</td><td class="num">1</td><td class="num">1</td><td class="num">1.7</td></tr><tr><td>LA</td><td class="num">64</td><td class="num">0</td><td class="num">1</td><td class="num">1</td><td class="num">1.6</td></tr><tr><td>SD</td><td class="num">66</td><td class="num">0</td><td class="num">1</td><td class="num">0</td><td class="num">1.5</td></tr><tr><td>NC</td><td class="num">100</td><td class="num">1</td><td class="num">0</td><td class="num">0</td><td class="num">1</td></tr></tbody></table>
+<details><summary>Query (LEFT JOIN, flag pivot, HAVING)</summary><pre>-- TCBI D1 pump is proxy-by-design for every county (state baseline x rent ratio), so it is not a flag here.
+WITH flags AS (
+  SELECT c.state_abbr, c.fips,
+         MAX(CASE WHEN m.dataset_id=&#x27;tsci_2026-05-12&#x27; AND m.code=&#x27;cc_p&#x27; AND m.text &lt;&gt; &#x27;LIVE&#x27; THEN 1 ELSE 0 END) AS childcare_proxy,
+         MAX(CASE WHEN m.dataset_id=&#x27;acs5_2023&#x27; AND m.text IS NOT NULL THEN 1 ELSE 0 END) AS census_suppressed,
+         1 - MAX(CASE WHEN m.dataset_id=&#x27;tcbi_d5_2026-M04&#x27; THEN 1 ELSE 0 END) AS missing_from_tcbi
+  FROM col.county c LEFT JOIN col.measure m ON m.fips = c.fips
+  WHERE c.state_abbr IS NOT NULL
+  GROUP BY c.state_abbr, c.fips)
+SELECT TOP 15 state_abbr, COUNT(*) AS counties, SUM(childcare_proxy) AS childcare_proxy, SUM(census_suppressed) AS census_suppressed, SUM(missing_from_tcbi) AS missing_from_tcbi,
+       ROUND(100.0 * SUM(CASE WHEN childcare_proxy + census_suppressed + missing_from_tcbi &gt; 0 THEN 1 ELSE 0 END) / COUNT(*), 1) AS pct_any_flag
+FROM flags GROUP BY state_abbr HAVING SUM(childcare_proxy + census_suppressed + missing_from_tcbi) &gt; 0 ORDER BY pct_any_flag DESC, counties DESC;</pre></details>
+</section>
+<section class="q">
+<h2>Q5. Renter burden: where does rent + childcare + insurance exceed 30% of median income, and how many people live there?</h2>
+<p class="finding"><b>83% of the population</b> lives in counties where rent + childcare + renter insurance is 30% or more of median household income. The severe band (41 counties, 5.1M people) has an average median income of $35,277, half the under-30% band's $70,147.</p>
+<p class="note">Renter burden from the snapshot; population from the snapshot's own population field. The 30% line is the HUD cost-burden convention; the snapshot adds childcare and insurance to rent, so this is a broader nut than HUD's.</p>
+<table><thead><tr><th>band</th><th class=num>counties</th><th class=num>population</th><th class=num>pct_of_population</th><th class=num>avg_median_income</th></tr></thead><tbody><tr><td>1. under 30%</td><td class="num">1,266</td><td class="num">56,325,594</td><td class="num">16.8</td><td class="num">70,147.0</td></tr><tr><td>2. 30-39% (burdened)</td><td class="num">1,560</td><td class="num">178,453,410</td><td class="num">53.2</td><td class="num">63,072.0</td></tr><tr><td>3. 40-49%</td><td class="num">344</td><td class="num">95,761,072</td><td class="num">28.5</td><td class="num">58,668.0</td></tr><tr><td>4. 50%+ (severe)</td><td class="num">41</td><td class="num">5,083,962</td><td class="num">1.5</td><td class="num">35,277.0</td></tr></tbody></table>
+<details><summary>Query (CASE banding, window SUM for shares)</summary><pre>WITH w AS (
+  SELECT m.fips, c.name, c.state_abbr,
+         MAX(CASE WHEN code=&#x27;rb&#x27; THEN value END) AS renter_burden_pct,
+         MAX(CASE WHEN code=&#x27;ob&#x27; THEN value END) AS owner_burden_pct,
+         MAX(CASE WHEN code=&#x27;pop&#x27; THEN value END) AS pop,
+         MAX(CASE WHEN code=&#x27;i&#x27; THEN value END) AS income
+  FROM col.measure m JOIN col.county c ON c.fips = m.fips
+  WHERE dataset_id = &#x27;tsci_2026-05-12&#x27; GROUP BY m.fips, c.name, c.state_abbr)
+SELECT band, COUNT(*) AS counties, SUM(pop) AS population, ROUND(100.0 * SUM(pop) / SUM(SUM(pop)) OVER (), 1) AS pct_of_population,
+       ROUND(AVG(income), 0) AS avg_median_income
+FROM (SELECT *, CASE WHEN renter_burden_pct &gt;= 50 THEN &#x27;4. 50%+ (severe)&#x27; WHEN renter_burden_pct &gt;= 40 THEN &#x27;3. 40-49%&#x27;
+                      WHEN renter_burden_pct &gt;= 30 THEN &#x27;2. 30-39% (burdened)&#x27; ELSE &#x27;1. under 30%&#x27; END AS band FROM w WHERE renter_burden_pct IS NOT NULL) b
+GROUP BY band ORDER BY band;</pre></details>
+</section>
+<section class="q">
+<h2>Q6. Which states carry the heaviest shelter burden, weighted by the raw Census population rather than the snapshot&#x27;s?</h2>
+<p class="finding">Population-weighted, <b>DC</b> (45.6%), CA (43.8%) and MA (42.5%) carry the heaviest renter burden; owner burden runs higher everywhere, 6 to 18 points above renter burden in these 15 states.</p>
+<p class="note">Weights come from the raw Census population (acs5_2023), not the snapshot, so a state's number does not depend on the tool that published it. DC is one county. The veteran cut needs a state-level veteran population table, which is the next load.</p>
+<table><thead><tr><th>state_abbr</th><th class=num>counties</th><th class=num>pop_weighted_renter_burden_pct</th><th class=num>pop_weighted_owner_burden_pct</th><th class=num>pop_weighted_tsci</th></tr></thead><tbody><tr><td>DC</td><td class="num">1</td><td class="num">45.6</td><td class="num">59.8</td><td class="num">152.9</td></tr><tr><td>CA</td><td class="num">58</td><td class="num">43.8</td><td class="num">57</td><td class="num">139.0</td></tr><tr><td>MA</td><td class="num">14</td><td class="num">42.5</td><td class="num">55.8</td><td class="num">141.5</td></tr><tr><td>FL</td><td class="num">67</td><td class="num">42</td><td class="num">51.7</td><td class="num">105.9</td></tr><tr><td>NV</td><td class="num">17</td><td class="num">41.7</td><td class="num">49</td><td class="num">95.2</td></tr><tr><td>CO</td><td class="num">64</td><td class="num">41.4</td><td class="num">50.8</td><td class="num">124.7</td></tr><tr><td>OR</td><td class="num">36</td><td class="num">41.3</td><td class="num">51.9</td><td class="num">104.4</td></tr><tr><td>HI</td><td class="num">5</td><td class="num">40.8</td><td class="num">53.6</td><td class="num">132.3</td></tr><tr><td>NY</td><td class="num">62</td><td class="num">40.7</td><td class="num">59</td><td class="num">123.6</td></tr><tr><td>WA</td><td class="num">39</td><td class="num">40.1</td><td class="num">50.7</td><td class="num">121.8</td></tr><tr><td>VT</td><td class="num">14</td><td class="num">39.5</td><td class="num">51.2</td><td class="num">98.8</td></tr><tr><td>AZ</td><td class="num">15</td><td class="num">39</td><td class="num">45.3</td><td class="num">91.5</td></tr><tr><td>AK</td><td class="num">30</td><td class="num">36.9</td><td class="num">48.2</td><td class="num">105.5</td></tr><tr><td>OH</td><td class="num">88</td><td class="num">36.8</td><td class="num">46.6</td><td class="num">81</td></tr><tr><td>MD</td><td class="num">24</td><td class="num">36.6</td><td class="num">45.1</td><td class="num">117.7</td></tr></tbody></table>
+<details><summary>Query (four-way JOIN across two datasets, pop-weighted averages)</summary><pre>-- (Cross-dataset join: TSCI burdens x acs5_2023 population. The veteran cut needs a state-level veteran population table;
+--  that is the next load, not something this query can pretend to have.)
+SELECT TOP 15 c.state_abbr, COUNT(*) AS counties,
+       ROUND(SUM(rb.value * pop.value) / NULLIF(SUM(pop.value),0), 1) AS pop_weighted_renter_burden_pct,
+       ROUND(SUM(ob.value * pop.value) / NULLIF(SUM(pop.value),0), 1) AS pop_weighted_owner_burden_pct,
+       ROUND(SUM(ti.value * pop.value) / NULLIF(SUM(pop.value),0), 1) AS pop_weighted_tsci
+FROM col.county c
+JOIN col.measure rb  ON rb.fips = c.fips AND rb.dataset_id = &#x27;tsci_2026-05-12&#x27; AND rb.code = &#x27;rb&#x27;
+JOIN col.measure ob  ON ob.fips = c.fips AND ob.dataset_id = &#x27;tsci_2026-05-12&#x27; AND ob.code = &#x27;ob&#x27;
+JOIN col.measure ti  ON ti.fips = c.fips AND ti.dataset_id = &#x27;tsci_2026-05-12&#x27; AND ti.code = &#x27;ti&#x27;
+JOIN col.measure pop ON pop.fips = c.fips AND pop.dataset_id = &#x27;acs5_2023&#x27; AND pop.code = &#x27;B01003_001E&#x27;
+WHERE c.state_abbr IS NOT NULL
+GROUP BY c.state_abbr ORDER BY pop_weighted_renter_burden_pct DESC;</pre></details>
+</section>
+<section class="q">
+<h2>Q7. Warehouse inventory: what is loaded, from where, with what vintage</h2>
+<p class="finding"><b>7 datasets, 200,072 rows</b>, 3,222 counties, 63 metrics with names and units in the data dictionary. Every row knows its vintage and load time; a refresh is a new dataset, not an overwrite.</p>
+<p class="note">The inventory is the warehouse describing itself. Vintages differ by design: Census 2023, TSCI May 2026, TCBI April–June 2026.</p>
+<table><thead><tr><th>dataset_id</th><th>tool</th><th>vintage</th><th>source_file</th><th>loaded_at</th><th class=num>metrics</th><th class=num>counties</th><th class=num>rows_</th></tr></thead><tbody><tr><td>acs5_2023</td><td>census</td><td>ACS 5-year 2023</td><td>acs5_2023_county.json</td><td>2026-10-16</td><td class="num">5</td><td class="num">3,222</td><td class="num">16,110</td></tr><tr><td>tcbi_d1_2026-06-01</td><td>tcbi</td><td>TCBI_2026-06-01_eia_refresh</td><td>d1_data.json</td><td>2026-10-16</td><td class="num">9</td><td class="num">3,134</td><td class="num">28,206</td></tr><tr><td>tcbi_d2_2026-M04</td><td>tcbi</td><td>TCBI_2026-M04_bls_refresh</td><td>d2_data.json</td><td>2026-10-16</td><td class="num">6</td><td class="num">3,134</td><td class="num">18,804</td></tr><tr><td>tcbi_d3_2026-M04</td><td>tcbi</td><td>TCBI_2026-M04_bls_refresh</td><td>d3_data.json</td><td>2026-10-16</td><td class="num">5</td><td class="num">3,134</td><td class="num">15,670</td></tr><tr><td>tcbi_d4_2026-M04</td><td>tcbi</td><td>TCBI_2026-M04_bls_refresh</td><td>d4_data.json</td><td>2026-10-16</td><td class="num">3</td><td class="num">3,134</td><td class="num">9,402</td></tr><tr><td>tcbi_d5_2026-M04</td><td>tcbi</td><td>TCBI_2026-M04_chain_refresh</td><td>d5_data.json</td><td>2026-10-16</td><td class="num">10</td><td class="num">3,133</td><td class="num">31,330</td></tr><tr><td>tsci_2026-05-12</td><td>tsci</td><td>2026-05-12 publication snapshot</td><td>counties.json</td><td>2026-10-16</td><td class="num">25</td><td class="num">3,222</td><td class="num">80,550</td></tr></tbody></table>
+<details><summary>Query (JOIN + GROUP BY over the dataset table)</summary><pre>SELECT d.dataset_id, d.tool, d.vintage, d.source_file, d.loaded_at, COUNT(DISTINCT m.code) AS metrics, COUNT(DISTINCT m.fips) AS counties, COUNT(*) AS rows_
+FROM col.dataset d JOIN col.measure m ON m.dataset_id = d.dataset_id
+GROUP BY d.dataset_id, d.tool, d.vintage, d.source_file, d.loaded_at ORDER BY d.tool, d.dataset_id;</pre></details>
+</section>
+<p class="foot">Data: U.S. Census Bureau ACS 5-year 2023 (public domain); TSCI and TCBI snapshots from <a href="https://patrickneilbradley.com/tcbi-tsci-methodology.html">patrickneilbradley.com</a> (author's own, non-commercial). Build #6 of Patrick Neil Bradley's Azure learning portfolio. Azure services: Azure SQL Database (free offer), Key Vault (existing). Cost: $0. Loaders, queries and runner: <a href="https://github.com/patbradley18-netizen/azure-portfolio/tree/main/build-06-cost-of-living">GitHub</a>.</p>
+</main></body></html>
