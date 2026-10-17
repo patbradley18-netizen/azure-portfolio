@@ -38,7 +38,7 @@ def idx_chart(title, m, rm, lo=0.0, hi=2.0):
     s = [f'<svg viewBox="0 0 {W} {H}" width="100%" role="img" aria-label="{e(title)}"><text x="{L}" y="16" class="ct">{e(title)}</text>']
     for k in range(5):
         v = lo + (hi - lo) * k / 4; s.append(f'<line x1="{L}" x2="{W-Rm}" y1="{Y(v):.1f}" y2="{Y(v):.1f}" class="grid"/><text x="{L-6}" y="{Y(v)+4:.1f}" class="tick" text-anchor="end">{v:.1f}×</text>')
-    s.append(f'<line x1="{L}" x2="{W-Rm}" y1="{Y(1):.1f}" y2="{Y(1):.1f}" class="ref"/><text x="{L+4}" y="{Y(1)-5:.1f}" class="tick">same share as everyone their age</text>')
+    s.append(f'<line x1="{L}" x2="{W-Rm}" y1="{Y(1):.1f}" y2="{Y(1):.1f}" class="ref"/><text x="{L+4}" y="{Y(1)+13:.1f}" class="tick">same share as everyone their age</text>')
     for i, era in enumerate(ERAS):
         s.append(f'<text x="{X(i):.1f}" y="{H-14}" class="tick" text-anchor="middle">{e(SHORT[era])}</text>')
         c = cell(era, m, rm)
@@ -78,14 +78,14 @@ def s_idx(era, m, rm):
     return f"{SHORT[era]} —" if not c else f"{SHORT[era]} {pct(c['p1'])} vs {pct(c['p2'])} (index {c['idx']:.2f}, CI {100*c['lo']:+.1f} to {100*c['hi']:+.1f} pts)"
 race_s = ("White non-Hispanic share of each era's veterans against everyone the same age in the same years: " + "; ".join(s_idx(era, "white_share", "ref_white") for era in ERAS) + ". "
           "Black: " + "; ".join(f"{SHORT[era]} {cell(era,'black_share','ref_black')['idx']:.2f}" for era in ERAS if cell(era,'black_share','ref_black')) + ". Hispanic: " + "; ".join(f"{SHORT[era]} {cell(era,'hisp_share','ref_hisp')['idx']:.2f}" for era in ERAS if cell(era,'hisp_share','ref_hisp')) + ".")
-women_s = ("Veteran status was asked of men only before 1988, so women are measured from 1988 on — for WWII and Korea that means survivors in their 60s and beyond. Women as a share of each era's veterans: " + "; ".join(f"{SHORT[era]} {pct(cell(era,'female_share','ref_female')['p1'])}" if cell(era,'female_share','ref_female') else f"{SHORT[era]} —" for era in ERAS) + " — against roughly half of the population in every window (women measured from 1988 on).")
+women_s = ("Veteran status was asked of men only before 1988, so women are measured from 1988 on — for WWII and Korea that means survivors in their 60s and beyond. Women as a share of each era's veterans: " + "; ".join(f"{SHORT[era]} {pct(cell(era,'female_share','ref_female')['p1'])}" if cell(era,'female_share','ref_female') else f"{SHORT[era]} —" for era in ERAS) + " — against roughly half of the population in every window.")
 cit_eras = [era for era in ERAS if cell(era, "noncit_share", "ref_noncit")]
 cit_s = ("Citizenship (1994 on, so the older eras are their later survivors): non-citizens are " + "; ".join(f"{SHORT[era]} {pct(cell(era,'noncit_share','ref_noncit')['p1'])} vs {pct(cell(era,'noncit_share','ref_noncit')['p2'])} of the population" for era in cit_eras) +
          ". Naturalized citizens: " + "; ".join(f"{SHORT[era]} {pct(cell(era,'natur_share','ref_natur')['p1'])} vs {pct(cell(era,'natur_share','ref_natur')['p2'])}" for era in cit_eras) +
          ". Foreign-born: " + "; ".join(f"{SHORT[era]} index {cell(era,'foreign_share','ref_foreign')['idx']:.2f}" for era in cit_eras) + "; US-born with a foreign-born parent: " + "; ".join(f"{SHORT[era]} index {cell(era,'secondgen_share','ref_secondgen')['idx']:.2f}" for era in cit_eras) + ".")
 edu_s = ("Education: no-diploma share vs the population the same age — " + "; ".join(f"{SHORT[era]} {pct(cell(era,'lt_hs_share','ref_lt_hs')['p1'])} vs {pct(cell(era,'lt_hs_share','ref_lt_hs')['p2'])} (h {cell(era,'lt_hs_share','ref_lt_hs')['h']:+.2f})" for era in ERAS) +
          ". Bachelor's or more — " + "; ".join(f"{SHORT[era]} {pct(cell(era,'ba_share','ref_ba')['p1'])} vs {pct(cell(era,'ba_share','ref_ba')['p2'])}" for era in ERAS) + ".")
-multi_s = "From 2006 the survey records up to four periods; the share of each era's veterans who also served in another era: " + "; ".join(f"{SHORT[era]} {pct(P[era]['multi_share'])}" for era in ERAS) + " (pooled over 2006+ only where the window reaches it)."
+multi_s = "From 2006 the survey records up to four periods; the share of each era's veterans who also served in another era: " + "; ".join(f"{SHORT[era]} {pct(P[era]['multi_share'])}" for era in ERAS if max(P[era]['years']) >= 2006) + " (eras whose working-age window ends before 2006 cannot be measured)."
 
 rows = []
 for era in ERAS:
