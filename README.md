@@ -15,7 +15,8 @@ Small, free-tier builds on an Azure for Students subscription. Each one teaches 
 | 7 | [Veteran burden cut: the join Q6 couldn't make](build-07-veteran-burden/) | Metadata-driven labels, NTILE quintiles, stratified comparison, publishing a no | Published and closed |
 | 8 | [Tenure and a model: controls one at a time](build-08-tenure-model/) | SQL builds the feature table, Python fits WLS with robust SEs; which control does what | Published and closed |
 | 9 | [Measure the renter, not the county: the right outcome](build-09-renter-burden/) | Distribution table → rate with the right denominator, GROUP BY ROLLUP, state fixed effects | Published and closed |
-| 10 | [Can veterans reach the VA? Spatial SQL and the portfolio as code](build-10-va-access/) | `geography` type, spatial indexes, nearest-neighbour joins with STDistance, Bicep + what-if, inline SVG map, reading the output before trusting the flags | Published |
+| 10 | [Can veterans reach the VA? Spatial SQL and the portfolio as code](build-10-va-access/) | `geography` type, spatial indexes, nearest-neighbour joins with STDistance, Bicep + what-if, inline SVG map, reading the output before trusting the flags | Published and closed |
+| 11 | [How much does straight-line lie? Road miles under a cap and a ledger](build-11-road-distance/) | Materialised spatial join, capped and ledgered batch against a free API, detour index, resume-safe runs, a region-policy dead end documented | Published |
 
 Note for anyone copying the OIDC setup: GitHub now presents the subject claim with owner and repository IDs embedded (
 epo:<owner>@<id>/<repo>@<id>:ref:refs/heads/main); the federated credential subject must match that string exactly.
