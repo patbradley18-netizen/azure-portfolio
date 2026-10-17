@@ -35,6 +35,21 @@ def call(path, method="GET", _retry=True):
 checks = []
 
 
+def wake():
+    """The free SQL database auto-pauses; the first query after a pause can fail or take a minute. Knock until a data
+    endpoint answers 200, up to 5 x 20 s, before any check is scored (added after two CI runs failed on a sleeping db)."""
+    for i in range(5):
+        s, _, t = call("/counties/18097/access")
+        if s == 200:
+            print(f"db awake after {i} retr{'y' if i == 1 else 'ies'} ({t:.1f}s)", flush=True)
+            return
+        print(f"wake-up call returned {s}; waiting 20 s", flush=True)
+        time.sleep(20)
+
+
+wake()
+
+
 def expect(name, cond, detail=""):
     checks.append((name, bool(cond), detail))
     print(("PASS " if cond else "FAIL ") + name + (f"  [{detail}]" if detail and not cond else ""), flush=True)
