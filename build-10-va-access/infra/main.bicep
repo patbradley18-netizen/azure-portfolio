@@ -111,6 +111,8 @@ resource search 'Microsoft.Search/searchServices@2024-06-01-preview' = {
     semanticSearch: 'free'
     disableLocalAuth: false
     authOptions: { aadOrApiKey: { aadAuthFailureMode: 'http401WithBearerChallenge' } }
+    encryptionWithCmk: { enforcement: 'Unspecified' }
+    networkRuleSet: { bypass: 'None' }
   }
 }
 
@@ -148,7 +150,7 @@ resource funcB1 'Microsoft.Web/sites@2024-04-01' = {
       deployment: {
         storage: {
           type: 'blobContainer'
-          value: '${storage.properties.primaryEndpoints.blob}${funcB1PackageContainer}'
+          value: 'https://${storageName}.blob.${environment().suffixes.storage}/${funcB1PackageContainer}'
           authentication: { type: 'StorageAccountConnectionString', storageAccountConnectionStringName: 'DEPLOYMENT_STORAGE_CONNECTION_STRING' }
         }
       }
@@ -169,7 +171,7 @@ resource funcB2 'Microsoft.Web/sites@2024-04-01' = {
       deployment: {
         storage: {
           type: 'blobContainer'
-          value: '${storage.properties.primaryEndpoints.blob}${funcB2PackageContainer}'
+          value: 'https://${storageName}.blob.${environment().suffixes.storage}/${funcB2PackageContainer}'
           authentication: { type: 'StorageAccountConnectionString', storageAccountConnectionStringName: 'DEPLOYMENT_STORAGE_CONNECTION_STRING' }
         }
       }
@@ -186,22 +188,22 @@ var roleCognitiveServicesUser = subscriptionResourceId('Microsoft.Authorization/
 var roleKeyVaultSecretsUser = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '4633458b-17de-408a-b874-0445c86b69e6')
 
 resource raFuncB1Blob 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(storage.id, funcB1.id, roleBlobDataReader)
+  name: '0230c822-0657-485b-9261-05c7405d44b7' // live name (created by az cli, build #1); guid() can never reproduce it
   scope: storage
   properties: { roleDefinitionId: roleBlobDataReader, principalId: funcB1.identity.principalId, principalType: 'ServicePrincipal' }
 }
 resource raFuncB1Lang 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(language.id, funcB1.id, roleCognitiveServicesUser)
+  name: '45033b0a-73f6-4f67-84b0-b3fac81ff9d0' // live name (build #1)
   scope: language
   properties: { roleDefinitionId: roleCognitiveServicesUser, principalId: funcB1.identity.principalId, principalType: 'ServicePrincipal' }
 }
 resource raFuncB2Kv 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(keyVault.id, funcB2.id, roleKeyVaultSecretsUser)
+  name: 'ecf5d484-082d-4793-bb69-6e86697eed18' // live name (build #2)
   scope: keyVault
   properties: { roleDefinitionId: roleKeyVaultSecretsUser, principalId: funcB2.identity.principalId, principalType: 'ServicePrincipal' }
 }
 resource raGithubBlob 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(storage.id, githubIdentity.id, roleBlobDataContributor)
+  name: 'b2f2fab3-795d-410c-b5e5-3a8b7b6395e3' // live name (build #3)
   scope: storage
   properties: { roleDefinitionId: roleBlobDataContributor, principalId: githubIdentity.properties.principalId, principalType: 'ServicePrincipal' }
 }
@@ -245,7 +247,7 @@ resource sqlFreeLimitAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: 'alert-sql-free-limit'
   location: 'global'
   properties: {
-    description: 'Free SQL vCore-seconds consumed this month passed the threshold (production ${sqlFreeLimitThreshold} of 100,000)'
+    description: 'Free SQL vCore-seconds consumed this month passed 80,000 of 100,000 (proved at 9,000 on 2026-10-16)'
     severity: 2
     enabled: true
     scopes: [ sqlDb.id ]
@@ -253,7 +255,7 @@ resource sqlFreeLimitAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
     windowSize: 'PT1H'
     criteria: {
       'odata.type': 'Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria'
-      allOf: [ { name: 'free-limit', metricName: 'free_amount_consumed', metricNamespace: 'Microsoft.Sql/servers/databases', operator: 'GreaterThan', threshold: sqlFreeLimitThreshold, timeAggregation: 'Maximum', criterionType: 'StaticThresholdCriterion' } ]
+      allOf: [ { name: 'cond0', metricName: 'free_amount_consumed', operator: 'GreaterThan', threshold: sqlFreeLimitThreshold, timeAggregation: 'Maximum', criterionType: 'StaticThresholdCriterion' } ]
     }
     actions: [ { actionGroupId: opsActionGroup.id } ]
   }
@@ -281,7 +283,7 @@ resource funcB13 'Microsoft.Web/sites@2024-04-01' = {
   properties: {
     serverFarmId: planB13.id
     functionAppConfig: {
-      deployment: { storage: { type: 'blobContainer', value: '${storage.properties.primaryEndpoints.blob}app-package-funcazportfoliob13-0322941', authentication: { type: 'StorageAccountConnectionString', storageAccountConnectionStringName: 'DEPLOYMENT_STORAGE_CONNECTION_STRING' } } }
+      deployment: { storage: { type: 'blobContainer', value: 'https://${storageName}.blob.${environment().suffixes.storage}/app-package-funcazportfoliob13-0322941', authentication: { type: 'StorageAccountConnectionString', storageAccountConnectionStringName: 'DEPLOYMENT_STORAGE_CONNECTION_STRING' } } }
       runtime: { name: 'python', version: '3.12' }
       scaleAndConcurrency: { instanceMemoryMB: 2048, maximumInstanceCount: 100 }
     }
@@ -292,12 +294,27 @@ resource apim 'Microsoft.ApiManagement/service@2023-05-01-preview' = {
   name: apimName
   location: locationUs
   sku: { name: 'Consumption', capacity: 0 }
-  properties: { publisherEmail: apimPublisherEmail, publisherName: apimPublisherName }
+  properties: {
+    publisherEmail: apimPublisherEmail
+    publisherName: apimPublisherName
+    publicNetworkAccess: 'Enabled'
+    legacyPortalStatus: 'Disabled'
+    customProperties: {
+      'Microsoft.WindowsAzure.ApiManagement.Gateway.Protocols.Server.Http2': 'False'
+      'Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Ssl30': 'False'
+      'Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls10': 'False'
+      'Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls11': 'False'
+      'Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10': 'False'
+      'Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls11': 'False'
+    }
+  }
 }
 
 // ---------- Build #14: ingestion â€” validator Function app, Event Grid system topic + subscription, the loader container group ----------
 param funcB14Name string = 'func-azportfolio-b14'
 param loaderImage string = 'ghcr.io/patbradley18-netizen/azportfolio-loader:latest'
+@description('A PUT on a container group redeploys it and can change its system identity (build #14). Off by default; set true only to recreate the loader on purpose.')
+param deployLoader bool = false
 
 resource planB14 'Microsoft.Web/serverfarms@2024-04-01' existing = { name: 'ASP-rgazportfoliob1-afb7' }
 
@@ -309,7 +326,7 @@ resource funcB14 'Microsoft.Web/sites@2024-04-01' = {
   properties: {
     serverFarmId: planB14.id
     functionAppConfig: {
-      deployment: { storage: { type: 'blobContainer', value: '${storage.properties.primaryEndpoints.blob}app-package-funcazportfoliob14', authentication: { type: 'StorageAccountConnectionString', storageAccountConnectionStringName: 'DEPLOYMENT_STORAGE_CONNECTION_STRING' } } }
+      deployment: { storage: { type: 'blobContainer', value: 'https://${storageName}.blob.${environment().suffixes.storage}/app-package-funcazportfoliob14-7063208', authentication: { type: 'StorageAccountConnectionString', storageAccountConnectionStringName: 'DEPLOYMENT_STORAGE_CONNECTION_STRING' } } }
       runtime: { name: 'python', version: '3.12' }
       scaleAndConcurrency: { instanceMemoryMB: 2048, maximumInstanceCount: 100 }
     }
@@ -334,13 +351,14 @@ resource inboxSubscription 'Microsoft.EventGrid/systemTopics/eventSubscriptions@
   }
 }
 
-resource loader 'Microsoft.ContainerInstance/containerGroups@2023-05-01' = {
+resource loader 'Microsoft.ContainerInstance/containerGroups@2023-05-01' = if (deployLoader) {
   name: 'aci-azportfolio-b14'
   location: locationUs
   identity: { type: 'SystemAssigned' }
   properties: {
     osType: 'Linux'
     restartPolicy: 'Never'
+    provisioningTimeoutInSeconds: 1800
     containers: [ {
       name: 'aci-azportfolio-b14'
       properties: {
@@ -370,26 +388,30 @@ output staticSiteHint string = 'Static website on ${storage.name} is enabled on 
 param ipumsSecretName string = 'ipums-api-key'
 param adxClusterUri string = 'https://kvc-1267rvs0jur9k7ncmj.southcentralus.kusto.windows.net'
 
-resource b15Settings 'Microsoft.Web/sites/config@2024-04-01' = {
-  parent: funcB13
-  name: 'appsettings'
-  properties: {
-    IPUMS_API_KEY: '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=${ipumsSecretName})'
-    ADX_CLUSTER_URI: adxClusterUri
-    ADX_INGEST_URI: replace(adxClusterUri, 'https://', 'https://ingest-')
-    ADX_DATABASE: 'vets'
-    ADX_TABLE: 'cps_raw'
-    STORAGE_ACCOUNT_URL: storage.properties.primaryEndpoints.blob
-    IPUMS_CONTAINER: 'ipums'
+module b15Settings 'appsettings-merge.bicep' = {
+  name: 'b15-appsettings-merge'
+  params: {
+    siteName: funcB13.name
+    existing: list(resourceId('Microsoft.Web/sites/config', funcB13Name, 'appsettings'), '2024-04-01').properties
+    settings: {
+      IPUMS_API_KEY: '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=${ipumsSecretName})'
+      ADX_CLUSTER_URI: adxClusterUri
+      ADX_INGEST_URI: replace(adxClusterUri, 'https://', 'https://ingest-')
+      ADX_DATABASE: 'vets'
+      ADX_TABLE: 'cps_raw'
+      STORAGE_ACCOUNT_URL: 'https://${storageName}.blob.${environment().suffixes.storage}/'
+      IPUMS_CONTAINER: 'ipums'
+    }
   }
 }
 
 resource ipumsContainer 'Microsoft.Storage/storageAccounts/blobServices/containers@2023-05-01' = {
   name: '${storage.name}/default/ipums'
+  properties: { publicAccess: 'None', defaultEncryptionScope: '$account-encryption-key', denyEncryptionScopeOverride: false }
 }
 
 resource b13KvSecretsUser 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(keyVault.id, funcB13.id, 'kv-secrets-user')
+  name: '96f0c571-f3d9-4b9e-902c-ffb2968ce992' // live name (build #15)
   scope: keyVault
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '4633458b-17de-408a-b874-0445c86b69e6') // Key Vault Secrets User

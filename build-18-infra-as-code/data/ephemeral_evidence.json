@@ -1,0 +1,292 @@
+{
+    "topic":  {
+                  "id":  "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-iac-test/providers/Microsoft.EventGrid/systemTopics/egst-stiacdnluzfwyejbm6",
+                  "identity":  {
+                                   "principalId":  "8a253819-7f11-4466-bf5d-56cd2c8a0d76",
+                                   "tenantId":  "fbc63603-de50-4d40-b10a-1708ddcea0b7",
+                                   "type":  "SystemAssigned",
+                                   "userAssignedIdentities":  null
+                               },
+                  "location":  "northcentralus",
+                  "metricResourceId":  "b5de8e9e-014e-4b56-bc4c-48a79cd8ef3d",
+                  "name":  "egst-stiacdnluzfwyejbm6",
+                  "provisioningState":  "Succeeded",
+                  "resourceGroup":  "rg-azportfolio-iac-test",
+                  "source":  "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-iac-test/providers/Microsoft.Storage/storageAccounts/stiacdnluzfwyejbm6",
+                  "systemData":  null,
+                  "tags":  null,
+                  "topicType":  "Microsoft.Storage.StorageAccounts",
+                  "type":  "Microsoft.EventGrid/systemTopics"
+              },
+    "roles":  {
+                  "value":  [
+                                {
+                                    "createdBy":  "29da58b6-2595-4b29-9ab4-5aaa281e5af1",
+                                    "createdOn":  "2026-10-17T18:50:43.385494+00:00",
+                                    "id":  "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourcegroups/rg-azportfolio-iac-test/providers/Microsoft.Storage/storageAccounts/stiacdnluzfwyejbm6/providers/Microsoft.Authorization/roleAssignments/e8a1dfbf-982d-5694-8693-e608cc2e6320",
+                                    "name":  "e8a1dfbf-982d-5694-8693-e608cc2e6320",
+                                    "principalId":  "9d6eb5b2-9c38-4931-a379-9269a9eeaf07",
+                                    "principalName":  "fce3d72d-7979-47e0-b75f-dc0fd0311e17",
+                                    "principalType":  "ServicePrincipal",
+                                    "resourceGroup":  "rg-azportfolio-iac-test",
+                                    "roleDefinitionId":  "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/providers/Microsoft.Authorization/roleDefinitions/ba92f5b4-2d11-453d-a403-e96b0029c9fe",
+                                    "roleDefinitionName":  "Storage Blob Data Contributor",
+                                    "scope":  "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourcegroups/rg-azportfolio-iac-test/providers/Microsoft.Storage/storageAccounts/stiacdnluzfwyejbm6",
+                                    "type":  "Microsoft.Authorization/roleAssignments",
+                                    "updatedBy":  "29da58b6-2595-4b29-9ab4-5aaa281e5af1",
+                                    "updatedOn":  "2026-10-17T18:50:43.385494+00:00"
+                                },
+                                {
+                                    "createdBy":  "29da58b6-2595-4b29-9ab4-5aaa281e5af1",
+                                    "createdOn":  "2026-10-17T18:50:43.334058+00:00",
+                                    "id":  "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourcegroups/rg-azportfolio-iac-test/providers/Microsoft.Storage/storageAccounts/stiacdnluzfwyejbm6/providers/Microsoft.Authorization/roleAssignments/7728dcf1-05fc-5e65-8d38-1bb31e33e72d",
+                                    "name":  "7728dcf1-05fc-5e65-8d38-1bb31e33e72d",
+                                    "principalId":  "9d6eb5b2-9c38-4931-a379-9269a9eeaf07",
+                                    "principalName":  "fce3d72d-7979-47e0-b75f-dc0fd0311e17",
+                                    "principalType":  "ServicePrincipal",
+                                    "resourceGroup":  "rg-azportfolio-iac-test",
+                                    "roleDefinitionId":  "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/providers/Microsoft.Authorization/roleDefinitions/974c5e8b-45b9-4653-ba55-5f855dd0fb88",
+                                    "roleDefinitionName":  "Storage Queue Data Contributor",
+                                    "scope":  "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourcegroups/rg-azportfolio-iac-test/providers/Microsoft.Storage/storageAccounts/stiacdnluzfwyejbm6",
+                                    "type":  "Microsoft.Authorization/roleAssignments",
+                                    "updatedBy":  "29da58b6-2595-4b29-9ab4-5aaa281e5af1",
+                                    "updatedOn":  "2026-10-17T18:50:43.334058+00:00"
+                                }
+                            ],
+                  "Count":  2
+              },
+    "containers":  {
+                       "value":  [
+                                     {
+                                         "defaultEncryptionScope":  "$account-encryption-key",
+                                         "deleted":  false,
+                                         "deletedTime":  null,
+                                         "denyEncryptionScopeOverride":  false,
+                                         "enableNfsV3AllSquash":  null,
+                                         "enableNfsV3RootSquash":  null,
+                                         "etag":  "\"0x8DF2C7F8C3D4CA9\"",
+                                         "hasImmutabilityPolicy":  false,
+                                         "hasLegalHold":  false,
+                                         "id":  "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-iac-test/providers/Microsoft.Storage/storageAccounts/stiacdnluzfwyejbm6/blobServices/default/containers/inbox",
+                                         "immutabilityPolicy":  null,
+                                         "immutableStorageWithVersioning":  {
+                                                                                "enabled":  false,
+                                                                                "migrationState":  null,
+                                                                                "timeStamp":  null
+                                                                            },
+                                         "lastModifiedTime":  "2026-10-17T18:50:43+00:00",
+                                         "leaseDuration":  null,
+                                         "leaseState":  "Available",
+                                         "leaseStatus":  "Unlocked",
+                                         "legalHold":  null,
+                                         "metadata":  null,
+                                         "name":  "inbox",
+                                         "publicAccess":  "None",
+                                         "remainingRetentionDays":  0,
+                                         "resourceGroup":  "rg-azportfolio-iac-test",
+                                         "systemData":  null,
+                                         "type":  "Microsoft.Storage/storageAccounts/blobServices/containers",
+                                         "version":  null
+                                     },
+                                     {
+                                         "defaultEncryptionScope":  "$account-encryption-key",
+                                         "deleted":  false,
+                                         "deletedTime":  null,
+                                         "denyEncryptionScopeOverride":  false,
+                                         "enableNfsV3AllSquash":  null,
+                                         "enableNfsV3RootSquash":  null,
+                                         "etag":  "\"0x8DF2C7F8C4ADF43\"",
+                                         "hasImmutabilityPolicy":  false,
+                                         "hasLegalHold":  false,
+                                         "id":  "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-iac-test/providers/Microsoft.Storage/storageAccounts/stiacdnluzfwyejbm6/blobServices/default/containers/quarantine",
+                                         "immutabilityPolicy":  null,
+                                         "immutableStorageWithVersioning":  {
+                                                                                "enabled":  false,
+                                                                                "migrationState":  null,
+                                                                                "timeStamp":  null
+                                                                            },
+                                         "lastModifiedTime":  "2026-10-17T18:50:43+00:00",
+                                         "leaseDuration":  null,
+                                         "leaseState":  "Available",
+                                         "leaseStatus":  "Unlocked",
+                                         "legalHold":  null,
+                                         "metadata":  null,
+                                         "name":  "quarantine",
+                                         "publicAccess":  "None",
+                                         "remainingRetentionDays":  0,
+                                         "resourceGroup":  "rg-azportfolio-iac-test",
+                                         "systemData":  null,
+                                         "type":  "Microsoft.Storage/storageAccounts/blobServices/containers",
+                                         "version":  null
+                                     }
+                                 ],
+                       "Count":  2
+                   },
+    "vault":  {
+                  "id":  "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-iac-test/providers/Microsoft.KeyVault/vaults/kv-iac-dnluzfwyejbm6",
+                  "location":  "northcentralus",
+                  "name":  "kv-iac-dnluzfwyejbm6",
+                  "properties":  {
+                                     "accessPolicies":  [
+
+                                                        ],
+                                     "createMode":  null,
+                                     "enablePurgeProtection":  null,
+                                     "enableRbacAuthorization":  true,
+                                     "enableSoftDelete":  true,
+                                     "enabledForDeployment":  false,
+                                     "enabledForDiskEncryption":  null,
+                                     "enabledForTemplateDeployment":  null,
+                                     "hsmPoolResourceId":  null,
+                                     "networkAcls":  null,
+                                     "privateEndpointConnections":  null,
+                                     "provisioningState":  "Succeeded",
+                                     "publicNetworkAccess":  "Enabled",
+                                     "sku":  {
+                                                 "family":  "A",
+                                                 "name":  "standard"
+                                             },
+                                     "softDeleteRetentionInDays":  7,
+                                     "tenantId":  "fbc63603-de50-4d40-b10a-1708ddcea0b7",
+                                     "vaultUri":  "https://kv-iac-dnluzfwyejbm6.vault.azure.net/"
+                                 },
+                  "resourceGroup":  "rg-azportfolio-iac-test",
+                  "systemData":  {
+                                     "createdAt":  "2026-10-17T18:50:22.616000+00:00",
+                                     "createdBy":  "<operator-email-redacted>",
+                                     "createdByType":  "User",
+                                     "lastModifiedAt":  "2026-10-17T18:50:22.616000+00:00",
+                                     "lastModifiedBy":  "<operator-email-redacted>",
+                                     "lastModifiedByType":  "User"
+                                 },
+                  "tags":  {
+
+                           },
+                  "type":  "Microsoft.KeyVault/vaults"
+              },
+    "principalId":  "9d6eb5b2-9c38-4931-a379-9269a9eeaf07",
+    "storage":  {
+                    "accessTier":  "Hot",
+                    "accountMigrationInProgress":  null,
+                    "allowBlobPublicAccess":  false,
+                    "allowCrossTenantReplication":  false,
+                    "allowSharedKeyAccess":  false,
+                    "allowSharedKeyAccessForServices":  null,
+                    "allowedCopyScope":  null,
+                    "azureFilesIdentityBasedAuthentication":  null,
+                    "blobRestoreStatus":  null,
+                    "creationTime":  "2026-10-17T18:50:22.722567+00:00",
+                    "customDomain":  null,
+                    "dataCollaborationPolicyProperties":  null,
+                    "defaultToOAuthAuthentication":  null,
+                    "dnsEndpointType":  null,
+                    "dualStackEndpointPreference":  null,
+                    "enableExtendedGroups":  null,
+                    "enableHttpsTrafficOnly":  true,
+                    "enableNfsV3":  null,
+                    "encryption":  {
+                                       "encryptionIdentity":  null,
+                                       "keySource":  "Microsoft.Storage",
+                                       "keyVaultProperties":  null,
+                                       "requireInfrastructureEncryption":  null,
+                                       "services":  {
+                                                        "blob":  {
+                                                                     "enabled":  true,
+                                                                     "keyType":  "Account",
+                                                                     "lastEnabledTime":  "2026-10-17T18:50:22.896946+00:00"
+                                                                 },
+                                                        "file":  {
+                                                                     "enabled":  true,
+                                                                     "keyType":  "Account",
+                                                                     "lastEnabledTime":  "2026-10-17T18:50:22.896946+00:00"
+                                                                 },
+                                                        "queue":  null,
+                                                        "table":  null
+                                                    }
+                                   },
+                    "extendedLocation":  null,
+                    "failoverInProgress":  null,
+                    "geoPriorityReplicationStatus":  null,
+                    "geoReplicationStats":  null,
+                    "id":  "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-iac-test/providers/Microsoft.Storage/storageAccounts/stiacdnluzfwyejbm6",
+                    "identity":  null,
+                    "immutableStorageWithVersioning":  null,
+                    "isHnsEnabled":  null,
+                    "isLocalUserEnabled":  null,
+                    "isSftpEnabled":  null,
+                    "isSkuConversionBlocked":  null,
+                    "keyCreationTime":  {
+                                            "key1":  "2026-10-17T18:50:22.896405+00:00",
+                                            "key2":  "2026-10-17T18:50:22.896405+00:00"
+                                        },
+                    "keyPolicy":  null,
+                    "kind":  "StorageV2",
+                    "largeFileSharesState":  null,
+                    "lastGeoFailoverTime":  null,
+                    "location":  "northcentralus",
+                    "minimumTlsVersion":  "TLS1_2",
+                    "name":  "stiacdnluzfwyejbm6",
+                    "networkRuleSet":  {
+                                           "bypass":  "None",
+                                           "defaultAction":  "Allow",
+                                           "ipRules":  [
+
+                                                       ],
+                                           "ipv6Rules":  [
+
+                                                         ],
+                                           "resourceAccessRules":  null,
+                                           "virtualNetworkRules":  [
+
+                                                                   ]
+                                       },
+                    "placement":  null,
+                    "primaryEndpoints":  {
+                                             "blob":  "https://stiacdnluzfwyejbm6.blob.core.windows.net/",
+                                             "dfs":  "https://stiacdnluzfwyejbm6.dfs.core.windows.net/",
+                                             "file":  "https://stiacdnluzfwyejbm6.file.core.windows.net/",
+                                             "internetEndpoints":  null,
+                                             "ipv6Endpoints":  null,
+                                             "microsoftEndpoints":  null,
+                                             "queue":  "https://stiacdnluzfwyejbm6.queue.core.windows.net/",
+                                             "table":  "https://stiacdnluzfwyejbm6.table.core.windows.net/",
+                                             "web":  "https://stiacdnluzfwyejbm6.z14.web.core.windows.net/"
+                                         },
+                    "primaryLocation":  "northcentralus",
+                    "privateEndpointConnections":  [
+
+                                                   ],
+                    "provisioningState":  "Succeeded",
+                    "publicNetworkAccess":  null,
+                    "resourceGroup":  "rg-azportfolio-iac-test",
+                    "routingPreference":  null,
+                    "sasPolicy":  null,
+                    "secondaryEndpoints":  null,
+                    "secondaryLocation":  null,
+                    "sku":  {
+                                "name":  "Standard_LRS",
+                                "tier":  "Standard"
+                            },
+                    "statusOfPrimary":  "available",
+                    "statusOfSecondary":  null,
+                    "storageAccountSkuConversionStatus":  null,
+                    "systemData":  null,
+                    "tags":  {
+
+                             },
+                    "type":  "Microsoft.Storage/storageAccounts",
+                    "zones":  null
+                },
+    "queues":  [
+                   {
+                       "id":  "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-iac-test/providers/Microsoft.Storage/storageAccounts/stiacdnluzfwyejbm6/queueServices/default/queues/ingest-load",
+                       "name":  "ingest-load",
+                       "properties":  {
+                                          "metadata":  {
+
+                                                       }
+                                      },
+                       "type":  "Microsoft.Storage/storageAccounts/queueServices/queues"
+                   }
+               ]
+}

@@ -1,0 +1,14 @@
+﻿[
+  {
+    "duration": "PT27.3694025S",
+    "name": "b18-converge-2",
+    "state": "Succeeded",
+    "timestamp": "2026-10-17T18:19:49.596719+00:00"
+  },
+  {
+    "duration": "PT29.7132987S",
+    "name": "b18-converge-1",
+    "state": "Succeeded",
+    "timestamp": "2026-10-17T18:17:17.067476+00:00"
+  }
+]

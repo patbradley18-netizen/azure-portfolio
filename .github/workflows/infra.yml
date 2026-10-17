@@ -1,0 +1,83 @@
+name: infra
+
+# Build #18. Every push that touches the template runs what-if against the live group and prints the diff into the run summary;
+# PRs are not a trigger: their OIDC subject is pull_request, which the identity does not trust. The deploy job runs only by hand (workflow_dispatch) and only after the "production" environment's approval. The identity is
+# the build #3 OIDC identity, granted Contributor + User Access Administrator on the group for this (role assignments need UAA).
+on:
+  push:
+    paths: ['build-10-va-access/infra/**', 'build-18-infra-as-code/infra/**', '.github/workflows/infra.yml']
+  workflow_dispatch:
+    inputs:
+      deploy:
+        description: 'Deploy main.bicep to rg-azportfolio-b1 (Incremental)'
+        type: boolean
+        default: false
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  RG: rg-azportfolio-b1
+  TEMPLATE: build-10-va-access/infra/main.bicep
+
+jobs:
+  whatif:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: azure/login@v2
+        with:
+          client-id: 7721b9b0-874d-4b8c-9ce5-b3ca0489bcdd
+          tenant-id: fbc63603-de50-4d40-b10a-1708ddcea0b7
+          subscription-id: 9cb921f7-8a0b-445c-bb35-eca47da1daae
+      - name: Lint
+        run: az bicep build -f "$TEMPLATE" --stdout > /dev/null
+      - name: Lint ephemeral module
+        run: az bicep build -f build-18-infra-as-code/infra/ephemeral.bicep --stdout > /dev/null
+      - name: What-if against the live group
+        run: |
+          SID=$(az sql server show -g "$RG" -n sql-azportfolio-b1eu --query administrators.sid -o tsv)
+          LOGIN=$(az sql server show -g "$RG" -n sql-azportfolio-b1eu --query administrators.login -o tsv)
+          EMAIL=$(az monitor action-group show -g "$RG" -n ag-azportfolio-ops --query "emailReceivers[0].emailAddress" -o tsv)  # read from Azure, never stored in the repo
+          echo "::add-mask::$EMAIL"
+          az deployment group what-if -g "$RG" -f "$TEMPLATE" \
+            -p sqlAdminObjectId="$SID" sqlAdminLogin="$LOGIN" operatorEmail="$EMAIL" apimPublisherEmail="$EMAIL" \
+            --no-pretty-print -o json > whatif.json
+          python3 - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json, collections
+          w = json.load(open("whatif.json"))
+          counts = collections.Counter(c["changeType"] for c in w["changes"])
+          print("## what-if against rg-azportfolio-b1\n")
+          print("| change | count |\n|---|---|")
+          for k in ("Create", "Delete", "Modify", "NoChange", "Ignore"):
+              print(f"| {k} | {counts.get(k, 0)} |")
+          real = [c for c in w["changes"] if c["changeType"] in ("Create", "Delete")]
+          print("\n**Creates/Deletes (real changes):** " + (", ".join("/".join(c["resourceId"].split("/")[-2:]) for c in real) or "none"))
+          print("\nModify rows are mostly what-if blind spots (`reference()`, `list()`, provider defaults) — see build #18's README for the 12 known ones.")
+          PY
+      - name: Fail on Create/Delete
+        run: |
+          python3 -c "import json,sys; w=json.load(open('whatif.json')); bad=[c for c in w['changes'] if c['changeType'] in ('Create','Delete')]; print(len(bad),'create/delete'); sys.exit(1 if bad else 0)"
+
+  deploy:
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.deploy }}
+    needs: whatif
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: azure/login@v2
+        with:
+          client-id: 7721b9b0-874d-4b8c-9ce5-b3ca0489bcdd
+          tenant-id: fbc63603-de50-4d40-b10a-1708ddcea0b7
+          subscription-id: 9cb921f7-8a0b-445c-bb35-eca47da1daae
+      - name: Deploy (Incremental)
+        run: |
+          SID=$(az sql server show -g "$RG" -n sql-azportfolio-b1eu --query administrators.sid -o tsv)
+          LOGIN=$(az sql server show -g "$RG" -n sql-azportfolio-b1eu --query administrators.login -o tsv)
+          EMAIL=$(az monitor action-group show -g "$RG" -n ag-azportfolio-ops --query "emailReceivers[0].emailAddress" -o tsv)  # read from Azure, never stored in the repo
+          echo "::add-mask::$EMAIL"
+          az deployment group create -g "$RG" -n "ci-$(date -u +%Y%m%d-%H%M%S)" --mode Incremental -f "$TEMPLATE" \
+            -p sqlAdminObjectId="$SID" sqlAdminLogin="$LOGIN" operatorEmail="$EMAIL" apimPublisherEmail="$EMAIL" \
+            --query "{state:properties.provisioningState, duration:properties.duration}" -o json

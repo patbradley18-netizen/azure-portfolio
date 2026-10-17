@@ -1,0 +1,2488 @@
+{
+  "changes": [
+    {
+      "after": {
+        "apiVersion": "2023-05-01-preview",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.ApiManagement/service/apim-azportfolio-b13",
+        "location": "northcentralus",
+        "name": "apim-azportfolio-b13",
+        "properties": {
+          "customProperties": {
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Protocols.Server.Http2": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Ssl30": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls10": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls11": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls11": "False"
+          },
+          "developerPortalStatus": "Enabled",
+          "disableGateway": false,
+          "hostnameConfigurations": [
+            {
+              "certificateSource": "BuiltIn",
+              "defaultSslBinding": true,
+              "hostName": "apim-azportfolio-b13.azure-api.net",
+              "negotiateClientCertificate": false,
+              "type": "Proxy"
+            }
+          ],
+          "legacyPortalStatus": "Disabled",
+          "natGatewayState": "Disabled",
+          "publicNetworkAccess": "Enabled",
+          "publisherEmail": "<operator-email-redacted>",
+          "publisherName": "Patrick Neil Bradley",
+          "virtualNetworkType": "None"
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "sku": {
+          "capacity": 0,
+          "name": "Consumption"
+        },
+        "type": "Microsoft.ApiManagement/service"
+      },
+      "before": {
+        "apiVersion": "2023-05-01-preview",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.ApiManagement/service/apim-azportfolio-b13",
+        "location": "northcentralus",
+        "name": "apim-azportfolio-b13",
+        "properties": {
+          "customProperties": {
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Protocols.Server.Http2": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Ssl30": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls10": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls11": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls11": "False"
+          },
+          "developerPortalStatus": "Enabled",
+          "disableGateway": false,
+          "hostnameConfigurations": [
+            {
+              "certificateSource": "BuiltIn",
+              "defaultSslBinding": true,
+              "hostName": "apim-azportfolio-b13.azure-api.net",
+              "negotiateClientCertificate": false,
+              "type": "Proxy"
+            }
+          ],
+          "legacyPortalStatus": "Disabled",
+          "natGatewayState": "Disabled",
+          "publicNetworkAccess": "Enabled",
+          "publisherEmail": "<operator-email-redacted>",
+          "publisherName": "Patrick Neil Bradley",
+          "virtualNetworkType": "None"
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "sku": {
+          "capacity": 0,
+          "name": "Consumption"
+        },
+        "type": "Microsoft.ApiManagement/service"
+      },
+      "changeType": "NoChange",
+      "delta": [],
+      "deploymentId": null,
+      "extension": null,
+      "identifiers": null,
+      "resourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.ApiManagement/service/apim-azportfolio-b13",
+      "symbolicName": null,
+      "unsupportedReason": null
+    },
+    {
+      "after": {
+        "apiVersion": "2024-10-01",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.CognitiveServices/accounts/lang-azportfolio-b1",
+        "kind": "TextAnalytics",
+        "location": "germanywestcentral",
+        "name": "lang-azportfolio-b1",
+        "properties": {
+          "customSubDomainName": "lang-azportfolio-b1",
+          "publicNetworkAccess": "Enabled"
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "sku": {
+          "name": "F0"
+        },
+        "type": "Microsoft.CognitiveServices/accounts"
+      },
+      "before": {
+        "apiVersion": "2024-10-01",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.CognitiveServices/accounts/lang-azportfolio-b1",
+        "kind": "TextAnalytics",
+        "location": "germanywestcentral",
+        "name": "lang-azportfolio-b1",
+        "properties": {
+          "customSubDomainName": "lang-azportfolio-b1",
+          "publicNetworkAccess": "Enabled"
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "sku": {
+          "name": "F0"
+        },
+        "type": "Microsoft.CognitiveServices/accounts"
+      },
+      "changeType": "NoChange",
+      "delta": [],
+      "deploymentId": null,
+      "extension": null,
+      "identifiers": null,
+      "resourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.CognitiveServices/accounts/lang-azportfolio-b1",
+      "symbolicName": null,
+      "unsupportedReason": null
+    },
+    {
+      "after": {
+        "apiVersion": "2022-04-01",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.CognitiveServices/accounts/lang-azportfolio-b1/providers/Microsoft.Authorization/roleAssignments/45033b0a-73f6-4f67-84b0-b3fac81ff9d0",
+        "name": "45033b0a-73f6-4f67-84b0-b3fac81ff9d0",
+        "properties": {
+          "principalId": "[reference('/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/sites/func-azportfolio-b1', '2024-04-01', 'full').identity.principalId]",
+          "roleDefinitionId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/providers/Microsoft.Authorization/roleDefinitions/a97b65f3-24c7-4388-baec-2e87135dc908"
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.Authorization/roleAssignments"
+      },
+      "before": {
+        "apiVersion": "2022-04-01",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.CognitiveServices/accounts/lang-azportfolio-b1/providers/Microsoft.Authorization/roleAssignments/45033b0a-73f6-4f67-84b0-b3fac81ff9d0",
+        "name": "45033b0a-73f6-4f67-84b0-b3fac81ff9d0",
+        "properties": {
+          "principalId": "ed3b7363-da8a-4afc-bb9e-6f014a7a2781",
+          "roleDefinitionId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/providers/Microsoft.Authorization/roleDefinitions/a97b65f3-24c7-4388-baec-2e87135dc908"
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.Authorization/roleAssignments"
+      },
+      "changeType": "Modify",
+      "delta": [
+        {
+          "after": "[reference('/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/sites/func-azportfolio-b1', '2024-04-01', 'full').identity.principalId]",
+          "before": "ed3b7363-da8a-4afc-bb9e-6f014a7a2781",
+          "children": null,
+          "path": "properties.principalId",
+          "propertyChangeType": "Modify"
+        },
+        {
+          "after": "ServicePrincipal",
+          "before": null,
+          "children": null,
+          "path": "properties.principalType",
+          "propertyChangeType": "NoEffect"
+        }
+      ],
+      "deploymentId": null,
+      "extension": null,
+      "identifiers": null,
+      "resourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.CognitiveServices/accounts/lang-azportfolio-b1/providers/Microsoft.Authorization/roleAssignments/45033b0a-73f6-4f67-84b0-b3fac81ff9d0",
+      "symbolicName": null,
+      "unsupportedReason": null
+    },
+    {
+      "after": {
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.ContainerInstance/containerGroups/aci-azportfolio-b14",
+        "identity": {
+          "type": "SystemAssigned"
+        },
+        "location": "northcentralus",
+        "name": "aci-azportfolio-b14",
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.ContainerInstance/containerGroups"
+      },
+      "before": {
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.ContainerInstance/containerGroups/aci-azportfolio-b14",
+        "identity": {
+          "type": "SystemAssigned"
+        },
+        "location": "northcentralus",
+        "name": "aci-azportfolio-b14",
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.ContainerInstance/containerGroups"
+      },
+      "changeType": "Ignore",
+      "delta": null,
+      "deploymentId": null,
+      "extension": null,
+      "identifiers": null,
+      "resourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.ContainerInstance/containerGroups/aci-azportfolio-b14",
+      "symbolicName": null,
+      "unsupportedReason": null
+    },
+    {
+      "after": {
+        "apiVersion": "2024-06-01-preview",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.EventGrid/systemTopics/egst-stazportfoliob1",
+        "identity": {
+          "type": "SystemAssigned"
+        },
+        "location": "northcentralus",
+        "name": "egst-stazportfoliob1",
+        "properties": {
+          "source": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Storage/storageAccounts/stazportfoliob1",
+          "topicType": "Microsoft.Storage.StorageAccounts"
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.EventGrid/systemTopics"
+      },
+      "before": {
+        "apiVersion": "2024-06-01-preview",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.EventGrid/systemTopics/egst-stazportfoliob1",
+        "identity": {
+          "type": "SystemAssigned"
+        },
+        "location": "northcentralus",
+        "name": "egst-stazportfoliob1",
+        "properties": {
+          "source": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Storage/storageAccounts/stazportfoliob1",
+          "topicType": "Microsoft.Storage.StorageAccounts"
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.EventGrid/systemTopics"
+      },
+      "changeType": "NoChange",
+      "delta": [],
+      "deploymentId": null,
+      "extension": null,
+      "identifiers": null,
+      "resourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.EventGrid/systemTopics/egst-stazportfoliob1",
+      "symbolicName": null,
+      "unsupportedReason": null
+    },
+    {
+      "after": {
+        "apiVersion": "2024-06-01-preview",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.EventGrid/systemTopics/egst-stazportfoliob1/eventSubscriptions/evs-inbox-to-validator",
+        "name": "evs-inbox-to-validator",
+        "properties": {
+          "deadLetterWithResourceIdentity": {
+            "deadLetterDestination": {
+              "endpointType": "StorageBlob",
+              "properties": {
+                "blobContainerName": "deadletter",
+                "resourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Storage/storageAccounts/stazportfoliob1"
+              }
+            },
+            "identity": {
+              "type": "SystemAssigned"
+            }
+          },
+          "destination": {
+            "endpointType": "AzureFunction",
+            "properties": {
+              "maxEventsPerBatch": 1,
+              "preferredBatchSizeInKilobytes": 64,
+              "resourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/sites/func-azportfolio-b14/functions/validate_inbox_blob"
+            }
+          },
+          "eventDeliverySchema": "EventGridSchema",
+          "filter": {
+            "includedEventTypes": [
+              "Microsoft.Storage.BlobCreated"
+            ],
+            "subjectBeginsWith": "/blobServices/default/containers/inbox/"
+          },
+          "retryPolicy": {
+            "eventTimeToLiveInMinutes": 60,
+            "maxDeliveryAttempts": 5
+          }
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.EventGrid/systemTopics/eventSubscriptions"
+      },
+      "before": {
+        "apiVersion": "2024-06-01-preview",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.EventGrid/systemTopics/egst-stazportfoliob1/eventSubscriptions/evs-inbox-to-validator",
+        "name": "evs-inbox-to-validator",
+        "properties": {
+          "deadLetterWithResourceIdentity": {
+            "deadLetterDestination": {
+              "endpointType": "StorageBlob",
+              "properties": {
+                "blobContainerName": "deadletter",
+                "resourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Storage/storageAccounts/stazportfoliob1"
+              }
+            },
+            "identity": {
+              "type": "SystemAssigned"
+            }
+          },
+          "destination": {
+            "endpointType": "AzureFunction",
+            "properties": {
+              "maxEventsPerBatch": 1,
+              "preferredBatchSizeInKilobytes": 64,
+              "resourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/sites/func-azportfolio-b14/functions/validate_inbox_blob"
+            }
+          },
+          "eventDeliverySchema": "EventGridSchema",
+          "filter": {
+            "includedEventTypes": [
+              "Microsoft.Storage.BlobCreated"
+            ],
+            "subjectBeginsWith": "/blobServices/default/containers/inbox/"
+          },
+          "retryPolicy": {
+            "eventTimeToLiveInMinutes": 60,
+            "maxDeliveryAttempts": 5
+          }
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.EventGrid/systemTopics/eventSubscriptions"
+      },
+      "changeType": "NoChange",
+      "delta": [],
+      "deploymentId": null,
+      "extension": null,
+      "identifiers": null,
+      "resourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.EventGrid/systemTopics/egst-stazportfoliob1/eventSubscriptions/evs-inbox-to-validator",
+      "symbolicName": null,
+      "unsupportedReason": null
+    },
+    {
+      "after": {
+        "apiVersion": "2023-01-01",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Insights/actiongroups/ag-azportfolio-ops",
+        "location": "Global",
+        "name": "ag-azportfolio-ops",
+        "properties": {
+          "emailReceivers": [
+            {
+              "emailAddress": "<operator-email-redacted>",
+              "name": "operator",
+              "useCommonAlertSchema": false
+            }
+          ],
+          "enabled": true,
+          "groupShortName": "azpfops"
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.Insights/actionGroups"
+      },
+      "before": {
+        "apiVersion": "2023-01-01",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Insights/actiongroups/ag-azportfolio-ops",
+        "location": "Global",
+        "name": "ag-azportfolio-ops",
+        "properties": {
+          "emailReceivers": [
+            {
+              "emailAddress": "<operator-email-redacted>",
+              "name": "operator",
+              "useCommonAlertSchema": false
+            }
+          ],
+          "enabled": true,
+          "groupShortName": "azpfops"
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.Insights/actionGroups"
+      },
+      "changeType": "NoChange",
+      "delta": [],
+      "deploymentId": null,
+      "extension": null,
+      "identifiers": null,
+      "resourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Insights/actionGroups/ag-azportfolio-ops",
+      "symbolicName": null,
+      "unsupportedReason": null
+    },
+    {
+      "after": {
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/microsoft.insights/actiongroups/Application Insights Smart Detection",
+        "location": "global",
+        "name": "Application Insights Smart Detection",
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "microsoft.insights/actiongroups"
+      },
+      "before": {
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/microsoft.insights/actiongroups/Application Insights Smart Detection",
+        "location": "global",
+        "name": "Application Insights Smart Detection",
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "microsoft.insights/actiongroups"
+      },
+      "changeType": "Ignore",
+      "delta": null,
+      "deploymentId": null,
+      "extension": null,
+      "identifiers": null,
+      "resourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/microsoft.insights/actiongroups/Application Insights Smart Detection",
+      "symbolicName": null,
+      "unsupportedReason": null
+    },
+    {
+      "after": {
+        "apiVersion": "2020-02-02",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Insights/components/func-azportfolio-b1",
+        "kind": "web",
+        "location": "germanywestcentral",
+        "name": "func-azportfolio-b1",
+        "properties": {
+          "Application_Type": "web",
+          "Flow_Type": "Bluefield",
+          "IngestionMode": "LogAnalytics",
+          "Request_Source": "rest",
+          "RetentionInDays": 90,
+          "WorkspaceResourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/DefaultResourceGroup-DEWC/providers/Microsoft.OperationalInsights/workspaces/DefaultWorkspace-9cb921f7-8a0b-445c-bb35-eca47da1daae-DEWC",
+          "publicNetworkAccessForIngestion": "Enabled",
+          "publicNetworkAccessForQuery": "Enabled"
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.Insights/components"
+      },
+      "before": {
+        "apiVersion": "2020-02-02",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Insights/components/func-azportfolio-b1",
+        "kind": "web",
+        "location": "germanywestcentral",
+        "name": "func-azportfolio-b1",
+        "properties": {
+          "Application_Type": "web",
+          "IngestionMode": "LogAnalytics",
+          "RetentionInDays": 90,
+          "WorkspaceResourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/DefaultResourceGroup-DEWC/providers/Microsoft.OperationalInsights/workspaces/DefaultWorkspace-9cb921f7-8a0b-445c-bb35-eca47da1daae-DEWC",
+          "publicNetworkAccessForIngestion": "Enabled",
+          "publicNetworkAccessForQuery": "Enabled"
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.Insights/components"
+      },
+      "changeType": "Modify",
+      "delta": [
+        {
+          "after": "Bluefield",
+          "before": null,
+          "children": null,
+          "path": "properties.Flow_Type",
+          "propertyChangeType": "Create"
+        },
+        {
+          "after": "rest",
+          "before": null,
+          "children": null,
+          "path": "properties.Request_Source",
+          "propertyChangeType": "Create"
+        }
+      ],
+      "deploymentId": null,
+      "extension": null,
+      "identifiers": null,
+      "resourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Insights/components/func-azportfolio-b1",
+      "symbolicName": null,
+      "unsupportedReason": null
+    },
+    {
+      "after": {
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Insights/components/func-azportfolio-b13",
+        "kind": "web",
+        "location": "germanywestcentral",
+        "name": "func-azportfolio-b13",
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.Insights/components"
+      },
+      "before": {
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Insights/components/func-azportfolio-b13",
+        "kind": "web",
+        "location": "germanywestcentral",
+        "name": "func-azportfolio-b13",
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.Insights/components"
+      },
+      "changeType": "Ignore",
+      "delta": null,
+      "deploymentId": null,
+      "extension": null,
+      "identifiers": null,
+      "resourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Insights/components/func-azportfolio-b13",
+      "symbolicName": null,
+      "unsupportedReason": null
+    },
+    {
+      "after": {
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Insights/components/func-azportfolio-b14",
+        "kind": "web",
+        "location": "germanywestcentral",
+        "name": "func-azportfolio-b14",
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.Insights/components"
+      },
+      "before": {
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Insights/components/func-azportfolio-b14",
+        "kind": "web",
+        "location": "germanywestcentral",
+        "name": "func-azportfolio-b14",
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.Insights/components"
+      },
+      "changeType": "Ignore",
+      "delta": null,
+      "deploymentId": null,
+      "extension": null,
+      "identifiers": null,
+      "resourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Insights/components/func-azportfolio-b14",
+      "symbolicName": null,
+      "unsupportedReason": null
+    },
+    {
+      "after": {
+        "apiVersion": "2020-02-02",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Insights/components/func-azportfolio-b2",
+        "kind": "web",
+        "location": "germanywestcentral",
+        "name": "func-azportfolio-b2",
+        "properties": {
+          "Application_Type": "web",
+          "Flow_Type": "Bluefield",
+          "IngestionMode": "LogAnalytics",
+          "Request_Source": "rest",
+          "RetentionInDays": 90,
+          "WorkspaceResourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/DefaultResourceGroup-DEWC/providers/Microsoft.OperationalInsights/workspaces/DefaultWorkspace-9cb921f7-8a0b-445c-bb35-eca47da1daae-DEWC",
+          "publicNetworkAccessForIngestion": "Enabled",
+          "publicNetworkAccessForQuery": "Enabled"
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.Insights/components"
+      },
+      "before": {
+        "apiVersion": "2020-02-02",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Insights/components/func-azportfolio-b2",
+        "kind": "web",
+        "location": "germanywestcentral",
+        "name": "func-azportfolio-b2",
+        "properties": {
+          "Application_Type": "web",
+          "IngestionMode": "LogAnalytics",
+          "RetentionInDays": 90,
+          "WorkspaceResourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/DefaultResourceGroup-DEWC/providers/Microsoft.OperationalInsights/workspaces/DefaultWorkspace-9cb921f7-8a0b-445c-bb35-eca47da1daae-DEWC",
+          "publicNetworkAccessForIngestion": "Enabled",
+          "publicNetworkAccessForQuery": "Enabled"
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.Insights/components"
+      },
+      "changeType": "Modify",
+      "delta": [
+        {
+          "after": "Bluefield",
+          "before": null,
+          "children": null,
+          "path": "properties.Flow_Type",
+          "propertyChangeType": "Create"
+        },
+        {
+          "after": "rest",
+          "before": null,
+          "children": null,
+          "path": "properties.Request_Source",
+          "propertyChangeType": "Create"
+        }
+      ],
+      "deploymentId": null,
+      "extension": null,
+      "identifiers": null,
+      "resourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Insights/components/func-azportfolio-b2",
+      "symbolicName": null,
+      "unsupportedReason": null
+    },
+    {
+      "after": {
+        "apiVersion": "2018-03-01",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Insights/metricalerts/alert-sql-free-limit",
+        "location": "global",
+        "name": "alert-sql-free-limit",
+        "properties": {
+          "actions": [
+            {
+              "actionGroupId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Insights/actionGroups/ag-azportfolio-ops"
+            }
+          ],
+          "criteria": {
+            "allOf": [
+              {
+                "criterionType": "StaticThresholdCriterion",
+                "metricName": "free_amount_consumed",
+                "name": "cond0",
+                "operator": "GreaterThan",
+                "threshold": 80000.0,
+                "timeAggregation": "Maximum"
+              }
+            ],
+            "odata.type": "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria"
+          },
+          "description": "Free SQL vCore-seconds consumed this month passed 80,000 of 100,000 (proved at 9,000 on 2026-10-16)",
+          "enabled": true,
+          "evaluationFrequency": "PT15M",
+          "scopes": [
+            "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Sql/servers/sql-azportfolio-b1eu/databases/aid"
+          ],
+          "severity": 2,
+          "windowSize": "PT1H"
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.Insights/metricAlerts"
+      },
+      "before": {
+        "apiVersion": "2018-03-01",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Insights/metricalerts/alert-sql-free-limit",
+        "location": "global",
+        "name": "alert-sql-free-limit",
+        "properties": {
+          "actions": [
+            {
+              "actionGroupId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Insights/actionGroups/ag-azportfolio-ops"
+            }
+          ],
+          "criteria": {
+            "allOf": [
+              {
+                "criterionType": "StaticThresholdCriterion",
+                "metricName": "free_amount_consumed",
+                "name": "cond0",
+                "operator": "GreaterThan",
+                "threshold": 80000.0,
+                "timeAggregation": "Maximum"
+              }
+            ],
+            "odata.type": "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria"
+          },
+          "description": "Free SQL vCore-seconds consumed this month passed 80,000 of 100,000 (proved at 9,000 on 2026-10-16)",
+          "enabled": true,
+          "evaluationFrequency": "PT15M",
+          "scopes": [
+            "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Sql/servers/sql-azportfolio-b1eu/databases/aid"
+          ],
+          "severity": 2,
+          "windowSize": "PT1H"
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.Insights/metricAlerts"
+      },
+      "changeType": "NoChange",
+      "delta": [],
+      "deploymentId": null,
+      "extension": null,
+      "identifiers": null,
+      "resourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Insights/metricAlerts/alert-sql-free-limit",
+      "symbolicName": null,
+      "unsupportedReason": null
+    },
+    {
+      "after": {
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/microsoft.insights/workbooks/9c4ca95a-7ecc-490f-ab08-2210e4cfb5d0",
+        "kind": "shared",
+        "location": "northcentralus",
+        "name": "9c4ca95a-7ecc-490f-ab08-2210e4cfb5d0",
+        "resourceGroup": "rg-azportfolio-b1",
+        "tags": {
+          "hidden-title": "azportfolio-operations"
+        },
+        "type": "microsoft.insights/workbooks"
+      },
+      "before": {
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/microsoft.insights/workbooks/9c4ca95a-7ecc-490f-ab08-2210e4cfb5d0",
+        "kind": "shared",
+        "location": "northcentralus",
+        "name": "9c4ca95a-7ecc-490f-ab08-2210e4cfb5d0",
+        "resourceGroup": "rg-azportfolio-b1",
+        "tags": {
+          "hidden-title": "azportfolio-operations"
+        },
+        "type": "microsoft.insights/workbooks"
+      },
+      "changeType": "Ignore",
+      "delta": null,
+      "deploymentId": null,
+      "extension": null,
+      "identifiers": null,
+      "resourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/microsoft.insights/workbooks/9c4ca95a-7ecc-490f-ab08-2210e4cfb5d0",
+      "symbolicName": null,
+      "unsupportedReason": null
+    },
+    {
+      "after": {
+        "apiVersion": "2023-07-01",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.KeyVault/vaults/kv-azportfolio-b2",
+        "location": "northcentralus",
+        "name": "kv-azportfolio-b2",
+        "properties": {
+          "enableRbacAuthorization": true,
+          "enableSoftDelete": true,
+          "enabledForDeployment": false,
+          "enabledForDiskEncryption": false,
+          "enabledForTemplateDeployment": false,
+          "publicNetworkAccess": "Enabled",
+          "sku": {
+            "family": "A",
+            "name": "standard"
+          },
+          "softDeleteRetentionInDays": 7,
+          "tenantId": "fbc63603-de50-4d40-b10a-1708ddcea0b7"
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.KeyVault/vaults"
+      },
+      "before": {
+        "apiVersion": "2023-07-01",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.KeyVault/vaults/kv-azportfolio-b2",
+        "location": "northcentralus",
+        "name": "kv-azportfolio-b2",
+        "properties": {
+          "enableRbacAuthorization": true,
+          "enableSoftDelete": true,
+          "enabledForDeployment": false,
+          "enabledForDiskEncryption": false,
+          "enabledForTemplateDeployment": false,
+          "publicNetworkAccess": "Enabled",
+          "sku": {
+            "family": "A",
+            "name": "standard"
+          },
+          "softDeleteRetentionInDays": 7,
+          "tenantId": "fbc63603-de50-4d40-b10a-1708ddcea0b7"
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.KeyVault/vaults"
+      },
+      "changeType": "NoChange",
+      "delta": [],
+      "deploymentId": null,
+      "extension": null,
+      "identifiers": null,
+      "resourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.KeyVault/vaults/kv-azportfolio-b2",
+      "symbolicName": null,
+      "unsupportedReason": null
+    },
+    {
+      "after": {
+        "apiVersion": "2022-04-01",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.KeyVault/vaults/kv-azportfolio-b2/providers/Microsoft.Authorization/roleAssignments/96f0c571-f3d9-4b9e-902c-ffb2968ce992",
+        "name": "96f0c571-f3d9-4b9e-902c-ffb2968ce992",
+        "properties": {
+          "principalId": "[reference('/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/sites/func-azportfolio-b13', '2024-04-01', 'full').identity.principalId]",
+          "roleDefinitionId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/providers/Microsoft.Authorization/roleDefinitions/4633458b-17de-408a-b874-0445c86b69e6"
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.Authorization/roleAssignments"
+      },
+      "before": {
+        "apiVersion": "2022-04-01",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.KeyVault/vaults/kv-azportfolio-b2/providers/Microsoft.Authorization/roleAssignments/96f0c571-f3d9-4b9e-902c-ffb2968ce992",
+        "name": "96f0c571-f3d9-4b9e-902c-ffb2968ce992",
+        "properties": {
+          "principalId": "25510d7e-bc26-4f71-be2f-fb52e39fabf5",
+          "roleDefinitionId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/providers/Microsoft.Authorization/roleDefinitions/4633458b-17de-408a-b874-0445c86b69e6"
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.Authorization/roleAssignments"
+      },
+      "changeType": "Modify",
+      "delta": [
+        {
+          "after": "[reference('/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/sites/func-azportfolio-b13', '2024-04-01', 'full').identity.principalId]",
+          "before": "25510d7e-bc26-4f71-be2f-fb52e39fabf5",
+          "children": null,
+          "path": "properties.principalId",
+          "propertyChangeType": "Modify"
+        },
+        {
+          "after": "ServicePrincipal",
+          "before": null,
+          "children": null,
+          "path": "properties.principalType",
+          "propertyChangeType": "NoEffect"
+        }
+      ],
+      "deploymentId": null,
+      "extension": null,
+      "identifiers": null,
+      "resourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.KeyVault/vaults/kv-azportfolio-b2/providers/Microsoft.Authorization/roleAssignments/96f0c571-f3d9-4b9e-902c-ffb2968ce992",
+      "symbolicName": null,
+      "unsupportedReason": null
+    },
+    {
+      "after": {
+        "apiVersion": "2022-04-01",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.KeyVault/vaults/kv-azportfolio-b2/providers/Microsoft.Authorization/roleAssignments/ecf5d484-082d-4793-bb69-6e86697eed18",
+        "name": "ecf5d484-082d-4793-bb69-6e86697eed18",
+        "properties": {
+          "principalId": "[reference('/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/sites/func-azportfolio-b2', '2024-04-01', 'full').identity.principalId]",
+          "roleDefinitionId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/providers/Microsoft.Authorization/roleDefinitions/4633458b-17de-408a-b874-0445c86b69e6"
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.Authorization/roleAssignments"
+      },
+      "before": {
+        "apiVersion": "2022-04-01",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.KeyVault/vaults/kv-azportfolio-b2/providers/Microsoft.Authorization/roleAssignments/ecf5d484-082d-4793-bb69-6e86697eed18",
+        "name": "ecf5d484-082d-4793-bb69-6e86697eed18",
+        "properties": {
+          "principalId": "1c403439-6a5d-4cf0-965f-91d897941e15",
+          "roleDefinitionId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/providers/Microsoft.Authorization/roleDefinitions/4633458b-17de-408a-b874-0445c86b69e6"
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.Authorization/roleAssignments"
+      },
+      "changeType": "Modify",
+      "delta": [
+        {
+          "after": "[reference('/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/sites/func-azportfolio-b2', '2024-04-01', 'full').identity.principalId]",
+          "before": "1c403439-6a5d-4cf0-965f-91d897941e15",
+          "children": null,
+          "path": "properties.principalId",
+          "propertyChangeType": "Modify"
+        },
+        {
+          "after": "ServicePrincipal",
+          "before": null,
+          "children": null,
+          "path": "properties.principalType",
+          "propertyChangeType": "NoEffect"
+        }
+      ],
+      "deploymentId": null,
+      "extension": null,
+      "identifiers": null,
+      "resourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.KeyVault/vaults/kv-azportfolio-b2/providers/Microsoft.Authorization/roleAssignments/ecf5d484-082d-4793-bb69-6e86697eed18",
+      "symbolicName": null,
+      "unsupportedReason": null
+    },
+    {
+      "after": {
+        "apiVersion": "2023-01-31",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id-github-azportfolio",
+        "location": "northcentralus",
+        "name": "id-github-azportfolio",
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+      },
+      "before": {
+        "apiVersion": "2023-01-31",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id-github-azportfolio",
+        "location": "northcentralus",
+        "name": "id-github-azportfolio",
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+      },
+      "changeType": "NoChange",
+      "delta": [],
+      "deploymentId": null,
+      "extension": null,
+      "identifiers": null,
+      "resourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id-github-azportfolio",
+      "symbolicName": null,
+      "unsupportedReason": null
+    },
+    {
+      "after": {
+        "apiVersion": "2024-06-01-preview",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Search/searchServices/srch-azportfolio-b1",
+        "location": "northcentralus",
+        "name": "srch-azportfolio-b1",
+        "properties": {
+          "authOptions": {
+            "aadOrApiKey": {
+              "aadAuthFailureMode": "http401WithBearerChallenge"
+            }
+          },
+          "disableLocalAuth": false,
+          "encryptionWithCmk": {
+            "enforcement": "Unspecified"
+          },
+          "hostingMode": "default",
+          "networkRuleSet": {
+            "bypass": "None"
+          },
+          "partitionCount": 1,
+          "publicNetworkAccess": "Enabled",
+          "replicaCount": 1,
+          "semanticSearch": "free"
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "sku": {
+          "name": "free"
+        },
+        "type": "Microsoft.Search/searchServices"
+      },
+      "before": {
+        "apiVersion": "2024-06-01-preview",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Search/searchServices/srch-azportfolio-b1",
+        "location": "northcentralus",
+        "name": "srch-azportfolio-b1",
+        "properties": {
+          "authOptions": {
+            "aadOrApiKey": {
+              "aadAuthFailureMode": "http401WithBearerChallenge"
+            }
+          },
+          "disableLocalAuth": false,
+          "encryptionWithCmk": {
+            "enforcement": "Unspecified"
+          },
+          "hostingMode": "default",
+          "networkRuleSet": {
+            "bypass": "None"
+          },
+          "partitionCount": 1,
+          "publicNetworkAccess": "Enabled",
+          "replicaCount": 1,
+          "semanticSearch": "free"
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "sku": {
+          "name": "free"
+        },
+        "type": "Microsoft.Search/searchServices"
+      },
+      "changeType": "NoChange",
+      "delta": [],
+      "deploymentId": null,
+      "extension": null,
+      "identifiers": null,
+      "resourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Search/searchServices/srch-azportfolio-b1",
+      "symbolicName": null,
+      "unsupportedReason": null
+    },
+    {
+      "after": {
+        "apiVersion": "2023-08-01-preview",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Sql/servers/sql-azportfolio-b1eu",
+        "location": "germanywestcentral",
+        "name": "sql-azportfolio-b1eu",
+        "properties": {
+          "administratorLogin": "CloudSAcc7eae9f",
+          "administrators": {
+            "administratorType": "ActiveDirectory",
+            "azureADOnlyAuthentication": true,
+            "login": "<operator-email-redacted>",
+            "principalType": "User",
+            "sid": "29da58b6-2595-4b29-9ab4-5aaa281e5af1",
+            "tenantId": "fbc63603-de50-4d40-b10a-1708ddcea0b7"
+          },
+          "minimalTlsVersion": "1.2",
+          "publicNetworkAccess": "Enabled",
+          "restrictOutboundNetworkAccess": "Disabled",
+          "retentionDays": -1
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.Sql/servers"
+      },
+      "before": {
+        "apiVersion": "2023-08-01-preview",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Sql/servers/sql-azportfolio-b1eu",
+        "location": "germanywestcentral",
+        "name": "sql-azportfolio-b1eu",
+        "properties": {
+          "administratorLogin": "CloudSAcc7eae9f",
+          "administrators": {
+            "administratorType": "ActiveDirectory",
+            "azureADOnlyAuthentication": true,
+            "login": "<operator-email-redacted>",
+            "principalType": "User",
+            "sid": "29da58b6-2595-4b29-9ab4-5aaa281e5af1",
+            "tenantId": "fbc63603-de50-4d40-b10a-1708ddcea0b7"
+          },
+          "minimalTlsVersion": "1.2",
+          "publicNetworkAccess": "Enabled",
+          "restrictOutboundNetworkAccess": "Disabled",
+          "retentionDays": -1
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.Sql/servers"
+      },
+      "changeType": "NoChange",
+      "delta": [
+        {
+          "after": "12.0",
+          "before": null,
+          "children": null,
+          "path": "properties.version",
+          "propertyChangeType": "NoEffect"
+        }
+      ],
+      "deploymentId": null,
+      "extension": null,
+      "identifiers": null,
+      "resourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Sql/servers/sql-azportfolio-b1eu",
+      "symbolicName": null,
+      "unsupportedReason": null
+    },
+    {
+      "after": {
+        "apiVersion": "2023-08-01-preview",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Sql/servers/sql-azportfolio-b1eu/databases/aid",
+        "location": "germanywestcentral",
+        "name": "aid",
+        "properties": {
+          "autoPauseDelay": 60,
+          "availabilityZone": "NoPreference",
+          "catalogCollation": "SQL_Latin1_General_CP1_CI_AS",
+          "collation": "SQL_Latin1_General_CP1_CI_AS",
+          "freeLimitExhaustionBehavior": "AutoPause",
+          "isLedgerOn": false,
+          "maintenanceConfigurationId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/providers/Microsoft.Maintenance/publicMaintenanceConfigurations/SQL_Default",
+          "maxSizeBytes": 34359738368,
+          "readScale": "Disabled",
+          "requestedBackupStorageRedundancy": "Local",
+          "useFreeLimit": true,
+          "zoneRedundant": false
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "sku": {
+          "family": "Gen5",
+          "name": "GP_S_Gen5"
+        },
+        "type": "Microsoft.Sql/servers/databases"
+      },
+      "before": {
+        "apiVersion": "2023-08-01-preview",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Sql/servers/sql-azportfolio-b1eu/databases/aid",
+        "location": "germanywestcentral",
+        "name": "aid",
+        "properties": {
+          "autoPauseDelay": 60,
+          "availabilityZone": "NoPreference",
+          "catalogCollation": "SQL_Latin1_General_CP1_CI_AS",
+          "collation": "SQL_Latin1_General_CP1_CI_AS",
+          "freeLimitExhaustionBehavior": "AutoPause",
+          "isLedgerOn": false,
+          "maintenanceConfigurationId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/providers/Microsoft.Maintenance/publicMaintenanceConfigurations/SQL_Default",
+          "maxSizeBytes": 34359738368,
+          "readScale": "Disabled",
+          "requestedBackupStorageRedundancy": "Local",
+          "useFreeLimit": true,
+          "zoneRedundant": false
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "sku": {
+          "family": "Gen5",
+          "name": "GP_S_Gen5"
+        },
+        "type": "Microsoft.Sql/servers/databases"
+      },
+      "changeType": "NoChange",
+      "delta": [
+        {
+          "after": 0.5,
+          "before": null,
+          "children": null,
+          "path": "properties.minCapacity",
+          "propertyChangeType": "NoEffect"
+        },
+        {
+          "after": 2,
+          "before": null,
+          "children": null,
+          "path": "sku.capacity",
+          "propertyChangeType": "NoEffect"
+        },
+        {
+          "after": "GeneralPurpose",
+          "before": null,
+          "children": null,
+          "path": "sku.tier",
+          "propertyChangeType": "NoEffect"
+        }
+      ],
+      "deploymentId": null,
+      "extension": null,
+      "identifiers": null,
+      "resourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Sql/servers/sql-azportfolio-b1eu/databases/aid",
+      "symbolicName": null,
+      "unsupportedReason": null
+    },
+    {
+      "after": {
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Sql/servers/sql-azportfolio-b1eu/databases/master",
+        "kind": "v12.0,system,serverless",
+        "location": "germanywestcentral",
+        "managedBy": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Sql/servers/sql-azportfolio-b1eu",
+        "name": "sql-azportfolio-b1eu/master",
+        "resourceGroup": "rg-azportfolio-b1",
+        "sku": {
+          "capacity": 4,
+          "family": "SYSTEM",
+          "name": "GP_SYSTEM",
+          "tier": "System"
+        },
+        "type": "Microsoft.Sql/servers/databases"
+      },
+      "before": {
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Sql/servers/sql-azportfolio-b1eu/databases/master",
+        "kind": "v12.0,system,serverless",
+        "location": "germanywestcentral",
+        "managedBy": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Sql/servers/sql-azportfolio-b1eu",
+        "name": "sql-azportfolio-b1eu/master",
+        "resourceGroup": "rg-azportfolio-b1",
+        "sku": {
+          "capacity": 4,
+          "family": "SYSTEM",
+          "name": "GP_SYSTEM",
+          "tier": "System"
+        },
+        "type": "Microsoft.Sql/servers/databases"
+      },
+      "changeType": "Ignore",
+      "delta": null,
+      "deploymentId": null,
+      "extension": null,
+      "identifiers": null,
+      "resourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Sql/servers/sql-azportfolio-b1eu/databases/master",
+      "symbolicName": null,
+      "unsupportedReason": null
+    },
+    {
+      "after": {
+        "apiVersion": "2023-05-01",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Storage/storageAccounts/stazportfoliob1",
+        "kind": "StorageV2",
+        "location": "northcentralus",
+        "name": "stazportfoliob1",
+        "properties": {
+          "accessTier": "Hot",
+          "allowBlobPublicAccess": false,
+          "allowCrossTenantReplication": false,
+          "encryption": {
+            "keySource": "Microsoft.Storage"
+          },
+          "minimumTlsVersion": "TLS1_2",
+          "networkAcls": {
+            "bypass": "None",
+            "defaultAction": "Allow"
+          },
+          "supportsHttpsTrafficOnly": true
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "sku": {
+          "name": "Standard_LRS"
+        },
+        "type": "Microsoft.Storage/storageAccounts"
+      },
+      "before": {
+        "apiVersion": "2023-05-01",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Storage/storageAccounts/stazportfoliob1",
+        "kind": "StorageV2",
+        "location": "northcentralus",
+        "name": "stazportfoliob1",
+        "properties": {
+          "accessTier": "Hot",
+          "allowBlobPublicAccess": false,
+          "allowCrossTenantReplication": false,
+          "encryption": {
+            "keySource": "Microsoft.Storage"
+          },
+          "minimumTlsVersion": "TLS1_2",
+          "networkAcls": {
+            "bypass": "None",
+            "defaultAction": "Allow"
+          },
+          "supportsHttpsTrafficOnly": true
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "sku": {
+          "name": "Standard_LRS"
+        },
+        "type": "Microsoft.Storage/storageAccounts"
+      },
+      "changeType": "NoChange",
+      "delta": [],
+      "deploymentId": null,
+      "extension": null,
+      "identifiers": null,
+      "resourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Storage/storageAccounts/stazportfoliob1",
+      "symbolicName": null,
+      "unsupportedReason": null
+    },
+    {
+      "after": {
+        "apiVersion": "2023-05-01",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Storage/storageAccounts/stazportfoliob1/blobServices/default/containers/ipums",
+        "name": "ipums",
+        "properties": {
+          "defaultEncryptionScope": "$account-encryption-key",
+          "denyEncryptionScopeOverride": false,
+          "publicAccess": "None"
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.Storage/storageAccounts/blobServices/containers"
+      },
+      "before": {
+        "apiVersion": "2023-05-01",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Storage/storageAccounts/stazportfoliob1/blobServices/default/containers/ipums",
+        "name": "ipums",
+        "properties": {
+          "defaultEncryptionScope": "$account-encryption-key",
+          "denyEncryptionScopeOverride": false,
+          "publicAccess": "None"
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.Storage/storageAccounts/blobServices/containers"
+      },
+      "changeType": "NoChange",
+      "delta": [],
+      "deploymentId": null,
+      "extension": null,
+      "identifiers": null,
+      "resourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Storage/storageAccounts/stazportfoliob1/blobServices/default/containers/ipums",
+      "symbolicName": null,
+      "unsupportedReason": null
+    },
+    {
+      "after": {
+        "apiVersion": "2022-04-01",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Storage/storageAccounts/stazportfoliob1/providers/Microsoft.Authorization/roleAssignments/0230c822-0657-485b-9261-05c7405d44b7",
+        "name": "0230c822-0657-485b-9261-05c7405d44b7",
+        "properties": {
+          "principalId": "[reference('/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/sites/func-azportfolio-b1', '2024-04-01', 'full').identity.principalId]",
+          "roleDefinitionId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/providers/Microsoft.Authorization/roleDefinitions/2a2b9908-6ea1-4ae2-8e65-a410df84e7d1"
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.Authorization/roleAssignments"
+      },
+      "before": {
+        "apiVersion": "2022-04-01",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Storage/storageAccounts/stazportfoliob1/providers/Microsoft.Authorization/roleAssignments/0230c822-0657-485b-9261-05c7405d44b7",
+        "name": "0230c822-0657-485b-9261-05c7405d44b7",
+        "properties": {
+          "principalId": "ed3b7363-da8a-4afc-bb9e-6f014a7a2781",
+          "roleDefinitionId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/providers/Microsoft.Authorization/roleDefinitions/2a2b9908-6ea1-4ae2-8e65-a410df84e7d1"
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.Authorization/roleAssignments"
+      },
+      "changeType": "Modify",
+      "delta": [
+        {
+          "after": "[reference('/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/sites/func-azportfolio-b1', '2024-04-01', 'full').identity.principalId]",
+          "before": "ed3b7363-da8a-4afc-bb9e-6f014a7a2781",
+          "children": null,
+          "path": "properties.principalId",
+          "propertyChangeType": "Modify"
+        },
+        {
+          "after": "ServicePrincipal",
+          "before": null,
+          "children": null,
+          "path": "properties.principalType",
+          "propertyChangeType": "NoEffect"
+        }
+      ],
+      "deploymentId": null,
+      "extension": null,
+      "identifiers": null,
+      "resourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Storage/storageAccounts/stazportfoliob1/providers/Microsoft.Authorization/roleAssignments/0230c822-0657-485b-9261-05c7405d44b7",
+      "symbolicName": null,
+      "unsupportedReason": null
+    },
+    {
+      "after": {
+        "apiVersion": "2022-04-01",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Storage/storageAccounts/stazportfoliob1/providers/Microsoft.Authorization/roleAssignments/b2f2fab3-795d-410c-b5e5-3a8b7b6395e3",
+        "name": "b2f2fab3-795d-410c-b5e5-3a8b7b6395e3",
+        "properties": {
+          "principalId": "[reference('/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id-github-azportfolio', '2023-01-31').principalId]",
+          "roleDefinitionId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/providers/Microsoft.Authorization/roleDefinitions/ba92f5b4-2d11-453d-a403-e96b0029c9fe"
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.Authorization/roleAssignments"
+      },
+      "before": {
+        "apiVersion": "2022-04-01",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Storage/storageAccounts/stazportfoliob1/providers/Microsoft.Authorization/roleAssignments/b2f2fab3-795d-410c-b5e5-3a8b7b6395e3",
+        "name": "b2f2fab3-795d-410c-b5e5-3a8b7b6395e3",
+        "properties": {
+          "principalId": "da0301c7-fede-44b1-8822-80d6568f645a",
+          "roleDefinitionId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/providers/Microsoft.Authorization/roleDefinitions/ba92f5b4-2d11-453d-a403-e96b0029c9fe"
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.Authorization/roleAssignments"
+      },
+      "changeType": "Modify",
+      "delta": [
+        {
+          "after": "[reference('/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id-github-azportfolio', '2023-01-31').principalId]",
+          "before": "da0301c7-fede-44b1-8822-80d6568f645a",
+          "children": null,
+          "path": "properties.principalId",
+          "propertyChangeType": "Modify"
+        },
+        {
+          "after": "ServicePrincipal",
+          "before": null,
+          "children": null,
+          "path": "properties.principalType",
+          "propertyChangeType": "NoEffect"
+        }
+      ],
+      "deploymentId": null,
+      "extension": null,
+      "identifiers": null,
+      "resourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Storage/storageAccounts/stazportfoliob1/providers/Microsoft.Authorization/roleAssignments/b2f2fab3-795d-410c-b5e5-3a8b7b6395e3",
+      "symbolicName": null,
+      "unsupportedReason": null
+    },
+    {
+      "after": {
+        "apiVersion": "2024-04-01",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/serverFarms/ASP-rgazportfoliob1-4497",
+        "kind": "functionapp",
+        "location": "germanywestcentral",
+        "name": "ASP-rgazportfoliob1-4497",
+        "properties": {
+          "allowEquivalentSku": false,
+          "asyncScalingEnabled": false,
+          "createdTime": "2026-10-15T20:38:21.5033333",
+          "currentNumberOfZonesUtilized": 0,
+          "elasticScaleEnabled": false,
+          "hyperV": false,
+          "isCustomMode": false,
+          "isSpot": false,
+          "isXenon": false,
+          "kind": "functionapp",
+          "maximumNumberOfZones": 3,
+          "name": "ASP-rgazportfoliob1-4497",
+          "perSiteScaling": false,
+          "powerState": "Running",
+          "reserved": true,
+          "targetWorkerSizeId": 0,
+          "vnetConnectionsMax": 2,
+          "vnetConnectionsUsed": 0,
+          "zoneRedundant": false
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "sku": {
+          "capacity": 0,
+          "name": "FC1"
+        },
+        "type": "Microsoft.Web/serverfarms"
+      },
+      "before": {
+        "apiVersion": "2024-04-01",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/serverFarms/ASP-rgazportfoliob1-4497",
+        "kind": "functionapp",
+        "location": "germanywestcentral",
+        "name": "ASP-rgazportfoliob1-4497",
+        "properties": {
+          "allowEquivalentSku": false,
+          "asyncScalingEnabled": false,
+          "createdTime": "2026-10-15T20:38:21.5033333",
+          "currentNumberOfZonesUtilized": 0,
+          "elasticScaleEnabled": false,
+          "hyperV": false,
+          "isCustomMode": false,
+          "isSpot": false,
+          "isXenon": false,
+          "kind": "functionapp",
+          "maximumNumberOfZones": 3,
+          "name": "ASP-rgazportfoliob1-4497",
+          "perSiteScaling": false,
+          "powerState": "Running",
+          "reserved": true,
+          "targetWorkerSizeId": 0,
+          "vnetConnectionsMax": 2,
+          "vnetConnectionsUsed": 0,
+          "zoneRedundant": false
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "sku": {
+          "capacity": 0,
+          "name": "FC1"
+        },
+        "type": "Microsoft.Web/serverfarms"
+      },
+      "changeType": "NoChange",
+      "delta": [
+        {
+          "after": "FlexConsumption",
+          "before": null,
+          "children": null,
+          "path": "sku.tier",
+          "propertyChangeType": "NoEffect"
+        }
+      ],
+      "deploymentId": null,
+      "extension": null,
+      "identifiers": null,
+      "resourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/serverfarms/ASP-rgazportfoliob1-4497",
+      "symbolicName": null,
+      "unsupportedReason": null
+    },
+    {
+      "after": {
+        "apiVersion": "2024-04-01",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/serverFarms/ASP-rgazportfoliob1-845b",
+        "kind": "functionapp",
+        "location": "germanywestcentral",
+        "name": "ASP-rgazportfoliob1-845b",
+        "properties": {
+          "allowEquivalentSku": false,
+          "asyncScalingEnabled": false,
+          "createdTime": "2026-10-14T21:08:43.28",
+          "currentNumberOfZonesUtilized": 0,
+          "elasticScaleEnabled": false,
+          "hyperV": false,
+          "isCustomMode": false,
+          "isSpot": false,
+          "isXenon": false,
+          "kind": "functionapp",
+          "maximumNumberOfZones": 3,
+          "name": "ASP-rgazportfoliob1-845b",
+          "perSiteScaling": false,
+          "powerState": "Running",
+          "reserved": true,
+          "targetWorkerSizeId": 0,
+          "vnetConnectionsMax": 2,
+          "vnetConnectionsUsed": 0,
+          "zoneRedundant": false
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "sku": {
+          "capacity": 0,
+          "name": "FC1"
+        },
+        "type": "Microsoft.Web/serverfarms"
+      },
+      "before": {
+        "apiVersion": "2024-04-01",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/serverFarms/ASP-rgazportfoliob1-845b",
+        "kind": "functionapp",
+        "location": "germanywestcentral",
+        "name": "ASP-rgazportfoliob1-845b",
+        "properties": {
+          "allowEquivalentSku": false,
+          "asyncScalingEnabled": false,
+          "createdTime": "2026-10-14T21:08:43.28",
+          "currentNumberOfZonesUtilized": 0,
+          "elasticScaleEnabled": false,
+          "hyperV": false,
+          "isCustomMode": false,
+          "isSpot": false,
+          "isXenon": false,
+          "kind": "functionapp",
+          "maximumNumberOfZones": 3,
+          "name": "ASP-rgazportfoliob1-845b",
+          "perSiteScaling": false,
+          "powerState": "Running",
+          "reserved": true,
+          "targetWorkerSizeId": 0,
+          "vnetConnectionsMax": 2,
+          "vnetConnectionsUsed": 0,
+          "zoneRedundant": false
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "sku": {
+          "capacity": 0,
+          "name": "FC1"
+        },
+        "type": "Microsoft.Web/serverfarms"
+      },
+      "changeType": "NoChange",
+      "delta": [
+        {
+          "after": "FlexConsumption",
+          "before": null,
+          "children": null,
+          "path": "sku.tier",
+          "propertyChangeType": "NoEffect"
+        }
+      ],
+      "deploymentId": null,
+      "extension": null,
+      "identifiers": null,
+      "resourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/serverfarms/ASP-rgazportfoliob1-845b",
+      "symbolicName": null,
+      "unsupportedReason": null
+    },
+    {
+      "after": {
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/serverFarms/ASP-rgazportfoliob1-afb7",
+        "kind": "functionapp",
+        "location": "germanywestcentral",
+        "name": "ASP-rgazportfoliob1-afb7",
+        "resourceGroup": "rg-azportfolio-b1",
+        "sku": {
+          "capacity": 0,
+          "family": "FC",
+          "name": "FC1",
+          "size": "FC1",
+          "tier": "FlexConsumption"
+        },
+        "type": "Microsoft.Web/serverFarms"
+      },
+      "before": {
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/serverFarms/ASP-rgazportfoliob1-afb7",
+        "kind": "functionapp",
+        "location": "germanywestcentral",
+        "name": "ASP-rgazportfoliob1-afb7",
+        "resourceGroup": "rg-azportfolio-b1",
+        "sku": {
+          "capacity": 0,
+          "family": "FC",
+          "name": "FC1",
+          "size": "FC1",
+          "tier": "FlexConsumption"
+        },
+        "type": "Microsoft.Web/serverFarms"
+      },
+      "changeType": "Ignore",
+      "delta": null,
+      "deploymentId": null,
+      "extension": null,
+      "identifiers": null,
+      "resourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/serverFarms/ASP-rgazportfoliob1-afb7",
+      "symbolicName": null,
+      "unsupportedReason": null
+    },
+    {
+      "after": {
+        "apiVersion": "2024-04-01",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/serverFarms/ASP-rgazportfoliob1-d595",
+        "kind": "functionapp",
+        "location": "germanywestcentral",
+        "name": "ASP-rgazportfoliob1-d595",
+        "properties": {
+          "allowEquivalentSku": false,
+          "asyncScalingEnabled": false,
+          "createdTime": "2026-10-17T03:37:58.1966667",
+          "currentNumberOfZonesUtilized": 0,
+          "elasticScaleEnabled": false,
+          "hyperV": false,
+          "isCustomMode": false,
+          "isSpot": false,
+          "isXenon": false,
+          "kind": "functionapp",
+          "maximumNumberOfZones": 3,
+          "name": "ASP-rgazportfoliob1-d595",
+          "perSiteScaling": false,
+          "powerState": "Running",
+          "reserved": true,
+          "targetWorkerSizeId": 0,
+          "vnetConnectionsMax": 2,
+          "vnetConnectionsUsed": 0,
+          "zoneRedundant": false
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "sku": {
+          "capacity": 0,
+          "name": "FC1"
+        },
+        "type": "Microsoft.Web/serverfarms"
+      },
+      "before": {
+        "apiVersion": "2024-04-01",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/serverFarms/ASP-rgazportfoliob1-d595",
+        "kind": "functionapp",
+        "location": "germanywestcentral",
+        "name": "ASP-rgazportfoliob1-d595",
+        "properties": {
+          "allowEquivalentSku": false,
+          "asyncScalingEnabled": false,
+          "createdTime": "2026-10-17T03:37:58.1966667",
+          "currentNumberOfZonesUtilized": 0,
+          "elasticScaleEnabled": false,
+          "hyperV": false,
+          "isCustomMode": false,
+          "isSpot": false,
+          "isXenon": false,
+          "kind": "functionapp",
+          "maximumNumberOfZones": 3,
+          "name": "ASP-rgazportfoliob1-d595",
+          "perSiteScaling": false,
+          "powerState": "Running",
+          "reserved": true,
+          "targetWorkerSizeId": 0,
+          "vnetConnectionsMax": 2,
+          "vnetConnectionsUsed": 0,
+          "zoneRedundant": false
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "sku": {
+          "capacity": 0,
+          "name": "FC1"
+        },
+        "type": "Microsoft.Web/serverfarms"
+      },
+      "changeType": "NoChange",
+      "delta": [
+        {
+          "after": "FlexConsumption",
+          "before": null,
+          "children": null,
+          "path": "sku.tier",
+          "propertyChangeType": "NoEffect"
+        }
+      ],
+      "deploymentId": null,
+      "extension": null,
+      "identifiers": null,
+      "resourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/serverfarms/ASP-rgazportfoliob1-d595",
+      "symbolicName": null,
+      "unsupportedReason": null
+    },
+    {
+      "after": {
+        "apiVersion": "2024-04-01",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/sites/func-azportfolio-b1",
+        "identity": {
+          "type": "SystemAssigned"
+        },
+        "kind": "functionapp,linux",
+        "location": "germanywestcentral",
+        "name": "func-azportfolio-b1",
+        "properties": {
+          "afdEnabled": false,
+          "blockPathTraversal": false,
+          "clientAffinityEnabled": false,
+          "clientAffinityProxyEnabled": false,
+          "clientCertEnabled": false,
+          "clientCertMode": "Required",
+          "containerSize": 1536,
+          "dailyMemoryTimeQuota": 0,
+          "eligibleLogCategories": "FunctionAppLogs,AppServiceAuthenticationLogs,AppServiceAuditLogs,AppServiceIPSecAuditLogs",
+          "enabled": true,
+          "endToEndEncryptionEnabled": false,
+          "ftpUsername": "func-azportfolio-b1\\$func-azportfolio-b1",
+          "ftpsHostName": "ftps://waws-prod-fra-039.ftp.azurewebsites.windows.net/site/wwwroot",
+          "functionAppConfig": {
+            "deployment": {
+              "storage": {
+                "authentication": {
+                  "storageAccountConnectionStringName": "DEPLOYMENT_STORAGE_CONNECTION_STRING",
+                  "type": "StorageAccountConnectionString"
+                },
+                "type": "blobContainer",
+                "value": "https://stazportfoliob1.blob.core.windows.net/app-package-funcazportfoliob1-6177822"
+              }
+            },
+            "runtime": {
+              "name": "python",
+              "version": "3.12"
+            },
+            "scaleAndConcurrency": {
+              "instanceMemoryMB": 2048,
+              "maximumInstanceCount": 100
+            },
+            "siteUpdateStrategy": {
+              "type": "Recreate"
+            }
+          },
+          "functionsRuntimeAdminIsolationEnabled": false,
+          "hostNamesDisabled": false,
+          "httpsOnly": false,
+          "inFlightFeatures": [
+            "SiteContainers"
+          ],
+          "inboundIpv6Address": "2603:1020:c04:7::2",
+          "ipMode": "IPv4",
+          "jA4Forwarding": false,
+          "keyVaultReferenceIdentity": "SystemAssigned",
+          "maintenanceEnabled": false,
+          "name": "func-azportfolio-b1",
+          "outboundIpv6Addresses": "2603:1020:c01:d::b2,2603:1020:c01:e::61,2603:1020:c01:11::1a9,2603:1020:c01:10::2b,2603:1020:c01:12::29,2603:1020:c01:10::2c,2603:1020:c01:10::27,2603:1020:c01:16::27,2603:1020:c01:10::28,2603:1020:c01:11::1a6,2603:1020:c01:4::140,2603:1020:c01:11::1a7,2603:1020:c04:7::2,2603:10e1:100:2::144f:6b0b,2603:1020:c04:7::315,2603:10e1:100:2::144f:6a18",
+          "platformVersion": "110.0.7.48",
+          "possibleInboundIpv6Addresses": "2603:1020:c04:7::2",
+          "possibleOutboundIpv6Addresses": "2603:1020:c01:d::b2,2603:1020:c01:e::61,2603:1020:c01:11::1a9,2603:1020:c01:10::2b,2603:1020:c01:12::29,2603:1020:c01:10::2c,2603:1020:c01:10::27,2603:1020:c01:16::27,2603:1020:c01:10::28,2603:1020:c01:11::1a6,2603:1020:c01:4::140,2603:1020:c01:11::1a7,2603:1020:c01:16::28,2603:1020:c01:10::29,2603:1020:c01:16::29,2603:1020:c01:12::27,2603:1020:c01:16::2a,2603:1020:c01:16::2b,2603:1020:c01:e::58,2603:1020:c01:11::1a8,2603:1020:c01:12::28,2603:1020:c01:10::2a,2603:1020:c01:d::b1,2603:1020:c01:e::60,2603:1020:c01:16::2c,2603:1020:c01:11::1aa,2603:1020:c01:4::158,2603:1020:c01:d::b3,2603:1020:c01:d::b4,2603:1020:c01:4::16a,2603:1020:c04:7::2,2603:10e1:100:2::144f:6b0b,2603:1020:c04:7::315,2603:10e1:100:2::144f:6a18",
+          "publicNetworkAccess": "Enabled",
+          "redundancyMode": "None",
+          "reserved": true,
+          "runtimeAvailabilityState": "Normal",
+          "scmSiteAlsoStopped": false,
+          "serverFarmId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/serverfarms/ASP-rgazportfoliob1-845b",
+          "siteConfig": {
+            "acrUseManagedIdentityCreds": false,
+            "alwaysOn": false,
+            "clusteringEnabled": false,
+            "functionAppScaleLimit": 100,
+            "http20Enabled": false,
+            "localMySqlEnabled": false,
+            "minimumElasticInstanceCount": 0,
+            "netFrameworkVersion": "v4.6",
+            "numberOfWorkers": 1,
+            "webJobsEnabled": false
+          },
+          "siteScopedCertificatesEnabled": true,
+          "storageAccountRequired": false,
+          "storageRecoveryDefaultState": "Running",
+          "useQueryStringAffinity": false,
+          "vnetBackupRestoreEnabled": false,
+          "vnetContentShareEnabled": false,
+          "vnetImagePullEnabled": false,
+          "vnetRouteAllEnabled": false
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.Web/sites"
+      },
+      "before": {
+        "apiVersion": "2024-04-01",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/sites/func-azportfolio-b1",
+        "identity": {
+          "type": "SystemAssigned"
+        },
+        "kind": "functionapp,linux",
+        "location": "germanywestcentral",
+        "name": "func-azportfolio-b1",
+        "properties": {
+          "afdEnabled": false,
+          "blockPathTraversal": false,
+          "clientAffinityEnabled": false,
+          "clientAffinityProxyEnabled": false,
+          "clientCertEnabled": false,
+          "clientCertMode": "Required",
+          "containerSize": 1536,
+          "dailyMemoryTimeQuota": 0,
+          "eligibleLogCategories": "FunctionAppLogs,AppServiceAuthenticationLogs,AppServiceAuditLogs,AppServiceIPSecAuditLogs",
+          "enabled": true,
+          "endToEndEncryptionEnabled": false,
+          "ftpUsername": "func-azportfolio-b1\\$func-azportfolio-b1",
+          "ftpsHostName": "ftps://waws-prod-fra-039.ftp.azurewebsites.windows.net/site/wwwroot",
+          "functionAppConfig": {
+            "deployment": {
+              "storage": {
+                "authentication": {
+                  "storageAccountConnectionStringName": "DEPLOYMENT_STORAGE_CONNECTION_STRING",
+                  "type": "StorageAccountConnectionString"
+                },
+                "type": "blobContainer",
+                "value": "https://stazportfoliob1.blob.core.windows.net/app-package-funcazportfoliob1-6177822"
+              }
+            },
+            "runtime": {
+              "name": "python",
+              "version": "3.12"
+            },
+            "scaleAndConcurrency": {
+              "instanceMemoryMB": 2048,
+              "maximumInstanceCount": 100
+            },
+            "siteUpdateStrategy": {
+              "type": "Recreate"
+            }
+          },
+          "functionsRuntimeAdminIsolationEnabled": false,
+          "hostNamesDisabled": false,
+          "httpsOnly": false,
+          "inFlightFeatures": [
+            "SiteContainers"
+          ],
+          "inboundIpv6Address": "2603:1020:c04:7::2",
+          "ipMode": "IPv4",
+          "jA4Forwarding": false,
+          "keyVaultReferenceIdentity": "SystemAssigned",
+          "maintenanceEnabled": false,
+          "name": "func-azportfolio-b1",
+          "outboundIpv6Addresses": "2603:1020:c01:d::b2,2603:1020:c01:e::61,2603:1020:c01:11::1a9,2603:1020:c01:10::2b,2603:1020:c01:12::29,2603:1020:c01:10::2c,2603:1020:c01:10::27,2603:1020:c01:16::27,2603:1020:c01:10::28,2603:1020:c01:11::1a6,2603:1020:c01:4::140,2603:1020:c01:11::1a7,2603:1020:c04:7::2,2603:10e1:100:2::144f:6b0b,2603:1020:c04:7::315,2603:10e1:100:2::144f:6a18",
+          "platformVersion": "110.0.7.48",
+          "possibleInboundIpv6Addresses": "2603:1020:c04:7::2",
+          "possibleOutboundIpv6Addresses": "2603:1020:c01:d::b2,2603:1020:c01:e::61,2603:1020:c01:11::1a9,2603:1020:c01:10::2b,2603:1020:c01:12::29,2603:1020:c01:10::2c,2603:1020:c01:10::27,2603:1020:c01:16::27,2603:1020:c01:10::28,2603:1020:c01:11::1a6,2603:1020:c01:4::140,2603:1020:c01:11::1a7,2603:1020:c01:16::28,2603:1020:c01:10::29,2603:1020:c01:16::29,2603:1020:c01:12::27,2603:1020:c01:16::2a,2603:1020:c01:16::2b,2603:1020:c01:e::58,2603:1020:c01:11::1a8,2603:1020:c01:12::28,2603:1020:c01:10::2a,2603:1020:c01:d::b1,2603:1020:c01:e::60,2603:1020:c01:16::2c,2603:1020:c01:11::1aa,2603:1020:c01:4::158,2603:1020:c01:d::b3,2603:1020:c01:d::b4,2603:1020:c01:4::16a,2603:1020:c04:7::2,2603:10e1:100:2::144f:6b0b,2603:1020:c04:7::315,2603:10e1:100:2::144f:6a18",
+          "publicNetworkAccess": "Enabled",
+          "redundancyMode": "None",
+          "reserved": true,
+          "runtimeAvailabilityState": "Normal",
+          "scmSiteAlsoStopped": false,
+          "serverFarmId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/serverfarms/ASP-rgazportfoliob1-845b",
+          "siteConfig": {
+            "acrUseManagedIdentityCreds": false,
+            "alwaysOn": false,
+            "clusteringEnabled": false,
+            "functionAppScaleLimit": 100,
+            "http20Enabled": false,
+            "minimumElasticInstanceCount": 0,
+            "numberOfWorkers": 1,
+            "webJobsEnabled": false
+          },
+          "siteScopedCertificatesEnabled": true,
+          "storageAccountRequired": false,
+          "storageRecoveryDefaultState": "Running",
+          "useQueryStringAffinity": false,
+          "vnetBackupRestoreEnabled": false,
+          "vnetContentShareEnabled": false,
+          "vnetImagePullEnabled": false,
+          "vnetRouteAllEnabled": false
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.Web/sites"
+      },
+      "changeType": "Modify",
+      "delta": [
+        {
+          "after": false,
+          "before": null,
+          "children": null,
+          "path": "properties.siteConfig.localMySqlEnabled",
+          "propertyChangeType": "Create"
+        },
+        {
+          "after": "v4.6",
+          "before": null,
+          "children": null,
+          "path": "properties.siteConfig.netFrameworkVersion",
+          "propertyChangeType": "Create"
+        }
+      ],
+      "deploymentId": null,
+      "extension": null,
+      "identifiers": null,
+      "resourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/sites/func-azportfolio-b1",
+      "symbolicName": null,
+      "unsupportedReason": null
+    },
+    {
+      "after": {
+        "apiVersion": "2024-04-01",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/sites/func-azportfolio-b13",
+        "identity": {
+          "type": "SystemAssigned"
+        },
+        "kind": "functionapp,linux",
+        "location": "germanywestcentral",
+        "name": "func-azportfolio-b13",
+        "properties": {
+          "afdEnabled": false,
+          "blockPathTraversal": false,
+          "clientAffinityEnabled": false,
+          "clientAffinityProxyEnabled": false,
+          "clientCertEnabled": false,
+          "clientCertMode": "Required",
+          "containerSize": 1536,
+          "dailyMemoryTimeQuota": 0,
+          "eligibleLogCategories": "FunctionAppLogs,AppServiceAuthenticationLogs,AppServiceAuditLogs,AppServiceIPSecAuditLogs",
+          "enabled": true,
+          "endToEndEncryptionEnabled": false,
+          "ftpUsername": "func-azportfolio-b13\\$func-azportfolio-b13",
+          "ftpsHostName": "ftps://waws-prod-fra-039.ftp.azurewebsites.windows.net/site/wwwroot",
+          "functionAppConfig": {
+            "deployment": {
+              "storage": {
+                "authentication": {
+                  "storageAccountConnectionStringName": "DEPLOYMENT_STORAGE_CONNECTION_STRING",
+                  "type": "StorageAccountConnectionString"
+                },
+                "type": "blobContainer",
+                "value": "https://stazportfoliob1.blob.core.windows.net/app-package-funcazportfoliob13-0322941"
+              }
+            },
+            "runtime": {
+              "name": "python",
+              "version": "3.12"
+            },
+            "scaleAndConcurrency": {
+              "instanceMemoryMB": 2048,
+              "maximumInstanceCount": 100
+            },
+            "siteUpdateStrategy": {
+              "type": "Recreate"
+            }
+          },
+          "functionsRuntimeAdminIsolationEnabled": false,
+          "hostNamesDisabled": false,
+          "httpsOnly": false,
+          "inFlightFeatures": [
+            "SiteContainers"
+          ],
+          "inboundIpv6Address": "2603:1020:c04:7::2",
+          "ipMode": "IPv4",
+          "jA4Forwarding": false,
+          "keyVaultReferenceIdentity": "SystemAssigned",
+          "maintenanceEnabled": false,
+          "name": "func-azportfolio-b13",
+          "outboundIpv6Addresses": "2603:1020:c01:d::b2,2603:1020:c01:e::61,2603:1020:c01:11::1a9,2603:1020:c01:10::2b,2603:1020:c01:12::29,2603:1020:c01:10::2c,2603:1020:c01:10::27,2603:1020:c01:16::27,2603:1020:c01:10::28,2603:1020:c01:11::1a6,2603:1020:c01:4::140,2603:1020:c01:11::1a7,2603:1020:c04:7::2,2603:10e1:100:2::144f:6b0b,2603:1020:c04:7::315,2603:10e1:100:2::144f:6a18",
+          "platformVersion": "110.0.7.48",
+          "possibleInboundIpv6Addresses": "2603:1020:c04:7::2",
+          "possibleOutboundIpv6Addresses": "2603:1020:c01:d::b2,2603:1020:c01:e::61,2603:1020:c01:11::1a9,2603:1020:c01:10::2b,2603:1020:c01:12::29,2603:1020:c01:10::2c,2603:1020:c01:10::27,2603:1020:c01:16::27,2603:1020:c01:10::28,2603:1020:c01:11::1a6,2603:1020:c01:4::140,2603:1020:c01:11::1a7,2603:1020:c01:16::28,2603:1020:c01:10::29,2603:1020:c01:16::29,2603:1020:c01:12::27,2603:1020:c01:16::2a,2603:1020:c01:16::2b,2603:1020:c01:e::58,2603:1020:c01:11::1a8,2603:1020:c01:12::28,2603:1020:c01:10::2a,2603:1020:c01:d::b1,2603:1020:c01:e::60,2603:1020:c01:16::2c,2603:1020:c01:11::1aa,2603:1020:c01:4::158,2603:1020:c01:d::b3,2603:1020:c01:d::b4,2603:1020:c01:4::16a,2603:1020:c04:7::2,2603:10e1:100:2::144f:6b0b,2603:1020:c04:7::315,2603:10e1:100:2::144f:6a18",
+          "publicNetworkAccess": "Enabled",
+          "redundancyMode": "None",
+          "reserved": true,
+          "runtimeAvailabilityState": "Normal",
+          "scmSiteAlsoStopped": false,
+          "serverFarmId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/serverfarms/ASP-rgazportfoliob1-d595",
+          "siteConfig": {
+            "acrUseManagedIdentityCreds": false,
+            "alwaysOn": false,
+            "clusteringEnabled": false,
+            "functionAppScaleLimit": 100,
+            "http20Enabled": false,
+            "localMySqlEnabled": false,
+            "minimumElasticInstanceCount": 0,
+            "netFrameworkVersion": "v4.6",
+            "numberOfWorkers": 1,
+            "webJobsEnabled": false
+          },
+          "siteScopedCertificatesEnabled": true,
+          "storageAccountRequired": false,
+          "storageRecoveryDefaultState": "Running",
+          "useQueryStringAffinity": false,
+          "vnetBackupRestoreEnabled": false,
+          "vnetContentShareEnabled": false,
+          "vnetImagePullEnabled": false,
+          "vnetRouteAllEnabled": false
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.Web/sites"
+      },
+      "before": {
+        "apiVersion": "2024-04-01",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/sites/func-azportfolio-b13",
+        "identity": {
+          "type": "SystemAssigned"
+        },
+        "kind": "functionapp,linux",
+        "location": "germanywestcentral",
+        "name": "func-azportfolio-b13",
+        "properties": {
+          "afdEnabled": false,
+          "blockPathTraversal": false,
+          "clientAffinityEnabled": false,
+          "clientAffinityProxyEnabled": false,
+          "clientCertEnabled": false,
+          "clientCertMode": "Required",
+          "containerSize": 1536,
+          "dailyMemoryTimeQuota": 0,
+          "eligibleLogCategories": "FunctionAppLogs,AppServiceAuthenticationLogs,AppServiceAuditLogs,AppServiceIPSecAuditLogs",
+          "enabled": true,
+          "endToEndEncryptionEnabled": false,
+          "ftpUsername": "func-azportfolio-b13\\$func-azportfolio-b13",
+          "ftpsHostName": "ftps://waws-prod-fra-039.ftp.azurewebsites.windows.net/site/wwwroot",
+          "functionAppConfig": {
+            "deployment": {
+              "storage": {
+                "authentication": {
+                  "storageAccountConnectionStringName": "DEPLOYMENT_STORAGE_CONNECTION_STRING",
+                  "type": "StorageAccountConnectionString"
+                },
+                "type": "blobContainer",
+                "value": "https://stazportfoliob1.blob.core.windows.net/app-package-funcazportfoliob13-0322941"
+              }
+            },
+            "runtime": {
+              "name": "python",
+              "version": "3.12"
+            },
+            "scaleAndConcurrency": {
+              "instanceMemoryMB": 2048,
+              "maximumInstanceCount": 100
+            },
+            "siteUpdateStrategy": {
+              "type": "Recreate"
+            }
+          },
+          "functionsRuntimeAdminIsolationEnabled": false,
+          "hostNamesDisabled": false,
+          "httpsOnly": false,
+          "inFlightFeatures": [
+            "SiteContainers"
+          ],
+          "inboundIpv6Address": "2603:1020:c04:7::2",
+          "ipMode": "IPv4",
+          "jA4Forwarding": false,
+          "keyVaultReferenceIdentity": "SystemAssigned",
+          "maintenanceEnabled": false,
+          "name": "func-azportfolio-b13",
+          "outboundIpv6Addresses": "2603:1020:c01:d::b2,2603:1020:c01:e::61,2603:1020:c01:11::1a9,2603:1020:c01:10::2b,2603:1020:c01:12::29,2603:1020:c01:10::2c,2603:1020:c01:10::27,2603:1020:c01:16::27,2603:1020:c01:10::28,2603:1020:c01:11::1a6,2603:1020:c01:4::140,2603:1020:c01:11::1a7,2603:1020:c04:7::2,2603:10e1:100:2::144f:6b0b,2603:1020:c04:7::315,2603:10e1:100:2::144f:6a18",
+          "platformVersion": "110.0.7.48",
+          "possibleInboundIpv6Addresses": "2603:1020:c04:7::2",
+          "possibleOutboundIpv6Addresses": "2603:1020:c01:d::b2,2603:1020:c01:e::61,2603:1020:c01:11::1a9,2603:1020:c01:10::2b,2603:1020:c01:12::29,2603:1020:c01:10::2c,2603:1020:c01:10::27,2603:1020:c01:16::27,2603:1020:c01:10::28,2603:1020:c01:11::1a6,2603:1020:c01:4::140,2603:1020:c01:11::1a7,2603:1020:c01:16::28,2603:1020:c01:10::29,2603:1020:c01:16::29,2603:1020:c01:12::27,2603:1020:c01:16::2a,2603:1020:c01:16::2b,2603:1020:c01:e::58,2603:1020:c01:11::1a8,2603:1020:c01:12::28,2603:1020:c01:10::2a,2603:1020:c01:d::b1,2603:1020:c01:e::60,2603:1020:c01:16::2c,2603:1020:c01:11::1aa,2603:1020:c01:4::158,2603:1020:c01:d::b3,2603:1020:c01:d::b4,2603:1020:c01:4::16a,2603:1020:c04:7::2,2603:10e1:100:2::144f:6b0b,2603:1020:c04:7::315,2603:10e1:100:2::144f:6a18",
+          "publicNetworkAccess": "Enabled",
+          "redundancyMode": "None",
+          "reserved": true,
+          "runtimeAvailabilityState": "Normal",
+          "scmSiteAlsoStopped": false,
+          "serverFarmId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/serverfarms/ASP-rgazportfoliob1-d595",
+          "siteConfig": {
+            "acrUseManagedIdentityCreds": false,
+            "alwaysOn": false,
+            "clusteringEnabled": false,
+            "functionAppScaleLimit": 100,
+            "http20Enabled": false,
+            "minimumElasticInstanceCount": 0,
+            "numberOfWorkers": 1,
+            "webJobsEnabled": false
+          },
+          "siteScopedCertificatesEnabled": true,
+          "storageAccountRequired": false,
+          "storageRecoveryDefaultState": "Running",
+          "useQueryStringAffinity": false,
+          "vnetBackupRestoreEnabled": false,
+          "vnetContentShareEnabled": false,
+          "vnetImagePullEnabled": false,
+          "vnetRouteAllEnabled": false
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.Web/sites"
+      },
+      "changeType": "Modify",
+      "delta": [
+        {
+          "after": false,
+          "before": null,
+          "children": null,
+          "path": "properties.siteConfig.localMySqlEnabled",
+          "propertyChangeType": "Create"
+        },
+        {
+          "after": "v4.6",
+          "before": null,
+          "children": null,
+          "path": "properties.siteConfig.netFrameworkVersion",
+          "propertyChangeType": "Create"
+        }
+      ],
+      "deploymentId": null,
+      "extension": null,
+      "identifiers": null,
+      "resourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/sites/func-azportfolio-b13",
+      "symbolicName": null,
+      "unsupportedReason": null
+    },
+    {
+      "after": {
+        "apiVersion": "2024-04-01",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/sites/func-azportfolio-b13/config/appsettings",
+        "location": "Germany West Central",
+        "name": "appsettings",
+        "properties": "[union(list('/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/sites/func-azportfolio-b13/config/appsettings', '2024-04-01').properties, createObject('IPUMS_API_KEY', '@Microsoft.KeyVault(VaultName=kv-azportfolio-b2;SecretName=ipums-api-key)', 'ADX_CLUSTER_URI', 'https://kvc-1267rvs0jur9k7ncmj.southcentralus.kusto.windows.net', 'ADX_INGEST_URI', 'https://ingest-kvc-1267rvs0jur9k7ncmj.southcentralus.kusto.windows.net', 'ADX_DATABASE', 'vets', 'ADX_TABLE', 'cps_raw', 'STORAGE_ACCOUNT_URL', 'https://stazportfoliob1.blob.core.windows.net/', 'IPUMS_CONTAINER', 'ipums'))]",
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.Web/sites/config"
+      },
+      "before": {
+        "apiVersion": "2024-04-01",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/sites/func-azportfolio-b13/config/appsettings",
+        "location": "Germany West Central",
+        "name": "appsettings",
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.Web/sites/config"
+      },
+      "changeType": "Modify",
+      "delta": [
+        {
+          "after": "[union(list('/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/sites/func-azportfolio-b13/config/appsettings', '2024-04-01').properties, createObject('IPUMS_API_KEY', '@Microsoft.KeyVault(VaultName=kv-azportfolio-b2;SecretName=ipums-api-key)', 'ADX_CLUSTER_URI', 'https://kvc-1267rvs0jur9k7ncmj.southcentralus.kusto.windows.net', 'ADX_INGEST_URI', 'https://ingest-kvc-1267rvs0jur9k7ncmj.southcentralus.kusto.windows.net', 'ADX_DATABASE', 'vets', 'ADX_TABLE', 'cps_raw', 'STORAGE_ACCOUNT_URL', 'https://stazportfoliob1.blob.core.windows.net/', 'IPUMS_CONTAINER', 'ipums'))]",
+          "before": null,
+          "children": null,
+          "path": "properties",
+          "propertyChangeType": "Create"
+        }
+      ],
+      "deploymentId": null,
+      "extension": null,
+      "identifiers": null,
+      "resourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/sites/func-azportfolio-b13/config/appsettings",
+      "symbolicName": null,
+      "unsupportedReason": null
+    },
+    {
+      "after": {
+        "apiVersion": "2024-04-01",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/sites/func-azportfolio-b14",
+        "identity": {
+          "type": "SystemAssigned"
+        },
+        "kind": "functionapp,linux",
+        "location": "germanywestcentral",
+        "name": "func-azportfolio-b14",
+        "properties": {
+          "afdEnabled": false,
+          "blockPathTraversal": false,
+          "clientAffinityEnabled": false,
+          "clientAffinityProxyEnabled": false,
+          "clientCertEnabled": false,
+          "clientCertMode": "Required",
+          "containerSize": 1536,
+          "dailyMemoryTimeQuota": 0,
+          "eligibleLogCategories": "FunctionAppLogs,AppServiceAuthenticationLogs,AppServiceAuditLogs,AppServiceIPSecAuditLogs",
+          "enabled": true,
+          "endToEndEncryptionEnabled": false,
+          "ftpUsername": "func-azportfolio-b14\\$func-azportfolio-b14",
+          "ftpsHostName": "ftps://waws-prod-fra-039.ftp.azurewebsites.windows.net/site/wwwroot",
+          "functionAppConfig": {
+            "deployment": {
+              "storage": {
+                "authentication": {
+                  "storageAccountConnectionStringName": "DEPLOYMENT_STORAGE_CONNECTION_STRING",
+                  "type": "StorageAccountConnectionString"
+                },
+                "type": "blobContainer",
+                "value": "https://stazportfoliob1.blob.core.windows.net/app-package-funcazportfoliob14-7063208"
+              }
+            },
+            "runtime": {
+              "name": "python",
+              "version": "3.12"
+            },
+            "scaleAndConcurrency": {
+              "instanceMemoryMB": 2048,
+              "maximumInstanceCount": 100
+            },
+            "siteUpdateStrategy": {
+              "type": "Recreate"
+            }
+          },
+          "functionsRuntimeAdminIsolationEnabled": false,
+          "hostNamesDisabled": false,
+          "httpsOnly": false,
+          "inFlightFeatures": [
+            "SiteContainers"
+          ],
+          "inboundIpv6Address": "2603:1020:c04:7::2",
+          "ipMode": "IPv4",
+          "jA4Forwarding": false,
+          "keyVaultReferenceIdentity": "SystemAssigned",
+          "maintenanceEnabled": false,
+          "name": "func-azportfolio-b14",
+          "outboundIpv6Addresses": "2603:1020:c01:d::b2,2603:1020:c01:e::61,2603:1020:c01:11::1a9,2603:1020:c01:10::2b,2603:1020:c01:12::29,2603:1020:c01:10::2c,2603:1020:c01:10::27,2603:1020:c01:16::27,2603:1020:c01:10::28,2603:1020:c01:11::1a6,2603:1020:c01:4::140,2603:1020:c01:11::1a7,2603:1020:c04:7::2,2603:10e1:100:2::144f:6b0b,2603:1020:c04:7::315,2603:10e1:100:2::144f:6a18",
+          "platformVersion": "110.0.7.48",
+          "possibleInboundIpv6Addresses": "2603:1020:c04:7::2",
+          "possibleOutboundIpv6Addresses": "2603:1020:c01:d::b2,2603:1020:c01:e::61,2603:1020:c01:11::1a9,2603:1020:c01:10::2b,2603:1020:c01:12::29,2603:1020:c01:10::2c,2603:1020:c01:10::27,2603:1020:c01:16::27,2603:1020:c01:10::28,2603:1020:c01:11::1a6,2603:1020:c01:4::140,2603:1020:c01:11::1a7,2603:1020:c01:16::28,2603:1020:c01:10::29,2603:1020:c01:16::29,2603:1020:c01:12::27,2603:1020:c01:16::2a,2603:1020:c01:16::2b,2603:1020:c01:e::58,2603:1020:c01:11::1a8,2603:1020:c01:12::28,2603:1020:c01:10::2a,2603:1020:c01:d::b1,2603:1020:c01:e::60,2603:1020:c01:16::2c,2603:1020:c01:11::1aa,2603:1020:c01:4::158,2603:1020:c01:d::b3,2603:1020:c01:d::b4,2603:1020:c01:4::16a,2603:1020:c04:7::2,2603:10e1:100:2::144f:6b0b,2603:1020:c04:7::315,2603:10e1:100:2::144f:6a18",
+          "publicNetworkAccess": "Enabled",
+          "redundancyMode": "None",
+          "reserved": true,
+          "runtimeAvailabilityState": "Normal",
+          "scmSiteAlsoStopped": false,
+          "serverFarmId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/serverfarms/ASP-rgazportfoliob1-afb7",
+          "siteConfig": {
+            "acrUseManagedIdentityCreds": false,
+            "alwaysOn": false,
+            "clusteringEnabled": false,
+            "functionAppScaleLimit": 100,
+            "http20Enabled": false,
+            "localMySqlEnabled": false,
+            "minimumElasticInstanceCount": 0,
+            "netFrameworkVersion": "v4.6",
+            "numberOfWorkers": 1,
+            "webJobsEnabled": false
+          },
+          "siteScopedCertificatesEnabled": true,
+          "storageAccountRequired": false,
+          "storageRecoveryDefaultState": "Running",
+          "useQueryStringAffinity": false,
+          "vnetBackupRestoreEnabled": false,
+          "vnetContentShareEnabled": false,
+          "vnetImagePullEnabled": false,
+          "vnetRouteAllEnabled": false
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.Web/sites"
+      },
+      "before": {
+        "apiVersion": "2024-04-01",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/sites/func-azportfolio-b14",
+        "identity": {
+          "type": "SystemAssigned"
+        },
+        "kind": "functionapp,linux",
+        "location": "germanywestcentral",
+        "name": "func-azportfolio-b14",
+        "properties": {
+          "afdEnabled": false,
+          "blockPathTraversal": false,
+          "clientAffinityEnabled": false,
+          "clientAffinityProxyEnabled": false,
+          "clientCertEnabled": false,
+          "clientCertMode": "Required",
+          "containerSize": 1536,
+          "dailyMemoryTimeQuota": 0,
+          "eligibleLogCategories": "FunctionAppLogs,AppServiceAuthenticationLogs,AppServiceAuditLogs,AppServiceIPSecAuditLogs",
+          "enabled": true,
+          "endToEndEncryptionEnabled": false,
+          "ftpUsername": "func-azportfolio-b14\\$func-azportfolio-b14",
+          "ftpsHostName": "ftps://waws-prod-fra-039.ftp.azurewebsites.windows.net/site/wwwroot",
+          "functionAppConfig": {
+            "deployment": {
+              "storage": {
+                "authentication": {
+                  "storageAccountConnectionStringName": "DEPLOYMENT_STORAGE_CONNECTION_STRING",
+                  "type": "StorageAccountConnectionString"
+                },
+                "type": "blobContainer",
+                "value": "https://stazportfoliob1.blob.core.windows.net/app-package-funcazportfoliob14-7063208"
+              }
+            },
+            "runtime": {
+              "name": "python",
+              "version": "3.12"
+            },
+            "scaleAndConcurrency": {
+              "instanceMemoryMB": 2048,
+              "maximumInstanceCount": 100
+            },
+            "siteUpdateStrategy": {
+              "type": "Recreate"
+            }
+          },
+          "functionsRuntimeAdminIsolationEnabled": false,
+          "hostNamesDisabled": false,
+          "httpsOnly": false,
+          "inFlightFeatures": [
+            "SiteContainers"
+          ],
+          "inboundIpv6Address": "2603:1020:c04:7::2",
+          "ipMode": "IPv4",
+          "jA4Forwarding": false,
+          "keyVaultReferenceIdentity": "SystemAssigned",
+          "maintenanceEnabled": false,
+          "name": "func-azportfolio-b14",
+          "outboundIpv6Addresses": "2603:1020:c01:d::b2,2603:1020:c01:e::61,2603:1020:c01:11::1a9,2603:1020:c01:10::2b,2603:1020:c01:12::29,2603:1020:c01:10::2c,2603:1020:c01:10::27,2603:1020:c01:16::27,2603:1020:c01:10::28,2603:1020:c01:11::1a6,2603:1020:c01:4::140,2603:1020:c01:11::1a7,2603:1020:c04:7::2,2603:10e1:100:2::144f:6b0b,2603:1020:c04:7::315,2603:10e1:100:2::144f:6a18",
+          "platformVersion": "110.0.7.48",
+          "possibleInboundIpv6Addresses": "2603:1020:c04:7::2",
+          "possibleOutboundIpv6Addresses": "2603:1020:c01:d::b2,2603:1020:c01:e::61,2603:1020:c01:11::1a9,2603:1020:c01:10::2b,2603:1020:c01:12::29,2603:1020:c01:10::2c,2603:1020:c01:10::27,2603:1020:c01:16::27,2603:1020:c01:10::28,2603:1020:c01:11::1a6,2603:1020:c01:4::140,2603:1020:c01:11::1a7,2603:1020:c01:16::28,2603:1020:c01:10::29,2603:1020:c01:16::29,2603:1020:c01:12::27,2603:1020:c01:16::2a,2603:1020:c01:16::2b,2603:1020:c01:e::58,2603:1020:c01:11::1a8,2603:1020:c01:12::28,2603:1020:c01:10::2a,2603:1020:c01:d::b1,2603:1020:c01:e::60,2603:1020:c01:16::2c,2603:1020:c01:11::1aa,2603:1020:c01:4::158,2603:1020:c01:d::b3,2603:1020:c01:d::b4,2603:1020:c01:4::16a,2603:1020:c04:7::2,2603:10e1:100:2::144f:6b0b,2603:1020:c04:7::315,2603:10e1:100:2::144f:6a18",
+          "publicNetworkAccess": "Enabled",
+          "redundancyMode": "None",
+          "reserved": true,
+          "runtimeAvailabilityState": "Normal",
+          "scmSiteAlsoStopped": false,
+          "serverFarmId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/serverfarms/ASP-rgazportfoliob1-afb7",
+          "siteConfig": {
+            "acrUseManagedIdentityCreds": false,
+            "alwaysOn": false,
+            "clusteringEnabled": false,
+            "functionAppScaleLimit": 100,
+            "http20Enabled": false,
+            "minimumElasticInstanceCount": 0,
+            "numberOfWorkers": 1,
+            "webJobsEnabled": false
+          },
+          "siteScopedCertificatesEnabled": true,
+          "storageAccountRequired": false,
+          "storageRecoveryDefaultState": "Running",
+          "useQueryStringAffinity": false,
+          "vnetBackupRestoreEnabled": false,
+          "vnetContentShareEnabled": false,
+          "vnetImagePullEnabled": false,
+          "vnetRouteAllEnabled": false
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.Web/sites"
+      },
+      "changeType": "Modify",
+      "delta": [
+        {
+          "after": false,
+          "before": null,
+          "children": null,
+          "path": "properties.siteConfig.localMySqlEnabled",
+          "propertyChangeType": "Create"
+        },
+        {
+          "after": "v4.6",
+          "before": null,
+          "children": null,
+          "path": "properties.siteConfig.netFrameworkVersion",
+          "propertyChangeType": "Create"
+        }
+      ],
+      "deploymentId": null,
+      "extension": null,
+      "identifiers": null,
+      "resourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/sites/func-azportfolio-b14",
+      "symbolicName": null,
+      "unsupportedReason": null
+    },
+    {
+      "after": {
+        "apiVersion": "2024-04-01",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/sites/func-azportfolio-b2",
+        "identity": {
+          "type": "SystemAssigned"
+        },
+        "kind": "functionapp,linux",
+        "location": "germanywestcentral",
+        "name": "func-azportfolio-b2",
+        "properties": {
+          "afdEnabled": false,
+          "blockPathTraversal": false,
+          "clientAffinityEnabled": false,
+          "clientAffinityProxyEnabled": false,
+          "clientCertEnabled": false,
+          "clientCertMode": "Required",
+          "containerSize": 1536,
+          "dailyMemoryTimeQuota": 0,
+          "eligibleLogCategories": "FunctionAppLogs,AppServiceAuthenticationLogs,AppServiceAuditLogs,AppServiceIPSecAuditLogs",
+          "enabled": true,
+          "endToEndEncryptionEnabled": false,
+          "ftpUsername": "func-azportfolio-b2\\$func-azportfolio-b2",
+          "ftpsHostName": "ftps://waws-prod-fra-039.ftp.azurewebsites.windows.net/site/wwwroot",
+          "functionAppConfig": {
+            "deployment": {
+              "storage": {
+                "authentication": {
+                  "storageAccountConnectionStringName": "DEPLOYMENT_STORAGE_CONNECTION_STRING",
+                  "type": "StorageAccountConnectionString"
+                },
+                "type": "blobContainer",
+                "value": "https://stazportfoliob1.blob.core.windows.net/app-package-funcazportfoliob2-2154978"
+              }
+            },
+            "runtime": {
+              "name": "python",
+              "version": "3.12"
+            },
+            "scaleAndConcurrency": {
+              "instanceMemoryMB": 2048,
+              "maximumInstanceCount": 100
+            },
+            "siteUpdateStrategy": {
+              "type": "Recreate"
+            }
+          },
+          "functionsRuntimeAdminIsolationEnabled": false,
+          "hostNamesDisabled": false,
+          "httpsOnly": false,
+          "inFlightFeatures": [
+            "SiteContainers"
+          ],
+          "inboundIpv6Address": "2603:1020:c04:7::2",
+          "ipMode": "IPv4",
+          "jA4Forwarding": false,
+          "keyVaultReferenceIdentity": "SystemAssigned",
+          "maintenanceEnabled": false,
+          "name": "func-azportfolio-b2",
+          "outboundIpv6Addresses": "2603:1020:c01:d::b2,2603:1020:c01:e::61,2603:1020:c01:11::1a9,2603:1020:c01:10::2b,2603:1020:c01:12::29,2603:1020:c01:10::2c,2603:1020:c01:10::27,2603:1020:c01:16::27,2603:1020:c01:10::28,2603:1020:c01:11::1a6,2603:1020:c01:4::140,2603:1020:c01:11::1a7,2603:1020:c04:7::2,2603:10e1:100:2::144f:6b0b,2603:1020:c04:7::315,2603:10e1:100:2::144f:6a18",
+          "platformVersion": "110.0.7.48",
+          "possibleInboundIpv6Addresses": "2603:1020:c04:7::2",
+          "possibleOutboundIpv6Addresses": "2603:1020:c01:d::b2,2603:1020:c01:e::61,2603:1020:c01:11::1a9,2603:1020:c01:10::2b,2603:1020:c01:12::29,2603:1020:c01:10::2c,2603:1020:c01:10::27,2603:1020:c01:16::27,2603:1020:c01:10::28,2603:1020:c01:11::1a6,2603:1020:c01:4::140,2603:1020:c01:11::1a7,2603:1020:c01:16::28,2603:1020:c01:10::29,2603:1020:c01:16::29,2603:1020:c01:12::27,2603:1020:c01:16::2a,2603:1020:c01:16::2b,2603:1020:c01:e::58,2603:1020:c01:11::1a8,2603:1020:c01:12::28,2603:1020:c01:10::2a,2603:1020:c01:d::b1,2603:1020:c01:e::60,2603:1020:c01:16::2c,2603:1020:c01:11::1aa,2603:1020:c01:4::158,2603:1020:c01:d::b3,2603:1020:c01:d::b4,2603:1020:c01:4::16a,2603:1020:c04:7::2,2603:10e1:100:2::144f:6b0b,2603:1020:c04:7::315,2603:10e1:100:2::144f:6a18",
+          "publicNetworkAccess": "Enabled",
+          "redundancyMode": "None",
+          "reserved": true,
+          "runtimeAvailabilityState": "Normal",
+          "scmSiteAlsoStopped": false,
+          "serverFarmId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/serverfarms/ASP-rgazportfoliob1-4497",
+          "siteConfig": {
+            "acrUseManagedIdentityCreds": false,
+            "alwaysOn": false,
+            "clusteringEnabled": false,
+            "functionAppScaleLimit": 100,
+            "http20Enabled": false,
+            "localMySqlEnabled": false,
+            "minimumElasticInstanceCount": 0,
+            "netFrameworkVersion": "v4.6",
+            "numberOfWorkers": 1,
+            "webJobsEnabled": false
+          },
+          "siteScopedCertificatesEnabled": true,
+          "storageAccountRequired": false,
+          "storageRecoveryDefaultState": "Running",
+          "useQueryStringAffinity": false,
+          "vnetBackupRestoreEnabled": false,
+          "vnetContentShareEnabled": false,
+          "vnetImagePullEnabled": false,
+          "vnetRouteAllEnabled": false
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.Web/sites"
+      },
+      "before": {
+        "apiVersion": "2024-04-01",
+        "id": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/sites/func-azportfolio-b2",
+        "identity": {
+          "type": "SystemAssigned"
+        },
+        "kind": "functionapp,linux",
+        "location": "germanywestcentral",
+        "name": "func-azportfolio-b2",
+        "properties": {
+          "afdEnabled": false,
+          "blockPathTraversal": false,
+          "clientAffinityEnabled": false,
+          "clientAffinityProxyEnabled": false,
+          "clientCertEnabled": false,
+          "clientCertMode": "Required",
+          "containerSize": 1536,
+          "dailyMemoryTimeQuota": 0,
+          "eligibleLogCategories": "FunctionAppLogs,AppServiceAuthenticationLogs,AppServiceAuditLogs,AppServiceIPSecAuditLogs",
+          "enabled": true,
+          "endToEndEncryptionEnabled": false,
+          "ftpUsername": "func-azportfolio-b2\\$func-azportfolio-b2",
+          "ftpsHostName": "ftps://waws-prod-fra-039.ftp.azurewebsites.windows.net/site/wwwroot",
+          "functionAppConfig": {
+            "deployment": {
+              "storage": {
+                "authentication": {
+                  "storageAccountConnectionStringName": "DEPLOYMENT_STORAGE_CONNECTION_STRING",
+                  "type": "StorageAccountConnectionString"
+                },
+                "type": "blobContainer",
+                "value": "https://stazportfoliob1.blob.core.windows.net/app-package-funcazportfoliob2-2154978"
+              }
+            },
+            "runtime": {
+              "name": "python",
+              "version": "3.12"
+            },
+            "scaleAndConcurrency": {
+              "instanceMemoryMB": 2048,
+              "maximumInstanceCount": 100
+            },
+            "siteUpdateStrategy": {
+              "type": "Recreate"
+            }
+          },
+          "functionsRuntimeAdminIsolationEnabled": false,
+          "hostNamesDisabled": false,
+          "httpsOnly": false,
+          "inFlightFeatures": [
+            "SiteContainers"
+          ],
+          "inboundIpv6Address": "2603:1020:c04:7::2",
+          "ipMode": "IPv4",
+          "jA4Forwarding": false,
+          "keyVaultReferenceIdentity": "SystemAssigned",
+          "maintenanceEnabled": false,
+          "name": "func-azportfolio-b2",
+          "outboundIpv6Addresses": "2603:1020:c01:d::b2,2603:1020:c01:e::61,2603:1020:c01:11::1a9,2603:1020:c01:10::2b,2603:1020:c01:12::29,2603:1020:c01:10::2c,2603:1020:c01:10::27,2603:1020:c01:16::27,2603:1020:c01:10::28,2603:1020:c01:11::1a6,2603:1020:c01:4::140,2603:1020:c01:11::1a7,2603:1020:c04:7::2,2603:10e1:100:2::144f:6b0b,2603:1020:c04:7::315,2603:10e1:100:2::144f:6a18",
+          "platformVersion": "110.0.7.48",
+          "possibleInboundIpv6Addresses": "2603:1020:c04:7::2",
+          "possibleOutboundIpv6Addresses": "2603:1020:c01:d::b2,2603:1020:c01:e::61,2603:1020:c01:11::1a9,2603:1020:c01:10::2b,2603:1020:c01:12::29,2603:1020:c01:10::2c,2603:1020:c01:10::27,2603:1020:c01:16::27,2603:1020:c01:10::28,2603:1020:c01:11::1a6,2603:1020:c01:4::140,2603:1020:c01:11::1a7,2603:1020:c01:16::28,2603:1020:c01:10::29,2603:1020:c01:16::29,2603:1020:c01:12::27,2603:1020:c01:16::2a,2603:1020:c01:16::2b,2603:1020:c01:e::58,2603:1020:c01:11::1a8,2603:1020:c01:12::28,2603:1020:c01:10::2a,2603:1020:c01:d::b1,2603:1020:c01:e::60,2603:1020:c01:16::2c,2603:1020:c01:11::1aa,2603:1020:c01:4::158,2603:1020:c01:d::b3,2603:1020:c01:d::b4,2603:1020:c01:4::16a,2603:1020:c04:7::2,2603:10e1:100:2::144f:6b0b,2603:1020:c04:7::315,2603:10e1:100:2::144f:6a18",
+          "publicNetworkAccess": "Enabled",
+          "redundancyMode": "None",
+          "reserved": true,
+          "runtimeAvailabilityState": "Normal",
+          "scmSiteAlsoStopped": false,
+          "serverFarmId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/serverfarms/ASP-rgazportfoliob1-4497",
+          "siteConfig": {
+            "acrUseManagedIdentityCreds": false,
+            "alwaysOn": false,
+            "clusteringEnabled": false,
+            "functionAppScaleLimit": 100,
+            "http20Enabled": false,
+            "minimumElasticInstanceCount": 0,
+            "numberOfWorkers": 1,
+            "webJobsEnabled": false
+          },
+          "siteScopedCertificatesEnabled": true,
+          "storageAccountRequired": false,
+          "storageRecoveryDefaultState": "Running",
+          "useQueryStringAffinity": false,
+          "vnetBackupRestoreEnabled": false,
+          "vnetContentShareEnabled": false,
+          "vnetImagePullEnabled": false,
+          "vnetRouteAllEnabled": false
+        },
+        "resourceGroup": "rg-azportfolio-b1",
+        "type": "Microsoft.Web/sites"
+      },
+      "changeType": "Modify",
+      "delta": [
+        {
+          "after": false,
+          "before": null,
+          "children": null,
+          "path": "properties.siteConfig.localMySqlEnabled",
+          "propertyChangeType": "Create"
+        },
+        {
+          "after": "v4.6",
+          "before": null,
+          "children": null,
+          "path": "properties.siteConfig.netFrameworkVersion",
+          "propertyChangeType": "Create"
+        }
+      ],
+      "deploymentId": null,
+      "extension": null,
+      "identifiers": null,
+      "resourceId": "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Web/sites/func-azportfolio-b2",
+      "symbolicName": null,
+      "unsupportedReason": null
+    }
+  ],
+  "diagnostics": null,
+  "error": null,
+  "potentialChanges": null,
+  "status": "Succeeded"
+}
