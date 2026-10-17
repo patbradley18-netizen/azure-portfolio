@@ -27,7 +27,7 @@ def diff_chart(title, m, rm, ymin, ymax, fmt=lambda v: f"{100*v:+.0f} pts"):
     for k in range(5):
         v = ymin + (ymax - ymin) * k / 4; y = Y(v)
         s.append(f'<line x1="{L}" x2="{W-Rm}" y1="{y:.1f}" y2="{y:.1f}" class="grid"/><text x="{L-6}" y="{y+4:.1f}" class="tick" text-anchor="end">{e(fmt(v))}</text>')
-    s.append(f'<line x1="{L}" x2="{W-Rm}" y1="{Y(0):.1f}" y2="{Y(0):.1f}" class="ref"/><text x="{W-Rm}" y="{Y(0)-4:.1f}" class="tick" text-anchor="end">civilians, same age &amp; years</text>')
+    s.append(f'<line x1="{L}" x2="{W-Rm}" y1="{Y(0):.1f}" y2="{Y(0):.1f}" class="ref"/><text x="{L+4}" y="{Y(0)-5:.1f}" class="tick">civilians, same age &amp; years</text>')
     for i, b in enumerate(BINS):
         s.append(f'<text x="{X(i,0.5):.1f}" y="{H-14}" class="tick" text-anchor="middle">{BINLAB[b]}</text>')
     s.append(f'<text x="{(L+W-Rm)/2:.1f}" y="{H-2}" class="tick" text-anchor="middle">years since separation</text>')
