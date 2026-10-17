@@ -18,7 +18,7 @@ rows:
 values:
   numeric_or_null: true              # every variable cell parses as a number, or is null/empty
   allow_negative_sentinels: true     # -666666666 etc. are Census suppression codes, loaded as NULL + text flag
-  max_value: 1.0e9
+  max_value: 1000000000
 dataset_id:
   template: 'acs5_{year}{set_suffix}'
   set_suffix: { shelter: '', veterans: '_vet', tenure: '_tenure', rentburden: '_rentburden' }

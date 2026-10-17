@@ -45,8 +45,14 @@ def sql_connect():
     for i in range(4):
         try:
             return mssql_python.connect(f"Server={SQL_SERVER};Database={SQL_DB};Encrypt=yes;", token_provider=TP())
-        except Exception as e:  # serverless db waking
-            print("connect retry", i + 1, type(e).__name__, flush=True)
+        except Exception as e:  # serverless db waking, or something else: say which
+            print("connect retry", i + 1, type(e).__name__, str(e)[:300], flush=True)
+            if i == 0:
+                import socket
+                try:
+                    socket.create_connection((SQL_SERVER, 1433), timeout=10).close(); print("  tcp 1433 reachable", flush=True)
+                except OSError as te:
+                    print("  tcp 1433 NOT reachable:", te, flush=True)
             time.sleep(20)
     raise RuntimeError("database did not wake")
 

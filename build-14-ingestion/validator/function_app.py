@@ -14,6 +14,7 @@ from pathlib import Path
 
 import azure.functions as func
 import yaml
+from azure.core.exceptions import ResourceNotFoundError
 from azure.identity import DefaultAzureCredential
 from azure.storage.blob import BlobServiceClient
 from azure.storage.queue import QueueClient, TextBase64EncodePolicy
@@ -23,7 +24,12 @@ from contract import check
 app = func.FunctionApp()
 ACCOUNT_URL = os.environ.get("STORAGE_ACCOUNT_URL", "https://stazportfoliob1.blob.core.windows.net")
 QUEUE_URL = os.environ.get("QUEUE_ACCOUNT_URL", "https://stazportfoliob1.queue.core.windows.net")
-CONTRACTS = {p.stem: yaml.safe_load(p.read_text(encoding="utf-8")) for p in (Path(__file__).parent / "contracts").glob("*.yaml")}
+CONTRACT_DIRS = [Path(__file__).resolve().parent / "contracts", Path.cwd() / "contracts", Path("/home/site/wwwroot/contracts")]
+CONTRACTS = {}
+for d in CONTRACT_DIRS:
+    for p in d.glob("*.yaml") if d.is_dir() else []:
+        CONTRACTS.setdefault(p.stem, yaml.safe_load(p.read_text(encoding="utf-8")))
+logging.info("contracts loaded: %s from %s", list(CONTRACTS), [str(d) for d in CONTRACT_DIRS if d.is_dir()])
 cred = DefaultAzureCredential()
 
 
@@ -48,15 +54,23 @@ def validate_inbox_blob(event: func.EventGridEvent, ledger: func.Out[str]) -> No
     if container != "inbox" or not name:
         logging.info("ignored event for %s", url)
         return
+    if name == "poisonpill.json":  # the one deliberate failure: Event Grid retries, then dead-letters to `deadletter/` (build #14 exercise)
+        raise RuntimeError("poisonpill.json: intentional failure to exercise Event Grid dead-lettering")
     bsc = BlobServiceClient(ACCOUNT_URL, credential=cred)
     blob = bsc.get_blob_client("inbox", name)
-    raw = blob.download_blob().readall()
+    try:
+        raw = blob.download_blob().readall()
+    except ResourceNotFoundError:
+        # Event Grid may redeliver an event for a blob the first delivery already quarantined or the loader already removed.
+        # That is a no-op, not an error: raising here would make Event Grid retry and eventually dead-letter a non-event.
+        logging.info("blob %s is gone (already handled); event acknowledged", name)
+        return
     sha = hashlib.sha256(raw).hexdigest()
     row = {"sha256": sha, "file_name": name, "blob_url": url, "size_bytes": len(raw), "received_at": dt.datetime.now(dt.timezone.utc).isoformat()[:19] + "Z",
            "stage": "validated", "outcome": None, "reason": None, "dataset_id": None, "rows": None, "run_by": "func-azportfolio-b14"}
     cid, contract = pick_contract(name)
     if not contract:
-        ok, reason, info = False, "no contract matches this file name", {}
+        ok, reason, info = False, f"no contract matches this file name ({len(CONTRACTS)} contract(s) loaded)", {}
     else:
         try:
             doc = json.loads(raw.decode("utf-8"))

@@ -92,8 +92,17 @@ def refresh_runs(req: func.HttpRequest, r: func.SqlRowList) -> func.HttpResponse
 @app.route(route="info", methods=["GET"])
 def api_info(req: func.HttpRequest) -> func.HttpResponse:
     return ok({"name": "azportfolio-data", "endpoints": ["GET info", "GET counties/{fips}/access", "GET states/{state}/access", "GET facilities/near?lat&lon&miles&kind&top",
-                                                         "GET refresh/runs", "POST refresh (starts the orchestration)", "GET refresh/status/{instanceId}"],
+                                                         "GET refresh/runs", "GET ingest/ledger", "POST refresh (starts the orchestration)", "GET refresh/status/{instanceId}"],
                "openapi": "openapi.yaml in the repo", "licence": "data public domain; API non-commercial learning project"})
+
+
+@app.function_name("ingest_ledger")
+@app.route(route="ingest/ledger", methods=["GET"])
+@app.sql_input(arg_name="r", command_text="SELECT TOP 50 ledger_id, file_name, LEFT(sha256, 12) AS sha256_prefix, stage, outcome, reason, dataset_id, rows, run_by, received_at FROM col.ingest_ledger ORDER BY ledger_id DESC",
+               command_type="Text", parameters="", connection_string_setting="SqlConnectionString")
+def ingest_ledger(req: func.HttpRequest, r: func.SqlRowList) -> func.HttpResponse:
+    """Build #14: what the ingestion gates decided, newest first (validator and loader rows)."""
+    return ok(rows(r), note="stage=validated rows are the validator's decisions (queued|quarantined); stage=loaded rows are the loader's (loaded|duplicate|poison)")
 
 
 # ---------------- Durable: monthly rebuild of col.county_access, fan-out by state ----------------

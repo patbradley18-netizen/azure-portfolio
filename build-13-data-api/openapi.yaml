@@ -64,6 +64,12 @@ paths:
       responses:
         "200": { $ref: "#/components/responses/Envelope" }
         "404": { $ref: "#/components/responses/Error" }
+  /ingest/ledger:
+    get:
+      summary: "The last 50 ingestion gate decisions (build 14): validator and loader rows, newest first"
+      operationId: ingestLedger
+      responses:
+        "200": { $ref: "#/components/responses/Envelope" }
   /refresh/runs:
     get:
       summary: The last 20 orchestration runs that rebuilt the access table
