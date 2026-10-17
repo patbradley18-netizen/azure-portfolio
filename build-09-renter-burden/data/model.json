@@ -1,0 +1,268 @@
+{
+ "n_counties": 3057,
+ "weights": "renter households with computed ratio (B25070_001E - B25070_011E)",
+ "se": "HC1 robust",
+ "state_fe_count": 50,
+ "outcomes": {
+  "burdened_30plus_pct": {
+   "M1 veteran share only": {
+    "n": 3057,
+    "r2": 0.03,
+    "coef": {
+     "const": 52.573,
+     "vet_share": -0.3645
+    },
+    "se": {
+     "const": 1.2109,
+     "vet_share": 0.1483
+    },
+    "p": {
+     "const": 0.0,
+     "vet_share": 0.014
+    }
+   },
+   "M2 + age (65+ share)": {
+    "n": 3057,
+    "r2": 0.032,
+    "coef": {
+     "const": 53.7786,
+     "vet_share": -0.3263,
+     "share_65plus": -0.0686
+    },
+    "se": {
+     "const": 1.6223,
+     "vet_share": 0.1554,
+     "share_65plus": 0.0665
+    },
+    "p": {
+     "const": 0.0,
+     "vet_share": 0.0357,
+     "share_65plus": 0.3019
+    }
+   },
+   "M3 + ownership (owner share)": {
+    "n": 3057,
+    "r2": 0.071,
+    "coef": {
+     "const": 57.4133,
+     "vet_share": -0.1177,
+     "share_65plus": 0.0549,
+     "owner_share": -0.1223
+    },
+    "se": {
+     "const": 2.532,
+     "vet_share": 0.1219,
+     "share_65plus": 0.0895,
+     "owner_share": 0.0507
+    },
+    "p": {
+     "const": 0.0,
+     "vet_share": 0.3343,
+     "share_65plus": 0.5392,
+     "owner_share": 0.0159
+    }
+   },
+   "M4 + log income, log population": {
+    "n": 3057,
+    "r2": 0.284,
+    "coef": {
+     "const": 79.5126,
+     "vet_share": 0.0737,
+     "share_65plus": 0.1521,
+     "owner_share": 0.0009,
+     "log_income": -5.819,
+     "log_pop": 2.4819
+    },
+    "se": {
+     "const": 14.1464,
+     "vet_share": 0.0948,
+     "share_65plus": 0.0665,
+     "owner_share": 0.0421,
+     "log_income": 1.5215,
+     "log_pop": 0.3209
+    },
+    "p": {
+     "const": 0.0,
+     "vet_share": 0.4366,
+     "share_65plus": 0.0223,
+     "owner_share": 0.982,
+     "log_income": 0.0001,
+     "log_pop": 0.0
+    }
+   },
+   "M5 + state fixed effects": {
+    "n": 3057,
+    "r2": 0.577,
+    "coef": {
+     "const": 138.378,
+     "vet_share": -0.0356,
+     "share_65plus": -0.1033,
+     "owner_share": 0.1012,
+     "log_income": -10.5572,
+     "log_pop": 2.0629
+    },
+    "se": {
+     "const": 13.944,
+     "vet_share": 0.0664,
+     "share_65plus": 0.0494,
+     "owner_share": 0.0352,
+     "log_income": 1.4441,
+     "log_pop": 0.2232
+    },
+    "p": {
+     "const": 0.0,
+     "vet_share": 0.5917,
+     "share_65plus": 0.0367,
+     "owner_share": 0.004,
+     "log_income": 0.0,
+     "log_pop": 0.0
+    }
+   }
+  },
+  "severe_50plus_pct": {
+   "M1 veteran share only": {
+    "n": 3057,
+    "r2": 0.086,
+    "coef": {
+     "const": 28.1371,
+     "vet_share": -0.4633
+    },
+    "se": {
+     "const": 0.8212,
+     "vet_share": 0.1008
+    },
+    "p": {
+     "const": 0.0,
+     "vet_share": 0.0
+    }
+   },
+   "M2 + age (65+ share)": {
+    "n": 3057,
+    "r2": 0.087,
+    "coef": {
+     "const": 27.6742,
+     "vet_share": -0.478,
+     "share_65plus": 0.0264
+    },
+    "se": {
+     "const": 1.1259,
+     "vet_share": 0.1052,
+     "share_65plus": 0.0438
+    },
+    "p": {
+     "const": 0.0,
+     "vet_share": 0.0,
+     "share_65plus": 0.5472
+    }
+   },
+   "M3 + ownership (owner share)": {
+    "n": 3057,
+    "r2": 0.149,
+    "coef": {
+     "const": 31.1278,
+     "vet_share": -0.2798,
+     "share_65plus": 0.1438,
+     "owner_share": -0.1162
+    },
+    "se": {
+     "const": 1.7804,
+     "vet_share": 0.0778,
+     "share_65plus": 0.061,
+     "owner_share": 0.037
+    },
+    "p": {
+     "const": 0.0,
+     "vet_share": 0.0003,
+     "share_65plus": 0.0185,
+     "owner_share": 0.0017
+    }
+   },
+   "M4 + log income, log population": {
+    "n": 3057,
+    "r2": 0.295,
+    "coef": {
+     "const": 64.6406,
+     "vet_share": -0.2168,
+     "share_65plus": 0.175,
+     "owner_share": -0.0339,
+     "log_income": -5.2254,
+     "log_pop": 1.4649
+    },
+    "se": {
+     "const": 9.8844,
+     "vet_share": 0.062,
+     "share_65plus": 0.0479,
+     "owner_share": 0.0294,
+     "log_income": 1.0217,
+     "log_pop": 0.2102
+    },
+    "p": {
+     "const": 0.0,
+     "vet_share": 0.0005,
+     "share_65plus": 0.0003,
+     "owner_share": 0.2493,
+     "log_income": 0.0,
+     "log_pop": 0.0
+    }
+   },
+   "M5 + state fixed effects": {
+    "n": 3057,
+    "r2": 0.526,
+    "coef": {
+     "const": 102.6335,
+     "vet_share": -0.2203,
+     "share_65plus": -0.0367,
+     "owner_share": 0.044,
+     "log_income": -8.4806,
+     "log_pop": 1.2668
+    },
+    "se": {
+     "const": 9.1491,
+     "vet_share": 0.0496,
+     "share_65plus": 0.0388,
+     "owner_share": 0.0244,
+     "log_income": 0.9153,
+     "log_pop": 0.1488
+    },
+    "p": {
+     "const": 0.0,
+     "vet_share": 0.0,
+     "share_65plus": 0.3441,
+     "owner_share": 0.0716,
+     "log_income": 0.0,
+     "log_pop": 0.0
+    }
+   }
+  },
+  "tsci_renter_burden (build #8 outcome, same counties)": {
+   "M4 + log income, log population": {
+    "n": 3057,
+    "r2": 0.487,
+    "coef": {
+     "const": 70.2424,
+     "vet_share": 0.051,
+     "share_65plus": 0.3881,
+     "owner_share": -0.3488,
+     "log_income": -3.167,
+     "log_pop": 1.2305
+    },
+    "se": {
+     "const": 19.3396,
+     "vet_share": 0.0821,
+     "share_65plus": 0.1025,
+     "owner_share": 0.0811,
+     "log_income": 1.967,
+     "log_pop": 0.3887
+    },
+    "p": {
+     "const": 0.0003,
+     "vet_share": 0.5343,
+     "share_65plus": 0.0002,
+     "owner_share": 0.0,
+     "log_income": 0.1074,
+     "log_pop": 0.0015
+    }
+   }
+  }
+ }
+}
