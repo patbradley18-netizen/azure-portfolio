@@ -1,0 +1,5 @@
+azure-identity>=1.19
+azure-storage-blob>=12.24
+azure-storage-queue>=12.12
+mssql-python>=1.10
+pyyaml>=6.0

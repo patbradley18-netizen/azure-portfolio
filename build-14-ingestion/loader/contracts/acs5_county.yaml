@@ -1,0 +1,25 @@
+# Data contract: a raw ACS 5-year county pull as the Census API returns it (the shape build #6-#9's fetch_acs.py saves).
+# File name convention: acs5_<year>_<set>_county.json  ->  dataset_id acs5_<year>[_<set>] (shelter is the unnamed default set).
+# The validator checks every rule below; one failure quarantines the file with the first failing rule as the reason.
+name: acs5_county
+file_pattern: '^acs5_(?P<year>20\d{2})_(?P<set>[a-z]+)_county\.json$'
+format: json_array_of_arrays        # header row, then one row per county
+header:
+  required: [NAME, state, county]   # the Census API appends state and county last; variable codes go first
+  variable_pattern: '^B\d{5}[A-Z]?_\d{3}E$'
+  min_variables: 1
+  max_variables: 60
+rows:
+  min: 3100                          # 3,221 counties + PR 78 in a full pull; a partial pull is a quarantine
+  max: 3300
+  state_fips_pattern: '^\d{2}$'
+  county_fips_pattern: '^\d{3}$'
+  unique_key: [state, county]
+values:
+  numeric_or_null: true              # every variable cell parses as a number, or is null/empty
+  allow_negative_sentinels: true     # -666666666 etc. are Census suppression codes, loaded as NULL + text flag
+  max_value: 1.0e9
+dataset_id:
+  template: 'acs5_{year}{set_suffix}'
+  set_suffix: { shelter: '', veterans: '_vet', tenure: '_tenure', rentburden: '_rentburden' }
+  allowed_sets: [shelter, veterans, tenure, rentburden]
