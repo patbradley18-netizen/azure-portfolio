@@ -1,0 +1,5 @@
+// K03 | Runs per Function per day: the timer evidence (b1 Mondays 06:00 UTC, b2 Saturdays 12:00 UTC) plus manual runs
+AppRequests
+| extend app = tostring(split(AppRoleName, '/')[0])
+| summarize runs=count(), failed=countif(Success == false), avg_ms=round(avg(DurationMs), 0), max_ms=max(DurationMs) by app, day=bin(TimeGenerated, 1d)
+| order by day asc, app asc

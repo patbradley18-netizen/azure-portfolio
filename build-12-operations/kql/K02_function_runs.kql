@@ -1,0 +1,5 @@
+// K02 | Function run history: every invocation of both Functions, with duration and outcome
+AppRequests
+| extend app = tostring(split(AppRoleName, '/')[0])
+| project TimeGenerated, app, Name, Success, DurationMs, ResultCode, OperationId
+| order by TimeGenerated asc

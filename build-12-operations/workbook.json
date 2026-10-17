@@ -1,0 +1,109 @@
+{
+ "version": "Notebook/1.0",
+ "items": [
+  {
+   "type": 1,
+   "content": {
+    "json": "## Azure learning portfolio \u2014 operations\nOne page: the free SQL limit (the unit that bites), Function run history and failures, and what this workspace ingests. Alert `alert-sql-free-limit` emails `ag-azportfolio-ops` when `free_amount_consumed` passes the threshold. Build #12."
+   },
+   "name": "header"
+  },
+  {
+   "type": 10,
+   "content": {
+    "chartId": "sqlfree",
+    "version": "MetricsItem/2.0",
+    "size": 4,
+    "chartType": 2,
+    "resourceType": "microsoft.sql/servers/databases",
+    "metricScope": 0,
+    "resourceIds": [
+     "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1/providers/Microsoft.Sql/servers/sql-azportfolio-b1eu/databases/aid"
+    ],
+    "timeContext": {
+     "durationMs": 2592000000
+    },
+    "metrics": [
+     {
+      "namespace": "microsoft.sql/servers/databases",
+      "metric": "microsoft.sql/servers/databases--free_amount_consumed",
+      "aggregation": 4,
+      "splitBy": null
+     },
+     {
+      "namespace": "microsoft.sql/servers/databases",
+      "metric": "microsoft.sql/servers/databases--free_amount_remaining",
+      "aggregation": 2,
+      "splitBy": null
+     }
+    ],
+    "title": "Free SQL vCore-seconds: consumed (max) and remaining (min), last 30 days \u2014 100,000/month is the line",
+    "gridSettings": {
+     "rowLimit": 10000
+    }
+   },
+   "name": "sql-free-limit"
+  },
+  {
+   "type": 3,
+   "content": {
+    "version": "KqlItem/1.0",
+    "query": "AppRequests | extend app = tostring(split(AppRoleName, '/')[0]) | summarize runs=count(), failed=countif(Success == false), avg_ms=round(avg(DurationMs), 0), max_ms=max(DurationMs) by app, day=bin(TimeGenerated, 1d) | order by day asc, app asc",
+    "size": 0,
+    "title": "Function runs per day (K03)",
+    "timeContext": {
+     "durationMs": 7776000000
+    },
+    "queryType": 0,
+    "resourceType": "microsoft.operationalinsights/workspaces",
+    "crossComponentResources": [
+     "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/DefaultResourceGroup-DEWC/providers/Microsoft.OperationalInsights/workspaces/DefaultWorkspace-9cb921f7-8a0b-445c-bb35-eca47da1daae-DEWC"
+    ],
+    "visualization": "table"
+   },
+   "name": "runs-by-day"
+  },
+  {
+   "type": 3,
+   "content": {
+    "version": "KqlItem/1.0",
+    "query": "union isfuzzy=true (AppRequests | where Success == false | extend app = tostring(split(AppRoleName, '/')[0]), what = 'failed request', detail = strcat(Name, ' -> ', ResultCode)), (AppExceptions | extend app = tostring(split(AppRoleName, '/')[0]), what = 'exception', detail = strcat(ExceptionType, ': ', substring(OuterMessage, 0, 160))) | project TimeGenerated, app, what, detail | order by TimeGenerated desc",
+    "size": 0,
+    "title": "Failures and exceptions (K04)",
+    "timeContext": {
+     "durationMs": 7776000000
+    },
+    "queryType": 0,
+    "resourceType": "microsoft.operationalinsights/workspaces",
+    "crossComponentResources": [
+     "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/DefaultResourceGroup-DEWC/providers/Microsoft.OperationalInsights/workspaces/DefaultWorkspace-9cb921f7-8a0b-445c-bb35-eca47da1daae-DEWC"
+    ],
+    "visualization": "table"
+   },
+   "name": "failures"
+  },
+  {
+   "type": 3,
+   "content": {
+    "version": "KqlItem/1.0",
+    "query": "Usage | where TimeGenerated > ago(30d) | where IsBillable == true | summarize mb=round(sum(Quantity), 2) by DataType | order by mb desc",
+    "size": 0,
+    "title": "Ingestion by table, MB, last 30 days (K06) \u2014 free line is 5,120 MB",
+    "timeContext": {
+     "durationMs": 2592000000
+    },
+    "queryType": 0,
+    "resourceType": "microsoft.operationalinsights/workspaces",
+    "crossComponentResources": [
+     "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/DefaultResourceGroup-DEWC/providers/Microsoft.OperationalInsights/workspaces/DefaultWorkspace-9cb921f7-8a0b-445c-bb35-eca47da1daae-DEWC"
+    ],
+    "visualization": "table"
+   },
+   "name": "ingest"
+  }
+ ],
+ "isLocked": false,
+ "fallbackResourceIds": [
+  "/subscriptions/9cb921f7-8a0b-445c-bb35-eca47da1daae/resourceGroups/rg-azportfolio-b1"
+ ]
+}

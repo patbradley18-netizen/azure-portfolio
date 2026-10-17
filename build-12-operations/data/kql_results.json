@@ -1,0 +1,239 @@
+﻿{
+    "K01_tables":  {
+                       "title":  "K01 | What the workspace holds: which tables, how many rows, over what window",
+                       "kql":  "union isfuzzy=true AppRequests, AppTraces, AppExceptions, AppDependencies, AppPerformanceCounters, FunctionAppLogs, AzureMetrics | summarize rows=count(), earliest=min(TimeGenerated), latest=max(TimeGenerated) by Type | order by rows desc ",
+                       "rows":  {
+                                    "value":  [
+                                                  {
+                                                      "TableName":  "PrimaryResult",
+                                                      "Type":  "AppTraces",
+                                                      "earliest":  "2026-10-14T21:14:39.4438773Z",
+                                                      "latest":  "2026-10-15T20:46:30.0829437Z",
+                                                      "rows":  "415"
+                                                  },
+                                                  {
+                                                      "TableName":  "PrimaryResult",
+                                                      "Type":  "AppDependencies",
+                                                      "earliest":  "2026-10-14T21:18:35.6478888Z",
+                                                      "latest":  "2026-10-15T20:43:37.8182308Z",
+                                                      "rows":  "122"
+                                                  },
+                                                  {
+                                                      "TableName":  "PrimaryResult",
+                                                      "Type":  "AppPerformanceCounters",
+                                                      "earliest":  "2026-10-14T21:17:26.2798774Z",
+                                                      "latest":  "2026-10-15T20:45:30.8688438Z",
+                                                      "rows":  "18"
+                                                  },
+                                                  {
+                                                      "TableName":  "PrimaryResult",
+                                                      "Type":  "AppRequests",
+                                                      "earliest":  "2026-10-14T21:18:35.2811425Z",
+                                                      "latest":  "2026-10-15T20:43:30.0171692Z",
+                                                      "rows":  "3"
+                                                  },
+                                                  {
+                                                      "TableName":  "PrimaryResult",
+                                                      "Type":  "AppExceptions",
+                                                      "earliest":  "2026-10-14T21:18:58.1316039Z",
+                                                      "latest":  "2026-10-14T21:18:58.1331064Z",
+                                                      "rows":  "2"
+                                                  }
+                                              ],
+                                    "Count":  5
+                                }
+                   },
+    "K02_function_runs":  {
+                              "title":  "K02 | Function run history: every invocation of both Functions, with duration and outcome",
+                              "kql":  "AppRequests | extend app = tostring(split(AppRoleName, \u0027/\u0027)[0]) | project TimeGenerated, app, Name, Success, DurationMs, ResultCode, OperationId | order by TimeGenerated asc ",
+                              "rows":  {
+                                           "value":  [
+                                                         {
+                                                             "DurationMs":  "22852.1845",
+                                                             "Name":  "weekly_detect",
+                                                             "OperationId":  "775b4920546aa318c52f04c4c23bb152",
+                                                             "ResultCode":  "0",
+                                                             "Success":  "False",
+                                                             "TableName":  "PrimaryResult",
+                                                             "TimeGenerated":  "2026-10-14T21:18:35.2811425Z",
+                                                             "app":  "func-azportfolio-b1"
+                                                         },
+                                                         {
+                                                             "DurationMs":  "21412.6957",
+                                                             "Name":  "weekly_detect",
+                                                             "OperationId":  "b701f59541b78e824d89ba90cf3eb183",
+                                                             "ResultCode":  "0",
+                                                             "Success":  "True",
+                                                             "TableName":  "PrimaryResult",
+                                                             "TimeGenerated":  "2026-10-14T21:22:51.6719864Z",
+                                                             "app":  "func-azportfolio-b1"
+                                                         },
+                                                         {
+                                                             "DurationMs":  "7813.6799",
+                                                             "Name":  "weekly_bls_pull",
+                                                             "OperationId":  "0d3f863f2b1b21c5e7c71f6214155602",
+                                                             "ResultCode":  "0",
+                                                             "Success":  "True",
+                                                             "TableName":  "PrimaryResult",
+                                                             "TimeGenerated":  "2026-10-15T20:43:30.0171692Z",
+                                                             "app":  "func-azportfolio-b2"
+                                                         }
+                                                     ],
+                                           "Count":  3
+                                       }
+                          },
+    "K03_runs_by_day":  {
+                            "title":  "K03 | Runs per Function per day: the timer evidence (b1 Mondays 06:00 UTC, b2 Saturdays 12:00 UTC) plus manual runs",
+                            "kql":  "AppRequests | extend app = tostring(split(AppRoleName, \u0027/\u0027)[0]) | summarize runs=count(), failed=countif(Success == false), avg_ms=round(avg(DurationMs), 0), max_ms=max(DurationMs) by app, day=bin(TimeGenerated, 1d) | order by day asc, app asc ",
+                            "rows":  {
+                                         "value":  [
+                                                       {
+                                                           "TableName":  "PrimaryResult",
+                                                           "app":  "func-azportfolio-b1",
+                                                           "avg_ms":  "22132",
+                                                           "day":  "2026-10-14T00:00:00Z",
+                                                           "failed":  "1",
+                                                           "max_ms":  "22852.1845",
+                                                           "runs":  "2"
+                                                       },
+                                                       {
+                                                           "TableName":  "PrimaryResult",
+                                                           "app":  "func-azportfolio-b2",
+                                                           "avg_ms":  "7814",
+                                                           "day":  "2026-10-15T00:00:00Z",
+                                                           "failed":  "0",
+                                                           "max_ms":  "7813.6799",
+                                                           "runs":  "1"
+                                                       }
+                                                   ],
+                                         "Count":  2
+                                     }
+                        },
+    "K04_failures":  {
+                         "title":  "K04 | Failures and exceptions: what went wrong, when, in which app",
+                         "kql":  "union isfuzzy=true (AppRequests | where Success == false | extend app = tostring(split(AppRoleName, \u0027/\u0027)[0]), what = \u0027failed request\u0027, detail = strcat(Name, \u0027 -\u003e \u0027, ResultCode)), (AppExceptions | extend app = tostring(split(AppRoleName, \u0027/\u0027)[0]), what = \u0027exception\u0027, detail = strcat(ExceptionType, \u0027: \u0027, substring(OuterMessage, 0, 160))) | project TimeGenerated, app, what, detail | order by TimeGenerated desc ",
+                         "rows":  {
+                                      "value":  [
+                                                    {
+                                                        "TableName":  "PrimaryResult",
+                                                        "TimeGenerated":  "2026-10-14T21:18:58.1331064Z",
+                                                        "app":  "func-azportfolio-b1",
+                                                        "detail":  "Microsoft.Data.SqlClient.SqlException: Exception while executing function: Functions.weekly_detect",
+                                                        "what":  "exception"
+                                                    },
+                                                    {
+                                                        "TableName":  "PrimaryResult",
+                                                        "TimeGenerated":  "2026-10-14T21:18:58.1316039Z",
+                                                        "app":  "func-azportfolio-b1",
+                                                        "detail":  "Microsoft.Data.SqlClient.SqlException: Exception while executing function: Functions.weekly_detect",
+                                                        "what":  "exception"
+                                                    },
+                                                    {
+                                                        "TableName":  "PrimaryResult",
+                                                        "TimeGenerated":  "2026-10-14T21:18:35.2811425Z",
+                                                        "app":  "func-azportfolio-b1",
+                                                        "detail":  "weekly_detect -\u003e 0",
+                                                        "what":  "failed request"
+                                                    }
+                                                ],
+                                      "Count":  3
+                                  }
+                     },
+    "K05_trace_volume":  {
+                             "title":  "K05 | Trace volume by severity per app: what the Functions log, and how much (sampling makes these estimates)",
+                             "kql":  "AppTraces | extend app = tostring(split(AppRoleName, \u0027/\u0027)[0]) | summarize traces=count(), sample_weight=round(sum(ItemCount), 0) by app, SeverityLevel | order by app asc, SeverityLevel asc ",
+                             "rows":  {
+                                          "value":  [
+                                                        {
+                                                            "SeverityLevel":  "1",
+                                                            "TableName":  "PrimaryResult",
+                                                            "app":  "",
+                                                            "sample_weight":  "44",
+                                                            "traces":  "44"
+                                                        },
+                                                        {
+                                                            "SeverityLevel":  "1",
+                                                            "TableName":  "PrimaryResult",
+                                                            "app":  "func-azportfolio-b1",
+                                                            "sample_weight":  "250",
+                                                            "traces":  "250"
+                                                        },
+                                                        {
+                                                            "SeverityLevel":  "2",
+                                                            "TableName":  "PrimaryResult",
+                                                            "app":  "func-azportfolio-b1",
+                                                            "sample_weight":  "1",
+                                                            "traces":  "1"
+                                                        },
+                                                        {
+                                                            "SeverityLevel":  "3",
+                                                            "TableName":  "PrimaryResult",
+                                                            "app":  "func-azportfolio-b1",
+                                                            "sample_weight":  "1",
+                                                            "traces":  "1"
+                                                        },
+                                                        {
+                                                            "SeverityLevel":  "0",
+                                                            "TableName":  "PrimaryResult",
+                                                            "app":  "func-azportfolio-b2",
+                                                            "sample_weight":  "1",
+                                                            "traces":  "1"
+                                                        },
+                                                        {
+                                                            "SeverityLevel":  "1",
+                                                            "TableName":  "PrimaryResult",
+                                                            "app":  "func-azportfolio-b2",
+                                                            "sample_weight":  "117",
+                                                            "traces":  "117"
+                                                        },
+                                                        {
+                                                            "SeverityLevel":  "2",
+                                                            "TableName":  "PrimaryResult",
+                                                            "app":  "func-azportfolio-b2",
+                                                            "sample_weight":  "1",
+                                                            "traces":  "1"
+                                                        }
+                                                    ],
+                                          "Count":  7
+                                      }
+                         },
+    "K06_ingest_gb":  {
+                          "title":  "K06 | Ingestion: how many MB this workspace took in over the last 30 days, by table (the 5 GB/month free line is the one that matters)",
+                          "kql":  "Usage | where TimeGenerated \u003e ago(30d) | where IsBillable == true | summarize mb=round(sum(Quantity), 2) by DataType | order by mb desc ",
+                          "rows":  {
+                                       "value":  [
+                                                     {
+                                                         "DataType":  "AppTraces",
+                                                         "TableName":  "PrimaryResult",
+                                                         "mb":  "0.45"
+                                                     },
+                                                     {
+                                                         "DataType":  "AppDependencies",
+                                                         "TableName":  "PrimaryResult",
+                                                         "mb":  "0.13"
+                                                     },
+                                                     {
+                                                         "DataType":  "AppMetrics",
+                                                         "TableName":  "PrimaryResult",
+                                                         "mb":  "0.05"
+                                                     },
+                                                     {
+                                                         "DataType":  "AppExceptions",
+                                                         "TableName":  "PrimaryResult",
+                                                         "mb":  "0.05"
+                                                     },
+                                                     {
+                                                         "DataType":  "AppPerformanceCounters",
+                                                         "TableName":  "PrimaryResult",
+                                                         "mb":  "0.01"
+                                                     },
+                                                     {
+                                                         "DataType":  "AppRequests",
+                                                         "TableName":  "PrimaryResult",
+                                                         "mb":  "0"
+                                                     }
+                                                 ],
+                                       "Count":  6
+                                   }
+                      }
+}

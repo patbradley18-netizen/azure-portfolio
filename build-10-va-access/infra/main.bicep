@@ -206,4 +206,57 @@ resource raGithubBlob 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   properties: { roleDefinitionId: roleBlobDataContributor, principalId: githubIdentity.properties.principalId, principalType: 'ServicePrincipal' }
 }
 
+// ---------- Build #12: the monitoring the Function wizard created, now described; plus the alert and its action group ----------
+param workspaceResourceGroup string = 'DefaultResourceGroup-DEWC'
+param workspaceName string = 'DefaultWorkspace-${subscription().subscriptionId}-DEWC'
+param operatorEmail string   // passed on the command line; never stored
+param sqlFreeLimitThreshold int = 80000
+
+resource workspace 'Microsoft.OperationalInsights/workspaces@2023-09-01' existing = {
+  name: workspaceName
+  scope: resourceGroup(workspaceResourceGroup)
+}
+
+resource aiB1 'Microsoft.Insights/components@2020-02-02' = {
+  name: funcB1Name
+  location: locationEu
+  kind: 'web'
+  properties: { Application_Type: 'web', WorkspaceResourceId: workspace.id, IngestionMode: 'LogAnalytics', RetentionInDays: 90 }
+}
+
+resource aiB2 'Microsoft.Insights/components@2020-02-02' = {
+  name: funcB2Name
+  location: locationEu
+  kind: 'web'
+  properties: { Application_Type: 'web', WorkspaceResourceId: workspace.id, IngestionMode: 'LogAnalytics', RetentionInDays: 90 }
+}
+
+resource opsActionGroup 'Microsoft.Insights/actionGroups@2023-01-01' = {
+  name: 'ag-azportfolio-ops'
+  location: 'global'
+  properties: {
+    groupShortName: 'azpfops'
+    enabled: true
+    emailReceivers: [ { name: 'operator', emailAddress: operatorEmail, useCommonAlertSchema: false } ]
+  }
+}
+
+resource sqlFreeLimitAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
+  name: 'alert-sql-free-limit'
+  location: 'global'
+  properties: {
+    description: 'Free SQL vCore-seconds consumed this month passed the threshold (production ${sqlFreeLimitThreshold} of 100,000)'
+    severity: 2
+    enabled: true
+    scopes: [ sqlDb.id ]
+    evaluationFrequency: 'PT15M'
+    windowSize: 'PT1H'
+    criteria: {
+      'odata.type': 'Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria'
+      allOf: [ { name: 'free-limit', metricName: 'free_amount_consumed', metricNamespace: 'Microsoft.Sql/servers/databases', operator: 'GreaterThan', threshold: sqlFreeLimitThreshold, timeAggregation: 'Maximum', criterionType: 'StaticThresholdCriterion' } ]
+    }
+    actions: [ { actionGroupId: opsActionGroup.id } ]
+  }
+}
+
 output staticSiteHint string = 'Static website on ${storage.name} is enabled on the data plane (az storage blob service-properties update --static-website), not in ARM.'

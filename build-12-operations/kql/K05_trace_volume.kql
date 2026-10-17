@@ -1,0 +1,5 @@
+// K05 | Trace volume by severity per app: what the Functions log, and how much (sampling makes these estimates)
+AppTraces
+| extend app = tostring(split(AppRoleName, '/')[0])
+| summarize traces=count(), sample_weight=round(sum(ItemCount), 0) by app, SeverityLevel
+| order by app asc, SeverityLevel asc

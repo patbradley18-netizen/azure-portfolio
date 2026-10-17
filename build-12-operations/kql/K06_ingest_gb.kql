@@ -1,0 +1,6 @@
+// K06 | Ingestion: how many MB this workspace took in over the last 30 days, by table (the 5 GB/month free line is the one that matters)
+Usage
+| where TimeGenerated > ago(30d)
+| where IsBillable == true
+| summarize mb=round(sum(Quantity), 2) by DataType
+| order by mb desc

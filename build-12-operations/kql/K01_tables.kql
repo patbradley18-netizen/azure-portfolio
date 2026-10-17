@@ -1,0 +1,4 @@
+// K01 | What the workspace holds: which tables, how many rows, over what window
+union isfuzzy=true AppRequests, AppTraces, AppExceptions, AppDependencies, AppPerformanceCounters, FunctionAppLogs, AzureMetrics
+| summarize rows=count(), earliest=min(TimeGenerated), latest=max(TimeGenerated) by Type
+| order by rows desc

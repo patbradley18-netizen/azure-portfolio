@@ -1,0 +1,6 @@
+// K04 | Failures and exceptions: what went wrong, when, in which app
+union isfuzzy=true
+  (AppRequests | where Success == false | extend app = tostring(split(AppRoleName, '/')[0]), what = 'failed request', detail = strcat(Name, ' -> ', ResultCode)),
+  (AppExceptions | extend app = tostring(split(AppRoleName, '/')[0]), what = 'exception', detail = strcat(ExceptionType, ': ', substring(OuterMessage, 0, 160)))
+| project TimeGenerated, app, what, detail
+| order by TimeGenerated desc
