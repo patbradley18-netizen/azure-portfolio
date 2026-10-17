@@ -1,0 +1,42 @@
+// Build #16 — cohort base over the wider table, as a materialized view, plus the survival helpers.
+// Recodes (verified against the extract #4 codebook — see SPEC change log): EDUC <73 less than HS; 73 HS; 81–92 some college/assoc; >=111 BA+; 999 NIU.
+// RACE 100 White, 200 Black, else other; HISPAN 0 not Hispanic, 100–612 Hispanic; 901/902 unknown.
+.create-or-alter function with (docstring="Person-level base for build #16: cohorts, clock, outcomes, demographics", folder="b16") person_base() {
+    cps_person
+    | where VTSUPPWT > 0
+    | extend cohort = case(
+        VVIETNAM == 2, "vietnam_theater",
+        VIRAQ == 1 or VAFGHAN == 1, "gwot_theater",
+        VWHEN == 4, "vietnam_era",
+        VWHEN == 1, "gwot_era",
+        VETSTAT == 1, "nonvet",
+        YEAR < 1991 and VVIETNAM != 2, "all_other",
+        "other_vet")
+    | extend war = case(cohort startswith "vietnam", "vietnam", cohort startswith "gwot", "gwot", "")
+    | extend sep_year = iff(VLASTSERVE between (1900 .. 2100), toint(VLASTSERVE), int(null))
+    | extend years_out = iff(isnotnull(sep_year), toint(YEAR) - sep_year, iff(war == "vietnam", toint(YEAR) - 1975, int(null)))
+    | extend clock = iff(isnotnull(sep_year), "separation", iff(isnotnull(years_out), "era", ""))
+    | extend bin = case(isnull(years_out), "", years_out < 0, "before_end", years_out <= 4, "00-04", years_out <= 9, "05-09", years_out <= 15, "10-15", years_out <= 22, "16-22", years_out <= 30, "23-30", "31+")
+    | extend ageband = case(AGE < 18, "<18", AGE <= 34, "18-34", AGE <= 49, "35-49", AGE <= 64, "50-64", "65+")
+    | extend educ4 = case(EDUC >= 999 or EDUC <= 1, "", EDUC < 73, "lt_hs", EDUC == 73, "hs", EDUC < 111, "some_college", "ba_plus")
+    | extend hisp = HISPAN between (100 .. 612), race4 = case(HISPAN between (100 .. 612), "hispanic", RACE == 100, "white_nh", RACE == 200, "black", RACE >= 900 or HISPAN >= 900, "", "other")
+    | extend male = SEX == 1, sex = iff(SEX == 1, "M", "F")
+    | extend inlf = LABFORCE == 2, unemp = EMPSTAT in (20, 21, 22)
+    | extend closed_gwot = cohort == "gwot_theater" and sep_year <= 2009
+    | project YEAR = toint(YEAR), AGE = toint(AGE), sex, male, cohort, war, clock, years_out, bin, ageband, educ4, race4, hisp, inlf, unemp, w = VTSUPPWT, sep_year, closed_gwot
+}
+
+// Materialized view: the cohort base precomputed over cps_person. ADX keeps it current as extents arrive (an annual extract lands
+// and the view catches up on its own). The KQL above is the view's query; person_base() stays as the readable source of truth.
+.create async ifnotexists materialized-view with (backfill=true) vet_base_mv on table cps_person {
+    cps_person
+    | where VTSUPPWT > 0
+    | extend cohort = case(VVIETNAM == 2, "vietnam_theater", VIRAQ == 1 or VAFGHAN == 1, "gwot_theater", VWHEN == 4, "vietnam_era", VWHEN == 1, "gwot_era", VETSTAT == 1, "nonvet", YEAR < 1991 and VVIETNAM != 2, "all_other", "other_vet")
+    | extend sep_year = iff(VLASTSERVE between (1900 .. 2100), toint(VLASTSERVE), int(null))
+    | extend sex = iff(SEX == 1, "M", "F"), closed_gwot = VIRAQ == 1 or VAFGHAN == 1
+    | summarize w = sum(VTSUPPWT), n = count(), inlf_w = sumif(VTSUPPWT, LABFORCE == 2), unemp_w = sumif(VTSUPPWT, EMPSTAT in (20, 21, 22) and LABFORCE == 2),
+                lt_hs_w = sumif(VTSUPPWT, EDUC between (2 .. 72)), hs_w = sumif(VTSUPPWT, EDUC == 73), some_w = sumif(VTSUPPWT, EDUC between (74 .. 110)), ba_w = sumif(VTSUPPWT, EDUC between (111 .. 998)), educ_w = sumif(VTSUPPWT, EDUC between (2 .. 998)),
+                hisp_w = sumif(VTSUPPWT, HISPAN between (100 .. 612)), white_w = sumif(VTSUPPWT, RACE == 100 and HISPAN == 0), black_w = sumif(VTSUPPWT, RACE == 200 and not(HISPAN between (100 .. 612))), race_w = sumif(VTSUPPWT, RACE < 900 and HISPAN < 900),
+                female_w = sumif(VTSUPPWT, SEX == 2), sumw2 = sum(VTSUPPWT * VTSUPPWT)
+      by YEAR = toint(YEAR), AGE = toint(AGE), sex, cohort, sep_year
+}

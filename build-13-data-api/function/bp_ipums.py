@@ -44,7 +44,7 @@ async def ipums_extract_start(req: func.HttpRequest, client) -> func.HttpRespons
         body = req.get_json()
     except ValueError:
         body = {}
-    job = {"samples": body.get("samples") or SAMPLES, "variables": body.get("variables") or VARIABLES,
+    job = {"samples": body.get("samples") or SAMPLES, "variables": body.get("variables") or VARIABLES, "table": body.get("table"),
            "description": body.get("description") or f"azportfolio build15 {dt.date.today().isoformat()}", "trigger": "http"}
     instance_id = await client.start_new("ipums_orchestrator", None, job)
     return client.create_check_status_response(req, instance_id)
@@ -76,7 +76,7 @@ def ipums_orchestrator(context: df.DurableOrchestrationContext):
         yield context.create_timer(context.current_utc_datetime + dt.timedelta(seconds=60))
     landed = yield context.call_activity("ipums_download", {"number": number})
     retry = df.RetryOptions(first_retry_interval_in_milliseconds=30000, max_number_of_attempts=3)
-    ingest = yield context.call_activity_with_retry("adx_ingest", retry, {"number": number, "blob": landed["blob"]})
+    ingest = yield context.call_activity_with_retry("adx_ingest", retry, {"number": number, "blob": landed["blob"], "table": job.get("table")})
     return {"extract": number, "polls": polls, **landed, **ingest}
 
 
@@ -131,10 +131,28 @@ def adx_ingest(q: dict) -> dict:
     with tempfile.NamedTemporaryFile(suffix=".csv.gz", delete=False) as f:
         blob.download_blob().readinto(f)
         path = f.name
+    table = q.get("table") or os.environ.get("ADX_TABLE", "cps_raw")
+    ensure_table(cred, table, path)
     kcsb = KustoConnectionStringBuilder.with_azure_token_credential(os.environ["ADX_INGEST_URI"], cred)
     client = QueuedIngestClient(kcsb)
-    props = IngestionProperties(database=os.environ["ADX_DATABASE"], table=os.environ.get("ADX_TABLE", "cps_raw"), data_format=DataFormat.CSV,
+    props = IngestionProperties(database=os.environ["ADX_DATABASE"], table=table, data_format=DataFormat.CSV,
                                 ignore_first_record=True, additional_tags=[f"extract:{q['number']}"], drop_by_tags=[f"extract:{q['number']}"])
     result = client.ingest_from_file(path, ingestion_properties=props)
     os.remove(path)
     return {"ingest": str(result.status), "table": props.table, "tag": f"extract:{q['number']}"}
+
+
+REAL_SUFFIXES = ("WT", "WTFINL")
+
+
+def ensure_table(cred, table, gz_path):
+    """`.create-merge table` from the csv header: IPUMS orders columns its own way, so the file is the schema.
+    Weights are real; everything else in these extracts is an integer code (long covers the 14-digit CPS ids)."""
+    import gzip
+    from azure.kusto.data import KustoClient, KustoConnectionStringBuilder
+    with gzip.open(gz_path, "rt") as f:
+        header = [h.strip().strip('"') for h in f.readline().strip().split(",")]
+    cols = ", ".join(f"{h}:{'real' if h.endswith(REAL_SUFFIXES) else 'long'}" for h in header)
+    kc = KustoClient(KustoConnectionStringBuilder.with_azure_token_credential(os.environ["ADX_CLUSTER_URI"], cred))
+    kc.execute_mgmt(os.environ["ADX_DATABASE"], f".create-merge table {table} ({cols})")
+    logging.info("table %s ensured with %d columns", table, len(header))
