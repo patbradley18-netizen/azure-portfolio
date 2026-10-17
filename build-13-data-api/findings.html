@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Warehouse As Product</title>
+<style>
+:root{color-scheme:light;--surface:#fcfcfb;--surface-2:#f1f0ec;--ink:#0b0b0b;--ink-2:#52514e;--ink-3:#8a8880;--line:#e3e1da;--series:#2a78d6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--surface:#1a1a19;--surface-2:#242422;--ink:#f0efec;--ink-2:#c3c2b7;--ink-3:#8f8e86;--line:#33332f;--series:#3987e5}}
+:root[data-theme="dark"]{color-scheme:dark;--surface:#1a1a19;--surface-2:#242422;--ink:#f0efec;--ink-2:#c3c2b7;--ink-3:#8f8e86;--line:#33332f;--series:#3987e5}
+*{box-sizing:border-box}body{margin:0;background:var(--surface);color:var(--ink);font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:980px;margin:0 auto;padding:32px 16px 64px}h1{font-size:26px;margin:0 0 4px}.sub{color:var(--ink-2);margin:0 0 28px}
+h2{font-size:17px;margin:40px 0 8px}.finding{font-size:16px;margin:0 0 6px}.note{color:var(--ink-2);font-size:14px;margin:0 0 14px}
+pre{background:var(--surface-2);padding:12px;border-radius:8px;overflow-x:auto;font-size:12px;line-height:1.45;white-space:pre-wrap}details{margin-top:10px}summary{cursor:pointer;color:var(--series);font-size:14px}
+button{font:inherit;font-size:13px;padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);cursor:pointer}button:hover{border-color:var(--series)}
+table{width:100%;border-collapse:collapse;font-size:13px;display:block;overflow-x:auto;margin-bottom:10px}th{text-align:left;color:var(--ink-2);font-weight:500;border-bottom:1px solid var(--line);padding:6px 8px}td{padding:5px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+.foot{margin-top:40px;color:var(--ink-3);font-size:13px;border-top:1px solid var(--line);padding-top:14px}a{color:var(--series)}code{font-size:13px}
+</style></head><body><main>
+<h1>The warehouse as a product: a public data API, a gateway with two products, and a rebuild that runs itself</h1>
+<p class="sub">Twelve builds produced a county warehouse only its author could query. This one puts an HTTP API on it — Azure Functions with SQL bindings and a managed identity, behind API Management with a keyless public product and a keyed one — and a Durable Functions orchestration that rebuilds the access table state by state every month. The OpenAPI spec is the contract; a test suite holds the gateway to it after every deploy. Anchor phrase: a query becomes an endpoint. The buttons call the live gateway from your browser.</p>
+<section class="q"><h2>The API</h2><p class="finding">Five read endpoints and two orchestration endpoints, one Function app behind API Management. A call for Marion County, Indiana returns its nearest medical center (<b>Richard L. Roudebush Veterans&#x27; Administration Medical Center</b>, 2.7 straight-line miles) and nearest care site (Indianapolis VA Clinic, 1.4 miles); a call for Delaware returns 3 counties and the veteran-weighted mean of 33.5 miles; a point in Indianapolis finds the Richard L. Roudebush Veterans&#x27; Administration Medical Center at 8.3 miles. Every response carries the data vintage in <code>meta.source</code>.</p><p class="note">Base URL https://apim-azportfolio-b13.azure-api.net/data. Read endpoints go through SQL input bindings (parameterised T-SQL or stored procedures); the Function's managed identity has SELECT on schema col and EXECUTE on two procedures, nothing more.</p><p><button data-path="/counties/18097/access">GET /counties/18097/access</button></p><pre class="live" data-for="/counties/18097/access">press the button: the browser calls the gateway</pre><p><button data-path="/states/DE/access">GET /states/DE/access</button></p><pre class="live" data-for="/states/DE/access">press the button: the browser calls the gateway</pre><p><button data-path="/facilities/near?lat=39.9&amp;lon=-86.2&amp;kind=VAMC&amp;top=3">GET /facilities/near?lat=39.9&amp;lon=-86.2&amp;kind=VAMC&amp;top=3</button></p><pre class="live" data-for="/facilities/near?lat=39.9&amp;lon=-86.2&amp;kind=VAMC&amp;top=3">press the button: the browser calls the gateway</pre><details><summary>Sample response, as recorded at build time</summary><pre>{
+ &quot;data&quot;: {
+  &quot;fips&quot;: &quot;18097&quot;,
+  &quot;county&quot;: &quot;Marion&quot;,
+  &quot;state_abbr&quot;: &quot;IN&quot;,
+  &quot;veterans&quot;: 40971.0,
+  &quot;vet_share&quot;: 5.63,
+  &quot;vamc_sta_no&quot;: &quot;583&quot;,
+  &quot;vamc_name&quot;: &quot;Richard L. Roudebush Veterans&#x27; Administration Medical Center&quot;,
+  &quot;vamc_miles&quot;: 2.7,
+  &quot;site_sta_no&quot;: &quot;583QB&quot;,
+  &quot;site_name&quot;: &quot;Indianapolis VA Clinic&quot;,
+  &quot;site_kind&quot;: &quot;OOS&quot;,
+  &quot;site_miles&quot;: 1.4,
+  &quot;center_kind&quot;: &quot;cenpop2020&quot;,
+  &quot;computed_at&quot;: &quot;2026-10-17T03:54:12.814Z&quot;
+ },
+ &quot;meta&quot;: {
+  &quot;source&quot;: &quot;Facilities: VA VAST extract 2018-09-29 via HRSA; veterans: ACS 5-year 2023 B21001; county origins: 2020 Census centers of population. Straight-line miles.&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;generated_at&quot;: &quot;2026-10-17T03:56:27Z&quot;
+ }
+}</pre></details></section>
+<section class="q"><h2>The gateway</h2><p class="finding">Two products on the same API. <b>public</b>: no key, GET only, 30 calls a minute and 2,000 a day shared by everyone (the Consumption tier has no per-caller counters), responses cached 5 minutes. <b>keyed</b>: a subscription key, 60 a minute and 20,000 a month, and the right to start the rebuild. The Function's host key lives in a secret named value in the gateway; the Function answers nobody else. The gateway also fills in <code>miles</code>, <code>kind</code> and <code>top</code> when a caller omits them, because the stored-procedure binding behind <code>/facilities/near</code> needs all five.</p><p class="note">API Management, Consumption tier: first 1,000,000 calls a month free. Policies are XML files in the repo (apim/).</p><p><button data-path="/info">GET /info</button></p><pre class="live" data-for="/info">press the button: the browser calls the gateway</pre><details><summary>The public product policy</summary><pre>&lt;!-- Product &quot;public&quot;: no subscription key. The Consumption tier does not allow the per-key (per-IP) counters, so the
+     limit is product-wide: 30 calls a minute and 2,000 a day shared by every anonymous caller. GET only. --&gt;
+&lt;policies&gt;
+  &lt;inbound&gt;
+    &lt;base /&gt;
+    &lt;rate-limit calls=&quot;30&quot; renewal-period=&quot;60&quot; /&gt;
+    &lt;quota calls=&quot;2000&quot; renewal-period=&quot;86400&quot; /&gt;
+    &lt;choose&gt;
+      &lt;when condition=&quot;@(context.Request.Method != &quot;GET&quot;)&quot;&gt;
+        &lt;return-response&gt;&lt;set-status code=&quot;405&quot; reason=&quot;Method Not Allowed&quot; /&gt;&lt;/return-response&gt;
+      &lt;/when&gt;
+    &lt;/choose&gt;
+  &lt;/inbound&gt;
+  &lt;backend&gt;&lt;base /&gt;&lt;/backend&gt;
+  &lt;outbound&gt;
+    &lt;base /&gt;
+    &lt;set-header name=&quot;X-Powered-By&quot; exists-action=&quot;delete&quot; /&gt;
+    &lt;set-header name=&quot;Cache-Control&quot; exists-action=&quot;override&quot;&gt;&lt;value&gt;public, max-age=300&lt;/value&gt;&lt;/set-header&gt;
+  &lt;/outbound&gt;
+  &lt;on-error&gt;&lt;base /&gt;&lt;/on-error&gt;
+&lt;/policies&gt;
+</pre></details></section>
+<section class="q"><h2>The rebuild</h2><p class="finding">The rebuild is a Durable Functions orchestration: fan out to 51 state activities, each running <code>col.sp_refresh_access_state</code> with retries, fan in to a run record. The last good run <b>6fba18a9…</b> rebuilt <b>3,144 rows</b> across 51 states in 33 seconds; the table matched build #10 to the row afterwards. The first run wrote 0 rows and said so: the activity's SQL binding could not address a plain-string input, so the stored procedure ran with an empty state. The fix was an object input; the activity now fails loudly on zero rows.</p><p class="note">POST /refresh (keyed product) starts it; GET /refresh/status/{id} follows it; GET /refresh/runs lists the run records. A timer starts it at 03:00 UTC on the first of the month.</p><p><button data-path="/refresh/runs">GET /refresh/runs</button></p><pre class="live" data-for="/refresh/runs">press the button: the browser calls the gateway</pre><table><thead><tr><th>run</th><th>started</th><th>finished</th><th>states</th><th>rows</th><th>status</th></tr></thead><tbody><tr><td>6fba18a98360…</td><td>2026-10-17T03:54:08</td><td>2026-10-17T03:54:41</td><td>51</td><td>3,144</td><td>done</td></tr><tr><td>f8240370cb56…</td><td>2026-10-17T03:50:25</td><td>2026-10-17T03:50:35</td><td>51</td><td>0</td><td>done</td></tr></tbody></table></section>
+<section class="q"><h2>The contract</h2><p class="finding"><b>16/16 checks pass</b> against the live gateway: envelope shape, status codes, validation (400, 404, 405), a known value, the gateway's defaults, ordering, a response-time budget. The same script runs in GitHub Actions after every deploy; a broken contract fails the build.</p><p class="note">tests/contract_test.py; the public product's shared rate limit is why the suite backs off on 429 instead of failing.</p><pre>PASS info 200 with envelope
+PASS info under budget
+PASS county 200
+PASS county is Marion IN
+PASS county nearest VAMC is Roudebush
+PASS county meta carries source note
+PASS bad fips -&gt; 400 with error
+PASS unknown fips -&gt; 404
+PASS state 200, lower-case accepted
+PASS state rows sorted farthest first
+PASS near 200 with gateway defaults (miles 60, top 20)
+PASS near sorted by miles
+PASS near kind filter
+PASS out-of-range -&gt; 400
+PASS runs 200 list
+PASS public POST refresh -&gt; 405
+16/16 passed</pre><details><summary>openapi.yaml</summary><pre>openapi: 3.0.3
+info:
+  title: azportfolio-data
+  version: 1.0.0
+  description: |
+    Read API over the Azure learning portfolio&#x27;s county warehouse (schema `col`): distance from every county&#x27;s
+    population center to the nearest VA medical center and care site (build #10), served by an Azure Function
+    behind API Management. Straight-line miles. Facilities are VA&#x27;s VAST extract of 2018-09-29; veterans are ACS
+    5-year 2023 B21001. Non-commercial learning project; data public domain.
+servers:
+  - url: https://apim-azportfolio-b13.azure-api.net/data
+paths:
+  /info:
+    get:
+      summary: API info
+      operationId: apiInfo
+      responses:
+        &quot;200&quot;: { $ref: &quot;#/components/responses/Envelope&quot; }
+  /counties/{fips}/access:
+    get:
+      summary: One county&#x27;s nearest VA medical center and care site
+      operationId: countyAccess
+      parameters:
+        - { name: fips, in: path, required: true, schema: { type: string, pattern: &quot;^[0-9]{5}$&quot; }, example: &quot;18097&quot; }
+      responses:
+        &quot;200&quot;: { $ref: &quot;#/components/responses/Envelope&quot; }
+        &quot;400&quot;: { $ref: &quot;#/components/responses/Error&quot; }
+        &quot;404&quot;: { $ref: &quot;#/components/responses/Error&quot; }
+  /states/{state}/access:
+    get:
+      summary: Every county in a state, farthest first, with the veteran-weighted mean
+      operationId: stateAccess
+      parameters:
+        - { name: state, in: path, required: true, schema: { type: string, pattern: &quot;^[A-Za-z]{2}$&quot; }, example: &quot;IN&quot; }
+      responses:
+        &quot;200&quot;: { $ref: &quot;#/components/responses/Envelope&quot; }
+        &quot;400&quot;: { $ref: &quot;#/components/responses/Error&quot; }
+        &quot;404&quot;: { $ref: &quot;#/components/responses/Error&quot; }
+  /facilities/near:
+    get:
+      summary: VA care sites within a radius of a point (live spatial query)
+      operationId: facilitiesNear
+      parameters:
+        - { name: lat, in: query, required: true, schema: { type: number, minimum: -90, maximum: 90 }, example: 39.9 }
+        - { name: lon, in: query, required: true, schema: { type: number, minimum: -180, maximum: 180 }, example: -86.2 }
+        - { name: miles, in: query, schema: { type: number, default: 60, minimum: 0, exclusiveMinimum: true, maximum: 500 } }
+        - { name: kind, in: query, schema: { type: string, enum: [VAMC, HCC, CBOC, OOS] } }
+        - { name: top, in: query, schema: { type: integer, default: 20, minimum: 1, maximum: 100 } }
+      responses:
+        &quot;200&quot;: { $ref: &quot;#/components/responses/Envelope&quot; }
+        &quot;400&quot;: { $ref: &quot;#/components/responses/Error&quot; }
+  /refresh:
+    post:
+      summary: Start the monthly rebuild orchestration now (keyed product only; the public product answers 405)
+      operationId: refreshStart
+      responses:
+        &quot;202&quot;: { description: Durable Functions check-status payload (instance id and status URL) }
+  /refresh/status/{instanceId}:
+    get:
+      summary: Status and output of an orchestration instance
+      operationId: refreshStatus
+      parameters:
+        - { name: instanceId, in: path, required: true, schema: { type: string } }
+      responses:
+        &quot;200&quot;: { $ref: &quot;#/components/responses/Envelope&quot; }
+        &quot;404&quot;: { $ref: &quot;#/components/responses/Error&quot; }
+  /refresh/runs:
+    get:
+      summary: The last 20 orchestration runs that rebuilt the access table
+      operationId: refreshRuns
+      responses:
+        &quot;200&quot;: { $ref: &quot;#/components/responses/Envelope&quot; }
+components:
+  responses:
+    Envelope:
+      description: &quot;{ data, meta }&quot;
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [data, meta]
+            properties:
+              data: {}
+              meta:
+                type: object
+                required: [version, generated_at]
+                properties:
+                  version: { type: string }
+                  generated_at: { type: string, format: date-time }
+    Error:
+      description: &quot;{ error }&quot;
+      content:
+        application/json:
+          schema: { type: object, required: [error], properties: { error: { type: string } } }
+</pre></details></section>
+<section class="q"><h2>What this cannot say</h2>
+<p class="note">The public product's limits are shared by every anonymous caller, not per caller — the Consumption tier has no per-key counters for keyless products — so a busy afternoon can rate-limit a stranger. The orchestration rebuilds a table whose inputs change once a year; the monthly schedule is a demonstration of the pattern, not a need. A cold Flex Consumption app answers the first call in seconds, not milliseconds. Azure Maps was blocked by region policy in build #11; API Management Consumption was not — the difference is the first thing any plan checks now.</p></section>
+<p class="foot">Build #13 of Patrick Neil Bradley's Azure learning portfolio. Azure services: Azure Functions (Flex Consumption, Python 3.12, SQL bindings, managed identity), Durable Functions (Azure Storage provider), API Management (Consumption), Azure SQL Database (free offer), GitHub Actions. Data: VA VAST via HRSA, U.S. Census Bureau (public domain). Cost: $0 beyond fractions of a cent of storage transactions. Code: <a href="https://github.com/patbradley18-netizen/azure-portfolio/tree/main/build-13-data-api">GitHub</a>.</p>
+</main>
+<script>
+document.querySelectorAll('button[data-path]').forEach(function (b) {
+  b.addEventListener('click', async function () {
+    var out = document.querySelector('pre.live[data-for="' + b.dataset.path + '"]'); out.textContent = 'calling ' + "https://apim-azportfolio-b13.azure-api.net/data" + b.dataset.path + ' …';
+    var t0 = performance.now();
+    try { var r = await fetch("https://apim-azportfolio-b13.azure-api.net/data" + b.dataset.path); var j = await r.json(); out.textContent = 'HTTP ' + r.status + ' in ' + Math.round(performance.now() - t0) + ' ms' + "\n" + JSON.stringify(j, null, 1).slice(0, 2500); }
+    catch (err) { out.textContent = 'error: ' + err; }
+  });
+});
+</script>
+</body></html>

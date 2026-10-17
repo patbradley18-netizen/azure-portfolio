@@ -1,0 +1,18 @@
+PASS info 200 with envelope
+PASS info under budget
+PASS county 200
+PASS county is Marion IN
+PASS county nearest VAMC is Roudebush
+PASS county meta carries source note
+PASS bad fips -> 400 with error
+PASS unknown fips -> 404
+PASS state 200, lower-case accepted
+PASS state rows sorted farthest first
+PASS near 200 with gateway defaults (miles 60, top 20)
+PASS near sorted by miles
+PASS near kind filter
+PASS out-of-range -> 400
+PASS runs 200 list
+PASS public POST refresh -> 405
+
+16/16 passed

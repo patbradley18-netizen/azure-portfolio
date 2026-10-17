@@ -1,0 +1,21 @@
+<!-- Product "public": no subscription key. The Consumption tier does not allow the per-key (per-IP) counters, so the
+     limit is product-wide: 30 calls a minute and 2,000 a day shared by every anonymous caller. GET only. -->
+<policies>
+  <inbound>
+    <base />
+    <rate-limit calls="30" renewal-period="60" />
+    <quota calls="2000" renewal-period="86400" />
+    <choose>
+      <when condition="@(context.Request.Method != "GET")">
+        <return-response><set-status code="405" reason="Method Not Allowed" /></return-response>
+      </when>
+    </choose>
+  </inbound>
+  <backend><base /></backend>
+  <outbound>
+    <base />
+    <set-header name="X-Powered-By" exists-action="delete" />
+    <set-header name="Cache-Control" exists-action="override"><value>public, max-age=300</value></set-header>
+  </outbound>
+  <on-error><base /></on-error>
+</policies>

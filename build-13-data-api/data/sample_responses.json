@@ -1,0 +1,150 @@
+﻿{
+    "/info":  {
+                  "data":  {
+                               "name":  "azportfolio-data",
+                               "endpoints":  [
+                                                 "GET info",
+                                                 "GET counties/{fips}/access",
+                                                 "GET states/{state}/access",
+                                                 "GET facilities/near?lat\u0026lon\u0026miles\u0026kind\u0026top",
+                                                 "GET refresh/runs",
+                                                 "POST refresh (starts the orchestration)",
+                                                 "GET refresh/status/{instanceId}"
+                                             ],
+                               "openapi":  "openapi.yaml in the repo",
+                               "licence":  "data public domain; API non-commercial learning project"
+                           },
+                  "meta":  {
+                               "version":  "1.0.0",
+                               "generated_at":  "2026-10-17T03:56:26Z"
+                           }
+              },
+    "/counties/18097/access":  {
+                                   "data":  {
+                                                "fips":  "18097",
+                                                "county":  "Marion",
+                                                "state_abbr":  "IN",
+                                                "veterans":  40971.0,
+                                                "vet_share":  5.63,
+                                                "vamc_sta_no":  "583",
+                                                "vamc_name":  "Richard L. Roudebush Veterans\u0027 Administration Medical Center",
+                                                "vamc_miles":  2.7,
+                                                "site_sta_no":  "583QB",
+                                                "site_name":  "Indianapolis VA Clinic",
+                                                "site_kind":  "OOS",
+                                                "site_miles":  1.4,
+                                                "center_kind":  "cenpop2020",
+                                                "computed_at":  "2026-10-17T03:54:12.814Z"
+                                            },
+                                   "meta":  {
+                                                "source":  "Facilities: VA VAST extract 2018-09-29 via HRSA; veterans: ACS 5-year 2023 B21001; county origins: 2020 Census centers of population. Straight-line miles.",
+                                                "version":  "1.0.0",
+                                                "generated_at":  "2026-10-17T03:56:27Z"
+                                            }
+                               },
+    "/states/DE/access":  {
+                              "data":  [
+                                           {
+                                               "fips":  "10005",
+                                               "county":  "Sussex",
+                                               "veterans":  17798.0,
+                                               "vet_share":  8.81,
+                                               "vamc_name":  "Perry Point VA Medical Center",
+                                               "vamc_miles":  72.8,
+                                               "site_name":  "Sussex County VA Clinic",
+                                               "site_kind":  "CBOC",
+                                               "site_miles":  3.7
+                                           },
+                                           {
+                                               "fips":  "10001",
+                                               "county":  "Kent",
+                                               "veterans":  16310.0,
+                                               "vet_share":  11.64,
+                                               "vamc_name":  "Perry Point VA Medical Center",
+                                               "vamc_miles":  39.7,
+                                               "site_name":  "Kent County VA Clinic",
+                                               "site_kind":  "CBOC",
+                                               "site_miles":  1.9
+                                           },
+                                           {
+                                               "fips":  "10003",
+                                               "county":  "New Castle",
+                                               "veterans":  27474.0,
+                                               "vet_share":  6.11,
+                                               "vamc_name":  "Wilmington VA Medical Center",
+                                               "vamc_miles":  4.4,
+                                               "site_name":  "Wilmington VA Medical Center",
+                                               "site_kind":  "VAMC",
+                                               "site_miles":  4.4
+                                           }
+                                       ],
+                              "meta":  {
+                                           "state":  "DE",
+                                           "counties":  3,
+                                           "veterans":  61582.0,
+                                           "vamc_miles_weighted":  33.5,
+                                           "source":  "Facilities: VA VAST extract 2018-09-29 via HRSA; veterans: ACS 5-year 2023 B21001; county origins: 2020 Census centers of population. Straight-line miles.",
+                                           "version":  "1.0.0",
+                                           "generated_at":  "2026-10-17T03:56:27Z"
+                                       }
+                          },
+    "/facilities/near?lat=39.9\u0026lon=-86.2\u0026kind=VAMC\u0026top=3":  {
+                                                                               "data":  [
+                                                                                            {
+                                                                                                "sta_no":  "583",
+                                                                                                "name":  "Richard L. Roudebush Veterans\u0027 Administration Medical Center",
+                                                                                                "kind":  "VAMC",
+                                                                                                "city":  "Indianapolis",
+                                                                                                "state":  "IN",
+                                                                                                "lat":  39.77978309,
+                                                                                                "lon":  -86.18645756,
+                                                                                                "miles":  8.3
+                                                                                            },
+                                                                                            {
+                                                                                                "sta_no":  "610",
+                                                                                                "name":  "Marion VA Medical Center",
+                                                                                                "kind":  "VAMC",
+                                                                                                "city":  "Marion",
+                                                                                                "state":  "IN",
+                                                                                                "lat":  40.52373253,
+                                                                                                "lon":  -85.63715446,
+                                                                                                "miles":  52.3
+                                                                                            }
+                                                                                        ],
+                                                                               "meta":  {
+                                                                                            "lat":  39.9,
+                                                                                            "lon":  -86.2,
+                                                                                            "miles":  60.0,
+                                                                                            "kind":  "VAMC",
+                                                                                            "source":  "Facilities: VA VAST extract 2018-09-29 via HRSA; veterans: ACS 5-year 2023 B21001; county origins: 2020 Census centers of population. Straight-line miles.",
+                                                                                            "version":  "1.0.0",
+                                                                                            "generated_at":  "2026-10-17T03:56:27Z"
+                                                                                        }
+                                                                           },
+    "/refresh/runs":  {
+                          "data":  [
+                                       {
+                                           "run_id":  "6fba18a98360461d882c8f7db45c1fca",
+                                           "started_at":  "2026-10-17T03:54:08.000Z",
+                                           "finished_at":  "2026-10-17T03:54:41.000Z",
+                                           "states_done":  51,
+                                           "rows_written":  3144,
+                                           "status":  "done",
+                                           "note":  null
+                                       },
+                                       {
+                                           "run_id":  "f8240370cb564fed938317ae265b8bf5",
+                                           "started_at":  "2026-10-17T03:50:25.000Z",
+                                           "finished_at":  "2026-10-17T03:50:35.000Z",
+                                           "states_done":  51,
+                                           "rows_written":  0,
+                                           "status":  "done",
+                                           "note":  null
+                                       }
+                                   ],
+                          "meta":  {
+                                       "version":  "1.0.0",
+                                       "generated_at":  "2026-10-17T03:56:28Z"
+                                   }
+                      }
+}

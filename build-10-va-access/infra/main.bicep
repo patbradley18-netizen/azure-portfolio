@@ -259,4 +259,40 @@ resource sqlFreeLimitAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   }
 }
 
+// ---------- Build #13: the data API — Function app on its own Flex plan, and API Management (Consumption) ----------
+param funcB13Name string = 'func-azportfolio-b13'
+param apimName string = 'apim-azportfolio-b13'
+param apimPublisherEmail string  // passed on the command line; never stored
+param apimPublisherName string = 'Patrick Neil Bradley'
+
+resource planB13 'Microsoft.Web/serverfarms@2024-04-01' = {
+  name: 'ASP-rgazportfoliob1-d595' // the CLI named the plan at create time
+  location: locationEu
+  kind: 'functionapp'
+  sku: { name: 'FC1', tier: 'FlexConsumption' }
+  properties: { reserved: true }
+}
+
+resource funcB13 'Microsoft.Web/sites@2024-04-01' = {
+  name: funcB13Name
+  location: locationEu
+  kind: 'functionapp,linux'
+  identity: { type: 'SystemAssigned' }
+  properties: {
+    serverFarmId: planB13.id
+    functionAppConfig: {
+      deployment: { storage: { type: 'blobContainer', value: '${storage.properties.primaryEndpoints.blob}app-package-funcazportfoliob13-0322941', authentication: { type: 'StorageAccountConnectionString', storageAccountConnectionStringName: 'DEPLOYMENT_STORAGE_CONNECTION_STRING' } } }
+      runtime: { name: 'python', version: '3.12' }
+      scaleAndConcurrency: { instanceMemoryMB: 2048, maximumInstanceCount: 100 }
+    }
+  }
+}
+
+resource apim 'Microsoft.ApiManagement/service@2023-05-01-preview' = {
+  name: apimName
+  location: locationUs
+  sku: { name: 'Consumption', capacity: 0 }
+  properties: { publisherEmail: apimPublisherEmail, publisherName: apimPublisherName }
+}
+
 output staticSiteHint string = 'Static website on ${storage.name} is enabled on the data plane (az storage blob service-properties update --static-website), not in ARM.'

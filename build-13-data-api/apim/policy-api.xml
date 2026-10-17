@@ -1,0 +1,25 @@
+<!-- API-level policy: the backend is the Function app; its host key is an APIM named value (secret), never in this repo. -->
+<policies>
+  <inbound>
+    <base />
+    <!-- browsers on the portfolio site and the showcase site may call the API directly -->
+    <cors allow-credentials="false">
+      <allowed-origins>
+        <origin>https://stazportfoliob1.z14.web.core.windows.net</origin>
+        <origin>https://patrickneilbradley.com</origin>
+        <origin>https://www.patrickneilbradley.com</origin>
+      </allowed-origins>
+      <allowed-methods><method>GET</method></allowed-methods>
+      <allowed-headers><header>*</header></allowed-headers>
+    </cors>
+    <set-backend-service base-url="https://func-azportfolio-b13.azurewebsites.net/api" />
+    <set-header name="x-functions-key" exists-action="override"><value>{{func-b13-host-key}}</value></set-header>
+    <!-- defaults for the stored-procedure binding behind /facilities/near: a caller may omit them -->
+    <set-query-parameter name="miles" exists-action="skip"><value>60</value></set-query-parameter>
+    <set-query-parameter name="kind" exists-action="skip"><value></value></set-query-parameter>
+    <set-query-parameter name="top" exists-action="skip"><value>20</value></set-query-parameter>
+  </inbound>
+  <backend><base /></backend>
+  <outbound><base /></outbound>
+  <on-error><base /></on-error>
+</policies>

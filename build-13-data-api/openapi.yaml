@@ -1,0 +1,94 @@
+openapi: 3.0.3
+info:
+  title: azportfolio-data
+  version: 1.0.0
+  description: |
+    Read API over the Azure learning portfolio's county warehouse (schema `col`): distance from every county's
+    population center to the nearest VA medical center and care site (build #10), served by an Azure Function
+    behind API Management. Straight-line miles. Facilities are VA's VAST extract of 2018-09-29; veterans are ACS
+    5-year 2023 B21001. Non-commercial learning project; data public domain.
+servers:
+  - url: https://apim-azportfolio-b13.azure-api.net/data
+paths:
+  /info:
+    get:
+      summary: API info
+      operationId: apiInfo
+      responses:
+        "200": { $ref: "#/components/responses/Envelope" }
+  /counties/{fips}/access:
+    get:
+      summary: One county's nearest VA medical center and care site
+      operationId: countyAccess
+      parameters:
+        - { name: fips, in: path, required: true, schema: { type: string, pattern: "^[0-9]{5}$" }, example: "18097" }
+      responses:
+        "200": { $ref: "#/components/responses/Envelope" }
+        "400": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
+  /states/{state}/access:
+    get:
+      summary: Every county in a state, farthest first, with the veteran-weighted mean
+      operationId: stateAccess
+      parameters:
+        - { name: state, in: path, required: true, schema: { type: string, pattern: "^[A-Za-z]{2}$" }, example: "IN" }
+      responses:
+        "200": { $ref: "#/components/responses/Envelope" }
+        "400": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
+  /facilities/near:
+    get:
+      summary: VA care sites within a radius of a point (live spatial query)
+      operationId: facilitiesNear
+      parameters:
+        - { name: lat, in: query, required: true, schema: { type: number, minimum: -90, maximum: 90 }, example: 39.9 }
+        - { name: lon, in: query, required: true, schema: { type: number, minimum: -180, maximum: 180 }, example: -86.2 }
+        - { name: miles, in: query, schema: { type: number, default: 60, minimum: 0, exclusiveMinimum: true, maximum: 500 } }
+        - { name: kind, in: query, schema: { type: string, enum: [VAMC, HCC, CBOC, OOS] } }
+        - { name: top, in: query, schema: { type: integer, default: 20, minimum: 1, maximum: 100 } }
+      responses:
+        "200": { $ref: "#/components/responses/Envelope" }
+        "400": { $ref: "#/components/responses/Error" }
+  /refresh:
+    post:
+      summary: Start the monthly rebuild orchestration now (keyed product only; the public product answers 405)
+      operationId: refreshStart
+      responses:
+        "202": { description: Durable Functions check-status payload (instance id and status URL) }
+  /refresh/status/{instanceId}:
+    get:
+      summary: Status and output of an orchestration instance
+      operationId: refreshStatus
+      parameters:
+        - { name: instanceId, in: path, required: true, schema: { type: string } }
+      responses:
+        "200": { $ref: "#/components/responses/Envelope" }
+        "404": { $ref: "#/components/responses/Error" }
+  /refresh/runs:
+    get:
+      summary: The last 20 orchestration runs that rebuilt the access table
+      operationId: refreshRuns
+      responses:
+        "200": { $ref: "#/components/responses/Envelope" }
+components:
+  responses:
+    Envelope:
+      description: "{ data, meta }"
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [data, meta]
+            properties:
+              data: {}
+              meta:
+                type: object
+                required: [version, generated_at]
+                properties:
+                  version: { type: string }
+                  generated_at: { type: string, format: date-time }
+    Error:
+      description: "{ error }"
+      content:
+        application/json:
+          schema: { type: object, required: [error], properties: { error: { type: string } } }

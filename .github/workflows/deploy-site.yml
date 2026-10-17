@@ -30,7 +30,7 @@ jobs:
 
       - name: Assemble site
         run: |
-          mkdir -p dist/build-01-aid-lite dist/build-02-bls-veterans dist/build-04-sql-analysis dist/build-05-ai-summary dist/build-06-cost-of-living dist/build-07-veteran-burden dist/build-08-tenure-model dist/build-09-renter-burden dist/build-10-va-access dist/build-11-road-distance dist/build-12-operations
+          mkdir -p dist/build-01-aid-lite dist/build-02-bls-veterans dist/build-04-sql-analysis dist/build-05-ai-summary dist/build-06-cost-of-living dist/build-07-veteran-burden dist/build-08-tenure-model dist/build-09-renter-burden dist/build-10-va-access dist/build-11-road-distance dist/build-12-operations dist/build-13-data-api
           cp site/index.html dist/index.html
           cp build-01-aid-lite/dashboard.html dist/build-01-aid-lite/index.html
           cp build-01-aid-lite/dashboard.png  dist/build-01-aid-lite/dashboard.png
@@ -45,6 +45,8 @@ jobs:
           cp build-10-va-access/findings.html dist/build-10-va-access/index.html
           cp build-11-road-distance/findings.html dist/build-11-road-distance/index.html
           cp build-12-operations/findings.html dist/build-12-operations/index.html
+          cp build-13-data-api/findings.html dist/build-13-data-api/index.html
+          cp build-13-data-api/openapi.yaml dist/build-13-data-api/openapi.yaml
           find dist -type f | sort
 
       - name: Azure login (OIDC, user-assigned managed identity)
@@ -72,3 +74,7 @@ jobs:
           curl -fsS "${SITE_URL}build-10-va-access/" | grep -q "distance is not access"
           curl -fsS "${SITE_URL}build-11-road-distance/" | grep -q "measure the error in your own measure"
           curl -fsS "${SITE_URL}build-12-operations/" | grep -q "a number, a threshold, an email"
+          curl -fsS "${SITE_URL}build-13-data-api/" | grep -q "a query becomes an endpoint"
+
+      - name: API contract test (build 13, public product, no key)
+        run: python3 build-13-data-api/tests/contract_test.py
