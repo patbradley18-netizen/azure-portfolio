@@ -11,7 +11,8 @@ Small, free-tier builds on an Azure for Students subscription. Each one teaches 
 | 3 | [Live site, deployed by GitHub Actions](.github/workflows/deploy-site.yml) | Blob static website, CI/CD, OIDC federated identity (no deployment token), secret-scan gate | Published and closed |
 | 4 | [SQL analysis: seven questions, seven queries, seven sentences](build-04-sql-analysis/) | T-SQL (CTEs, self-joins, FULL OUTER JOIN, conditional aggregation), findings computed from results | Published |
 | 5 | [AI summary with cost controls: estimate, cap, ledger, verify](build-05-ai-summary/) | Azure AI Language (F0), per-record cost estimation, hard caps, billed-vs-estimated ledger, exact-match verification, tier gates | Published and closed |
-| 6 | [Cost-of-living warehouse: snapshot to source](build-06-cost-of-living/) | Long-format warehouse design, data dictionary, provenance, OPENJSON bulk loads, keyed Census API via Key Vault, reconciliation in T-SQL | Published |
+| 6 | [Cost-of-living warehouse: snapshot to source](build-06-cost-of-living/) | Long-format warehouse design, data dictionary, provenance, OPENJSON bulk loads, keyed Census API via Key Vault, reconciliation in T-SQL | Published and closed |
+| 7 | [Veteran burden cut: the join Q6 couldn't make](build-07-veteran-burden/) | Metadata-driven labels, NTILE quintiles, stratified comparison, publishing a no | Published |
 
 Note for anyone copying the OIDC setup: GitHub now presents the subject claim with owner and repository IDs embedded (
 epo:<owner>@<id>/<repo>@<id>:ref:refs/heads/main); the federated credential subject must match that string exactly.

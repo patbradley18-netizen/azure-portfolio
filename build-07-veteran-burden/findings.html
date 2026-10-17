@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Veteran Burden Cut</title>
+<style>
+:root{color-scheme:light;--surface:#fcfcfb;--surface-2:#f1f0ec;--ink:#0b0b0b;--ink-2:#52514e;--ink-3:#8a8880;--line:#e3e1da;--series:#2a78d6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--surface:#1a1a19;--surface-2:#242422;--ink:#f0efec;--ink-2:#c3c2b7;--ink-3:#8f8e86;--line:#33332f;--series:#3987e5}}
+:root[data-theme="dark"]{color-scheme:dark;--surface:#1a1a19;--surface-2:#242422;--ink:#f0efec;--ink-2:#c3c2b7;--ink-3:#8f8e86;--line:#33332f;--series:#3987e5}
+*{box-sizing:border-box}body{margin:0;background:var(--surface);color:var(--ink);font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:980px;margin:0 auto;padding:32px 16px 64px}h1{font-size:26px;margin:0 0 4px}.sub{color:var(--ink-2);margin:0 0 28px}
+h2{font-size:17px;margin:40px 0 8px}.finding{font-size:16px;margin:0 0 6px}.note{color:var(--ink-2);font-size:14px;margin:0 0 14px}
+table{width:100%;border-collapse:collapse;font-size:13px;display:block;overflow-x:auto}th{text-align:left;color:var(--ink-2);font-weight:500;border-bottom:1px solid var(--line);padding:6px 8px;white-space:nowrap}td{padding:5px 8px;border-bottom:1px solid var(--line);vertical-align:top}td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+details{margin-top:10px}summary{cursor:pointer;color:var(--series);font-size:14px}pre{background:var(--surface-2);padding:12px;border-radius:8px;overflow-x:auto;font-size:12px;line-height:1.45}
+.foot{margin-top:40px;color:var(--ink-3);font-size:13px;border-top:1px solid var(--line);padding-top:14px}a{color:var(--series)}
+</style></head><body><main>
+<h1>Do veteran-heavy counties carry heavier shelter costs? No — and here is the check that says so</h1>
+<p class="sub">Build #6 built a county cost-of-living warehouse and had to admit it could not make the veteran cut. One more table (Census ACS 5-year 2023, B21001, civilian veterans by sex and age) closes that gap. Five T-SQL questions, including the one that tests whether the answer is just age. Anchor phrase: the join Q6 couldn't make. Expand any query to read the T-SQL.</p>
+<section class="q">
+<h2>Q8. What share of each county&#x27;s adult civilian population are veterans, and how is that distributed?</h2>
+<p class="finding">Veterans are <b>6.4%</b> of 260M adult civilians. 165 counties are 12%+ veteran, but they hold only 3.6% of adults; the under-5% band (413 counties) holds 32% — the big metros.</p>
+<p class="note">B21001 counts civilian adults 18+ by veteran status; active-duty personnel are excluded by definition, which matters for base counties in Q10. Bands are the curator's.</p>
+<table><thead><tr><th>band</th><th class=num>counties</th><th class=num>adults</th><th class=num>veterans</th><th class=num>veteran_share_pct</th></tr></thead><tbody><tr><td>1. under 5%</td><td class="num">413</td><td class="num">83,980,506</td><td class="num">3,054,772</td><td class="num">3.6</td></tr><tr><td>2. 5-8%</td><td class="num">1,581</td><td class="num">120,495,705</td><td class="num">7,861,512</td><td class="num">6.5</td></tr><tr><td>3. 8-12%</td><td class="num">1,063</td><td class="num">46,352,227</td><td class="num">4,336,077</td><td class="num">9.4</td></tr><tr><td>4. 12%+</td><td class="num">165</td><td class="num">9,335,286</td><td class="num">1,383,041</td><td class="num">14.8</td></tr></tbody></table>
+<details><summary>Query (conditional-aggregation pivot, CASE banding)</summary><pre>WITH v AS (
+  SELECT fips,
+         MAX(CASE WHEN code=&#x27;B21001_001E&#x27; THEN value END) AS adults,
+         MAX(CASE WHEN code=&#x27;B21001_002E&#x27; THEN value END) AS veterans
+  FROM col.measure WHERE dataset_id = &#x27;acs5_2023_vet&#x27; GROUP BY fips)
+SELECT band, COUNT(*) AS counties, SUM(adults) AS adults, SUM(veterans) AS veterans,
+       ROUND(100.0 * SUM(veterans) / SUM(adults), 1) AS veteran_share_pct
+FROM (SELECT *, CASE WHEN 100.0*veterans/NULLIF(adults,0) &gt;= 12 THEN &#x27;4. 12%+&#x27; WHEN 100.0*veterans/NULLIF(adults,0) &gt;= 8 THEN &#x27;3. 8-12%&#x27;
+                      WHEN 100.0*veterans/NULLIF(adults,0) &gt;= 5 THEN &#x27;2. 5-8%&#x27; ELSE &#x27;1. under 5%&#x27; END AS band FROM v WHERE adults &gt; 0) b
+GROUP BY band ORDER BY band;</pre></details>
+</section>
+<section class="q">
+<h2>Q9. Do counties with a larger veteran share carry heavier shelter burden? Population-weighted burden by veteran-share quintile</h2>
+<p class="finding"><b>No.</b> The lowest-veteran-share quintile carries the heaviest burden: renter 39.1%, owner 52.6%, on rent of $1,585 and home values of $484,271. Quintiles 2–5 sit in a 34.5–35.4% band for renters and 44.3–45.1% for owners. Veteran share does not track heavier shelter cost; the first quintile is the metro effect.</p>
+<p class="note">Quintiles of county veteran share (equal county counts, unequal population). Burdens, income, rent and home value are population-weighted from the TSCI snapshot and the raw Census population. Quintile 1 is where the large metros sit, which is the whole story.</p>
+<table><thead><tr><th class=num>quintile</th><th class=num>counties</th><th class=num>vet_share_min</th><th class=num>vet_share_max</th><th class=num>renter_burden_pct</th><th class=num>owner_burden_pct</th><th class=num>median_income</th><th class=num>rent</th><th class=num>home_value</th><th class=num>population</th></tr></thead><tbody><tr><td class="num">1</td><td class="num">642</td><td class="num">1.1</td><td class="num">5.8</td><td class="num">39.1</td><td class="num">52.6</td><td class="num">$88,618</td><td class="num">$1,585</td><td class="num">$484,271</td><td class="num">142,883,445</td></tr><tr><td class="num">2</td><td class="num">642</td><td class="num">5.8</td><td class="num">6.9</td><td class="num">34.8</td><td class="num">45.1</td><td class="num">$77,555</td><td class="num">$1,207</td><td class="num">$278,947</td><td class="num">61,308,196</td></tr><tr><td class="num">3</td><td class="num">642</td><td class="num">6.9</td><td class="num">7.9</td><td class="num">34.5</td><td class="num">44.3</td><td class="num">$79,470</td><td class="num">$1,258</td><td class="num">$321,459</td><td class="num">53,219,543</td></tr><tr><td class="num">4</td><td class="num">641</td><td class="num">7.9</td><td class="num">9.2</td><td class="num">34.5</td><td class="num">44.6</td><td class="num">$72,430</td><td class="num">$1,146</td><td class="num">$276,077</td><td class="num">37,286,490</td></tr><tr><td class="num">5</td><td class="num">641</td><td class="num">9.2</td><td class="num">21.8</td><td class="num">35.4</td><td class="num">44.8</td><td class="num">$74,292</td><td class="num">$1,243</td><td class="num">$284,354</td><td class="num">40,923,172</td></tr></tbody></table>
+<details><summary>Query (NTILE(5) window, three-dataset join, pop-weighted averages)</summary><pre>WITH v AS (
+  SELECT fips,
+         MAX(CASE WHEN code=&#x27;B21001_001E&#x27; THEN value END) AS adults,
+         MAX(CASE WHEN code=&#x27;B21001_002E&#x27; THEN value END) AS veterans
+  FROM col.measure WHERE dataset_id = &#x27;acs5_2023_vet&#x27; GROUP BY fips),
+t AS (
+  SELECT fips,
+         MAX(CASE WHEN code=&#x27;rb&#x27; THEN value END) AS renter_burden, MAX(CASE WHEN code=&#x27;ob&#x27; THEN value END) AS owner_burden,
+         MAX(CASE WHEN code=&#x27;i&#x27; THEN value END) AS income, MAX(CASE WHEN code=&#x27;r&#x27; THEN value END) AS rent,
+         MAX(CASE WHEN code=&#x27;hv&#x27; THEN value END) AS home_value
+  FROM col.measure WHERE dataset_id = &#x27;tsci_2026-05-12&#x27; GROUP BY fips),
+p AS (SELECT fips, value AS pop FROM col.measure WHERE dataset_id = &#x27;acs5_2023&#x27; AND code = &#x27;B01003_001E&#x27;),
+j AS (
+  SELECT v.fips, 100.0*v.veterans/NULLIF(v.adults,0) AS vet_share, t.renter_burden, t.owner_burden, t.income, t.rent, t.home_value, p.pop,
+         NTILE(5) OVER (ORDER BY 100.0*v.veterans/NULLIF(v.adults,0)) AS quintile
+  FROM v JOIN t ON t.fips = v.fips JOIN p ON p.fips = v.fips
+  WHERE v.adults &gt; 0 AND t.renter_burden IS NOT NULL AND t.owner_burden IS NOT NULL)
+SELECT quintile, COUNT(*) AS counties, ROUND(MIN(vet_share),1) AS vet_share_min, ROUND(MAX(vet_share),1) AS vet_share_max,
+       ROUND(SUM(renter_burden*pop)/SUM(pop),1) AS renter_burden_pct, ROUND(SUM(owner_burden*pop)/SUM(pop),1) AS owner_burden_pct,
+       ROUND(SUM(income*pop)/SUM(pop),0) AS median_income, ROUND(SUM(rent*pop)/SUM(pop),0) AS rent, ROUND(SUM(home_value*pop)/SUM(pop),0) AS home_value,
+       SUM(pop) AS population
+FROM j GROUP BY quintile ORDER BY quintile;</pre></details>
+</section>
+<section class="q">
+<h2>Q10. The 20 counties with the highest veteran share (min 10,000 adults): who are they and what do they pay?</h2>
+<p class="finding">The top 20 are military-base counties (Onslow/Lejeune, Okaloosa/Eglin, Bell/Hood, Cumberland/Bragg…) at 16.6–21.8% veteran. Their renter burden runs 24.2–44.4%; 11 of 20 are above their quintile's average of 35.4%. Ordinary burden, extraordinary veteran share: base towns, not retirement towns.</p>
+<p class="note">Minimum 10,000 adults to keep tiny counties out. TSCI composite >100 means above the national shelter nut. Veteran share here counts people who have left service and stayed near the base.</p>
+<table><thead><tr><th>name</th><th class=num>adults</th><th class=num>veterans</th><th class=num>vet_share_pct</th><th class=num>renter_burden_pct</th><th class=num>owner_burden_pct</th><th class=num>median_income</th><th class=num>tsci</th></tr></thead><tbody><tr><td>Onslow County, North Carolina</td><td class="num">117,637</td><td class="num">25,681</td><td class="num">21.8</td><td class="num">38.8</td><td class="num">45.9</td><td class="num">$64,568</td><td class="num">81.9</td></tr><tr><td>Elmore County, Idaho</td><td class="num">18,729</td><td class="num">3,918</td><td class="num">20.9</td><td class="num">33.5</td><td class="num">39.6</td><td class="num">$58,976</td><td class="num">63.6</td></tr><tr><td>Okaloosa County, Florida</td><td class="num">152,954</td><td class="num">31,518</td><td class="num">20.6</td><td class="num">37.4</td><td class="num">45.9</td><td class="num">$79,097</td><td class="num">102.4</td></tr><tr><td>Geary County, Kansas</td><td class="num">19,655</td><td class="num">3,948</td><td class="num">20.1</td><td class="num">40.5</td><td class="num">53.1</td><td class="num">$57,344</td><td class="num">81.3</td></tr><tr><td>Liberty County, Georgia</td><td class="num">40,874</td><td class="num">8,050</td><td class="num">19.7</td><td class="num">37.4</td><td class="num">43.8</td><td class="num">$59,013</td><td class="num">73.0</td></tr><tr><td>Bell County, Texas</td><td class="num">254,016</td><td class="num">49,214</td><td class="num">19.4</td><td class="num">32.0</td><td class="num">43.8</td><td class="num">$66,051</td><td class="num">80.2</td></tr><tr><td>Montgomery County, Tennessee</td><td class="num">153,876</td><td class="num">29,738</td><td class="num">19.3</td><td class="num">35.7</td><td class="num">43.0</td><td class="num">$72,365</td><td class="num">84.5</td></tr><tr><td>Lampasas County, Texas</td><td class="num">17,326</td><td class="num">3,268</td><td class="num">18.9</td><td class="num">24.2</td><td class="num">37.5</td><td class="num">$76,919</td><td class="num">74.2</td></tr><tr><td>Coryell County, Texas</td><td class="num">54,265</td><td class="num">10,175</td><td class="num">18.8</td><td class="num">29.8</td><td class="num">38.8</td><td class="num">$68,904</td><td class="num">75.6</td></tr><tr><td>York County, Virginia</td><td class="num">49,400</td><td class="num">9,116</td><td class="num">18.5</td><td class="num">30.0</td><td class="num">36.0</td><td class="num">$108,326</td><td class="num">104.9</td></tr><tr><td>Cochise County, Arizona</td><td class="num">95,200</td><td class="num">17,297</td><td class="num">18.2</td><td class="num">38.4</td><td class="num">47.5</td><td class="num">$58,970</td><td class="num">69.7</td></tr><tr><td>Cumberland County, North Carolina</td><td class="num">218,596</td><td class="num">39,514</td><td class="num">18.1</td><td class="num">40.1</td><td class="num">48.8</td><td class="num">$58,780</td><td class="num">78.6</td></tr><tr><td>Stafford County, Virginia</td><td class="num">114,315</td><td class="num">20,046</td><td class="num">17.5</td><td class="num">26.0</td><td class="num">32.3</td><td class="num">$133,792</td><td class="num">114.7</td></tr><tr><td>Hoke County, North Carolina</td><td class="num">35,946</td><td class="num">6,238</td><td class="num">17.4</td><td class="num">34.1</td><td class="num">43.3</td><td class="num">$60,095</td><td class="num">70.6</td></tr><tr><td>Hampton city, Virginia</td><td class="num">101,574</td><td class="num">17,625</td><td class="num">17.4</td><td class="num">40.7</td><td class="num">47.6</td><td class="num">$67,758</td><td class="num">85.6</td></tr><tr><td>Teller County, Colorado</td><td class="num">20,736</td><td class="num">3,564</td><td class="num">17.2</td><td class="num">44.4</td><td class="num">48.4</td><td class="num">$80,666</td><td class="num">111.1</td></tr><tr><td>Pulaski County, Missouri</td><td class="num">32,672</td><td class="num">5,613</td><td class="num">17.2</td><td class="num">38.7</td><td class="num">46.3</td><td class="num">$66,435</td><td class="num">83.7</td></tr><tr><td>Camden County, Georgia</td><td class="num">38,382</td><td class="num">6,385</td><td class="num">16.6</td><td class="num">34.3</td><td class="num">41.5</td><td class="num">$72,399</td><td class="num">80.7</td></tr><tr><td>Vernon Parish, Louisiana</td><td class="num">30,572</td><td class="num">5,084</td><td class="num">16.6</td><td class="num">33.7</td><td class="num">43.8</td><td class="num">$58,281</td><td class="num">76.0</td></tr><tr><td>Comanche County, Oklahoma</td><td class="num">83,304</td><td class="num">13,840</td><td class="num">16.6</td><td class="num">37.9</td><td class="num">49.6</td><td class="num">$59,000</td><td class="num">80.3</td></tr></tbody></table>
+<details><summary>Query (TOP 20 with a threshold, three-way JOIN)</summary><pre>WITH v AS (
+  SELECT fips,
+         MAX(CASE WHEN code=&#x27;B21001_001E&#x27; THEN value END) AS adults,
+         MAX(CASE WHEN code=&#x27;B21001_002E&#x27; THEN value END) AS veterans
+  FROM col.measure WHERE dataset_id = &#x27;acs5_2023_vet&#x27; GROUP BY fips),
+t AS (
+  SELECT fips, MAX(CASE WHEN code=&#x27;rb&#x27; THEN value END) AS renter_burden, MAX(CASE WHEN code=&#x27;ob&#x27; THEN value END) AS owner_burden,
+         MAX(CASE WHEN code=&#x27;i&#x27; THEN value END) AS income, MAX(CASE WHEN code=&#x27;ti&#x27; THEN value END) AS tsci
+  FROM col.measure WHERE dataset_id = &#x27;tsci_2026-05-12&#x27; GROUP BY fips)
+SELECT TOP 20 c.name, v.adults, v.veterans, ROUND(100.0*v.veterans/v.adults,1) AS vet_share_pct,
+       t.renter_burden AS renter_burden_pct, t.owner_burden AS owner_burden_pct, t.income AS median_income, t.tsci
+FROM v JOIN col.county c ON c.fips = v.fips JOIN t ON t.fips = v.fips
+WHERE v.adults &gt;= 10000
+ORDER BY 100.0*v.veterans/v.adults DESC;</pre></details>
+</section>
+<section class="q">
+<h2>Q11. The honest check: veterans skew older. Age structure of veteran vs nonveteran adults, nationally, from the same table</h2>
+<p class="finding"><b>49% of veterans are 65 or older</b> against 20% of nonveterans; only 8.4% of veterans are under 35 versus 30.5%. Any county-level veteran comparison is partly an age comparison, and older households are likelier to own outright — which lowers measured owner burden.</p>
+<p class="note">Same table, both sexes summed per age band, national totals. This is the build #2 caveat (veterans are older) measured instead of asserted.</p>
+<table><thead><tr><th>age_band</th><th class=num>veterans</th><th class=num>nonveterans</th><th class=num>pct_of_veterans</th><th class=num>pct_of_nonveterans</th></tr></thead><tbody><tr><td>18-34</td><td class="num">1,394,163</td><td class="num">74,211,553</td><td class="num">8.4</td><td class="num">30.5</td></tr><tr><td>35-54</td><td class="num">3,956,545</td><td class="num">80,834,994</td><td class="num">23.8</td><td class="num">33.2</td></tr><tr><td>55-64</td><td class="num">3,082,202</td><td class="num">39,973,823</td><td class="num">18.5</td><td class="num">16.4</td></tr><tr><td>65-74</td><td class="num">4,005,109</td><td class="num">29,671,105</td><td class="num">24.1</td><td class="num">12.2</td></tr><tr><td>75+</td><td class="num">4,197,383</td><td class="num">18,836,847</td><td class="num">25.2</td><td class="num">7.7</td></tr></tbody></table>
+<details><summary>Query (CTE lookup table + correlated subqueries + window share)</summary><pre>WITH a AS (
+  SELECT code, SUM(value) AS n FROM col.measure WHERE dataset_id = &#x27;acs5_2023_vet&#x27; GROUP BY code),
+bands AS (
+  SELECT &#x27;18-34&#x27; AS age_band, 1 AS ord, &#x27;B21001_007E&#x27; AS mt, &#x27;B21001_008E&#x27; AS mv, &#x27;B21001_025E&#x27; AS ft, &#x27;B21001_026E&#x27; AS fv UNION ALL
+  SELECT &#x27;35-54&#x27;, 2, &#x27;B21001_010E&#x27;, &#x27;B21001_011E&#x27;, &#x27;B21001_028E&#x27;, &#x27;B21001_029E&#x27; UNION ALL
+  SELECT &#x27;55-64&#x27;, 3, &#x27;B21001_013E&#x27;, &#x27;B21001_014E&#x27;, &#x27;B21001_031E&#x27;, &#x27;B21001_032E&#x27; UNION ALL
+  SELECT &#x27;65-74&#x27;, 4, &#x27;B21001_016E&#x27;, &#x27;B21001_017E&#x27;, &#x27;B21001_034E&#x27;, &#x27;B21001_035E&#x27; UNION ALL
+  SELECT &#x27;75+&#x27;,   5, &#x27;B21001_019E&#x27;, &#x27;B21001_020E&#x27;, &#x27;B21001_037E&#x27;, &#x27;B21001_038E&#x27;),
+x AS (
+  SELECT b.age_band, b.ord,
+         (SELECT n FROM a WHERE a.code=b.mv) + (SELECT n FROM a WHERE a.code=b.fv) AS veterans,
+         (SELECT n FROM a WHERE a.code=b.mt) + (SELECT n FROM a WHERE a.code=b.ft)
+           - (SELECT n FROM a WHERE a.code=b.mv) - (SELECT n FROM a WHERE a.code=b.fv) AS nonveterans
+  FROM bands b)
+SELECT age_band, veterans, nonveterans,
+       ROUND(100.0 * veterans / SUM(veterans) OVER (), 1) AS pct_of_veterans,
+       ROUND(100.0 * nonveterans / SUM(nonveterans) OVER (), 1) AS pct_of_nonveterans
+FROM x ORDER BY ord;</pre></details>
+</section>
+<section class="q">
+<h2>Q12. Within the oldest-skewing counties, does veteran share still track burden? Burden by veteran-share tercile inside each 65+ share tercile</h2>
+<p class="finding">Holding the 65+ share roughly constant, the <b>lowest</b>-veteran-share tercile is the most burdened in all three age groups (renter 39.2%, 34.7%, 38.8% vs 35.0%, 34.0%, 36.7% for the highest). Age does not rescue the hypothesis: at county level, more veterans means slightly lower shelter burden, not higher.</p>
+<p class="note">Counties split into terciles of 65+ share, then into veteran-share terciles within each. A stratified comparison, not a model: it removes the coarse age effect and nothing else. Income, urbanity and housing tenure remain unaddressed.</p>
+<table><thead><tr><th class=num>age_tercile</th><th class=num>vet_tercile</th><th class=num>counties</th><th class=num>avg_share_65plus</th><th class=num>avg_vet_share</th><th class=num>renter_burden_pct</th><th class=num>owner_burden_pct</th></tr></thead><tbody><tr><td class="num">1</td><td class="num">1</td><td class="num">357</td><td class="num">19.2</td><td class="num">4.4</td><td class="num">39.2</td><td class="num">52.7</td></tr><tr><td class="num">1</td><td class="num">2</td><td class="num">357</td><td class="num">20.5</td><td class="num">6.5</td><td class="num">35.2</td><td class="num">45.0</td></tr><tr><td class="num">1</td><td class="num">3</td><td class="num">356</td><td class="num">20.7</td><td class="num">9.7</td><td class="num">35.0</td><td class="num">44.6</td></tr><tr><td class="num">2</td><td class="num">1</td><td class="num">357</td><td class="num">25.2</td><td class="num">5.3</td><td class="num">34.7</td><td class="num">46.5</td></tr><tr><td class="num">2</td><td class="num">2</td><td class="num">356</td><td class="num">25.2</td><td class="num">7.4</td><td class="num">32.6</td><td class="num">42.9</td></tr><tr><td class="num">2</td><td class="num">3</td><td class="num">356</td><td class="num">25.5</td><td class="num">9.4</td><td class="num">34.0</td><td class="num">44.1</td></tr><tr><td class="num">3</td><td class="num">1</td><td class="num">357</td><td class="num">30.1</td><td class="num">6.0</td><td class="num">38.8</td><td class="num">52.4</td></tr><tr><td class="num">3</td><td class="num">2</td><td class="num">356</td><td class="num">31.0</td><td class="num">8.4</td><td class="num">34.9</td><td class="num">45.4</td></tr><tr><td class="num">3</td><td class="num">3</td><td class="num">356</td><td class="num">33.5</td><td class="num">11.2</td><td class="num">36.7</td><td class="num">46.5</td></tr></tbody></table>
+<details><summary>Query (nested NTILE(3) with PARTITION BY, pop-weighted burden)</summary><pre>WITH v AS (
+  SELECT fips,
+         MAX(CASE WHEN code=&#x27;B21001_001E&#x27; THEN value END) AS adults,
+         MAX(CASE WHEN code=&#x27;B21001_002E&#x27; THEN value END) AS veterans,
+         SUM(CASE WHEN code IN (&#x27;B21001_016E&#x27;,&#x27;B21001_019E&#x27;,&#x27;B21001_034E&#x27;,&#x27;B21001_037E&#x27;) THEN value ELSE 0 END) AS adults_65plus
+  FROM col.measure WHERE dataset_id = &#x27;acs5_2023_vet&#x27; GROUP BY fips),
+t AS (
+  SELECT fips, MAX(CASE WHEN code=&#x27;rb&#x27; THEN value END) AS renter_burden, MAX(CASE WHEN code=&#x27;ob&#x27; THEN value END) AS owner_burden
+  FROM col.measure WHERE dataset_id = &#x27;tsci_2026-05-12&#x27; GROUP BY fips),
+p AS (SELECT fips, value AS pop FROM col.measure WHERE dataset_id = &#x27;acs5_2023&#x27; AND code = &#x27;B01003_001E&#x27;),
+j AS (
+  SELECT v.fips, 100.0*v.veterans/NULLIF(v.adults,0) AS vet_share, 100.0*v.adults_65plus/NULLIF(v.adults,0) AS share_65plus,
+         t.renter_burden, t.owner_burden, p.pop
+  FROM v JOIN t ON t.fips = v.fips JOIN p ON p.fips = v.fips
+  WHERE v.adults &gt; 0 AND t.renter_burden IS NOT NULL AND t.owner_burden IS NOT NULL),
+k AS (
+  SELECT *, NTILE(3) OVER (ORDER BY share_65plus) AS age_tercile FROM j),
+m AS (
+  SELECT *, NTILE(3) OVER (PARTITION BY age_tercile ORDER BY vet_share) AS vet_tercile FROM k)
+SELECT age_tercile, vet_tercile, COUNT(*) AS counties, ROUND(AVG(share_65plus),1) AS avg_share_65plus, ROUND(AVG(vet_share),1) AS avg_vet_share,
+       ROUND(SUM(renter_burden*pop)/SUM(pop),1) AS renter_burden_pct, ROUND(SUM(owner_burden*pop)/SUM(pop),1) AS owner_burden_pct
+FROM m GROUP BY age_tercile, vet_tercile ORDER BY age_tercile, vet_tercile;</pre></details>
+</section>
+<p class="foot">Data: U.S. Census Bureau ACS 5-year 2023, tables B21001, B01003 (public domain); TSCI snapshot from <a href="https://patrickneilbradley.com/tcbi-tsci-methodology.html">patrickneilbradley.com</a> (author's own, non-commercial). Build #7 of Patrick Neil Bradley's Azure learning portfolio. Azure services: Azure SQL Database (free offer), Key Vault (existing). Cost: $0. Code: <a href="https://github.com/patbradley18-netizen/azure-portfolio/tree/main/build-07-veteran-burden">GitHub</a>.</p>
+</main></body></html>

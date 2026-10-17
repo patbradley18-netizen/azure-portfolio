@@ -1,0 +1,481 @@
+{
+ "Q8": {
+  "question": "What share of each county's adult civilian population are veterans, and how is that distributed?",
+  "sql": "WITH v AS (\n  SELECT fips,\n         MAX(CASE WHEN code='B21001_001E' THEN value END) AS adults,\n         MAX(CASE WHEN code='B21001_002E' THEN value END) AS veterans\n  FROM col.measure WHERE dataset_id = 'acs5_2023_vet' GROUP BY fips)\nSELECT band, COUNT(*) AS counties, SUM(adults) AS adults, SUM(veterans) AS veterans,\n       ROUND(100.0 * SUM(veterans) / SUM(adults), 1) AS veteran_share_pct\nFROM (SELECT *, CASE WHEN 100.0*veterans/NULLIF(adults,0) >= 12 THEN '4. 12%+' WHEN 100.0*veterans/NULLIF(adults,0) >= 8 THEN '3. 8-12%'\n                      WHEN 100.0*veterans/NULLIF(adults,0) >= 5 THEN '2. 5-8%' ELSE '1. under 5%' END AS band FROM v WHERE adults > 0) b\nGROUP BY band ORDER BY band;",
+  "columns": [
+   "band",
+   "counties",
+   "adults",
+   "veterans",
+   "veteran_share_pct"
+  ],
+  "rows": [
+   {
+    "band": "1. under 5%",
+    "counties": 413,
+    "adults": 83980506.0,
+    "veterans": 3054772.0,
+    "veteran_share_pct": 3.6
+   },
+   {
+    "band": "2. 5-8%",
+    "counties": 1581,
+    "adults": 120495705.0,
+    "veterans": 7861512.0,
+    "veteran_share_pct": 6.5
+   },
+   {
+    "band": "3. 8-12%",
+    "counties": 1063,
+    "adults": 46352227.0,
+    "veterans": 4336077.0,
+    "veteran_share_pct": 9.4
+   },
+   {
+    "band": "4. 12%+",
+    "counties": 165,
+    "adults": 9335286.0,
+    "veterans": 1383041.0,
+    "veteran_share_pct": 14.8
+   }
+  ]
+ },
+ "Q9": {
+  "question": "Do counties with a larger veteran share carry heavier shelter burden? Population-weighted burden by veteran-share quintile",
+  "sql": "WITH v AS (\n  SELECT fips,\n         MAX(CASE WHEN code='B21001_001E' THEN value END) AS adults,\n         MAX(CASE WHEN code='B21001_002E' THEN value END) AS veterans\n  FROM col.measure WHERE dataset_id = 'acs5_2023_vet' GROUP BY fips),\nt AS (\n  SELECT fips,\n         MAX(CASE WHEN code='rb' THEN value END) AS renter_burden, MAX(CASE WHEN code='ob' THEN value END) AS owner_burden,\n         MAX(CASE WHEN code='i' THEN value END) AS income, MAX(CASE WHEN code='r' THEN value END) AS rent,\n         MAX(CASE WHEN code='hv' THEN value END) AS home_value\n  FROM col.measure WHERE dataset_id = 'tsci_2026-05-12' GROUP BY fips),\np AS (SELECT fips, value AS pop FROM col.measure WHERE dataset_id = 'acs5_2023' AND code = 'B01003_001E'),\nj AS (\n  SELECT v.fips, 100.0*v.veterans/NULLIF(v.adults,0) AS vet_share, t.renter_burden, t.owner_burden, t.income, t.rent, t.home_value, p.pop,\n         NTILE(5) OVER (ORDER BY 100.0*v.veterans/NULLIF(v.adults,0)) AS quintile\n  FROM v JOIN t ON t.fips = v.fips JOIN p ON p.fips = v.fips\n  WHERE v.adults > 0 AND t.renter_burden IS NOT NULL AND t.owner_burden IS NOT NULL)\nSELECT quintile, COUNT(*) AS counties, ROUND(MIN(vet_share),1) AS vet_share_min, ROUND(MAX(vet_share),1) AS vet_share_max,\n       ROUND(SUM(renter_burden*pop)/SUM(pop),1) AS renter_burden_pct, ROUND(SUM(owner_burden*pop)/SUM(pop),1) AS owner_burden_pct,\n       ROUND(SUM(income*pop)/SUM(pop),0) AS median_income, ROUND(SUM(rent*pop)/SUM(pop),0) AS rent, ROUND(SUM(home_value*pop)/SUM(pop),0) AS home_value,\n       SUM(pop) AS population\nFROM j GROUP BY quintile ORDER BY quintile;",
+  "columns": [
+   "quintile",
+   "counties",
+   "vet_share_min",
+   "vet_share_max",
+   "renter_burden_pct",
+   "owner_burden_pct",
+   "median_income",
+   "rent",
+   "home_value",
+   "population"
+  ],
+  "rows": [
+   {
+    "quintile": 1,
+    "counties": 642,
+    "vet_share_min": 1.1,
+    "vet_share_max": 5.8,
+    "renter_burden_pct": 39.1,
+    "owner_burden_pct": 52.6,
+    "median_income": 88618.0,
+    "rent": 1585.0,
+    "home_value": 484271.0,
+    "population": 142883445.0
+   },
+   {
+    "quintile": 2,
+    "counties": 642,
+    "vet_share_min": 5.8,
+    "vet_share_max": 6.9,
+    "renter_burden_pct": 34.8,
+    "owner_burden_pct": 45.1,
+    "median_income": 77555.0,
+    "rent": 1207.0,
+    "home_value": 278947.0,
+    "population": 61308196.0
+   },
+   {
+    "quintile": 3,
+    "counties": 642,
+    "vet_share_min": 6.9,
+    "vet_share_max": 7.9,
+    "renter_burden_pct": 34.5,
+    "owner_burden_pct": 44.3,
+    "median_income": 79470.0,
+    "rent": 1258.0,
+    "home_value": 321459.0,
+    "population": 53219543.0
+   },
+   {
+    "quintile": 4,
+    "counties": 641,
+    "vet_share_min": 7.9,
+    "vet_share_max": 9.2,
+    "renter_burden_pct": 34.5,
+    "owner_burden_pct": 44.6,
+    "median_income": 72430.0,
+    "rent": 1146.0,
+    "home_value": 276077.0,
+    "population": 37286490.0
+   },
+   {
+    "quintile": 5,
+    "counties": 641,
+    "vet_share_min": 9.2,
+    "vet_share_max": 21.8,
+    "renter_burden_pct": 35.4,
+    "owner_burden_pct": 44.8,
+    "median_income": 74292.0,
+    "rent": 1243.0,
+    "home_value": 284354.0,
+    "population": 40923172.0
+   }
+  ]
+ },
+ "Q10": {
+  "question": "The 20 counties with the highest veteran share (min 10,000 adults): who are they and what do they pay?",
+  "sql": "WITH v AS (\n  SELECT fips,\n         MAX(CASE WHEN code='B21001_001E' THEN value END) AS adults,\n         MAX(CASE WHEN code='B21001_002E' THEN value END) AS veterans\n  FROM col.measure WHERE dataset_id = 'acs5_2023_vet' GROUP BY fips),\nt AS (\n  SELECT fips, MAX(CASE WHEN code='rb' THEN value END) AS renter_burden, MAX(CASE WHEN code='ob' THEN value END) AS owner_burden,\n         MAX(CASE WHEN code='i' THEN value END) AS income, MAX(CASE WHEN code='ti' THEN value END) AS tsci\n  FROM col.measure WHERE dataset_id = 'tsci_2026-05-12' GROUP BY fips)\nSELECT TOP 20 c.name, v.adults, v.veterans, ROUND(100.0*v.veterans/v.adults,1) AS vet_share_pct,\n       t.renter_burden AS renter_burden_pct, t.owner_burden AS owner_burden_pct, t.income AS median_income, t.tsci\nFROM v JOIN col.county c ON c.fips = v.fips JOIN t ON t.fips = v.fips\nWHERE v.adults >= 10000\nORDER BY 100.0*v.veterans/v.adults DESC;",
+  "columns": [
+   "name",
+   "adults",
+   "veterans",
+   "vet_share_pct",
+   "renter_burden_pct",
+   "owner_burden_pct",
+   "median_income",
+   "tsci"
+  ],
+  "rows": [
+   {
+    "name": "Onslow County, North Carolina",
+    "adults": 117637.0,
+    "veterans": 25681.0,
+    "vet_share_pct": 21.8,
+    "renter_burden_pct": 38.8,
+    "owner_burden_pct": 45.9,
+    "median_income": 64568.0,
+    "tsci": 81.9
+   },
+   {
+    "name": "Elmore County, Idaho",
+    "adults": 18729.0,
+    "veterans": 3918.0,
+    "vet_share_pct": 20.9,
+    "renter_burden_pct": 33.5,
+    "owner_burden_pct": 39.6,
+    "median_income": 58976.0,
+    "tsci": 63.6
+   },
+   {
+    "name": "Okaloosa County, Florida",
+    "adults": 152954.0,
+    "veterans": 31518.0,
+    "vet_share_pct": 20.6,
+    "renter_burden_pct": 37.4,
+    "owner_burden_pct": 45.9,
+    "median_income": 79097.0,
+    "tsci": 102.4
+   },
+   {
+    "name": "Geary County, Kansas",
+    "adults": 19655.0,
+    "veterans": 3948.0,
+    "vet_share_pct": 20.1,
+    "renter_burden_pct": 40.5,
+    "owner_burden_pct": 53.1,
+    "median_income": 57344.0,
+    "tsci": 81.3
+   },
+   {
+    "name": "Liberty County, Georgia",
+    "adults": 40874.0,
+    "veterans": 8050.0,
+    "vet_share_pct": 19.7,
+    "renter_burden_pct": 37.4,
+    "owner_burden_pct": 43.8,
+    "median_income": 59013.0,
+    "tsci": 73.0
+   },
+   {
+    "name": "Bell County, Texas",
+    "adults": 254016.0,
+    "veterans": 49214.0,
+    "vet_share_pct": 19.4,
+    "renter_burden_pct": 32.0,
+    "owner_burden_pct": 43.8,
+    "median_income": 66051.0,
+    "tsci": 80.2
+   },
+   {
+    "name": "Montgomery County, Tennessee",
+    "adults": 153876.0,
+    "veterans": 29738.0,
+    "vet_share_pct": 19.3,
+    "renter_burden_pct": 35.7,
+    "owner_burden_pct": 43.0,
+    "median_income": 72365.0,
+    "tsci": 84.5
+   },
+   {
+    "name": "Lampasas County, Texas",
+    "adults": 17326.0,
+    "veterans": 3268.0,
+    "vet_share_pct": 18.9,
+    "renter_burden_pct": 24.2,
+    "owner_burden_pct": 37.5,
+    "median_income": 76919.0,
+    "tsci": 74.2
+   },
+   {
+    "name": "Coryell County, Texas",
+    "adults": 54265.0,
+    "veterans": 10175.0,
+    "vet_share_pct": 18.8,
+    "renter_burden_pct": 29.8,
+    "owner_burden_pct": 38.8,
+    "median_income": 68904.0,
+    "tsci": 75.6
+   },
+   {
+    "name": "York County, Virginia",
+    "adults": 49400.0,
+    "veterans": 9116.0,
+    "vet_share_pct": 18.5,
+    "renter_burden_pct": 30.0,
+    "owner_burden_pct": 36.0,
+    "median_income": 108326.0,
+    "tsci": 104.9
+   },
+   {
+    "name": "Cochise County, Arizona",
+    "adults": 95200.0,
+    "veterans": 17297.0,
+    "vet_share_pct": 18.2,
+    "renter_burden_pct": 38.4,
+    "owner_burden_pct": 47.5,
+    "median_income": 58970.0,
+    "tsci": 69.7
+   },
+   {
+    "name": "Cumberland County, North Carolina",
+    "adults": 218596.0,
+    "veterans": 39514.0,
+    "vet_share_pct": 18.1,
+    "renter_burden_pct": 40.1,
+    "owner_burden_pct": 48.8,
+    "median_income": 58780.0,
+    "tsci": 78.6
+   },
+   {
+    "name": "Stafford County, Virginia",
+    "adults": 114315.0,
+    "veterans": 20046.0,
+    "vet_share_pct": 17.5,
+    "renter_burden_pct": 26.0,
+    "owner_burden_pct": 32.3,
+    "median_income": 133792.0,
+    "tsci": 114.7
+   },
+   {
+    "name": "Hoke County, North Carolina",
+    "adults": 35946.0,
+    "veterans": 6238.0,
+    "vet_share_pct": 17.4,
+    "renter_burden_pct": 34.1,
+    "owner_burden_pct": 43.3,
+    "median_income": 60095.0,
+    "tsci": 70.6
+   },
+   {
+    "name": "Hampton city, Virginia",
+    "adults": 101574.0,
+    "veterans": 17625.0,
+    "vet_share_pct": 17.4,
+    "renter_burden_pct": 40.7,
+    "owner_burden_pct": 47.6,
+    "median_income": 67758.0,
+    "tsci": 85.6
+   },
+   {
+    "name": "Teller County, Colorado",
+    "adults": 20736.0,
+    "veterans": 3564.0,
+    "vet_share_pct": 17.2,
+    "renter_burden_pct": 44.4,
+    "owner_burden_pct": 48.4,
+    "median_income": 80666.0,
+    "tsci": 111.1
+   },
+   {
+    "name": "Pulaski County, Missouri",
+    "adults": 32672.0,
+    "veterans": 5613.0,
+    "vet_share_pct": 17.2,
+    "renter_burden_pct": 38.7,
+    "owner_burden_pct": 46.3,
+    "median_income": 66435.0,
+    "tsci": 83.7
+   },
+   {
+    "name": "Camden County, Georgia",
+    "adults": 38382.0,
+    "veterans": 6385.0,
+    "vet_share_pct": 16.6,
+    "renter_burden_pct": 34.3,
+    "owner_burden_pct": 41.5,
+    "median_income": 72399.0,
+    "tsci": 80.7
+   },
+   {
+    "name": "Vernon Parish, Louisiana",
+    "adults": 30572.0,
+    "veterans": 5084.0,
+    "vet_share_pct": 16.6,
+    "renter_burden_pct": 33.7,
+    "owner_burden_pct": 43.8,
+    "median_income": 58281.0,
+    "tsci": 76.0
+   },
+   {
+    "name": "Comanche County, Oklahoma",
+    "adults": 83304.0,
+    "veterans": 13840.0,
+    "vet_share_pct": 16.6,
+    "renter_burden_pct": 37.9,
+    "owner_burden_pct": 49.6,
+    "median_income": 59000.0,
+    "tsci": 80.3
+   }
+  ]
+ },
+ "Q11": {
+  "question": "The honest check: veterans skew older. Age structure of veteran vs nonveteran adults, nationally, from the same table",
+  "sql": "WITH a AS (\n  SELECT code, SUM(value) AS n FROM col.measure WHERE dataset_id = 'acs5_2023_vet' GROUP BY code),\nbands AS (\n  SELECT '18-34' AS age_band, 1 AS ord, 'B21001_007E' AS mt, 'B21001_008E' AS mv, 'B21001_025E' AS ft, 'B21001_026E' AS fv UNION ALL\n  SELECT '35-54', 2, 'B21001_010E', 'B21001_011E', 'B21001_028E', 'B21001_029E' UNION ALL\n  SELECT '55-64', 3, 'B21001_013E', 'B21001_014E', 'B21001_031E', 'B21001_032E' UNION ALL\n  SELECT '65-74', 4, 'B21001_016E', 'B21001_017E', 'B21001_034E', 'B21001_035E' UNION ALL\n  SELECT '75+',   5, 'B21001_019E', 'B21001_020E', 'B21001_037E', 'B21001_038E'),\nx AS (\n  SELECT b.age_band, b.ord,\n         (SELECT n FROM a WHERE a.code=b.mv) + (SELECT n FROM a WHERE a.code=b.fv) AS veterans,\n         (SELECT n FROM a WHERE a.code=b.mt) + (SELECT n FROM a WHERE a.code=b.ft)\n           - (SELECT n FROM a WHERE a.code=b.mv) - (SELECT n FROM a WHERE a.code=b.fv) AS nonveterans\n  FROM bands b)\nSELECT age_band, veterans, nonveterans,\n       ROUND(100.0 * veterans / SUM(veterans) OVER (), 1) AS pct_of_veterans,\n       ROUND(100.0 * nonveterans / SUM(nonveterans) OVER (), 1) AS pct_of_nonveterans\nFROM x ORDER BY ord;",
+  "columns": [
+   "age_band",
+   "veterans",
+   "nonveterans",
+   "pct_of_veterans",
+   "pct_of_nonveterans"
+  ],
+  "rows": [
+   {
+    "age_band": "18-34",
+    "veterans": 1394163.0,
+    "nonveterans": 74211553.0,
+    "pct_of_veterans": 8.4,
+    "pct_of_nonveterans": 30.5
+   },
+   {
+    "age_band": "35-54",
+    "veterans": 3956545.0,
+    "nonveterans": 80834994.0,
+    "pct_of_veterans": 23.8,
+    "pct_of_nonveterans": 33.2
+   },
+   {
+    "age_band": "55-64",
+    "veterans": 3082202.0,
+    "nonveterans": 39973823.0,
+    "pct_of_veterans": 18.5,
+    "pct_of_nonveterans": 16.4
+   },
+   {
+    "age_band": "65-74",
+    "veterans": 4005109.0,
+    "nonveterans": 29671105.0,
+    "pct_of_veterans": 24.1,
+    "pct_of_nonveterans": 12.2
+   },
+   {
+    "age_band": "75+",
+    "veterans": 4197383.0,
+    "nonveterans": 18836847.0,
+    "pct_of_veterans": 25.2,
+    "pct_of_nonveterans": 7.7
+   }
+  ]
+ },
+ "Q12": {
+  "question": "Within the oldest-skewing counties, does veteran share still track burden? Burden by veteran-share tercile inside each 65+ share tercile",
+  "sql": "WITH v AS (\n  SELECT fips,\n         MAX(CASE WHEN code='B21001_001E' THEN value END) AS adults,\n         MAX(CASE WHEN code='B21001_002E' THEN value END) AS veterans,\n         SUM(CASE WHEN code IN ('B21001_016E','B21001_019E','B21001_034E','B21001_037E') THEN value ELSE 0 END) AS adults_65plus\n  FROM col.measure WHERE dataset_id = 'acs5_2023_vet' GROUP BY fips),\nt AS (\n  SELECT fips, MAX(CASE WHEN code='rb' THEN value END) AS renter_burden, MAX(CASE WHEN code='ob' THEN value END) AS owner_burden\n  FROM col.measure WHERE dataset_id = 'tsci_2026-05-12' GROUP BY fips),\np AS (SELECT fips, value AS pop FROM col.measure WHERE dataset_id = 'acs5_2023' AND code = 'B01003_001E'),\nj AS (\n  SELECT v.fips, 100.0*v.veterans/NULLIF(v.adults,0) AS vet_share, 100.0*v.adults_65plus/NULLIF(v.adults,0) AS share_65plus,\n         t.renter_burden, t.owner_burden, p.pop\n  FROM v JOIN t ON t.fips = v.fips JOIN p ON p.fips = v.fips\n  WHERE v.adults > 0 AND t.renter_burden IS NOT NULL AND t.owner_burden IS NOT NULL),\nk AS (\n  SELECT *, NTILE(3) OVER (ORDER BY share_65plus) AS age_tercile FROM j),\nm AS (\n  SELECT *, NTILE(3) OVER (PARTITION BY age_tercile ORDER BY vet_share) AS vet_tercile FROM k)\nSELECT age_tercile, vet_tercile, COUNT(*) AS counties, ROUND(AVG(share_65plus),1) AS avg_share_65plus, ROUND(AVG(vet_share),1) AS avg_vet_share,\n       ROUND(SUM(renter_burden*pop)/SUM(pop),1) AS renter_burden_pct, ROUND(SUM(owner_burden*pop)/SUM(pop),1) AS owner_burden_pct\nFROM m GROUP BY age_tercile, vet_tercile ORDER BY age_tercile, vet_tercile;",
+  "columns": [
+   "age_tercile",
+   "vet_tercile",
+   "counties",
+   "avg_share_65plus",
+   "avg_vet_share",
+   "renter_burden_pct",
+   "owner_burden_pct"
+  ],
+  "rows": [
+   {
+    "age_tercile": 1,
+    "vet_tercile": 1,
+    "counties": 357,
+    "avg_share_65plus": 19.2,
+    "avg_vet_share": 4.4,
+    "renter_burden_pct": 39.2,
+    "owner_burden_pct": 52.7
+   },
+   {
+    "age_tercile": 1,
+    "vet_tercile": 2,
+    "counties": 357,
+    "avg_share_65plus": 20.5,
+    "avg_vet_share": 6.5,
+    "renter_burden_pct": 35.2,
+    "owner_burden_pct": 45.0
+   },
+   {
+    "age_tercile": 1,
+    "vet_tercile": 3,
+    "counties": 356,
+    "avg_share_65plus": 20.7,
+    "avg_vet_share": 9.7,
+    "renter_burden_pct": 35.0,
+    "owner_burden_pct": 44.6
+   },
+   {
+    "age_tercile": 2,
+    "vet_tercile": 1,
+    "counties": 357,
+    "avg_share_65plus": 25.2,
+    "avg_vet_share": 5.3,
+    "renter_burden_pct": 34.7,
+    "owner_burden_pct": 46.5
+   },
+   {
+    "age_tercile": 2,
+    "vet_tercile": 2,
+    "counties": 356,
+    "avg_share_65plus": 25.2,
+    "avg_vet_share": 7.4,
+    "renter_burden_pct": 32.6,
+    "owner_burden_pct": 42.9
+   },
+   {
+    "age_tercile": 2,
+    "vet_tercile": 3,
+    "counties": 356,
+    "avg_share_65plus": 25.5,
+    "avg_vet_share": 9.4,
+    "renter_burden_pct": 34.0,
+    "owner_burden_pct": 44.1
+   },
+   {
+    "age_tercile": 3,
+    "vet_tercile": 1,
+    "counties": 357,
+    "avg_share_65plus": 30.1,
+    "avg_vet_share": 6.0,
+    "renter_burden_pct": 38.8,
+    "owner_burden_pct": 52.4
+   },
+   {
+    "age_tercile": 3,
+    "vet_tercile": 2,
+    "counties": 356,
+    "avg_share_65plus": 31.0,
+    "avg_vet_share": 8.4,
+    "renter_burden_pct": 34.9,
+    "owner_burden_pct": 45.4
+   },
+   {
+    "age_tercile": 3,
+    "vet_tercile": 3,
+    "counties": 356,
+    "avg_share_65plus": 33.5,
+    "avg_vet_share": 11.2,
+    "renter_burden_pct": 36.7,
+    "owner_burden_pct": 46.5
+   }
+  ]
+ }
+}
