@@ -16,9 +16,9 @@
 | WWII (1968–90) | 1.05 | 0.78 | 0.48 | 36.7% vs 40.3% | — |
 | Korea (1968–2000) | 1.06 | 0.80 | 0.50 | 22.7% vs 30.3% | — |
 | Vietnam era (1968–2025) | 1.09 | 0.86 | 0.52 | 7.2% vs 17.0% | — |
-| May 1975–Jul 1990 | 1.07 | 1.45 | 0.50 | 3.0% vs 10.4% | 0.07 |
-| Gulf War I (1991–2025) | 1.10 | 1.41 | 0.53 | 1.2% vs 10.8% | 0.07 |
-| Post-9/11 (2006–2025) | 1.14 | 1.12 | 0.66 | 1.4% vs 10.9% | 0.07 |
+| May 1975–Jul 1990 (2006–25) | 1.07 | 1.45 | 0.50 | 3.0% vs 10.4% | 0.07 |
+| Gulf War I (2006–25) | 1.10 | 1.41 | 0.53 | 1.2% vs 10.8% | 0.07 |
+| Post-9/11 (2006–25) | 1.14 | 1.12 | 0.66 | 1.4% vs 10.9% | 0.07 |
 
 - Every era's veterans were whiter than the population their age, and the gap is **widest in the post-9/11 volunteer force** (1.14), not in the draft wars; WWII veterans were 91.0% white non-Hispanic against 86.9% of everyone their age.
 - Black Americans were under-represented in the three draft-era wars (0.78–0.87) and over-represented in the volunteer eras (1.45, 1.41, 1.12).
@@ -44,7 +44,8 @@
 3. **The pre-1992 education code 72 ("12th grade, diploma unclear") is the graduate code**; treating it as "no diploma" put WWII dropouts at 69%. Corrected to 36.7%.
 4. **The reference is everyone, not non-veterans.** The first run compared WWII veterans with the minority of men who did not serve and produced a 10-point white gap; against the whole population it is 4.1 points.
 5. **A variable absent from early files is null, not "not asked"**: `not(null between …)` is null in KQL and silently zeroed the white numerator for 1968–70 → `coalesce`. Caught from the screenshot (a line starting at 0%).
-6. `VETLAST` is the most recent period of service; from 2006 `VET1–VET4` show that 19% of 1975–90-era veterans also served in another era.
+6. **Before 2006 every post-Vietnam period was coded "other service"**, so the 1975–90, Gulf War I and post-9/11 cohorts are observed from 2006 only — their windows are 2006–2025 whatever the plan said.
+7. `VETLAST` is the most recent period of service; from 2006 `VET1–VET4` show that 19% of 1975–90-era veterans also served in another era.
 
 ## What it cost
 

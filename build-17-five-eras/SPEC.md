@@ -41,3 +41,4 @@ Who enlisted or was drafted was decided before the survey saw them; the ASEC see
 ## Change log
 
 - 2026-10-17 13:50 — written; ASEC codes confirmed from a two-sample smoke extract (#5); full extract #6 submitted.
+- 2026-10-17 14:25 — after the data: `VETLAST` codes 10–12 exist from 2006 only (earlier years code post-Vietnam service as 09 "other"), so the three volunteer-era windows are 2006–2025; Hispanic item null before 1971; VETSTAT men-only before 1988; EDUC 72 = graduate pre-1992; reference changed from non-veterans to the whole population. §1 unchanged.
