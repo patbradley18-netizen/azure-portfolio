@@ -26,6 +26,9 @@ jobs:
         run: |
           if git grep -nE 'AccountKey=|SharedAccessSignature=|eyJ0eXAi[A-Za-z0-9_-]{10,}|DefaultEndpointsProtocol=' -- . ':!.github/workflows/*' ':!**/*.example.json'; then
             echo "::error::secret-shaped string found; refusing to deploy"; exit 1; fi
+          # personal data: no email addresses in tracked files (build #18 leaked one through a what-if snapshot; redacted in 8b3010e)
+          if git grep -nIiE '[A-Za-z0-9._%+-]+@(manchester\.edu|gmail\.com|outlook\.com|hotmail\.com|yahoo\.com)' -- . ':!.github/workflows/*'; then
+            echo "::error::an email address is in the repo; refusing to deploy"; exit 1; fi
           echo "gate passed"
 
       - name: Assemble site
