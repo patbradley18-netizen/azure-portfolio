@@ -1,0 +1,24 @@
+name: build-14 ingestion end-to-end
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "30 3 * * 1"   # Mondays 03:30 UTC, after the nightly loader
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Azure login (OIDC, user-assigned managed identity)
+        uses: azure/login@v2
+        with:
+          client-id: 7721b9b0-874d-4b8c-9ce5-b3ca0489bcdd
+          tenant-id: fbc63603-de50-4d40-b10a-1708ddcea0b7
+          subscription-id: 9cb921f7-8a0b-445c-bb35-eca47da1daae
+      - name: Drop files, run the loader, read the ledger, assert
+        run: python3 build-14-ingestion/tests/e2e_test.py

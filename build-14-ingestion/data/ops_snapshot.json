@@ -1,0 +1,176 @@
+﻿{
+    "taken_at":  "2026-10-17T05:25:25Z",
+    "ledger":  [
+                   {
+                       "ledger_id":  9,
+                       "file_name":  "ghost.json",
+                       "sha256_prefix":  "000000000000",
+                       "stage":  "loaded",
+                       "outcome":  "poison",
+                       "reason":  "ResourceNotFoundError: The specified blob does not exist.\nRequestId:bf0ecb10-501e-0076-03f7-5d7b99000000\nTime:2026-10-17T05:24:07.0554823Z\nErrorCode:BlobNotFound\nContent: \u003c?xml version=\"1.0\" encoding=\"utf-8\"?\u003e\u003cError\u003e\u003cCode\u003eB",
+                       "dataset_id":  "acs5_2099_ghost",
+                       "rows":  null,
+                       "run_by":  "aci-azportfolio-b14",
+                       "received_at":  "2026-10-17T05:24:07.376Z"
+                   },
+                   {
+                       "ledger_id":  8,
+                       "file_name":  "acs5_2023_tenure_county.json",
+                       "sha256_prefix":  "a598aa3da706",
+                       "stage":  "loaded",
+                       "outcome":  "duplicate",
+                       "reason":  "same bytes already loaded",
+                       "dataset_id":  "acs5_2023_tenure",
+                       "rows":  null,
+                       "run_by":  "aci-azportfolio-b14",
+                       "received_at":  "2026-10-17T05:08:30.038Z"
+                   },
+                   {
+                       "ledger_id":  7,
+                       "file_name":  "acs5_2023_tenure_county.json",
+                       "sha256_prefix":  "a598aa3da706",
+                       "stage":  "loaded",
+                       "outcome":  "loaded",
+                       "reason":  "replace-per-dataset",
+                       "dataset_id":  "acs5_2023_tenure",
+                       "rows":  9666,
+                       "run_by":  "aci-azportfolio-b14",
+                       "received_at":  "2026-10-17T05:08:29.560Z"
+                   },
+                   {
+                       "ledger_id":  6,
+                       "file_name":  "acs5_2023_tenure_county.json",
+                       "sha256_prefix":  "a598aa3da706",
+                       "stage":  "validated",
+                       "outcome":  "queued",
+                       "reason":  "passed contract acs5_county",
+                       "dataset_id":  "acs5_2023_tenure",
+                       "rows":  3222,
+                       "run_by":  "func-azportfolio-b14",
+                       "received_at":  "2026-10-17T04:54:28.000Z"
+                   },
+                   {
+                       "ledger_id":  5,
+                       "file_name":  "acs5_2023_tenure_county.json",
+                       "sha256_prefix":  "a598aa3da706",
+                       "stage":  "validated",
+                       "outcome":  "queued",
+                       "reason":  "passed contract acs5_county",
+                       "dataset_id":  "acs5_2023_tenure",
+                       "rows":  3222,
+                       "run_by":  "func-azportfolio-b14",
+                       "received_at":  "2026-10-17T04:52:48.000Z"
+                   },
+                   {
+                       "ledger_id":  4,
+                       "file_name":  "notacontract.json",
+                       "sha256_prefix":  "183622c4adbf",
+                       "stage":  "validated",
+                       "outcome":  "quarantined",
+                       "reason":  "no contract matches this file name (1 contract(s) loaded)",
+                       "dataset_id":  null,
+                       "rows":  null,
+                       "run_by":  "func-azportfolio-b14",
+                       "received_at":  "2026-10-17T04:52:48.000Z"
+                   },
+                   {
+                       "ledger_id":  3,
+                       "file_name":  "acs5_2023_rentburden_county.json",
+                       "sha256_prefix":  "83907892b317",
+                       "stage":  "validated",
+                       "outcome":  "quarantined",
+                       "reason":  "12 rows; contract allows 3100-3300",
+                       "dataset_id":  null,
+                       "rows":  12,
+                       "run_by":  "func-azportfolio-b14",
+                       "received_at":  "2026-10-17T04:52:41.000Z"
+                   },
+                   {
+                       "ledger_id":  2,
+                       "file_name":  "acs5_2023_rentburden_county.json",
+                       "sha256_prefix":  "83907892b317",
+                       "stage":  "validated",
+                       "outcome":  "quarantined",
+                       "reason":  "no contract matches this file name",
+                       "dataset_id":  null,
+                       "rows":  null,
+                       "run_by":  "func-azportfolio-b14",
+                       "received_at":  "2026-10-17T04:25:01.000Z"
+                   },
+                   {
+                       "ledger_id":  1,
+                       "file_name":  "acs5_2023_tenure_county.json",
+                       "sha256_prefix":  "a598aa3da706",
+                       "stage":  "validated",
+                       "outcome":  "quarantined",
+                       "reason":  "no contract matches this file name",
+                       "dataset_id":  null,
+                       "rows":  null,
+                       "run_by":  "func-azportfolio-b14",
+                       "received_at":  "2026-10-17T04:24:58.000Z"
+                   }
+               ],
+    "quarantine":  {
+                       "value":  [
+                                     {
+                                         "name":  "acs5_2023_rentburden_county.json",
+                                         "size":  455
+                                     },
+                                     {
+                                         "name":  "acs5_2023_rentburden_county.json.reason.txt",
+                                         "size":  34
+                                     },
+                                     {
+                                         "name":  "acs5_2023_tenure_county.json",
+                                         "size":  203886
+                                     },
+                                     {
+                                         "name":  "acs5_2023_tenure_county.json.reason.txt",
+                                         "size":  34
+                                     },
+                                     {
+                                         "name":  "notacontract.json",
+                                         "size":  19
+                                     },
+                                     {
+                                         "name":  "notacontract.json.reason.txt",
+                                         "size":  57
+                                     }
+                                 ],
+                       "Count":  6
+                   },
+    "quarantine_reasons":  {
+                               "notacontract.json.reason.txt":  "no contract matches this file name (1 contract(s) loaded)",
+                               "acs5_2023_rentburden_county.json.reason.txt":  "12 rows; contract allows 3100-3300",
+                               "acs5_2023_tenure_county.json.reason.txt":  "no contract matches this file name"
+                           },
+    "deadletter":  [
+                       "stazportfoliob1/EVS-INBOX-TO-VALIDATOR/2026/10/17/4/656e8f7e-bfc9-4991-bbaa-835969442152.json",
+                       "stazportfoliob1/EVS-INBOX-TO-VALIDATOR/2026/10/17/4/760c8c75-e102-4d63-b29e-abb6f09da3f0.json",
+                       "stazportfoliob1/EVS-INBOX-TO-VALIDATOR/2026/10/17/4/783fe22a-d482-4f53-a90d-af1af0958d34.json",
+                       "stazportfoliob1/EVS-INBOX-TO-VALIDATOR/2026/10/17/4/9f897400-a7e4-46b7-8cb3-1095a4167a54.json",
+                       "stazportfoliob1/EVS-INBOX-TO-VALIDATOR/2026/10/17/4/c2c7a130-0997-481d-8d9e-16fc01d8ad01.json",
+                       "stazportfoliob1/EVS-INBOX-TO-VALIDATOR/2026/10/17/5/32174ac5-f3c8-499f-a14d-a8c134911d0a.json"
+                   ],
+    "poison":  [
+                   {
+                       "content":  "{\"sha256\": \"0000000000000000000000000000000000000000000000000000000000000000\", \"file_name\": \"ghost.json\", \"blob_url\": \"https://stazportfoliob1.blob.core.windows.net/inbox/ghost.json\", \"dataset_id\": \"acs5_2099_ghost\", \"contract\": \"acs5_county\", \"year\": 2099, \"set\": \"shelter\", \"error\": \"ResourceNotFoundError: The specified blob does not exist.\\nRequestId:bf0ecb10-501e-0076-03f7-5d7b99000000\\nTime:2026-10-17T05:24:07.0554823Z\\nErrorCode:BlobNotFound\\nContent: \u003c?xml version=\\\"1.0\\\" encoding=\\\"utf-8\\\"?\u003e\u003cError\u003e\u003cCode\u003eB\", \"dequeue_count\": 5}",
+                       "dequeueCount":  0
+                   }
+               ],
+    "eventgrid":  {
+                      "DeadLetteredCount":  6,
+                      "MatchedEventCount":  12,
+                      "PublishSuccessCount":  175,
+                      "DeliverySuccessCount":  6,
+                      "DeliveryAttemptFailCount":  34
+                  },
+    "aci":  {
+                "exit":  0,
+                "finished":  "2026-10-17T05:24:08.362000+00:00",
+                "image":  "ghcr.io/patbradley18-netizen/azportfolio-loader:latest",
+                "started":  "2026-10-17T05:24:03.103000+00:00",
+                "state":  "Succeeded"
+            },
+    "aci_log_tail":  "message ghost.json dequeue_count=5\n  failed: ResourceNotFoundError: The specified blob does not exist.\nRequestId:bf0ecb10-501e-0076-03f7-5d7b99000000\nTime:2026-10-17T05:24:07.0554823Z\nErrorCode:BlobNotFound\nContent: \u003c?xml version=\"1.0\" encoding=\"utf-8\"?\u003e\u003cError\u003e\u003cCode\u003eB\n  -\u003e poison queue\ndone: 1 message(s)\n"
+}

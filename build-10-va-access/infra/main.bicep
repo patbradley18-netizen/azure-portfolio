@@ -1,4 +1,4 @@
-// main.bicep - the Azure learning portfolio as code (build #10).
+﻿// main.bicep - the Azure learning portfolio as code (build #10).
 // Scope: the existing resource group. Nothing here is deployed; `az deployment group what-if` compares this
 // description with the live resources and prints the difference. Names only: no keys, no connection strings.
 // App settings (which carry Key Vault references and connection strings) are deliberately not in this file.
@@ -259,7 +259,7 @@ resource sqlFreeLimitAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   }
 }
 
-// ---------- Build #13: the data API — Function app on its own Flex plan, and API Management (Consumption) ----------
+// ---------- Build #13: the data API â€” Function app on its own Flex plan, and API Management (Consumption) ----------
 param funcB13Name string = 'func-azportfolio-b13'
 param apimName string = 'apim-azportfolio-b13'
 param apimPublisherEmail string  // passed on the command line; never stored
@@ -293,6 +293,71 @@ resource apim 'Microsoft.ApiManagement/service@2023-05-01-preview' = {
   location: locationUs
   sku: { name: 'Consumption', capacity: 0 }
   properties: { publisherEmail: apimPublisherEmail, publisherName: apimPublisherName }
+}
+
+// ---------- Build #14: ingestion â€” validator Function app, Event Grid system topic + subscription, the loader container group ----------
+param funcB14Name string = 'func-azportfolio-b14'
+param loaderImage string = 'ghcr.io/patbradley18-netizen/azportfolio-loader:latest'
+
+resource planB14 'Microsoft.Web/serverfarms@2024-04-01' existing = { name: 'ASP-rgazportfoliob1-afb7' }
+
+resource funcB14 'Microsoft.Web/sites@2024-04-01' = {
+  name: funcB14Name
+  location: locationEu
+  kind: 'functionapp,linux'
+  identity: { type: 'SystemAssigned' }
+  properties: {
+    serverFarmId: planB14.id
+    functionAppConfig: {
+      deployment: { storage: { type: 'blobContainer', value: '${storage.properties.primaryEndpoints.blob}app-package-funcazportfoliob14', authentication: { type: 'StorageAccountConnectionString', storageAccountConnectionStringName: 'DEPLOYMENT_STORAGE_CONNECTION_STRING' } } }
+      runtime: { name: 'python', version: '3.12' }
+      scaleAndConcurrency: { instanceMemoryMB: 2048, maximumInstanceCount: 100 }
+    }
+  }
+}
+
+resource inboxTopic 'Microsoft.EventGrid/systemTopics@2024-06-01-preview' = {
+  name: 'egst-stazportfoliob1'
+  location: locationUs
+  identity: { type: 'SystemAssigned' }
+  properties: { source: storage.id, topicType: 'Microsoft.Storage.StorageAccounts' }
+}
+
+resource inboxSubscription 'Microsoft.EventGrid/systemTopics/eventSubscriptions@2024-06-01-preview' = {
+  parent: inboxTopic
+  name: 'evs-inbox-to-validator'
+  properties: {
+    destination: { endpointType: 'AzureFunction', properties: { resourceId: '${funcB14.id}/functions/validate_inbox_blob', maxEventsPerBatch: 1, preferredBatchSizeInKilobytes: 64 } }
+    filter: { includedEventTypes: [ 'Microsoft.Storage.BlobCreated' ], subjectBeginsWith: '/blobServices/default/containers/inbox/' }
+    retryPolicy: { maxDeliveryAttempts: 5, eventTimeToLiveInMinutes: 60 }
+    deadLetterWithResourceIdentity: { identity: { type: 'SystemAssigned' }, deadLetterDestination: { endpointType: 'StorageBlob', properties: { resourceId: storage.id, blobContainerName: 'deadletter' } } }
+  }
+}
+
+resource loader 'Microsoft.ContainerInstance/containerGroups@2023-05-01' = {
+  name: 'aci-azportfolio-b14'
+  location: locationUs
+  identity: { type: 'SystemAssigned' }
+  properties: {
+    osType: 'Linux'
+    restartPolicy: 'Never'
+    containers: [ {
+      name: 'aci-azportfolio-b14'
+      properties: {
+        image: loaderImage
+        resources: { requests: { cpu: json('0.5'), memoryInGB: json('0.5') } }
+        environmentVariables: [
+          { name: 'STORAGE_ACCOUNT_URL', value: 'https://${storage.name}.blob.core.windows.net' }
+          { name: 'QUEUE_ACCOUNT_URL', value: 'https://${storage.name}.queue.core.windows.net' }
+          { name: 'SQL_SERVER_NAME', value: '${sqlServer.name}.database.windows.net' }
+          { name: 'SQL_DATABASE_NAME', value: sqlDbName }
+          { name: 'RUN_BY', value: 'aci-azportfolio-b14' }
+          { name: 'MAX_DEQUEUE', value: '5' }
+          { name: 'VISIBILITY_S', value: '300' }
+        ]
+      }
+    } ]
+  }
 }
 
 output staticSiteHint string = 'Static website on ${storage.name} is enabled on the data plane (az storage blob service-properties update --static-website), not in ARM.'

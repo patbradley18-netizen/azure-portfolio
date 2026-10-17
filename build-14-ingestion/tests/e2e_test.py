@@ -2,6 +2,7 @@
 Runs in GitHub Actions after the site deploy (the workflow is already signed in to Azure through the deploy identity, which
 holds Storage Blob Data Contributor on the account and Container Apps Jobs Operator on the job) and from the PC.
 
+  (the loader runs on Azure Container Instances; the test starts the group and waits for it to exit)
   1. a known-bad file (12 rows)            -> quarantined, reason names the row-count rule
   2. a file no contract matches             -> quarantined, reason says so
   3. a real ACS pull (3,222 rows)           -> queued, then loaded by the job with 9,666 rows
@@ -15,7 +16,7 @@ import time
 import urllib.request
 
 ACCOUNT = "stazportfoliob1"
-JOB, RG = "caj-azportfolio-b14", "rg-azportfolio-b1"
+ACI, RG = "aci-azportfolio-b14", "rg-azportfolio-b1"
 API = "https://apim-azportfolio-b13.azure-api.net/data/ingest/ledger"
 AZ = "az.cmd" if sys.platform == "win32" else "az"
 GOOD = "build-08-tenure-model/data/acs5_2023_tenure_county.json"
@@ -49,16 +50,16 @@ def wait_for(pred, seconds, what):
 
 
 def run_job():
-    r = az("containerapp", "job", "start", "-n", JOB, "-g", RG, "--query", "name", "-o", "tsv")
+    r = az("container", "start", "-n", ACI, "-g", RG, "-o", "none")
     if r.returncode:
         print(r.stderr[:400]); sys.exit(2)
-    ex = r.stdout.strip()
     for _ in range(60):
         time.sleep(10)
-        s = az("containerapp", "job", "execution", "show", "-n", JOB, "-g", RG, "--job-execution-name", ex, "--query", "properties.status", "-o", "tsv").stdout.strip()
-        if s in ("Succeeded", "Failed", "Stopped"):
-            return ex, s
-    return ex, "Timeout"
+        s = az("container", "show", "-n", ACI, "-g", RG, "--query", "containers[0].instanceView.currentState.state", "-o", "tsv").stdout.strip()
+        code = az("container", "show", "-n", ACI, "-g", RG, "--query", "containers[0].instanceView.currentState.exitCode", "-o", "tsv").stdout.strip()
+        if s == "Terminated":
+            return ACI, "Succeeded" if code == "0" else f"Failed(exit {code})"
+    return ACI, "Timeout"
 
 
 checks = []

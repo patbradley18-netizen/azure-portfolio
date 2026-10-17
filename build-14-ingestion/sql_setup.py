@@ -25,7 +25,9 @@ STATEMENTS = [
 ]
 if LOADER:
     STATEMENTS += [
-        f"IF NOT EXISTS (SELECT 1 FROM sys.database_principals WHERE name = '{LOADER}') CREATE USER [{LOADER}] FROM EXTERNAL PROVIDER;",
+        # a recreated container group gets a new identity object id; the external-provider user stores the old SID, so recreate it
+        f"IF EXISTS (SELECT 1 FROM sys.database_principals WHERE name = '{LOADER}') DROP USER [{LOADER}];",
+        f"CREATE USER [{LOADER}] FROM EXTERNAL PROVIDER;",
         f"GRANT SELECT, INSERT ON col.ingest_ledger TO [{LOADER}];",
         f"GRANT SELECT, INSERT, UPDATE, DELETE ON col.measure TO [{LOADER}];",
         f"GRANT SELECT, INSERT, UPDATE ON col.metric TO [{LOADER}];",

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pipeline That Says No</title>
+<style>
+:root{color-scheme:light;--surface:#fcfcfb;--surface-2:#f1f0ec;--ink:#0b0b0b;--ink-2:#52514e;--ink-3:#8a8880;--line:#e3e1da;--series:#2a78d6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--surface:#1a1a19;--surface-2:#242422;--ink:#f0efec;--ink-2:#c3c2b7;--ink-3:#8f8e86;--line:#33332f;--series:#3987e5}}
+:root[data-theme="dark"]{color-scheme:dark;--surface:#1a1a19;--surface-2:#242422;--ink:#f0efec;--ink-2:#c3c2b7;--ink-3:#8f8e86;--line:#33332f;--series:#3987e5}
+*{box-sizing:border-box}body{margin:0;background:var(--surface);color:var(--ink);font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:980px;margin:0 auto;padding:32px 16px 64px}h1{font-size:26px;margin:0 0 4px}.sub{color:var(--ink-2);margin:0 0 28px}
+h2{font-size:17px;margin:40px 0 8px}.finding{font-size:16px;margin:0 0 6px}.note{color:var(--ink-2);font-size:14px;margin:0 0 14px}
+table{width:100%;border-collapse:collapse;font-size:13px;display:block;overflow-x:auto;margin-bottom:10px}th{text-align:left;color:var(--ink-2);font-weight:500;border-bottom:1px solid var(--line);padding:6px 8px;white-space:nowrap}td{padding:5px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+pre{background:var(--surface-2);padding:12px;border-radius:8px;overflow-x:auto;font-size:12px;line-height:1.45;white-space:pre-wrap}details{margin-top:10px}summary{cursor:pointer;color:var(--series);font-size:14px}
+.flow{background:var(--surface-2);border-radius:10px;padding:14px 16px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;white-space:pre;overflow-x:auto}
+.foot{margin-top:40px;color:var(--ink-3);font-size:13px;border-top:1px solid var(--line);padding-top:14px}a{color:var(--series)}code{font-size:13px}
+</style></head><body><main>
+<h1>The pipeline that says no: event-driven ingestion with a data contract, quarantine, idempotency and poison handling</h1>
+<p class="sub">Drop a file in <code>inbox/</code>. Event Grid tells a Function; the Function checks the file against its contract and either queues it, quarantines it with a reason, or records it. A container pulls the queue, refuses bytes it has loaded before, loads the rest with the same OPENJSON path as every earlier build, and moves a message that keeps failing to a poison queue. Every decision is a ledger row the build #13 API serves. Anchor phrase: every file is guilty until the gate clears it. Expand the contract to read the rules.</p>
+<div class="flow">inbox/ (blob created) ──► Event Grid system topic ──► validator Function ──┬─► ingest-load queue ──► loader container (ACI) ──► col.measure
+                                   │ dead-letter: deadletter/             └─► quarantine/ + reason        │ fails ×5 ──► ingest-load-poison
+                                                                   every decision ──► col.ingest_ledger ──► GET /data/ingest/ledger</div>
+<section class="q"><h2>The ledger</h2><p class="finding">9 ledger rows so far. The validator quarantined <b>4</b> file drops and queued <b>2</b>; the loader loaded <b>1</b>, refused <b>1</b> as duplicates (same bytes already loaded) and poisoned <b>1</b>. The real pull, acs5_2023_tenure_county.json, loaded 9,666 rows into acs5_2023_tenure — the number build #8 loaded by hand. Every decision names its rule.</p><p class="note">stage=validated rows are the validator's decisions; stage=loaded rows are the loader's. Newest first; via the build #13 API.</p><table><thead><tr><th>ledger_id</th><th>file_name</th><th>stage</th><th>outcome</th><th>reason</th><th>dataset_id</th><th>rows</th><th>run_by</th><th>received_at</th></tr></thead><tbody><tr><td>9</td><td>ghost.json</td><td>loaded</td><td>poison</td><td>ResourceNotFoundError: The specified blob does not exist.
+RequestId:bf0ecb10-501e-0076-03f7-5d7b99000000
+Time:2026-10-17T05:24:07.0554823Z
+ErrorCode:BlobNotFound
+Content: &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;Error&gt;&lt;Code&gt;B</td><td>acs5_2099_ghost</td><td>–</td><td>aci-azportfolio-b14</td><td>2026-10-17T05:24:07.376Z</td></tr><tr><td>8</td><td>acs5_2023_tenure_county.json</td><td>loaded</td><td>duplicate</td><td>same bytes already loaded</td><td>acs5_2023_tenure</td><td>–</td><td>aci-azportfolio-b14</td><td>2026-10-17T05:08:30.038Z</td></tr><tr><td>7</td><td>acs5_2023_tenure_county.json</td><td>loaded</td><td>loaded</td><td>replace-per-dataset</td><td>acs5_2023_tenure</td><td>9666</td><td>aci-azportfolio-b14</td><td>2026-10-17T05:08:29.560Z</td></tr><tr><td>6</td><td>acs5_2023_tenure_county.json</td><td>validated</td><td>queued</td><td>passed contract acs5_county</td><td>acs5_2023_tenure</td><td>3222</td><td>func-azportfolio-b14</td><td>2026-10-17T04:54:28.000Z</td></tr><tr><td>5</td><td>acs5_2023_tenure_county.json</td><td>validated</td><td>queued</td><td>passed contract acs5_county</td><td>acs5_2023_tenure</td><td>3222</td><td>func-azportfolio-b14</td><td>2026-10-17T04:52:48.000Z</td></tr><tr><td>4</td><td>notacontract.json</td><td>validated</td><td>quarantined</td><td>no contract matches this file name (1 contract(s) loaded)</td><td>–</td><td>–</td><td>func-azportfolio-b14</td><td>2026-10-17T04:52:48.000Z</td></tr><tr><td>3</td><td>acs5_2023_rentburden_county.json</td><td>validated</td><td>quarantined</td><td>12 rows; contract allows 3100-3300</td><td>–</td><td>12</td><td>func-azportfolio-b14</td><td>2026-10-17T04:52:41.000Z</td></tr><tr><td>2</td><td>acs5_2023_rentburden_county.json</td><td>validated</td><td>quarantined</td><td>no contract matches this file name</td><td>–</td><td>–</td><td>func-azportfolio-b14</td><td>2026-10-17T04:25:01.000Z</td></tr><tr><td>1</td><td>acs5_2023_tenure_county.json</td><td>validated</td><td>quarantined</td><td>no contract matches this file name</td><td>–</td><td>–</td><td>func-azportfolio-b14</td><td>2026-10-17T04:24:58.000Z</td></tr></tbody></table></section>
+<section class="q"><h2>Quarantine</h2><p class="finding">2 blobs in <code>quarantine/</code> (each file and its <code>.reason.txt</code>). Reasons seen: <i>12 rows; contract allows 3100-3300</i>; <i>no contract matches this file name</i>; <i>no contract matches this file name (1 contract(s) loaded)</i>.</p><p class="note">A quarantined file leaves the inbox; the reason file beside it is the first rule it failed.</p><table><thead><tr><th>blob</th><th>reason</th></tr></thead><tbody><tr><td>acs5_2023_rentburden_county.json.reason.txt</td><td>12 rows; contract allows 3100-3300</td></tr><tr><td>acs5_2023_tenure_county.json.reason.txt</td><td>no contract matches this file name</td></tr><tr><td>notacontract.json.reason.txt</td><td>no contract matches this file name (1 contract(s) loaded)</td></tr></tbody></table><details><summary>The contract (contracts/acs5_county.yaml)</summary><pre># Data contract: a raw ACS 5-year county pull as the Census API returns it (the shape build #6-#9&#x27;s fetch_acs.py saves).
+# File name convention: acs5_&lt;year&gt;_&lt;set&gt;_county.json  -&gt;  dataset_id acs5_&lt;year&gt;[_&lt;set&gt;] (shelter is the unnamed default set).
+# The validator checks every rule below; one failure quarantines the file with the first failing rule as the reason.
+name: acs5_county
+file_pattern: &#x27;^acs5_(?P&lt;year&gt;20\d{2})_(?P&lt;set&gt;[a-z]+)_county\.json$&#x27;
+format: json_array_of_arrays        # header row, then one row per county
+header:
+  required: [NAME, state, county]   # the Census API appends state and county last; variable codes go first
+  variable_pattern: &#x27;^B\d{5}[A-Z]?_\d{3}E$&#x27;
+  min_variables: 1
+  max_variables: 60
+rows:
+  min: 3100                          # 3,221 counties + PR 78 in a full pull; a partial pull is a quarantine
+  max: 3300
+  state_fips_pattern: &#x27;^\d{2}$&#x27;
+  county_fips_pattern: &#x27;^\d{3}$&#x27;
+  unique_key: [state, county]
+values:
+  numeric_or_null: true              # every variable cell parses as a number, or is null/empty
+  allow_negative_sentinels: true     # -666666666 etc. are Census suppression codes, loaded as NULL + text flag
+  max_value: 1000000000
+dataset_id:
+  template: &#x27;acs5_{year}{set_suffix}&#x27;
+  set_suffix: { shelter: &#x27;&#x27;, veterans: &#x27;_vet&#x27;, tenure: &#x27;_tenure&#x27;, rentburden: &#x27;_rentburden&#x27; }
+  allowed_sets: [shelter, veterans, tenure, rentburden]
+</pre></details></section>
+<section class="q"><h2>Poison</h2><p class="finding">1 message(s) in <code>ingest-load-poison</code>. Storage queues have no poison handling of their own: the loader counts dequeues and moves a message after the fifth failure, writing the last error to the ledger. The one here names a blob that does not exist (<code>ghost.json</code>), put on the queue on purpose.</p><p class="note">Dequeue count is the queue's own counter; the visibility timeout is how long a failed message hides before it returns.</p><table><thead><tr><th>dequeueCount</th><th>content</th></tr></thead><tbody><tr><td>0</td><td>{&quot;sha256&quot;: &quot;0000000000000000000000000000000000000000000000000000000000000000&quot;, &quot;file_name&quot;: &quot;ghost.json&quot;, &quot;blob_url&quot;: &quot;https://stazportfoliob1.blob.core.windows.net/inbox/ghost.json&quot;, &quot;dataset_id&quot;: &quot;acs5_2099_ghost&quot;, &quot;contract&quot;: &quot;acs5_county&quot;, &quot;year&quot;: 2099, &quot;set&quot;: &quot;shelter&quot;, &quot;error&quot;: &quot;ResourceNotFou</td></tr></tbody></table></section>
+<section class="q"><h2>Dead letters</h2><p class="finding">Event Grid matched <b>12</b> blob-created events on <code>inbox/</code> in the last day, delivered 6, failed 34 delivery attempts and dead-lettered 6. 6 blob(s) in <code>deadletter/</code>. The failed attempts are the build's own mistakes being retried — a validator that raised on a blob already quarantined, a redeploy with unreadable files — plus <code>poisonpill.json</code>, the one file the validator refuses on purpose until Event Grid gives up.</p><p class="note">Event Grid retries with backoff for up to 60 minutes / 5 attempts here; what it cannot deliver it writes to deadletter/ with its own identity.</p><table><thead><tr><th>blob</th></tr></thead><tbody><tr><td>stazportfoliob1/EVS-INBOX-TO-VALIDATOR/2026/10/17/4/656e8f7e-bfc9-4991-bbaa-835969442152.json</td></tr><tr><td>stazportfoliob1/EVS-INBOX-TO-VALIDATOR/2026/10/17/4/760c8c75-e102-4d63-b29e-abb6f09da3f0.json</td></tr><tr><td>stazportfoliob1/EVS-INBOX-TO-VALIDATOR/2026/10/17/4/783fe22a-d482-4f53-a90d-af1af0958d34.json</td></tr><tr><td>stazportfoliob1/EVS-INBOX-TO-VALIDATOR/2026/10/17/4/9f897400-a7e4-46b7-8cb3-1095a4167a54.json</td></tr><tr><td>stazportfoliob1/EVS-INBOX-TO-VALIDATOR/2026/10/17/4/c2c7a130-0997-481d-8d9e-16fc01d8ad01.json</td></tr><tr><td>stazportfoliob1/EVS-INBOX-TO-VALIDATOR/2026/10/17/5/32174ac5-f3c8-499f-a14d-a8c134911d0a.json</td></tr></tbody></table></section>
+<section class="q"><h2>The container</h2><p class="finding">The loader is a container image built by GitHub Actions and pulled from GitHub Container Registry, run as an Azure Container Instances group with a system identity. Last run: state <b>Succeeded</b>, exit 0. A Function timer in build #13's app starts it nightly through ARM; it drains the queue and exits, and ACI bills per second only while it runs.</p><p class="note">Image: ghcr.io/patbradley18-netizen/azportfolio-loader:latest. Log tail from the last run below.</p><pre>message ghost.json dequeue_count=5
+  failed: ResourceNotFoundError: The specified blob does not exist.
+RequestId:bf0ecb10-501e-0076-03f7-5d7b99000000
+Time:2026-10-17T05:24:07.0554823Z
+ErrorCode:BlobNotFound
+Content: &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;Error&gt;&lt;Code&gt;B
+  -&gt; poison queue
+done: 1 message(s)
+</pre></section>
+<section class="q"><h2>What this cannot say</h2>
+<p class="note">One contract covers one file family (raw ACS county pulls); anything else is quarantined by design. The public limits on the ledger endpoint are build #13's. Container Apps Jobs were the plan for the loader: new Container Apps environments on this subscription are express-only in every allowlisted region and express has no jobs, so the loader runs on Azure Container Instances instead — the same image, the same identity pattern, per-second billing in fractions of a cent. The validator re-reads the blob; the loader re-hashes and re-checks it; neither trusts the message. Snapshot taken 2026-10-17 05:25 UTC.</p></section>
+<p class="foot">Build #14 of Patrick Neil Bradley's Azure learning portfolio. Azure services: Event Grid (system topic, dead-lettering), Queue Storage, Azure Functions (Event Grid trigger, SQL output binding, managed identity), Azure Container Instances (managed identity), GitHub Container Registry via GitHub Actions, Azure SQL Database (free offer), API Management (build #13). Cost: $0 on every free line; Event Grid within 100,000 free operations; ACI and queue operations fractions of a cent. Code: <a href="https://github.com/patbradley18-netizen/azure-portfolio/tree/main/build-14-ingestion">GitHub</a>.</p>
+</main></body></html>

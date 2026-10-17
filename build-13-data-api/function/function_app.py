@@ -164,3 +164,18 @@ def refresh_state(job: dict, r: func.SqlRowList) -> dict:
 def run_record(rec: dict, row: func.Out[str]) -> str:
     row.set(json.dumps({k: v for k, v in rec.items() if k in ("run_id", "started_at", "finished_at", "states_done", "rows_written", "status", "note")}))
     return rec["status"]
+
+# ---------------- Build #14: nightly start of the loader container (ACI has no scheduler of its own) ----------------
+@app.function_name("loader_nightly")
+@app.timer_trigger(schedule="0 0 2 * * *", arg_name="timer", run_on_startup=False)
+def loader_nightly(timer: func.TimerRequest) -> None:
+    """Starts container group aci-azportfolio-b14 through ARM with this app's managed identity (role: Contributor on the group).
+    The loader drains the ingest-load queue and exits; ACI bills per second while it runs."""
+    import urllib.request
+    from azure.identity import DefaultAzureCredential
+    sub, rg, aci = os.environ["AZURE_SUBSCRIPTION_ID"], os.environ.get("ACI_RESOURCE_GROUP", "rg-azportfolio-b1"), os.environ.get("ACI_NAME", "aci-azportfolio-b14")
+    token = DefaultAzureCredential().get_token("https://management.azure.com/.default").token
+    url = f"https://management.azure.com/subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.ContainerInstance/containerGroups/{aci}/start?api-version=2023-05-01"
+    req = urllib.request.Request(url, method="POST", headers={"Authorization": "Bearer " + token, "Content-Length": "0"})
+    with urllib.request.urlopen(req, timeout=60) as r:
+        logging.info("loader start requested: HTTP %s", r.status)
