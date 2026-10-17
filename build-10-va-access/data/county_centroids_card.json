@@ -1,0 +1,9 @@
+{
+ "source": "https://www2.census.gov/geo/docs/reference/cenpop2020/county/CenPop2020_Mean_CO.txt",
+ "license": "US Census Bureau, public domain",
+ "vintage": "2020 Census centers of population",
+ "pulled_at": "2026-10-17T02:09:16Z",
+ "rows": 3222,
+ "puerto_rico_rows": 78,
+ "ct_planning_regions_from_gazetteer": 9
+}

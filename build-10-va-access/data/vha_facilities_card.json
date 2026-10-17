@@ -1,0 +1,23 @@
+{
+ "source": "https://gisportal.hrsa.gov/server/rest/services/HealthCareFacilities/VHAFacilities_FS/MapServer/0/query",
+ "source_owner": "HRSA (republishing VA VAST station list)",
+ "license": "US government work, public domain",
+ "pulled_at": "2026-10-17T02:09:15Z",
+ "vast_extract_dates": [
+  "2018-09-29"
+ ],
+ "rows": 1657,
+ "rows_with_coords": 1657,
+ "rows_with_fips": 1657,
+ "suspended": 5,
+ "kinds": {
+  "VETCTR": 315,
+  "MOBILE": 138,
+  "VAMC": 171,
+  "CBOC": 738,
+  "OOS": 263,
+  "OTHER": 10,
+  "HCC": 22
+ },
+ "states": 57
+}
