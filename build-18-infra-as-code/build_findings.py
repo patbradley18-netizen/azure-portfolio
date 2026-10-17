@@ -1,6 +1,7 @@
 """Builds findings.html from data/whatif_before.json, data/whatif_after.json (az what-if, utf-16), data/deployments.json and
 data/ephemeral_evidence.json. Every number is computed; no library."""
-import json, html, os
+import json, html, os, re
+def secs(d): return f"{float(re.sub(r'[^0-9.]', '', d)):.0f} s"
 HERE = os.path.dirname(os.path.abspath(__file__)); e = html.escape
 def load_wi(name):
     raw = open(os.path.join(HERE, "data", name), "rb").read()
@@ -23,7 +24,7 @@ rows_before = [{"type": x["changeType"], "res": rid(x), "paths": ", ".join(d["pa
 rows_after = [{"type": x["changeType"], "res": rid(x), "paths": ", ".join(d["path"] for d in (x.get("delta") or []))[:140], "why": reason(x)} for x in A["changes"] if x["changeType"] not in ("NoChange", "Ignore")]
 def table(rows, cols, head):
     return "<table><thead><tr>" + "".join(f"<th>{e(h)}</th>" for h in head) + "</tr></thead><tbody>" + "".join("<tr>" + "".join(f"<td>{e(str(r.get(c, '')))}</td>" for c in cols) + "</tr>" for r in rows) + "</tbody></table>"
-dep_rows = [{"name": d["name"], "state": d["state"], "dur": d["duration"].replace("PT", "").lower(), "t": d["timestamp"][:19].replace("T", " ")} for d in D]
+dep_rows = [{"name": d["name"], "state": d["state"], "dur": secs(d["duration"]), "t": d["timestamp"][:19].replace("T", " ")} for d in D]
 ev_rows = [{"check": k, "value": v} for k, v in [("storage account", EV["storage"]["name"]), ("shared-key access", str(EV["storage"]["allowSharedKeyAccess"])), ("public blob access", str(EV["storage"]["allowBlobPublicAccess"])), ("containers", ", ".join(c["name"] for c in (EV["containers"]["value"] if isinstance(EV["containers"], dict) else EV["containers"]))), ("queues", ", ".join(q["name"] for q in (EV["queues"]["value"] if isinstance(EV["queues"], dict) else EV["queues"]))), ("vault", EV["vault"]["name"] + " (RBAC, soft delete 7 d)"), ("roles on the account", ", ".join(sorted({r["roleDefinitionName"] for r in (EV["roles"]["value"] if isinstance(EV["roles"], dict) else EV["roles"])}))), ("event grid topic", EV["topic"]["name"] + " — " + EV["topic"]["provisioningState"])]]
 page = f"""<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>A template that changes nothing</title>
@@ -44,8 +45,8 @@ details{{margin-top:10px}}summary{{cursor:pointer;color:var(--series);font-size:
 
 <div class="tiles">
 <div class="tile"><b>{len(real_b)} → {len(real_a)}</b><span>real changes (Create/Delete) what-if reported, before → after</span></div>
-<div class="tile"><b>{cb.get('Modify',0)} → {ca.get('Modify',0)}</b><span>Modify rows before → after (the survivors are what-if's blind spots, listed below)</span></div>
-<div class="tile"><b>{len(D)}</b><span>deployments to the live group, all Succeeded; fastest {min(d['duration'] for d in D).replace('PT','').lower()}</span></div>
+<div class="tile"><b>{cb.get('Modify',0)} → {ca.get('Modify',0)}</b><span>Modify rows before → after: same count, different rows — the template errors were fixed; what remains is what-if's blind spots (listed below)</span></div>
+<div class="tile"><b>{len(D)}</b><span>deployments to the live group, all Succeeded; {' and '.join(secs(d['duration']) for d in D)}</span></div>
 <div class="tile"><b>10/10</b><span>ephemeral checks passed, then the group was deleted</span></div>
 </div>
 
@@ -54,7 +55,7 @@ details{{margin-top:10px}}summary{{cursor:pointer;color:var(--series);font-size:
 <details><summary>Before: {len(rows_before)} rows</summary>{table(rows_before, ["type","res","paths"], ["change","resource","properties"])}</details>
 
 <h2>After two deployments: the same 12 rows, so they are not drift</h2>
-<p class="finding">The template was deployed to the live group twice ({', '.join(d['duration'].replace('PT','').lower() for d in D)}). Nothing changed that could be observed — identities, app settings, the free database, the API, the alert all as before — and the second what-if reports exactly the rows the first fixed version did. That is the test for a what-if row: if a successful deployment leaves it standing, it is an evaluator limit, not a difference.</p>
+<p class="finding">The template was deployed to the live group twice ({' and '.join(secs(d['duration']) for d in D)}). Nothing changed that could be observed — identities, app settings, the free database, the API, the alert all as before — and the second what-if reports exactly the rows the first fixed version did. That is the test for a what-if row: if a successful deployment leaves it standing, it is an evaluator limit, not a difference.</p>
 {table(rows_after, ["type","res","paths","why"], ["change","resource","properties","why what-if cannot settle it"])}
 <p class="note">One deliberate exclusion: the loader container group sits behind <code>deployLoader=false</code>. A PUT on a container group redeploys it and can mint a new managed identity (build #14), which would orphan its SQL user — so it is templated but not converged.</p>
 
