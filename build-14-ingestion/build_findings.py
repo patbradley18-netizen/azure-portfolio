@@ -29,7 +29,8 @@ f_gate = (f"{len(L)} ledger rows so far. The validator quarantined <b>{len(quar)
           + (f"The real pull, {e(loaded[0]['file_name'])}, loaded {loaded[0]['rows']:,} rows into {e(loaded[0]['dataset_id'])} — the number build #8 loaded by hand. " if loaded else "")
           + "Every decision names its rule.")
 reasons = sorted({(r["reason"] or "")[:80] for r in quar})
-f_quar = (f"{len(S['quarantine'])} blobs in <code>quarantine/</code> (each file and its <code>.reason.txt</code>). Reasons seen: " + "; ".join(f"<i>{e(x)}</i>" for x in reasons) + ".")
+_qb = S["quarantine"]["value"] if isinstance(S["quarantine"], dict) else S["quarantine"]
+f_quar = (f"{len(S['quarantine_reasons'])} files ({len(_qb)} blobs) in <code>quarantine/</code> (each file and its <code>.reason.txt</code>). Reasons seen: " + "; ".join(f"<i>{e(x)}</i>" for x in reasons) + ".")
 f_poison = (f"{len(S['poison'])} message(s) in <code>ingest-load-poison</code>. Storage queues have no poison handling of their own: the loader counts dequeues and moves a message after "
             f"the fifth failure, writing the last error to the ledger. " + (f"The one here names a blob that does not exist (<code>{e(json.loads(S['poison'][0]['content']).get('file_name',''))}</code>), put on the queue on purpose." if S["poison"] else "None yet: the ghost message is still being retried."))
 f_dl = (f"Event Grid matched <b>{eg.get('MatchedEventCount', 0):.0f}</b> blob-created events on <code>inbox/</code> in the last day, delivered {eg.get('DeliverySuccessCount', 0):.0f}, "
