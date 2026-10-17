@@ -45,7 +45,8 @@ def series_chart(title, ylabel, getter, cohorts, ymax=None, ref=None, fmt=lambda
         for i, v in p:
             s.append(f'<circle cx="{X(i):.1f}" cy="{Y(v):.1f}" r="4.5" fill="{COL[c]}" stroke="var(--surface)" stroke-width="2"><title>{e(NAME[c])}, {BINLAB[BINS[i]]} years out: {e(fmt(v))} (n={r1[(c, BINS[i])]["n"]:,})</title></circle>')
         if p:
-            i, v = p[-1]; s.append(f'<text x="{X(i)+7:.1f}" y="{Y(v)+4:.1f}" class="lbl" fill="{COL[c]}">{e(NAME[c].split(",")[0])}</text>')
+            i, v = p[-1]; dy = -6 if c.startswith("vietnam") else 14  # keep the two end labels off each other
+            s.append(f'<text x="{X(i)+7:.1f}" y="{Y(v)+dy:.1f}" class="lbl" fill="{COL[c]}">{e(NAME[c].split(",")[0])}</text>')
     s.append("</svg>")
     return "".join(s)
 
