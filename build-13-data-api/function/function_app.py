@@ -15,6 +15,9 @@ import azure.durable_functions as df
 import azure.functions as func
 
 app = df.DFApp(http_auth_level=func.AuthLevel.FUNCTION)
+
+from bp_ipums import bp as ipums_bp  # Build #15: IPUMS → Blob → ADX (one app per Flex plan; plan creates throttled)
+app.register_functions(ipums_bp)
 VERSION = "1.0.0"
 SOURCE_NOTE = "Facilities: VA VAST extract 2018-09-29 via HRSA; veterans: ACS 5-year 2023 B21001; county origins: 2020 Census centers of population. Straight-line miles."
 

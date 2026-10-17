@@ -1,0 +1,5 @@
+// R1 — unemployment and participation by war, cohort kind and years-out bin (separation clock), 18-64, with baseline non-veterans in the same years
+// R2 — same by survey year (era clock included) for the time-series panels
+// R3 — disability: share with a service-connected disability and share rated 50%+ (1995+ for ratings)
+// R4 — sample sizes by year and cohort (the honesty table)
+// Each query below is run by adx_results.py and written to results.json under its key.

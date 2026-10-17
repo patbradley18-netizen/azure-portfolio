@@ -1,0 +1,31 @@
+// Build #15 — named functions in database vets. Every recode lives here, never inline in a result query (SPEC §5 rule 8).
+.create-or-alter function with (docstring="Supplement respondents 18-64 with cohort, clock and outcome flags (SPEC §2-§4)", folder="b15") vet_base() {
+    cps_raw
+    | where VTSUPPWT > 0 and AGE between (18 .. 64)
+    | extend cohort = case(
+        VVIETNAM == 2, "vietnam_theater",
+        VIRAQ == 1 or VAFGHAN == 1, "gwot_theater",
+        VWHEN == 4, "vietnam_era",
+        VWHEN == 1, "gwot_era",
+        VETSTAT == 1, "nonvet",
+        YEAR < 1991 and VVIETNAM != 2, "all_other",   // 1985/1987 have no VETSTAT: baseline = everyone not in the cohort
+        "other_vet")
+    | extend war = case(cohort startswith "vietnam", "vietnam", cohort startswith "gwot", "gwot", "")
+    | extend sep_year = iff(VLASTSERVE between (1900 .. 2100), VLASTSERVE, int(null))
+    | extend years_out_sep = YEAR - sep_year
+    | extend years_out_era = case(war == "vietnam", YEAR - 1975, war == "gwot", YEAR - 2021, int(null))
+    | extend clock = iff(isnotnull(years_out_sep), "separation", iff(YEAR < 1991 or isnull(sep_year), "era", ""))
+    | extend years_out = iff(clock == "separation", years_out_sep, years_out_era)
+    | extend bin = case(years_out < 0, "before_end", years_out <= 4, "00-04", years_out <= 9, "05-09", years_out <= 15, "10-15", years_out <= 22, "16-22", years_out <= 30, "23-30", "31+")
+    | extend inlf = LABFORCE == 2, unemp = EMPSTAT in (20, 21, 22), employed = EMPSTAT in (10, 12)
+    | extend disabled = VDISABLE == 2, rated50 = VDISRATE in (39, 40, 41, 42, 43, 44, 45, 46, 47, 56), disabled_known = VDISABLE in (1, 2), rate_known = VDISRATE between (10 .. 56)
+    | extend male = SEX == 1, bottom_coded = YEAR >= 2021 and VLASTSERVE == 1965
+    | project YEAR, cohort, war, clock, years_out, bin, w = VTSUPPWT, inlf, unemp, employed, disabled, rated50, disabled_known, rate_known, male, bottom_coded, AGE
+}
+
+.create-or-alter function with (docstring="Weighted share with approximate SE (effective n = (sum w)^2 / sum w^2)", folder="b15") wshare(T:(w:real, flag:bool)) {
+    T | summarize n = count(), sumw = sum(w), sumw2 = sum(w * w), num = sumif(w, flag)
+      | extend share = num / sumw, n_eff = sumw * sumw / sumw2
+      | extend se = sqrt(share * (1 - share) / n_eff)
+      | project n, n_eff, share, se
+}

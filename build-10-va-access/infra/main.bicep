@@ -361,3 +361,39 @@ resource loader 'Microsoft.ContainerInstance/containerGroups@2023-05-01' = {
 }
 
 output staticSiteHint string = 'Static website on ${storage.name} is enabled on the data plane (az storage blob service-properties update --static-website), not in ARM.'
+
+// ---------------- Build #15: two wars, matched years ----------------
+// The Azure Data Explorer FREE cluster is not an ARM resource (it belongs to the signed-in account, not the subscription), so it is not
+// templated: cluster `azportfolio` (https://kvc-1267rvs0jur9k7ncmj.southcentralus.kusto.windows.net), database `vets`, table `cps_raw`,
+// principals: funcB13's identity as Ingestor + Viewer (`.add database vets ingestors ('aadapp=<clientId>;<tenantId>')`).
+// The extract pipeline runs inside funcB13 (one app per Flex plan; plan creates were throttled on 2026-10-17).
+param ipumsSecretName string = 'ipums-api-key'
+param adxClusterUri string = 'https://kvc-1267rvs0jur9k7ncmj.southcentralus.kusto.windows.net'
+
+resource b15Settings 'Microsoft.Web/sites/config@2024-04-01' = {
+  parent: funcB13
+  name: 'appsettings'
+  properties: {
+    IPUMS_API_KEY: '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=${ipumsSecretName})'
+    ADX_CLUSTER_URI: adxClusterUri
+    ADX_INGEST_URI: replace(adxClusterUri, 'https://', 'https://ingest-')
+    ADX_DATABASE: 'vets'
+    ADX_TABLE: 'cps_raw'
+    STORAGE_ACCOUNT_URL: storage.properties.primaryEndpoints.blob
+    IPUMS_CONTAINER: 'ipums'
+  }
+}
+
+resource ipumsContainer 'Microsoft.Storage/storageAccounts/blobServices/containers@2023-05-01' = {
+  name: '${storage.name}/default/ipums'
+}
+
+resource b13KvSecretsUser 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  name: guid(keyVault.id, funcB13.id, 'kv-secrets-user')
+  scope: keyVault
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '4633458b-17de-408a-b874-0445c86b69e6') // Key Vault Secrets User
+    principalId: funcB13.identity.principalId
+    principalType: 'ServicePrincipal'
+  }
+}

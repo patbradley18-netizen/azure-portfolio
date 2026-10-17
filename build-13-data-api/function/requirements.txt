@@ -1,3 +1,7 @@
 azure-functions
 azure-functions-durable
 azure-identity
+azure-storage-blob
+azure-kusto-data
+azure-kusto-ingest
+requests
