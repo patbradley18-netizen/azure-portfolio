@@ -29,6 +29,7 @@ QUEUE_URL = os.environ["QUEUE_ACCOUNT_URL"]
 SQL_SERVER = os.environ["SQL_SERVER_NAME"]
 SQL_DB = os.environ["SQL_DATABASE_NAME"]
 MAX_DEQUEUE = int(os.environ.get("MAX_DEQUEUE", "5"))
+VISIBILITY_S = int(os.environ.get("VISIBILITY_S", "300"))  # how long a failed message hides before it comes back with dequeue_count + 1
 RUN_BY = os.environ.get("RUN_BY", "caj-azportfolio-b14")
 CONTRACTS = {p.stem: yaml.safe_load(p.read_text(encoding="utf-8")) for p in (Path(__file__).parent / "contracts").glob("*.yaml")}
 UNITS = {"B25064_001E": "USD/month", "B25077_001E": "USD", "B25088_002E": "USD/month", "B19013_001E": "USD/year",
@@ -100,7 +101,7 @@ def main():
     bsc = BlobServiceClient(BLOB_URL, credential=cred)
     conn = sql_connect(); cur = conn.cursor()
     handled = 0
-    for msg in q.receive_messages(messages_per_page=8, visibility_timeout=300, max_messages=64):
+    for msg in q.receive_messages(messages_per_page=8, visibility_timeout=VISIBILITY_S, max_messages=64):
         handled += 1
         body = json.loads(msg.content)
         name, sha = body["file_name"], body["sha256"]
