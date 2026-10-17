@@ -353,7 +353,7 @@ resource loader 'Microsoft.ContainerInstance/containerGroups@2023-05-01' = {
           { name: 'SQL_DATABASE_NAME', value: sqlDbName }
           { name: 'RUN_BY', value: 'aci-azportfolio-b14' }
           { name: 'MAX_DEQUEUE', value: '5' }
-          { name: 'VISIBILITY_S', value: '300' }
+          { name: 'VISIBILITY_S', value: '30' } // 30 s: a failed message returns fast; 5 tries in ~3 min (code default 300)
         ]
       }
     } ]

@@ -65,6 +65,9 @@ inbox/ (BlobCreated) ─► Event Grid ─► validator Function ─┬─► in
 bash setup.sh aci-azportfolio-b14        # one-time: ledger table, validator user, loader user (SQL token by env)
 python make_zip.py data/b14v.zip ...     # validator zip with sane paths and modes, then config-zip --build-remote true
 # Event Grid subscription and ACI: see the Build Log for the exact az rest / az container create commands
+# Knobs on the container group: MAX_DEQUEUE=5 (poison after the fifth failure) and VISIBILITY_S=30 (a failed message hides 30 s, then
+# returns with dequeue_count + 1; the code's default is 300). Changing an env var recreates the group = a new managed identity =
+# re-run sql_setup.py for the loader user and re-grant the two storage roles. Left at 30 on purpose at close.
 powershell -File snapshot.ps1            # facts for the page -> data/ops_snapshot.json
 python build_findings.py
 ```
