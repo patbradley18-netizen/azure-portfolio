@@ -1,0 +1,24 @@
+// Build #17 — era base over the ASEC person table. Recodes verified against the extract #5 codebook.
+// VETLAST: 04 WWII, 06 Korea, 08 Vietnam era, 10 May75–Jul90, 11 Aug90–Aug01, 12 Sep01+; 01 no service; 02/03/05/07/09 other.
+// EDUC: 2–71 less than HS (code 72 '12th grade, diploma unclear' is the pre-1992 graduate code → HS); 73 HS; 74–110 some college; 111–998 BA+.
+// HISPAN not asked before 1971 (codes 901/902): hisp_den counts only rows where it was asked; white_w counts RACE 100 not known-Hispanic.
+// VETSTAT asked of men only before 1988: female shares are computed in the queries over 1988+ only.
+// CITIZEN: 1–3 born citizen, 4 naturalized, 5 non-citizen, 9 NIU. NATIVITY: 1 both parents native, 2–4 one/both parents foreign, 5 foreign born, 0 unknown.
+.create async ifnotexists materialized-view with (backfill=true) era_base_mv on table asec_person {
+    asec_person
+    | where ASECWT > 0 and AGE >= 18
+    | extend era = case(VETSTAT == 1, "civilian",
+                        VETLAST == 12, "post911", VETLAST == 11, "gulfwar1", VETLAST == 10, "era7590", VETLAST == 8, "vietnam", VETLAST == 6, "korea", VETLAST == 4, "wwii",
+                        VETSTAT == 2, "other_vet", "")
+    | where era != ""
+    | extend ageband = case(AGE <= 34, "18-34", AGE <= 49, "35-49", AGE <= 64, "50-64", "65+")
+    | extend multi_era = VET2 between (1 .. 9)
+    | summarize w = sum(ASECWT), n = count(), sumw2 = sum(ASECWT * ASECWT),
+                female_w = sumif(ASECWT, SEX == 2), female_den_w = sumif(ASECWT, YEAR >= 1988),
+                hisp_w = sumif(ASECWT, HISPAN between (100 .. 612)), hisp_den_w = sumif(ASECWT, HISPAN < 900), white_w = sumif(ASECWT, RACE == 100 and not(HISPAN between (100 .. 612))), black_w = sumif(ASECWT, RACE == 200 and not(HISPAN between (100 .. 612))), race_w = sumif(ASECWT, RACE < 900),
+                born_w = sumif(ASECWT, CITIZEN between (1 .. 3)), natur_w = sumif(ASECWT, CITIZEN == 4), noncit_w = sumif(ASECWT, CITIZEN == 5), cit_w = sumif(ASECWT, CITIZEN between (1 .. 5)),
+                foreign_w = sumif(ASECWT, NATIVITY == 5), secondgen_w = sumif(ASECWT, NATIVITY between (2 .. 4)), nativepar_w = sumif(ASECWT, NATIVITY == 1), nat_w = sumif(ASECWT, NATIVITY between (1 .. 5)),
+                lt_hs_w = sumif(ASECWT, EDUC between (2 .. 71)), hs_w = sumif(ASECWT, EDUC between (72 .. 73)), some_w = sumif(ASECWT, EDUC between (74 .. 110)), ba_w = sumif(ASECWT, EDUC between (111 .. 998)), educ_w = sumif(ASECWT, EDUC between (2 .. 998)),
+                multi_w = sumif(ASECWT, VET2 between (1 .. 9))
+      by YEAR = toint(YEAR), era, ageband
+}
