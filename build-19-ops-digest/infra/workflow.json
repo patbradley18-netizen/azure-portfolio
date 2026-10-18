@@ -1,0 +1,455 @@
+{
+  "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "workspaceResourceId": {
+      "type": "String"
+    },
+    "subscriptionId": {
+      "type": "String"
+    },
+    "sqlDbId": {
+      "type": "String"
+    },
+    "actionGroupId": {
+      "type": "String"
+    },
+    "storageAccount": {
+      "type": "String"
+    },
+    "acsEndpoint": {
+      "type": "String"
+    },
+    "senderAddress": {
+      "type": "String"
+    },
+    "repo": {
+      "type": "String"
+    },
+    "adxExpiry": {
+      "type": "String"
+    },
+    "budgetUsd": {
+      "type": "Int"
+    },
+    "sqlFreeLimit": {
+      "type": "Int"
+    }
+  },
+  "triggers": {
+    "Weekly": {
+      "type": "Recurrence",
+      "recurrence": {
+        "frequency": "Week",
+        "interval": 1,
+        "timeZone": "UTC",
+        "schedule": {
+          "weekDays": [
+            "Monday"
+          ],
+          "hours": [
+            13
+          ],
+          "minutes": [
+            0
+          ]
+        },
+        "startTime": "2026-10-19T13:00:00Z"
+      }
+    }
+  },
+  "actions": {
+    "Get_ops_email": {
+      "type": "Http",
+      "runAfter": {},
+      "inputs": {
+        "method": "GET",
+        "uri": "https://management.azure.com@{parameters('actionGroupId')}?api-version=2023-01-01",
+        "authentication": {
+          "type": "ManagedServiceIdentity",
+          "audience": "https://management.azure.com/"
+        }
+      },
+      "runtimeConfiguration": {
+        "secureData": {
+          "properties": [
+            "inputs",
+            "outputs"
+          ]
+        }
+      }
+    },
+    "Query_functions": {
+      "type": "Http",
+      "runAfter": {},
+      "inputs": {
+        "method": "POST",
+        "uri": "https://management.azure.com@{parameters('workspaceResourceId')}/api/query?api-version=2020-08-01",
+        "body": {
+          "query": "AppRequests | where TimeGenerated > ago(7d) | summarize runs = sum(ItemCount), failures = sumif(ItemCount, Success == false) by app = AppRoleName | summarize runs = sum(runs), failures = sum(failures), apps = make_list(bag_pack('app', app, 'runs', runs, 'failures', failures)) | project runs = coalesce(runs, 0), failures = coalesce(failures, 0), apps"
+        },
+        "authentication": {
+          "type": "ManagedServiceIdentity",
+          "audience": "https://management.azure.com/"
+        }
+      }
+    },
+    "Get_sql_metric": {
+      "type": "Http",
+      "runAfter": {},
+      "inputs": {
+        "method": "GET",
+        "uri": "https://management.azure.com@{parameters('sqlDbId')}/providers/Microsoft.Insights/metrics?api-version=2023-10-01&metricnames=free_amount_consumed&aggregation=Maximum&interval=PT1H&timespan=@{encodeUriComponent(concat(addDays(utcNow(), -1), '/', utcNow()))}",
+        "authentication": {
+          "type": "ManagedServiceIdentity",
+          "audience": "https://management.azure.com/"
+        }
+      }
+    },
+    "Get_cost": {
+      "type": "Http",
+      "runAfter": {},
+      "inputs": {
+        "method": "POST",
+        "uri": "https://management.azure.com/subscriptions/@{parameters('subscriptionId')}/providers/Microsoft.CostManagement/query?api-version=2023-03-01",
+        "body": {
+          "type": "ActualCost",
+          "timeframe": "MonthToDate",
+          "dataset": {
+            "granularity": "None",
+            "aggregation": {
+              "totalCost": {
+                "name": "Cost",
+                "function": "Sum"
+              }
+            }
+          }
+        },
+        "authentication": {
+          "type": "ManagedServiceIdentity",
+          "audience": "https://management.azure.com/"
+        }
+      }
+    },
+    "List_quarantine": {
+      "type": "Http",
+      "runAfter": {},
+      "inputs": {
+        "method": "GET",
+        "uri": "https://@{parameters('storageAccount')}.blob.core.windows.net/quarantine?restype=container&comp=list",
+        "headers": {
+          "x-ms-version": "2023-11-03"
+        },
+        "authentication": {
+          "type": "ManagedServiceIdentity",
+          "audience": "https://storage.azure.com/"
+        }
+      }
+    },
+    "List_deadletter": {
+      "type": "Http",
+      "runAfter": {},
+      "inputs": {
+        "method": "GET",
+        "uri": "https://@{parameters('storageAccount')}.blob.core.windows.net/deadletter?restype=container&comp=list",
+        "headers": {
+          "x-ms-version": "2023-11-03"
+        },
+        "authentication": {
+          "type": "ManagedServiceIdentity",
+          "audience": "https://storage.azure.com/"
+        }
+      }
+    },
+    "Get_poison": {
+      "type": "Http",
+      "runAfter": {},
+      "inputs": {
+        "method": "GET",
+        "uri": "https://@{parameters('storageAccount')}.queue.core.windows.net/ingest-load-poison?comp=metadata",
+        "headers": {
+          "x-ms-version": "2023-11-03"
+        },
+        "authentication": {
+          "type": "ManagedServiceIdentity",
+          "audience": "https://storage.azure.com/"
+        }
+      }
+    },
+    "Get_github": {
+      "type": "Http",
+      "runAfter": {},
+      "inputs": {
+        "method": "GET",
+        "uri": "https://api.github.com/repos/@{parameters('repo')}/actions/runs?per_page=50",
+        "headers": {
+          "User-Agent": "azportfolio-digest",
+          "Accept": "application/vnd.github+json"
+        }
+      }
+    },
+    "Get_previous": {
+      "type": "Http",
+      "runAfter": {},
+      "inputs": {
+        "method": "GET",
+        "uri": "https://@{parameters('storageAccount')}.blob.core.windows.net/opsdigest/latest.json",
+        "headers": {
+          "x-ms-version": "2023-11-03"
+        },
+        "authentication": {
+          "type": "ManagedServiceIdentity",
+          "audience": "https://storage.azure.com/"
+        }
+      }
+    },
+    "Week_runs": {
+      "type": "Query",
+      "runAfter": {
+        "Get_github": [
+          "Succeeded",
+          "Failed",
+          "TimedOut"
+        ]
+      },
+      "inputs": {
+        "from": "@coalesce(body('Get_github')?['workflow_runs'], createArray())",
+        "where": "@greater(item()?['created_at'], addDays(utcNow(), -7, 'yyyy-MM-ddTHH:mm:ssZ'))"
+      }
+    },
+    "Week_failed": {
+      "type": "Query",
+      "runAfter": {
+        "Week_runs": [
+          "Succeeded"
+        ]
+      },
+      "inputs": {
+        "from": "@body('Week_runs')",
+        "where": "@equals(item()?['conclusion'], 'failure')"
+      }
+    },
+    "Sql_points": {
+      "type": "Query",
+      "runAfter": {
+        "Get_sql_metric": [
+          "Succeeded",
+          "Failed",
+          "TimedOut"
+        ]
+      },
+      "inputs": {
+        "from": "@coalesce(body('Get_sql_metric')?['value']?[0]?['timeseries']?[0]?['data'], createArray())",
+        "where": "@not(equals(item()?['maximum'], null))"
+      }
+    },
+    "Metrics": {
+      "type": "Compose",
+      "runAfter": {
+        "Query_functions": [
+          "Succeeded",
+          "Failed",
+          "TimedOut"
+        ],
+        "Get_cost": [
+          "Succeeded",
+          "Failed",
+          "TimedOut"
+        ],
+        "List_quarantine": [
+          "Succeeded",
+          "Failed",
+          "TimedOut"
+        ],
+        "List_deadletter": [
+          "Succeeded",
+          "Failed",
+          "TimedOut"
+        ],
+        "Get_poison": [
+          "Succeeded",
+          "Failed",
+          "TimedOut"
+        ],
+        "Get_previous": [
+          "Succeeded",
+          "Failed",
+          "TimedOut"
+        ],
+        "Sql_points": [
+          "Succeeded",
+          "Failed",
+          "Skipped"
+        ],
+        "Failed_names": [
+          "Succeeded",
+          "Failed",
+          "Skipped"
+        ]
+      },
+      "inputs": {
+        "functions_runs": "@body('Query_functions')?['tables']?[0]?['rows']?[0]?[0]",
+        "functions_failures": "@body('Query_functions')?['tables']?[0]?['rows']?[0]?[1]",
+        "functions_apps": "@body('Query_functions')?['tables']?[0]?['rows']?[0]?[2]",
+        "sql_consumed": "@if(empty(body('Sql_points')), null, last(body('Sql_points'))?['maximum'])",
+        "cost_mtd_usd": "@body('Get_cost')?['properties']?['rows']?[0]?[0]",
+        "quarantined_files": "@if(equals(outputs('List_quarantine')?['statusCode'], 200), xpath(xml(body('List_quarantine')), 'count(//Blob[contains(Name, \".reason.txt\")])'), null)",
+        "deadletter_blobs": "@if(equals(outputs('List_deadletter')?['statusCode'], 200), xpath(xml(body('List_deadletter')), 'count(//Blob)'), null)",
+        "poison_messages": "@if(equals(outputs('Get_poison')?['statusCode'], 200), int(outputs('Get_poison')?['headers']?['x-ms-approximate-messages-count']), null)",
+        "github_runs_7d": "@if(equals(actions('Get_github')?['status'], 'Succeeded'), length(body('Week_runs')), null)",
+        "github_failed_7d": "@if(equals(actions('Get_github')?['status'], 'Succeeded'), length(body('Week_failed')), null)",
+        "github_failed_names": "@if(equals(actions('Get_github')?['status'], 'Succeeded'), join(union(body('Failed_names'), body('Failed_names')), ', '), null)",
+        "adx_days_left": "@div(sub(ticks(parameters('adxExpiry')), ticks(utcNow())), 864000000000)",
+        "prev": "@if(equals(outputs('Get_previous')?['statusCode'], 200), body('Get_previous')?['metrics'], null)"
+      }
+    },
+    "Status": {
+      "type": "Compose",
+      "runAfter": {
+        "Metrics": [
+          "Succeeded"
+        ]
+      },
+      "inputs": {
+        "functions": "@if(equals(outputs('Metrics')?['functions_runs'], null), 'unknown', if(greater(outputs('Metrics')?['functions_failures'], 0), 'red', if(equals(outputs('Metrics')?['functions_runs'], 0), 'amber', 'green')))",
+        "sql": "@if(equals(outputs('Metrics')?['sql_consumed'], null), 'unknown', if(greaterOrEquals(outputs('Metrics')?['sql_consumed'], mul(parameters('sqlFreeLimit'), 0.8)), 'red', if(greaterOrEquals(outputs('Metrics')?['sql_consumed'], mul(parameters('sqlFreeLimit'), 0.6)), 'amber', 'green')))",
+        "cost": "@if(equals(outputs('Metrics')?['cost_mtd_usd'], null), 'unknown', if(greaterOrEquals(outputs('Metrics')?['cost_mtd_usd'], mul(parameters('budgetUsd'), 0.8)), 'red', if(greaterOrEquals(outputs('Metrics')?['cost_mtd_usd'], mul(parameters('budgetUsd'), 0.5)), 'amber', 'green')))",
+        "ingest": "@if(or(equals(outputs('Metrics')?['quarantined_files'], null), equals(outputs('Metrics')?['poison_messages'], null), equals(outputs('Metrics')?['deadletter_blobs'], null)), 'unknown', if(or(greater(outputs('Metrics')?['poison_messages'], coalesce(outputs('Metrics')?['prev']?['poison_messages'], outputs('Metrics')?['poison_messages'])), greater(outputs('Metrics')?['deadletter_blobs'], coalesce(outputs('Metrics')?['prev']?['deadletter_blobs'], outputs('Metrics')?['deadletter_blobs']))), 'red', if(greater(outputs('Metrics')?['quarantined_files'], coalesce(outputs('Metrics')?['prev']?['quarantined_files'], outputs('Metrics')?['quarantined_files'])), 'amber', 'green')))",
+        "github": "@if(equals(outputs('Metrics')?['github_runs_7d'], null), 'unknown', if(greater(outputs('Metrics')?['github_failed_7d'], 0), 'red', 'green'))",
+        "adx": "@if(less(outputs('Metrics')?['adx_days_left'], 14), 'red', if(less(outputs('Metrics')?['adx_days_left'], 60), 'amber', 'green'))"
+      }
+    },
+    "Digest": {
+      "type": "Compose",
+      "runAfter": {
+        "Status": [
+          "Succeeded"
+        ]
+      },
+      "inputs": {
+        "generated_at": "@{utcNow()}",
+        "run_id": "@{workflow()?['run']?['name']}",
+        "overall": "@if(contains(string(outputs('Status')), 'red'), 'RED', if(or(contains(string(outputs('Status')), 'amber'), contains(string(outputs('Status')), 'unknown')), 'AMBER', 'GREEN'))",
+        "status": "@outputs('Status')",
+        "metrics": "@removeProperty(outputs('Metrics'), 'prev')",
+        "thresholds": {
+          "budget_usd": "@parameters('budgetUsd')",
+          "sql_free_limit": "@parameters('sqlFreeLimit')",
+          "sql_amber_pct": 60,
+          "sql_red_pct": 80,
+          "cost_amber_pct": 50,
+          "cost_red_pct": 80,
+          "adx_amber_days": 60,
+          "adx_red_days": 14
+        }
+      }
+    },
+    "Save_dated": {
+      "type": "Http",
+      "runAfter": {
+        "Digest": [
+          "Succeeded"
+        ]
+      },
+      "inputs": {
+        "method": "PUT",
+        "uri": "https://@{parameters('storageAccount')}.blob.core.windows.net/opsdigest/digest/@{formatDateTime(utcNow(), 'yyyy-MM-dd')}.json",
+        "headers": {
+          "x-ms-version": "2023-11-03",
+          "x-ms-blob-type": "BlockBlob",
+          "Content-Type": "application/json"
+        },
+        "body": "@outputs('Digest')",
+        "authentication": {
+          "type": "ManagedServiceIdentity",
+          "audience": "https://storage.azure.com/"
+        }
+      }
+    },
+    "Save_latest": {
+      "type": "Http",
+      "runAfter": {
+        "Digest": [
+          "Succeeded"
+        ]
+      },
+      "inputs": {
+        "method": "PUT",
+        "uri": "https://@{parameters('storageAccount')}.blob.core.windows.net/opsdigest/latest.json",
+        "headers": {
+          "x-ms-version": "2023-11-03",
+          "x-ms-blob-type": "BlockBlob",
+          "Content-Type": "application/json"
+        },
+        "body": "@outputs('Digest')",
+        "authentication": {
+          "type": "ManagedServiceIdentity",
+          "audience": "https://storage.azure.com/"
+        }
+      }
+    },
+    "Email_html": {
+      "type": "Compose",
+      "runAfter": {
+        "Digest": [
+          "Succeeded"
+        ]
+      },
+      "inputs": "<div style=\"font-family:Segoe UI,Arial,sans-serif;font-size:14px;color:#1f2328\"><h2 style=\"margin:0 0 4px\">Azure portfolio — weekly digest: @{outputs('Digest')?['overall']}</h2><p style=\"margin:0 0 12px;color:#57606a\">Week ending @{formatDateTime(utcNow(), 'ddd d MMM yyyy')} · run @{workflow()?['run']?['name']}</p><table cellpadding=\"6\" style=\"border-collapse:collapse;border:1px solid #d0d7de\"><tr style=\"background:#f6f8fa\"><th align=\"left\">Check</th><th align=\"left\">Status</th><th align=\"left\">This week</th><th align=\"left\">Line</th></tr><tr><td>Function runs, 7 days</td><td><b>@{toUpper(outputs('Status')?['functions'])}</b></td><td>@{outputs('Metrics')?['functions_runs']} runs, @{outputs('Metrics')?['functions_failures']} failed</td><td>any failure = red; no runs = amber</td></tr><tr><td>SQL free limit (vCore-s this month)</td><td><b>@{toUpper(outputs('Status')?['sql'])}</b></td><td>@{outputs('Metrics')?['sql_consumed']} of @{parameters('sqlFreeLimit')}</td><td>60% amber, 80% red (the alert line)</td></tr><tr><td>Cost, month to date</td><td><b>@{toUpper(outputs('Status')?['cost'])}</b></td><td>$@{formatNumber(coalesce(outputs('Metrics')?['cost_mtd_usd'], 0), '0.00')}</td><td>$@{parameters('budgetUsd')} budget alert; 50% amber, 80% red</td></tr><tr><td>Ingestion gates</td><td><b>@{toUpper(outputs('Status')?['ingest'])}</b></td><td>@{outputs('Metrics')?['quarantined_files']} quarantined, @{outputs('Metrics')?['deadletter_blobs']} dead-lettered, @{outputs('Metrics')?['poison_messages']} poison</td><td>new poison or dead-letter = red; new quarantine = amber</td></tr><tr><td>GitHub Actions, 7 days</td><td><b>@{toUpper(outputs('Status')?['github'])}</b></td><td>@{outputs('Metrics')?['github_runs_7d']} runs, @{outputs('Metrics')?['github_failed_7d']} failed @{outputs('Metrics')?['github_failed_names']}</td><td>any failure = red</td></tr><tr><td>ADX free cluster</td><td><b>@{toUpper(outputs('Status')?['adx'])}</b></td><td>@{outputs('Metrics')?['adx_days_left']} days left</td><td>renew before @{parameters('adxExpiry')}; 60 d amber, 14 d red</td></tr></table><p style=\"color:#57606a;font-size:12px\">Sent by la-azportfolio-digest with its managed identity. UNKNOWN means a source did not answer; the digest still went out. History: opsdigest/digest/ in stazportfoliob1.</p></div>"
+    },
+    "Send_email": {
+      "type": "Http",
+      "runAfter": {
+        "Email_html": [
+          "Succeeded"
+        ],
+        "Get_ops_email": [
+          "Succeeded"
+        ]
+      },
+      "inputs": {
+        "method": "POST",
+        "uri": "@{parameters('acsEndpoint')}/emails:send?api-version=2023-03-31",
+        "body": {
+          "senderAddress": "@parameters('senderAddress')",
+          "content": {
+            "subject": "[@{outputs('Digest')?['overall']}] Azure portfolio weekly digest @{formatDateTime(utcNow(), 'yyyy-MM-dd')}",
+            "html": "@{outputs('Email_html')}"
+          },
+          "recipients": {
+            "to": [
+              {
+                "address": "@{body('Get_ops_email')?['properties']?['emailReceivers']?[0]?['emailAddress']}"
+              }
+            ]
+          }
+        },
+        "authentication": {
+          "type": "ManagedServiceIdentity",
+          "audience": "https://communication.azure.com"
+        }
+      },
+      "operationOptions": "DisableAsyncPattern",
+      "runtimeConfiguration": {
+        "secureData": {
+          "properties": [
+            "inputs"
+          ]
+        }
+      }
+    },
+    "Failed_names": {
+      "type": "Select",
+      "runAfter": {
+        "Week_failed": [
+          "Succeeded"
+        ]
+      },
+      "inputs": {
+        "from": "@body('Week_failed')",
+        "select": "@item()?['name']"
+      }
+    }
+  },
+  "outputs": {}
+}

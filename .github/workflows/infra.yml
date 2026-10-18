@@ -5,7 +5,7 @@ name: infra
 # the build #3 OIDC identity, granted Contributor + User Access Administrator on the group for this (role assignments need UAA).
 on:
   push:
-    paths: ['build-10-va-access/infra/**', 'build-18-infra-as-code/infra/**', '.github/workflows/infra.yml']
+    paths: ['build-10-va-access/infra/**', 'build-18-infra-as-code/infra/**', 'build-19-ops-digest/infra/**', '.github/workflows/infra.yml']
   workflow_dispatch:
     inputs:
       deploy:

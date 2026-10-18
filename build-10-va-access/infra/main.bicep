@@ -419,3 +419,11 @@ resource b13KvSecretsUser 'Microsoft.Authorization/roleAssignments@2022-04-01' =
     principalType: 'ServicePrincipal'
   }
 }
+
+// ---------------- Build #19: operations round two — the weekly digest ----------------
+// Logic App + ACS Email + digest history container + failure alerts + the Logic App's RG-scope roles.
+// Its two reads outside this group (Cost Management Reader on the subscription, Log Analytics Reader on the workspace)
+// are in build-19-ops-digest/infra/sub-roles.bicep and are deployed by the operator: this pipeline's identity is RG-scoped by design.
+module b19Digest '../../build-19-ops-digest/infra/digest.bicep' = {
+  name: 'b19-digest'
+}
