@@ -1,0 +1,308 @@
+[
+    {
+        "change":  "NoChange",
+        "type":  "service",
+        "name":  "apim-azportfolio-b13",
+        "paths":  ""
+    },
+    {
+        "change":  "Modify",
+        "type":  "roleAssignments",
+        "name":  "(guid name)",
+        "paths":  "properties.principalId, properties.principalType"
+    },
+    {
+        "change":  "NoChange",
+        "type":  "accounts",
+        "name":  "lang-azportfolio-b1",
+        "paths":  ""
+    },
+    {
+        "change":  "Modify",
+        "type":  "roleAssignments",
+        "name":  "(guid name)",
+        "paths":  "properties.principalId, properties.principalType"
+    },
+    {
+        "change":  "NoChange",
+        "type":  "communicationServices",
+        "name":  "acs-azportfolio",
+        "paths":  ""
+    },
+    {
+        "change":  "Modify",
+        "type":  "roleAssignments",
+        "name":  "(guid name)",
+        "paths":  "properties.principalId, properties.principalType"
+    },
+    {
+        "change":  "NoChange",
+        "type":  "emailServices",
+        "name":  "ecs-azportfolio",
+        "paths":  ""
+    },
+    {
+        "change":  "NoChange",
+        "type":  "domains",
+        "name":  "AzureManagedDomain",
+        "paths":  ""
+    },
+    {
+        "change":  "Ignore",
+        "type":  "containerGroups",
+        "name":  "aci-azportfolio-b14",
+        "paths":  ""
+    },
+    {
+        "change":  "NoChange",
+        "type":  "systemTopics",
+        "name":  "egst-stazportfoliob1",
+        "paths":  ""
+    },
+    {
+        "change":  "NoChange",
+        "type":  "eventSubscriptions",
+        "name":  "evs-inbox-to-validator",
+        "paths":  ""
+    },
+    {
+        "change":  "NoChange",
+        "type":  "actionGroups",
+        "name":  "ag-azportfolio-ops",
+        "paths":  ""
+    },
+    {
+        "change":  "Ignore",
+        "type":  "actiongroups",
+        "name":  "Application Insights Smart Detection",
+        "paths":  ""
+    },
+    {
+        "change":  "Modify",
+        "type":  "components",
+        "name":  "func-azportfolio-b1",
+        "paths":  "properties.Flow_Type, properties.Request_Source"
+    },
+    {
+        "change":  "Ignore",
+        "type":  "components",
+        "name":  "func-azportfolio-b13",
+        "paths":  ""
+    },
+    {
+        "change":  "Ignore",
+        "type":  "components",
+        "name":  "func-azportfolio-b14",
+        "paths":  ""
+    },
+    {
+        "change":  "Modify",
+        "type":  "components",
+        "name":  "func-azportfolio-b2",
+        "paths":  "properties.Flow_Type, properties.Request_Source"
+    },
+    {
+        "change":  "NoChange",
+        "type":  "metricAlerts",
+        "name":  "alert-digest-failed",
+        "paths":  ""
+    },
+    {
+        "change":  "NoChange",
+        "type":  "metricAlerts",
+        "name":  "alert-fn-failures-b1",
+        "paths":  ""
+    },
+    {
+        "change":  "NoChange",
+        "type":  "metricAlerts",
+        "name":  "alert-fn-failures-b13",
+        "paths":  ""
+    },
+    {
+        "change":  "NoChange",
+        "type":  "metricAlerts",
+        "name":  "alert-fn-failures-b14",
+        "paths":  ""
+    },
+    {
+        "change":  "NoChange",
+        "type":  "metricAlerts",
+        "name":  "alert-fn-failures-b2",
+        "paths":  ""
+    },
+    {
+        "change":  "NoChange",
+        "type":  "metricAlerts",
+        "name":  "alert-sql-free-limit",
+        "paths":  ""
+    },
+    {
+        "change":  "Ignore",
+        "type":  "workbooks",
+        "name":  "(guid name)",
+        "paths":  ""
+    },
+    {
+        "change":  "NoChange",
+        "type":  "vaults",
+        "name":  "kv-azportfolio-b2",
+        "paths":  ""
+    },
+    {
+        "change":  "Modify",
+        "type":  "roleAssignments",
+        "name":  "(guid name)",
+        "paths":  "properties.principalId, properties.principalType"
+    },
+    {
+        "change":  "Modify",
+        "type":  "roleAssignments",
+        "name":  "(guid name)",
+        "paths":  "properties.principalId, properties.principalType"
+    },
+    {
+        "change":  "Modify",
+        "type":  "workflows",
+        "name":  "la-azportfolio-digest",
+        "paths":  "properties.definition.actions.Metrics.inputs.github_failed_names, properties.definition.triggers.Weekly.evaluatedRecurrence, properties.parameters.acsEndpoint.value, properties.parameters.senderAddress.value"
+    },
+    {
+        "change":  "NoChange",
+        "type":  "userAssignedIdentities",
+        "name":  "id-github-azportfolio",
+        "paths":  ""
+    },
+    {
+        "change":  "NoChange",
+        "type":  "searchServices",
+        "name":  "srch-azportfolio-b1",
+        "paths":  ""
+    },
+    {
+        "change":  "NoChange",
+        "type":  "servers",
+        "name":  "sql-azportfolio-b1eu",
+        "paths":  "properties.version"
+    },
+    {
+        "change":  "NoChange",
+        "type":  "databases",
+        "name":  "aid",
+        "paths":  "properties.minCapacity, sku.capacity, sku.tier"
+    },
+    {
+        "change":  "Ignore",
+        "type":  "databases",
+        "name":  "master",
+        "paths":  ""
+    },
+    {
+        "change":  "NoChange",
+        "type":  "storageAccounts",
+        "name":  "stazportfoliob1",
+        "paths":  ""
+    },
+    {
+        "change":  "Modify",
+        "type":  "roleAssignments",
+        "name":  "(guid name)",
+        "paths":  "properties.principalId, properties.principalType"
+    },
+    {
+        "change":  "NoChange",
+        "type":  "containers",
+        "name":  "ipums",
+        "paths":  ""
+    },
+    {
+        "change":  "Modify",
+        "type":  "containers",
+        "name":  "opsdigest",
+        "paths":  "properties.defaultEncryptionScope, properties.denyEncryptionScopeOverride"
+    },
+    {
+        "change":  "Modify",
+        "type":  "roleAssignments",
+        "name":  "(guid name)",
+        "paths":  "properties.principalId, properties.principalType"
+    },
+    {
+        "change":  "Modify",
+        "type":  "roleAssignments",
+        "name":  "(guid name)",
+        "paths":  "properties.principalId, properties.principalType"
+    },
+    {
+        "change":  "Modify",
+        "type":  "roleAssignments",
+        "name":  "(guid name)",
+        "paths":  "properties.principalId, properties.principalType"
+    },
+    {
+        "change":  "Modify",
+        "type":  "roleAssignments",
+        "name":  "(guid name)",
+        "paths":  "properties.principalId, properties.principalType"
+    },
+    {
+        "change":  "Modify",
+        "type":  "roleAssignments",
+        "name":  "(guid name)",
+        "paths":  "properties.principalId, properties.principalType"
+    },
+    {
+        "change":  "NoChange",
+        "type":  "serverfarms",
+        "name":  "ASP-rgazportfoliob1-4497",
+        "paths":  "sku.tier"
+    },
+    {
+        "change":  "NoChange",
+        "type":  "serverfarms",
+        "name":  "ASP-rgazportfoliob1-845b",
+        "paths":  "sku.tier"
+    },
+    {
+        "change":  "Ignore",
+        "type":  "serverFarms",
+        "name":  "ASP-rgazportfoliob1-afb7",
+        "paths":  ""
+    },
+    {
+        "change":  "NoChange",
+        "type":  "serverfarms",
+        "name":  "ASP-rgazportfoliob1-d595",
+        "paths":  "sku.tier"
+    },
+    {
+        "change":  "Modify",
+        "type":  "sites",
+        "name":  "func-azportfolio-b1",
+        "paths":  "properties.siteConfig.localMySqlEnabled, properties.siteConfig.netFrameworkVersion"
+    },
+    {
+        "change":  "Modify",
+        "type":  "sites",
+        "name":  "func-azportfolio-b13",
+        "paths":  "properties.siteConfig.localMySqlEnabled, properties.siteConfig.netFrameworkVersion"
+    },
+    {
+        "change":  "Modify",
+        "type":  "config",
+        "name":  "appsettings",
+        "paths":  "properties"
+    },
+    {
+        "change":  "Modify",
+        "type":  "sites",
+        "name":  "func-azportfolio-b14",
+        "paths":  "properties.siteConfig.localMySqlEnabled, properties.siteConfig.netFrameworkVersion"
+    },
+    {
+        "change":  "Modify",
+        "type":  "sites",
+        "name":  "func-azportfolio-b2",
+        "paths":  "properties.siteConfig.localMySqlEnabled, properties.siteConfig.netFrameworkVersion"
+    }
+]

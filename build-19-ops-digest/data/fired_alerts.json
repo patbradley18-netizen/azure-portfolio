@@ -1,0 +1,12 @@
+[
+    {
+        "rule":  "alert-digest-failed",
+        "condition":  "Fired",
+        "fired":  "2026-10-18T00:25:32.9453034Z"
+    },
+    {
+        "rule":  "alert-sql-free-limit",
+        "condition":  "Resolved",
+        "fired":  "2026-10-17T03:20:55.6041962Z"
+    }
+]

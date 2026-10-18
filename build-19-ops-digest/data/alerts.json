@@ -1,0 +1,56 @@
+[
+    {
+        "name":  "alert-sql-free-limit",
+        "enabled":  true,
+        "severity":  2,
+        "window":  "PT1H",
+        "every":  "PT15M",
+        "metric":  "free_amount_consumed",
+        "threshold":  80000.0
+    },
+    {
+        "name":  "alert-fn-failures-b14",
+        "enabled":  true,
+        "severity":  2,
+        "window":  "PT1H",
+        "every":  "PT15M",
+        "metric":  "requests/failed",
+        "threshold":  0.0
+    },
+    {
+        "name":  "alert-fn-failures-b13",
+        "enabled":  true,
+        "severity":  2,
+        "window":  "PT1H",
+        "every":  "PT15M",
+        "metric":  "requests/failed",
+        "threshold":  0.0
+    },
+    {
+        "name":  "alert-fn-failures-b1",
+        "enabled":  true,
+        "severity":  2,
+        "window":  "PT1H",
+        "every":  "PT15M",
+        "metric":  "requests/failed",
+        "threshold":  0.0
+    },
+    {
+        "name":  "alert-fn-failures-b2",
+        "enabled":  true,
+        "severity":  2,
+        "window":  "PT1H",
+        "every":  "PT15M",
+        "metric":  "requests/failed",
+        "threshold":  0.0
+    },
+    {
+        "name":  "alert-digest-failed",
+        "enabled":  true,
+        "severity":  2,
+        "window":  "PT6H",
+        "every":  "PT1H",
+        "metric":  "RunsFailed",
+        "threshold":  0.0
+    }
+]

@@ -1,0 +1,292 @@
+[
+    {
+        "run":  "08584093229776302007197153428CU09",
+        "status":  "Succeeded",
+        "start":  "2026-10-18T00:38:27.8497064Z",
+        "end":  "2026-10-18T00:38:39.3745011Z",
+        "actions":  [
+                        {
+                            "name":  "Digest",
+                            "status":  "Succeeded",
+                            "code":  "OK"
+                        },
+                        {
+                            "name":  "Email_html",
+                            "status":  "Succeeded",
+                            "code":  "OK"
+                        },
+                        {
+                            "name":  "Failed_names",
+                            "status":  "Succeeded",
+                            "code":  "NotSpecified"
+                        },
+                        {
+                            "name":  "Get_cost",
+                            "status":  "Succeeded",
+                            "code":  "OK"
+                        },
+                        {
+                            "name":  "Get_github",
+                            "status":  "Succeeded",
+                            "code":  "OK"
+                        },
+                        {
+                            "name":  "Get_ops_email",
+                            "status":  "Succeeded",
+                            "code":  "OK"
+                        },
+                        {
+                            "name":  "Get_poison",
+                            "status":  "Succeeded",
+                            "code":  "OK"
+                        },
+                        {
+                            "name":  "Get_previous",
+                            "status":  "Failed",
+                            "code":  "NotFound"
+                        },
+                        {
+                            "name":  "Get_sql_metric",
+                            "status":  "Succeeded",
+                            "code":  "OK"
+                        },
+                        {
+                            "name":  "List_deadletter",
+                            "status":  "Succeeded",
+                            "code":  "OK"
+                        },
+                        {
+                            "name":  "List_quarantine",
+                            "status":  "Succeeded",
+                            "code":  "OK"
+                        },
+                        {
+                            "name":  "Metrics",
+                            "status":  "Succeeded",
+                            "code":  "OK"
+                        },
+                        {
+                            "name":  "Query_functions",
+                            "status":  "Succeeded",
+                            "code":  "OK"
+                        },
+                        {
+                            "name":  "Save_dated",
+                            "status":  "Succeeded",
+                            "code":  "Created"
+                        },
+                        {
+                            "name":  "Save_latest",
+                            "status":  "Succeeded",
+                            "code":  "Created"
+                        },
+                        {
+                            "name":  "Send_email",
+                            "status":  "Succeeded",
+                            "code":  "Accepted"
+                        },
+                        {
+                            "name":  "Sql_points",
+                            "status":  "Succeeded",
+                            "code":  "NotSpecified"
+                        },
+                        {
+                            "name":  "Status",
+                            "status":  "Succeeded",
+                            "code":  "OK"
+                        },
+                        {
+                            "name":  "Week_failed",
+                            "status":  "Succeeded",
+                            "code":  "NotSpecified"
+                        },
+                        {
+                            "name":  "Week_runs",
+                            "status":  "Succeeded",
+                            "code":  "NotSpecified"
+                        }
+                    ],
+        "digest":  {
+                       "generated_at":  "2026-10-18T00:38:38.3286697Z",
+                       "run_id":  "08584093229776302007197153428CU09",
+                       "overall":  "RED",
+                       "status":  {
+                                      "functions":  "red",
+                                      "sql":  "green",
+                                      "cost":  "green",
+                                      "ingest":  "green",
+                                      "github":  "red",
+                                      "adx":  "green"
+                                  },
+                       "metrics":  {
+                                       "functions_runs":  507,
+                                       "functions_failures":  21,
+                                       "functions_apps":  "[{\"app\":\"func-azportfolio-b13\",\"runs\":488,\"failures\":10},{\"app\":\"func-azportfolio-b14\",\"runs\":15,\"failures\":9},{\"app\":\"func-azportfolio-b1\",\"runs\":2,\"failures\":1},{\"app\":\"func-azportfolio-b2\",\"runs\":2,\"failures\":1}]",
+                                       "sql_consumed":  19343,
+                                       "cost_mtd_usd":  0.0700751826817847,
+                                       "quarantined_files":  3.0,
+                                       "deadletter_blobs":  6.0,
+                                       "poison_messages":  1,
+                                       "github_runs_7d":  44,
+                                       "github_failed_7d":  4,
+                                       "github_failed_names":  "Deploy site to Azure (Blob static website), Deploy site to Azure (Blob static website), Deploy site to Azure (Blob static website), Deploy site to Azure (Blob static website)",
+                                       "adx_days_left":  363
+                                   },
+                       "thresholds":  {
+                                          "budget_usd":  10,
+                                          "sql_free_limit":  100000,
+                                          "sql_amber_pct":  60,
+                                          "sql_red_pct":  80,
+                                          "cost_amber_pct":  50,
+                                          "cost_red_pct":  80,
+                                          "adx_amber_days":  60,
+                                          "adx_red_days":  14
+                                      }
+                   }
+    },
+    {
+        "run":  "08584093239403186102604822336CU13",
+        "status":  "Failed",
+        "start":  "2026-10-18T00:22:25.1616879Z",
+        "end":  "2026-10-18T00:22:27.3822344Z",
+        "actions":  [
+                        {
+                            "name":  "Digest",
+                            "status":  "Succeeded",
+                            "code":  "OK"
+                        },
+                        {
+                            "name":  "Email_html",
+                            "status":  "Succeeded",
+                            "code":  "OK"
+                        },
+                        {
+                            "name":  "Failed_names",
+                            "status":  "Succeeded",
+                            "code":  "NotSpecified"
+                        },
+                        {
+                            "name":  "Get_cost",
+                            "status":  "Failed",
+                            "code":  "Forbidden"
+                        },
+                        {
+                            "name":  "Get_github",
+                            "status":  "Succeeded",
+                            "code":  "OK"
+                        },
+                        {
+                            "name":  "Get_ops_email",
+                            "status":  "Failed",
+                            "code":  "Forbidden"
+                        },
+                        {
+                            "name":  "Get_poison",
+                            "status":  "Failed",
+                            "code":  "Forbidden"
+                        },
+                        {
+                            "name":  "Get_previous",
+                            "status":  "Failed",
+                            "code":  "Forbidden"
+                        },
+                        {
+                            "name":  "Get_sql_metric",
+                            "status":  "Failed",
+                            "code":  "Forbidden"
+                        },
+                        {
+                            "name":  "List_deadletter",
+                            "status":  "Failed",
+                            "code":  "Forbidden"
+                        },
+                        {
+                            "name":  "List_quarantine",
+                            "status":  "Failed",
+                            "code":  "Forbidden"
+                        },
+                        {
+                            "name":  "Metrics",
+                            "status":  "Succeeded",
+                            "code":  "OK"
+                        },
+                        {
+                            "name":  "Query_functions",
+                            "status":  "Failed",
+                            "code":  "Forbidden"
+                        },
+                        {
+                            "name":  "Save_dated",
+                            "status":  "Failed",
+                            "code":  "Forbidden"
+                        },
+                        {
+                            "name":  "Save_latest",
+                            "status":  "Failed",
+                            "code":  "Forbidden"
+                        },
+                        {
+                            "name":  "Send_email",
+                            "status":  "Skipped",
+                            "code":  "ActionSkipped"
+                        },
+                        {
+                            "name":  "Sql_points",
+                            "status":  "Failed",
+                            "code":  "BadRequest"
+                        },
+                        {
+                            "name":  "Status",
+                            "status":  "Succeeded",
+                            "code":  "OK"
+                        },
+                        {
+                            "name":  "Week_failed",
+                            "status":  "Succeeded",
+                            "code":  "NotSpecified"
+                        },
+                        {
+                            "name":  "Week_runs",
+                            "status":  "Succeeded",
+                            "code":  "NotSpecified"
+                        }
+                    ],
+        "digest":  {
+                       "generated_at":  "2026-10-18T00:22:27.1613664Z",
+                       "run_id":  "08584093239403186102604822336CU13",
+                       "overall":  "RED",
+                       "status":  {
+                                      "functions":  "unknown",
+                                      "sql":  "unknown",
+                                      "cost":  "unknown",
+                                      "ingest":  "unknown",
+                                      "github":  "red",
+                                      "adx":  "green"
+                                  },
+                       "metrics":  {
+                                       "functions_runs":  null,
+                                       "functions_failures":  null,
+                                       "functions_apps":  null,
+                                       "sql_consumed":  null,
+                                       "cost_mtd_usd":  null,
+                                       "quarantined_files":  null,
+                                       "deadletter_blobs":  null,
+                                       "poison_messages":  null,
+                                       "github_runs_7d":  44,
+                                       "github_failed_7d":  4,
+                                       "github_failed_names":  "Deploy site to Azure (Blob static website), Deploy site to Azure (Blob static website), Deploy site to Azure (Blob static website), Deploy site to Azure (Blob static website)",
+                                       "adx_days_left":  363
+                                   },
+                       "thresholds":  {
+                                          "budget_usd":  10,
+                                          "sql_free_limit":  100000,
+                                          "sql_amber_pct":  60,
+                                          "sql_red_pct":  80,
+                                          "cost_amber_pct":  50,
+                                          "cost_red_pct":  80,
+                                          "adx_amber_days":  60,
+                                          "adx_red_days":  14
+                                      }
+                   }
+    }
+]

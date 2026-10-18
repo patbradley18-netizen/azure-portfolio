@@ -1,0 +1,87 @@
+{
+    "Columns":  [
+                    {
+                        "ColumnName":  "app",
+                        "ColumnType":  "string",
+                        "DataType":  "String"
+                    },
+                    {
+                        "ColumnName":  "fn",
+                        "ColumnType":  "string",
+                        "DataType":  "String"
+                    },
+                    {
+                        "ColumnName":  "code",
+                        "ColumnType":  "string",
+                        "DataType":  "String"
+                    },
+                    {
+                        "ColumnName":  "n",
+                        "ColumnType":  "long",
+                        "DataType":  "Int64"
+                    },
+                    {
+                        "ColumnName":  "t0",
+                        "ColumnType":  "datetime",
+                        "DataType":  "DateTime"
+                    },
+                    {
+                        "ColumnName":  "t1",
+                        "ColumnType":  "datetime",
+                        "DataType":  "DateTime"
+                    },
+                    {
+                        "ColumnName":  "err",
+                        "ColumnType":  "string",
+                        "DataType":  "String"
+                    }
+                ],
+    "Rows":  [
+                 [
+                     "func-azportfolio-b1",
+                     "weekly_detect",
+                     "0",
+                     1,
+                     "2026-10-14T21:18:35.2811425Z",
+                     "2026-10-14T21:18:35.2811425Z",
+                     "Microsoft.Data.SqlClient.SqlException"
+                 ],
+                 [
+                     "func-azportfolio-b13",
+                     "county_access",
+                     "500",
+                     10,
+                     "2026-10-17T06:00:18.9197142Z",
+                     "2026-10-18T05:43:34.7059676Z",
+                     "System.ComponentModel.Win32Exception"
+                 ],
+                 [
+                     "func-azportfolio-b13",
+                     "facilities_near",
+                     "500",
+                     2,
+                     "2026-10-17T03:43:51.8291671Z",
+                     "2026-10-17T03:49:21.9309559Z",
+                     "System.InvalidOperationException"
+                 ],
+                 [
+                     "func-azportfolio-b14",
+                     "validate_inbox_blob",
+                     "0",
+                     9,
+                     "2026-10-17T04:25:01.6035201Z",
+                     "2026-10-17T05:17:05.5837475Z",
+                     "Microsoft.Azure.WebJobs.Script.Workers.Rpc.RpcException"
+                 ],
+                 [
+                     "func-azportfolio-b2",
+                     "weekly_bls_pull",
+                     "0",
+                     1,
+                     "2026-10-17T12:00:00.0134969Z",
+                     "2026-10-17T12:00:00.0134969Z",
+                     "System.ComponentModel.Win32Exception"
+                 ]
+             ],
+    "TableName":  "Table_0"
+}

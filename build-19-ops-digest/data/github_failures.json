@@ -1,0 +1,26 @@
+[
+    {
+        "workflow":  "Deploy site to Azure (Blob static website)",
+        "created":  "2026-10-17T06:39:50Z",
+        "sha":  "235dfa9",
+        "title":  "Build #15: two wars, matched years - publish"
+    },
+    {
+        "workflow":  "Deploy site to Azure (Blob static website)",
+        "created":  "2026-10-17T05:59:51Z",
+        "sha":  "22343ae",
+        "title":  "Build #14 close: VISIBILITY_S stays 30 (Bicep aligned, README states …"
+    },
+    {
+        "workflow":  "Deploy site to Azure (Blob static website)",
+        "created":  "2026-10-15T23:08:30Z",
+        "sha":  "4bd862a",
+        "title":  "Root README: builds 1-3 status, live site link"
+    },
+    {
+        "workflow":  "Deploy site to Azure (Blob static website)",
+        "created":  "2026-10-15T23:04:17Z",
+        "sha":  "67d3cc6",
+        "title":  "Build #3: site + GitHub Actions deploy to Blob static website via OIDC"
+    }
+]
