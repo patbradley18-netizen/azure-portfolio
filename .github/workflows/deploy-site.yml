@@ -33,7 +33,7 @@ jobs:
 
       - name: Assemble site
         run: |
-          mkdir -p dist/build-01-aid-lite dist/build-02-bls-veterans dist/build-04-sql-analysis dist/build-05-ai-summary dist/build-06-cost-of-living dist/build-07-veteran-burden dist/build-08-tenure-model dist/build-09-renter-burden dist/build-10-va-access dist/build-11-road-distance dist/build-12-operations dist/build-13-data-api dist/build-14-ingestion dist/build-15-two-wars dist/build-16-who-is-left dist/build-17-five-eras dist/build-18-infra-as-code dist/build-19-ops-digest
+          mkdir -p dist/build-01-aid-lite dist/build-02-bls-veterans dist/build-04-sql-analysis dist/build-05-ai-summary dist/build-06-cost-of-living dist/build-07-veteran-burden dist/build-08-tenure-model dist/build-09-renter-burden dist/build-10-va-access dist/build-11-road-distance dist/build-12-operations dist/build-13-data-api dist/build-14-ingestion dist/build-15-two-wars dist/build-16-who-is-left dist/build-17-five-eras dist/build-18-infra-as-code dist/build-19-ops-digest dist/build-22-showcase-feed
           cp site/index.html dist/index.html
           cp build-01-aid-lite/dashboard.html dist/build-01-aid-lite/index.html
           cp build-01-aid-lite/dashboard.png  dist/build-01-aid-lite/dashboard.png
@@ -56,6 +56,8 @@ jobs:
           cp build-17-five-eras/findings.html dist/build-17-five-eras/index.html
           cp build-18-infra-as-code/findings.html dist/build-18-infra-as-code/index.html
           cp build-19-ops-digest/findings.html dist/build-19-ops-digest/index.html
+          cp build-22-showcase-feed/findings.html dist/build-22-showcase-feed/index.html
+          python3 build-22-showcase-feed/build_feed.py . dist/showcase   # build #22: one JSON table per series + index; refuses emails/GUIDs
           find dist -type f | sort
 
       - name: Azure login (OIDC, user-assigned managed identity)
@@ -90,6 +92,9 @@ jobs:
           curl -fsS "${SITE_URL}build-17-five-eras/" | grep -q "who served, against who was there"
           curl -fsS "${SITE_URL}build-18-infra-as-code/" | grep -q "a template that changes nothing is the proof"
           curl -fsS "${SITE_URL}build-19-ops-digest/" | grep -q "six checks, one email, no keys"
+          curl -fsS "${SITE_URL}build-22-showcase-feed/" | grep -q "Azure feeds, Kiln draws"
+          curl -fsS "${SITE_URL}showcase/index.json" | grep -q '"schema":"azportfolio-showcase/1"'
+          curl -fsSI -H "Origin: https://patrickneilbradley.com" "${SITE_URL}showcase/index.json" | grep -qi "access-control-allow-origin"   # CORS from a foreign origin
 
       - name: API contract test (build 13, public product, no key)
         run: python3 build-13-data-api/tests/contract_test.py

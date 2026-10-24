@@ -427,3 +427,21 @@ resource b13KvSecretsUser 'Microsoft.Authorization/roleAssignments@2022-04-01' =
 module b19Digest '../../build-19-ops-digest/infra/digest.bicep' = {
   name: 'b19-digest'
 }
+
+// ---------------- Build #22: the showcase feed ----------------
+// Static JSON tables under $web/showcase/ (written by deploy-site.yml from build_feed.py). A browser on another origin
+// (patrickneilbradley.com, or Kiln Studio's Electron renderer) needs a CORS rule to read them. GET only; the data is public
+// by design (every file passes the feed's email/GUID refusal), so '*' costs nothing and grants nothing: CORS is a browser
+// rule, not an access grant — private containers still need a token.
+resource blobServiceCors 'Microsoft.Storage/storageAccounts/blobServices@2023-05-01' = {
+  parent: storage
+  name: 'default'
+  properties: {
+    cors: {
+      corsRules: [
+        { allowedOrigins: [ '*' ], allowedMethods: [ 'GET', 'HEAD', 'OPTIONS' ], allowedHeaders: [ '*' ], exposedHeaders: [ '*' ], maxAgeInSeconds: 3600 }
+      ]
+    }
+    deleteRetentionPolicy: { enabled: false }
+  }
+}
